@@ -1,0 +1,25 @@
+@media (min-width: 992px) {
+    .cust-col [class*="col-lg"] {
+        width: 20%;
+        max-width: 20%;
+    }
+}
+
+@media (min-width: 1200px) {
+    .softsource-index-section6 .form-sec {
+        max-width: 60%;
+        margin: auto;
+    }
+}
+
+@media only screen and (max-width: 479px) {
+    .softsource-faq-accordion-wrapper .card-header h5 button span {
+        right: 15px;
+    }
+
+    .softsource-faq-accordion-wrapper .card-header h5 button {
+        padding-left: 15px;
+        padding-right: 20px;
+    }
+}
+
