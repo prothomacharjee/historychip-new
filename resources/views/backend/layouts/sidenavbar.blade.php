@@ -14,7 +14,7 @@
     <!--navigation-->
     <ul class="metismenu" id="menu">
         <li>
-            <a href="{{ route('dashboard') }}">
+            <a href="{{ route('admin.dashboard') }}">
                 <div class="parent-icon"><i class='bx bx-home'></i>
                 </div>
                 <div class="menu-title">Dashboard</div>
@@ -22,7 +22,7 @@
         </li>
 
         <li>
-            <a href="{{ route('notice-prompts') }}">
+            <a href="{{ route('admin.notice-prompts') }}">
                 <div class="parent-icon"><i class='bx bx-file'></i>
                 </div>
                 <div class="menu-title">Notice Prompts</div>
@@ -30,7 +30,7 @@
         </li>
 
         <li>
-            <a href="{{ route('contacts') }}">
+            <a href="{{ route('admin.contacts') }}">
                 <div class="parent-icon"><i class='bx bx-message-dots'></i>
                 </div>
                 <div class="menu-title">Contacts</div>
@@ -38,11 +38,26 @@
         </li>
 
         <li>
-            <a href="{{ route('writing-prompts') }}">
+            <a href="{{ route('admin.writing-prompts') }}">
                 <div class="parent-icon"><i class='bx bx-pen'></i>
                 </div>
                 <div class="menu-title">Writing Prompts</div>
             </a>
+        </li>
+
+        <li>
+            <a href="javascript:;" class="has-arrow" aria-expanded="false">
+                <div class="parent-icon"><i class="bx bx-book-content"></i>
+                </div>
+                <div class="menu-title">Blogs</div>
+            </a>
+            <ul class="mm-collapse">
+                <li> <a href="{{ route('admin.blogs.create') }}"><i class="bx bx-right-arrow-alt"></i>Add Blog</a>
+                </li>
+                <li> <a href="{{ route('admin.blogs') }}"><i class="bx bx-right-arrow-alt"></i>Blog Lists</a>
+                </li>
+
+            </ul>
         </li>
 
     </ul>

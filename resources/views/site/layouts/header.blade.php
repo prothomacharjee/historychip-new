@@ -53,7 +53,7 @@
     <link rel="stylesheet" href="{{ asset('frontend/css/frontend.css?q=' . time()) }}">
     <link rel="stylesheet" href="{{ asset('frontend/css/mediaquery.css?q=' . time()) }}">
     <link rel="stylesheet" href="{{ asset('frontend/css/keyframes.css?q=' . time()) }}">
-    
+
     <script src="{{ asset('frontend/js/jquery/jquery.min.js?q=' . time()) }}"></script>
 </head>
 
@@ -167,13 +167,12 @@
                                             <ul class="softsource-submenu">
                                                 <li><a href="https://www.historychip.com/readastory"><span>Read a
                                                             Story</span></a></li>
-                                                <li><a href="https://www.historychip.com/submitastory"><span>Write a
-                                                            Story</span></a></li>
+                                                <li><a href="https://www.historychip.com/submitastory"><span>Write a Story</span></a></li>
 
                                             </ul>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link softsource-nav-main-menu" href="#">
+                                            <a class="nav-link softsource-nav-main-menu" href="{{ route('writingprompt') }}">
                                                 <span>Writing Prompts</span>
                                             </a>
                                         </li>

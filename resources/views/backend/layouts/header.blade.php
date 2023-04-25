@@ -57,6 +57,7 @@
     <!-- Bootstrap CSS -->
     <link href="{{ asset('backend/css/bootstrap.min.css?q=' . time()) }}" rel="stylesheet">
     <link href="{{ asset('backend/css/bootstrap-extended.css?q=' . time()) }}" rel="stylesheet">
+    <link href="{{ asset('backend/plugins/input-tags/css/tagsinput.css?q=' . time()) }}" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
     <link href="{{ asset('backend/css/app.css?q=' . time()) }}" rel="stylesheet">
     <link href="{{ asset('backend/css/icons.css?q=' . time()) }}" rel="stylesheet">
@@ -116,6 +117,7 @@
         src="{{ asset('backend/plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.min.js?q=' . time()) }}">
     </script>
 
+    <script src="{{ asset('backend/plugins/input-tags/js/tagsinput.js?q=' . time()) }}"></script>
     <script src="{{ asset('backend/js/summernote/summernote-lite.min.js?q=' . time()) }}"></script>
     {{-- <script src="{{ asset('backend/plugins/Drag-And-Drop/dist/imageuploadify.min.js?q=' . time()) }}"></script>
     <script src="{{ asset('backend/plugins/fancy-file-uploader/jquery.ui.widget.js?q=' . time()) }}"></script>

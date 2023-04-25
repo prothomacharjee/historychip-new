@@ -12,7 +12,7 @@ class SoftSourceHelper
         if (!$custom_name) {
             $custom_name = time();
         }
-        
+
         if (!$path) {
             $path = 'common/';
         }
@@ -23,7 +23,7 @@ class SoftSourceHelper
         Storage::disk('public')->putFileAs($path, $request_file, $name);
 
         // Get the URL of the uploaded file
-        return Storage::url($path . '/' . $name);
+        return Storage::url($path . $name);
 
     }
 

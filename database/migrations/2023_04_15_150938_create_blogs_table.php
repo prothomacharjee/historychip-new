@@ -18,6 +18,11 @@ return new class extends Migration
             $table->date('blog_date');
             $table->string('blog_banner')->nullable();
             $table->string('blog_banner_alt_text')->nullable();
+            $table->tinyInteger('status')->default(1);
+            $table->tinyInteger('is_draft')->default(0);
+            $table->tinyInteger('is_featured')->default(0);
+            $table->integer('created_by')->nullable();
+            $table->integer('updated_by')->nullable();
             $table->timestamps();
         });
     }

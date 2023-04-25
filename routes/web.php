@@ -1,11 +1,12 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\SiteController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\NoticePromptController;
+use App\Http\Controllers\SiteController;
 use App\Http\Controllers\WritingPromptController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,7 +17,7 @@ use App\Http\Controllers\WritingPromptController;
 | routes are loaded by the RouteServiceProvider and all of them will
 | be assigned to the "web" middleware group. Make something great!
 |
-*/
+ */
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -26,7 +27,6 @@ Auth::routes();
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-
 Route::get('/', [SiteController::class, 'index'])->name('home');
 Route::get('/about', [SiteController::class, 'about'])->name('about');
 Route::get('/founder', [SiteController::class, 'founder'])->name('founder');
@@ -35,29 +35,50 @@ Route::get('/frequently-asked-questions', [SiteController::class, 'faq'])->name(
 Route::get('/privacy-policy', [SiteController::class, 'privacypolicy'])->name('privacypolicy');
 Route::get('/terms-and-conditions', [SiteController::class, 'termsandconditions'])->name('termsandconditions');
 Route::get('/contact-us', [SiteController::class, 'contactus'])->name('contactus');
+Route::get('/writing-prompts', [SiteController::class, 'writingprompt'])->name('writingprompt');
+Route::get('/blogs/{slug}', [SiteController::class, 'blogs'])->name('blogs');
 
 
-Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
 
 
-// Notice Prompts
-Route::get('/notice-prompts', [NoticePromptController::class, 'index'])->name('notice-prompts');
-Route::get('/load-notice-prompts-data', [NoticePromptController::class, 'LoadNoticePromptDataTable'])->name('notice-prompts.loadDataTable');
-Route::post('/store-notice-prompts-data', [NoticePromptController::class, 'store'])->name('notice-prompts.store');
-Route::post('/fetch-notice-prompts-data', [NoticePromptController::class, 'FetchNoticePromptDataById'])->name('notice-prompts.fetch');
-Route::post('/delete-notice-prompts/{id}', [NoticePromptController::class, 'destroy'])->name('notice-prompts.destroy');
 
-// Contacts
-Route::get('/contacts', [ContactController::class, 'index'])->name('contacts');
-Route::get('/load-contacts-data', [ContactController::class, 'LoadContactDataTable'])->name('contacts.loadDataTable');
-Route::get('/reply-contacts-data/{id}', [ContactController::class, 'reply'])->name('contacts.reply');
-Route::post('/send-contacts-reply', [ContactController::class, 'send'])->name('contacts.send');
-Route::post('/fetch-contacts-data', [ContactController::class, 'FetchNoticePromptDataById'])->name('contacts.fetch');
-Route::post('/delete-contacts/{id}', [ContactController::class, 'destroy'])->name('contacts.destroy');
+// ADMIN PANEL
 
-// Writing Prompts
-Route::get('/writing-prompts', [WritingPromptController::class, 'index'])->name('writing-prompts');
-Route::get('/load-writing-prompts-data', [WritingPromptController::class, 'LoadWritingPromptDataTable'])->name('writing-prompts.loadDataTable');
-Route::post('/store-writing-prompts-data', [WritingPromptController::class, 'store'])->name('writing-prompts.store');
-Route::post('/fetch-writing-prompts-data', [WritingPromptController::class, 'FetchWritingPromptDataById'])->name('writing-prompts.fetch');
-Route::post('/delete-writing-prompts/{id}', [WritingPromptController::class, 'destroy'])->name('writing-prompts.destroy');
+
+// Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function () {
+Route::group(['prefix' => 'admin'], function () {
+    Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
+
+    // Notice Prompts
+    Route::get('/notice-prompts', [NoticePromptController::class, 'index'])->name('admin.notice-prompts');
+    Route::get('/load-notice-prompts-data', [NoticePromptController::class, 'LoadNoticePromptDataTable'])->name('admin.notice-prompts.loadDataTable');
+    Route::post('/store-notice-prompts-data', [NoticePromptController::class, 'store'])->name('admin.notice-prompts.store');
+    Route::post('/fetch-notice-prompts-data', [NoticePromptController::class, 'FetchNoticePromptDataById'])->name('admin.notice-prompts.fetch');
+    Route::post('/delete-notice-prompts/{id}', [NoticePromptController::class, 'destroy'])->name('admin.notice-prompts.destroy');
+
+    // Contacts
+    Route::get('/contacts', [ContactController::class, 'index'])->name('admin.contacts');
+    Route::get('/load-contacts-data', [ContactController::class, 'LoadContactDataTable'])->name('admin.contacts.loadDataTable');
+    Route::get('/reply-contacts-data/{id}', [ContactController::class, 'reply'])->name('admin.contacts.reply');
+    Route::post('/send-contacts-reply', [ContactController::class, 'send'])->name('admin.contacts.send');
+    Route::post('/fetch-contacts-data', [ContactController::class, 'FetchNoticePromptDataById'])->name('admin.contacts.fetch');
+    Route::post('/delete-contacts/{id}', [ContactController::class, 'destroy'])->name('admin.contacts.destroy');
+
+    // Writing Prompts
+    Route::get('/writing-prompts', [WritingPromptController::class, 'index'])->name('admin.writing-prompts');
+    Route::get('/load-writing-prompts-data', [WritingPromptController::class, 'LoadWritingPromptDataTable'])->name('admin.writing-prompts.loadDataTable');
+    Route::post('/store-writing-prompts-data', [WritingPromptController::class, 'store'])->name('admin.writing-prompts.store');
+    Route::post('/fetch-writing-prompts-data', [WritingPromptController::class, 'FetchWritingPromptDataById'])->name('admin.writing-prompts.fetch');
+    Route::post('/delete-writing-prompts/{id}', [WritingPromptController::class, 'destroy'])->name('admin.writing-prompts.destroy');
+
+    // Blogs
+    Route::get('/blogs', [BlogController::class, 'index'])->name('admin.blogs');
+    Route::get('/blogs/create', [BlogController::class, 'create'])->name('admin.blogs.create');
+    Route::get('/blogs/edit/{id}', [BlogController::class, 'edit'])->name('admin.blogs.edit');
+    Route::get('/load-regular-blogs-data', [BlogController::class, 'LoadRegularBlogDataTable'])->name('admin.blogs.LoadRegularBlogDataTable');
+    Route::get('/load-featured-blogs-data', [BlogController::class, 'LoadFeaturedBlogDataTable'])->name('admin.blogs.LoadFeaturedBlogDataTable');
+    Route::get('/load-drafted-blogs-data', [BlogController::class, 'LoadDraftedBlogDataTable'])->name('admin.blogs.LoadDraftedBlogDataTable');
+    Route::post('/store-blogs-data', [BlogController::class, 'store'])->name('admin.blogs.store');
+    // Route::post('/fetch-writing-prompts-data', [BlogController::class, 'FetchWritingPromptDataById'])->name('writing-prompts.fetch');
+    // Route::post('/delete-writing-prompts/{id}', [BlogController::class, 'destroy'])->name('writing-prompts.destroy');
+});

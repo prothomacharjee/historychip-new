@@ -8,7 +8,7 @@
             <div class="ps-3">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb mb-0 p-0">
-                        <li class="breadcrumb-item"><a href="{{ route('dashboard') }}"><i class="bx bx-home-alt"></i></a>
+                        <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}"><i class="bx bx-home-alt"></i></a>
                         </li>
                         <li class="breadcrumb-item active" aria-current="page">Contacts</li>
                     </ol>
@@ -62,7 +62,7 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="p-4 border rounded">
-                            <form class="row g-3 needs-validation" method="post" novalidate action="{{ route('contacts.send') }}"
+                            <form class="row g-3 needs-validation" method="post" novalidate action="{{ route('admin.contacts.send') }}"
                                 method="post">
                                 @csrf
                                 <input type="hidden" name="id" id="id" value="{{ $contact->id }}" />

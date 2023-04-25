@@ -114,4 +114,15 @@ class SiteController extends Controller
         ]);
     }
 
+    public function writingprompt()
+    {
+        return view('site/writingprompt')->with([
+            'page_title' => 'Writing Prompt',
+            'name' => 'Joy',
+            'categories' => [],
+            'stories' => [],
+            'notices' => $this->notices,
+        ]);
+    }
+
 }

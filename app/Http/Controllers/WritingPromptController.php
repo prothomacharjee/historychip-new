@@ -26,10 +26,10 @@ class WritingPromptController extends Controller
      */
     public function store(Request $request)
     {
-        $unquievalidation = $request->id ? $request->id :'';
+        $uniquevalidation = $request->id ? $request->id :'';
 
         $validator = Validator::make($request->except(['_token']), [
-            "title" => "required|unique:writing_prompts,title,".$unquievalidation,
+            "title" => "required|unique:writing_prompts,title,".$uniquevalidation,
             "details" => "required",
             "status" => "required",
             'icon' => 'nullable|file|image|mimes:jpeg,png,webp|max:1024',
@@ -98,7 +98,7 @@ class WritingPromptController extends Controller
         );
 
         // Build the DataTables response
-        $data = DataTables::of(WritingPrompt::select($columns)->where('status', 1))
+        $data = DataTables::of(WritingPrompt::select($columns))
             ->addColumn('serial', function ($row) {
                 static $count = 0;
                 $count++;

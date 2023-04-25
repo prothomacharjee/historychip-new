@@ -8,7 +8,7 @@
             <div class="ps-3">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb mb-0 p-0">
-                        <li class="breadcrumb-item"><a href="{{ route('dashboard') }}"><i class="bx bx-home-alt"></i></a>
+                        <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}"><i class="bx bx-home-alt"></i></a>
                         </li>
                         <li class="breadcrumb-item active" aria-current="page">Notice Prompts</li>
                     </ol>
@@ -64,7 +64,7 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="p-4 border rounded">
-                            <form class="row g-3 needs-validation" novalidate action="{{ route('notice-prompts.store') }}"
+                            <form class="row g-3 needs-validation" novalidate action="{{ route('admin.notice-prompts.store') }}"
                                 method="post">
                                 @csrf
                                 <input type="hidden" name="id" id="id" value="" />
@@ -110,7 +110,7 @@
                                     <select class="form-select @error('status') is-invalid @enderror" id="status"
                                         name="status" required aria-describedby="validationStatusFeedback">
                                         <option value="1" {{ old('status') == 1 ? 'selected' : '' }}>Active</option>
-                                        <option value="2" {{ old('status') == 2 ? 'selected' : '' }}>Inactive
+                                        <option value="2" {{ old('status') == 0 ? 'selected' : '' }}>Inactive
                                         </option>
                                     </select>
                                     <div class="valid-feedback">Looks good!</div>
@@ -175,7 +175,7 @@
             $("#dt_notice_prompt").DataTable({
                 "processing": true,
                 "serverSide": true,
-                "ajax": "{{ route('notice-prompts.loadDataTable') }}",
+                "ajax": "{{ route('admin.notice-prompts.loadDataTable') }}",
                 "columns": [{
                         "data": "name"
                     },
@@ -203,7 +203,7 @@
 
         function editFunc(id) {
             $.ajax({
-                url: `{{ route('notice-prompts.fetch') }}`,
+                url: `{{ route('admin.notice-prompts.fetch') }}`,
                 data: {
                     '_token': '{{ csrf_token() }}',
                     'id': id
