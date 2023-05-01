@@ -114,7 +114,7 @@ class ContactController extends Controller
             ->addColumn('action', function ($row) use($url) {
                 $buttons = '';
                 if($row->is_replied==0){
-                    $buttons = '<a href="'.route("admin.contacts.reply", ["id" => $row->id]).'" class="btn btn-outline-info btn-sm me-2" title="Reply"><i class="fadeIn animated bx bx-reply"></i></a>';
+                    $buttons = '<a href="'.route("admin.contacts.reply", ["id" => $row->id]).'" class="btn btn-outline-info btn-sm me-2" title="Reply"><i class="fadeInUp animate__animated bx bx-reply"></i></a>';
                 }
                 $buttons .= '<button type="button" class="delete btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#delete_modal"  onclick="remove_function('.$row->id.', \''.$url.'\')" title="Delete"><i class="bx bx-trash-alt"></i></button>';
                 return $buttons;

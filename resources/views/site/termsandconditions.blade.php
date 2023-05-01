@@ -526,30 +526,31 @@
                     Services should be directed to: <a href="mailto:info@historychip.com">info@historychip.com.</p>
             </div>
         </div>
+    </div>
 
-        {{-- Modal Start --}}
+    {{-- Modal Start --}}
 
-        {{-- Terms and conditions Modal Start --}}
-        <div class="modal animate__animated animate__pulse" id="softsource-pdfModal" tabindex="-1"
-            aria-labelledby="pdfModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="pdfModalLabel">Terms and Conditions</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <iframe src="{{ asset('frontend/documents/History Chip - Terms of Use.pdf') }}" frameborder="0"
-                            scrolling="no" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"
-                            style="width: 100%; height:80vh"></iframe>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="softsource-submit_btn" data-bs-dismiss="modal">I Understand.</button>
-                    </div>
+    {{-- Terms and conditions Modal Start --}}
+    <div class="modal animate__animated animate__pulse" id="softsource-pdfModal" tabindex="-1"
+        aria-labelledby="pdfModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="pdfModalLabel">Terms and Conditions</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <iframe src="{{ asset('frontend/documents/History Chip - Terms of Use.pdf') }}" frameborder="0"
+                        scrolling="no" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"
+                        style="width: 100%; height:80vh"></iframe>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="softsource-submit_btn" data-bs-dismiss="modal">I Understand.</button>
                 </div>
             </div>
         </div>
-        {{-- Terms and Conditions Modal Close --}}
+    </div>
+    {{-- Terms and Conditions Modal Close --}}
 
-        {{-- Modal Close --}}
-    @endsection
+    {{-- Modal Close --}}
+@endsection

@@ -194,7 +194,7 @@
                                             </ul>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link softsource-nav-main-menu" href="#">
+                                            <a class="nav-link softsource-nav-main-menu" href="{{ route('blogs') }}">
                                                 <span>Blogs</span>
                                             </a>
                                         </li>

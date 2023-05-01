@@ -102,8 +102,8 @@ class NoticePromptController extends Controller
                 return ($row->status == 1) ? '<span class="badge bg-success">Active</span>' : '<span class="badge bg-danger">Inactive</span>';
             })
             ->addColumn('action', function ($row) use($url) {
-                $buttons = '<button type="button" class="edit btn btn-outline-primary btn-sm me-2" onclick="editFunc(' . $row->id . ')" title="Edit"><i class="fadeIn animated bx bx-edit-alt"></i></button>';
-                $buttons .= '<button type="button" class="delete btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#delete_modal"  onclick="remove_function('.$row->id.', \''.$url.'\')" title="Delete"><i class="fadeIn animated bx bx-trash-alt"></i></button>';
+                $buttons = '<button type="button" class="edit btn btn-outline-primary btn-sm me-2" onclick="editFunc(' . $row->id . ')" title="Edit"><i class="fadeInUp animate__animated bx bx-edit-alt"></i></button>';
+                $buttons .= '<button type="button" class="delete btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#delete_modal"  onclick="remove_function('.$row->id.', \''.$url.'\')" title="Delete"><i class="fadeInUp animate__animated bx bx-trash-alt"></i></button>';
 
                 return $buttons;
             })

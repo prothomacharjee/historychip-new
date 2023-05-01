@@ -170,8 +170,8 @@ class BlogController extends Controller
                 return ($row->blog_banner) ? '<img src="' . asset($row->blog_banner) . '" alt="' . $row->blog_banner_alt_text . '" class="w-50">' : '';
             })
             ->addColumn('action', function ($row) use ($url) {
-                $buttons = '<a href="' . route('admin.blogs.edit', $row->id) . '" data-toggle="tooltip" title="Edit" class="edit btn btn-outline-primary btn-sm me-2"><i class="fadeIn animated bx bx-edit-alt"></i></a>';
-                $buttons .= '<button type="button" class="delete btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#delete_modal"  onclick="remove_function(' . $row->id . ', \'' . $url . '\')" title="Delete"><i class="fadeIn animated bx bx-trash-alt"></i></button>';
+                $buttons = '<a href="' . route('admin.blogs.edit', $row->id) . '" data-toggle="tooltip" title="Edit" class="edit btn btn-outline-primary btn-sm me-2"><i class="fadeInUp animate__animated bx bx-edit-alt"></i></a>';
+                $buttons .= '<button type="button" class="delete btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#delete_modal"  onclick="remove_function(' . $row->id . ', \'' . $url . '\')" title="Delete"><i class="fadeInUp animate__animated bx bx-trash-alt"></i></button>';
 
                 return $buttons;
             })
@@ -221,8 +221,8 @@ class BlogController extends Controller
                 return ($row->blog_banner) ? '<img src="' . asset($row->blog_banner) . '" alt="' . $row->blog_banner_alt_text . '" class="w-50">' : '';
             })
             ->addColumn('action', function ($row) use ($url) {
-                $buttons = '<a href="' . route('admin.blogs.edit', $row->id) . '" data-toggle="tooltip" title="Edit" class="edit btn btn-outline-primary btn-sm me-2"><i class="fadeIn animated bx bx-edit-alt"></i></a>';
-                $buttons .= '<button type="button" class="delete btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#delete_modal"  onclick="remove_function(' . $row->id . ', \'' . $url . '\')" title="Delete"><i class="fadeIn animated bx bx-trash-alt"></i></button>';
+                $buttons = '<a href="' . route('admin.blogs.edit', $row->id) . '" data-toggle="tooltip" title="Edit" class="edit btn btn-outline-primary btn-sm me-2"><i class="fadeInUp animate__animated bx bx-edit-alt"></i></a>';
+                $buttons .= '<button type="button" class="delete btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#delete_modal"  onclick="remove_function(' . $row->id . ', \'' . $url . '\')" title="Delete"><i class="fadeInUp animate__animated bx bx-trash-alt"></i></button>';
 
                 return $buttons;
             })
@@ -271,8 +271,8 @@ class BlogController extends Controller
                 return ($row->blog_banner) ? '<img src="' . asset($row->blog_banner) . '" alt="' . $row->blog_banner_alt_text . '" class="w-50">' : '';
             })
             ->addColumn('action', function ($row) use ($url) {
-                $buttons = '<a href="' . route('admin.blogs.edit', $row->id) . '" data-toggle="tooltip" title="Edit" class="edit btn btn-outline-primary btn-sm me-2"><i class="fadeIn animated bx bx-edit-alt"></i></a>';
-                $buttons .= '<button type="button" class="delete btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#delete_modal"  onclick="remove_function(' . $row->id . ', \'' . $url . '\')" title="Delete"><i class="fadeIn animated bx bx-trash-alt"></i></button>';
+                $buttons = '<a href="' . route('admin.blogs.edit', $row->id) . '" data-toggle="tooltip" title="Edit" class="edit btn btn-outline-primary btn-sm me-2"><i class="fadeInUp animate__animated bx bx-edit-alt"></i></a>';
+                $buttons .= '<button type="button" class="delete btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#delete_modal"  onclick="remove_function(' . $row->id . ', \'' . $url . '\')" title="Delete"><i class="fadeInUp animate__animated bx bx-trash-alt"></i></button>';
 
                 return $buttons;
             })

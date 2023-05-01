@@ -1,12 +1,13 @@
 <?php
 
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\BlogController;
-use App\Http\Controllers\ContactController;
-use App\Http\Controllers\NoticePromptController;
-use App\Http\Controllers\SiteController;
-use App\Http\Controllers\WritingPromptController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BlogController;
+use App\Http\Controllers\SiteController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\UserAuthController;
+use App\Http\Controllers\NoticePromptController;
+use App\Http\Controllers\WritingPromptController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,9 +24,15 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
-Auth::routes();
+// Auth::routes();
 
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// User Authentications
+Route::get('/login', [UserAuthController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [UserAuthController::class, 'login'])->name('login.submit');
+Route::get('/register', [UserAuthController::class, 'showRegistrationForm'])->name('register');
+Route::get('/password/reset', [UserAuthController::class, 'showResetPasswordForm'])->name('password.request');
+
+
 
 Route::get('/', [SiteController::class, 'index'])->name('home');
 Route::get('/about', [SiteController::class, 'about'])->name('about');
@@ -36,9 +43,12 @@ Route::get('/privacy-policy', [SiteController::class, 'privacypolicy'])->name('p
 Route::get('/terms-and-conditions', [SiteController::class, 'termsandconditions'])->name('termsandconditions');
 Route::get('/contact-us', [SiteController::class, 'contactus'])->name('contactus');
 Route::get('/writing-prompts', [SiteController::class, 'writingprompt'])->name('writingprompt');
-Route::get('/blogs/{slug}', [SiteController::class, 'blogs'])->name('blogs');
+Route::get('/blogs', [SiteController::class, 'blogs'])->name('blogs');
+Route::get('/blogs/{slug?}', [SiteController::class, 'blogs'])->name('blogs');
 
+Route::get('/story/create', [SiteController::class, 'blogs'])->name('story.create');
 
+Route::post('/getwritingprompts', [WritingPromptController::class, 'getwritingprompts'])->name('writing-prompts.get');
 
 
 
@@ -70,6 +80,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('/store-writing-prompts-data', [WritingPromptController::class, 'store'])->name('admin.writing-prompts.store');
     Route::post('/fetch-writing-prompts-data', [WritingPromptController::class, 'FetchWritingPromptDataById'])->name('admin.writing-prompts.fetch');
     Route::post('/delete-writing-prompts/{id}', [WritingPromptController::class, 'destroy'])->name('admin.writing-prompts.destroy');
+
 
     // Blogs
     Route::get('/blogs', [BlogController::class, 'index'])->name('admin.blogs');
