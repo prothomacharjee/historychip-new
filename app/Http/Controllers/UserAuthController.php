@@ -58,8 +58,6 @@ class UserAuthController extends Controller
             ]
         ]);
 
-        //dd($validation->fails());
-
         if ($validation->fails()) {
             return redirect()->back()->withErrors($validation)->withInput();
         } else {
