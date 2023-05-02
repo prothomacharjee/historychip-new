@@ -30,6 +30,7 @@ use App\Http\Controllers\WritingPromptController;
 Route::get('/login', [UserAuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [UserAuthController::class, 'login'])->name('login.submit');
 Route::get('/register', [UserAuthController::class, 'showRegistrationForm'])->name('register');
+Route::post('/register', [UserAuthController::class, 'register'])->name('register.submit');
 Route::get('/password/reset', [UserAuthController::class, 'showResetPasswordForm'])->name('password.request');
 
 

@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Validator;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Anhskohbo\NoCaptcha\NoCaptcha;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class UserAuthController extends Controller
@@ -41,21 +43,22 @@ class UserAuthController extends Controller
             $seconds = $this->limiter()->availableIn(
                 $this->throttleKey($request)
             );
-            return [
-                'status' => 0,
-                'error' => [],
-                'message' => 'Too many login attempts. Please try again after ' . $seconds . ' seconds.',
-                'redirect_url' => null,
-            ];
+            return redirect()->back()->with('error', "Too many login attempts. Please try again after $seconds seconds.");
         }
 
         // validation checking
         $validation = Validator::make($request->all(), [
             'email' => 'required|email',
             'password' => 'required|string|min:6|max:18',
+            'g-recaptcha-response' => 'required|captcha'
+        ], [
+            'g-recaptcha-response' => [
+                'required' => 'Please verify that you are not a robot.',
+                'captcha' => 'Captcha error! Try again later or contact site admin.',
+            ]
         ]);
 
-        $error_array = array();
+        //dd($validation->fails());
 
         if ($validation->fails()) {
             return redirect()->back()->withErrors($validation)->withInput();
@@ -76,7 +79,7 @@ class UserAuthController extends Controller
             }
 
             // checking if the mail is verified, if not sending OTP
-            if ($user_data->email_verified_at != 1) {
+            if ($user_data->is_verified != 1) {
                 try {
                     $otp = rand(100000, 999999);
                     session([
@@ -119,38 +122,17 @@ class UserAuthController extends Controller
             // checking if the account is not blocked
             if ($user_data->is_available != 1) {
                 $this->incrementLoginAttempts($request);
-                return [
-                    'status' => 0,
-                    'error' => [],
-                    'message' => 'Sorry! Account is temporary blocked.',
-                    'redirect_url' => null,
-                ];
+                return redirect()->back()->with('error', "Sorry! Account is temporary blocked.");
             }
 
             // else everything is fine with this account
 
-            // Checking if user has any restaurants items in cart
-            $cart = Cart::where([
-                ['user_id', $user_data->id],
-                ['is_deleted', 0],
-            ])
-                ->count();
-
-            // if not checking shopping cart
-            if ($cart == 0) {
-                $cart = ShoppingCart::where([
-                    ['user_id', $user_data->id],
-                    ['is_deleted', 0],
-                ])
-                    ->count();
-            }
 
             // finally put session data and marking as logged in
             session([
                 'id' => $user_data->id,
                 'name' => $user_data->name,
                 'email' => $user_data->email,
-                'cart' => $cart,
             ]);
 
             Auth::attempt([

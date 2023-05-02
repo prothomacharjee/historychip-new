@@ -20,7 +20,7 @@
                 <div class="softsource-register_div">
                     <h3>Register</h3>
                     <h4>Where everyone's stories matter.</h4>
-                    <form class="mt-3" method="POST" id="register_form" action="{{ route('register') }}">
+                    <form class="mt-3" method="POST" id="register_form" action="{{ route('register.submit') }}" class="captcha-form">
                         @csrf
                         <div class="form-group">
                             <input id="name" type="text" class="form-control @error('name') is-invalid @enderror"
@@ -129,14 +129,18 @@
                                 @enderror
                             </p>
                         </div>
-                        <div class="form-group{{ $errors->has('g-recaptcha-response') ? ' has-error' : '' }}">
-                            <div class="g-recaptcha" data-sitekey="6Ldbtq4ZAAAAAD4ydSIZZZufmPz-qK6P9LdDtPpJ">
-                            </div>
-                            <p style="color: red;"> @error('g-recaptcha-response')
-                                    {{ $message }}
+                        <div class="form-group {{ $errors->has('g-recaptcha-response') ? ' has-error' : '' }}">
+                                {!! NoCaptcha::renderJs() !!}
+                                {!! NoCaptcha::display() !!}
+                                <span class="captcha-validation" style="color:#b02a37" role="alert">
+
+                                </span>
+                                @error('g-recaptcha-response')
+                                    <span style="color:#b02a37" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
                                 @enderror
-                            </p>
-                        </div>
+                            </div>
                         <br>
                         <input type="submit" value="Register" id="register" class="softsource-submit_btn"><br />
                     </form>

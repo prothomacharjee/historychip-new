@@ -18,6 +18,17 @@ $(document).ready(function () {
             $("body").css("overflow", "auto");
         });
     });
+
+    $('.captcha-form').submit(function (event) {
+        var form = $(this);
+        var submitButton = form.find('button[type="submit"]');
+
+        if (grecaptcha && !grecaptcha.getResponse()) {
+            event.preventDefault();
+            submitButton.attr('disabled', true);
+            $('.captcha-validation').html('<strong>Please complete the reCAPTCHA to submit the form.</strong>');
+        }
+    });
 });
 
 windows.on("scroll", function () {

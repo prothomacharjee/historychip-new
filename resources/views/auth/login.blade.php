@@ -67,7 +67,7 @@
                             </div>
                         @endif
 
-                        <form method="POST" action="{{ route('login.submit') }}">
+                        <form method="POST" action="{{ route('login.submit') }}" id="login-form" class="captcha-form">
                             @csrf
                             <div class="form-group">
                                 <input id="email" type="email"
@@ -90,9 +90,24 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
-                            </div> <!-- / .form-group (password) -->
-                            <br>
-                            <input type="submit" value="login" id="login" class="softsource-submit_btn"><br /><br />
+                            </div>
+
+                            <div class="form-group">
+                                {!! NoCaptcha::renderJs() !!}
+                                {!! NoCaptcha::display() !!}
+                                <span class="captcha-validation" style="color:#b02a37" role="alert">
+
+                                </span>
+                                @error('g-recaptcha-response')
+                                    <span style="color:#b02a37" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                            <br />
+                            <input type="submit" value="login" id="login" class="softsource-submit_btn">
+                            <br /><br />
+
                             <div class="row">
                                 <div class="col-md-6">
                                     <input type="checkbox" id="remember" name="remember" value="remember"

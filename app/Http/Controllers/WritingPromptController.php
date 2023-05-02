@@ -6,7 +6,7 @@ use App\Helpers\SoftSourceHelper;
 use App\Models\WritingPrompt;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Validator;
+use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\Facades\DataTables;
 
 class WritingPromptController extends Controller

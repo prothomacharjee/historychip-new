@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\NoticePrompt;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Validator;
+use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\Facades\DataTables;
 
 class NoticePromptController extends Controller
