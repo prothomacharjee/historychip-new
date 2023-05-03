@@ -263,7 +263,7 @@
 
     <script src="{{ asset('frontend/js/bootstrap/bootstrap.min.js?q=' . time()) }}"></script>
     <script src="{{ asset('frontend/js/popper/popper.min.js?q=' . time()) }}"></script>
-    <script src="{{ asset('frontend/js/popper/popper.js.map?q=' . time()) }}"></script>
+
     <script src="{{ asset('frontend/js/select2/select2.min.js?q=' . time()) }}"></script>
 
     <script src="{{ asset('frontend/fontawsome/js/17472dc9f4.js?q=' . time()) }}"></script>
