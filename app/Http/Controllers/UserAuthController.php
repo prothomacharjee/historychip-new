@@ -3,10 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Partner;
 use Illuminate\Http\Request;
 use Anhskohbo\NoCaptcha\NoCaptcha;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Auth\Notifications\VerifyEmail;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class UserAuthController extends Controller
@@ -19,9 +25,11 @@ class UserAuthController extends Controller
 
     public function showRegistrationForm()
     {
+        $partners = Partner::where('status', 1)->get();
         return view('auth.register')->with([
             'page_title' => 'Register',
             'notices' => $this->notices,
+            'partners' => $partners,
         ]);
     }
 
@@ -37,6 +45,7 @@ class UserAuthController extends Controller
 
     public function login(Request $request)
     {
+
         // checking if too many attemps
         if ($this->hasTooManyLoginAttempts($request)) {
             $this->fireLockoutEvent($request);
@@ -49,7 +58,7 @@ class UserAuthController extends Controller
         // validation checking
         $validation = Validator::make($request->all(), [
             'email' => 'required|email',
-            'password' => 'required|string|min:6|max:18',
+            'password' => 'required|string|min:8|max:18',
             'g-recaptcha-response' => 'required|captcha'
         ], [
             'g-recaptcha-response' => [
@@ -61,99 +70,98 @@ class UserAuthController extends Controller
         if ($validation->fails()) {
             return redirect()->back()->withErrors($validation)->withInput();
         } else {
-            // getting data
-            $user_data = User::where('email', $request->email)->first();
-
-            // checking if has an account associate with this email
-            if ($user_data == null) {
-                $this->incrementLoginAttempts($request);
-                return redirect()->back()->with('error', "This Email is not registered in our system.");
+            $credentials = $request->only('email', 'password');
+            if (Auth::attempt($credentials)) {
+                // User is authenticated
+                $this->clearLoginAttempts($request);
+                return redirect()->intended('home');
+            } else {
+                // Check if email is registered
+                $user = User::where('email', $credentials['email'])->first();
+                if (!$user) {
+                    // Notify user that email is not registered
+                    $this->incrementLoginAttempts($request);
+                    return redirect()->back()->with('error', "This Email is not registered in our system. <a href='route('register')'>Register Now</a>");
+                } else {
+                    // Check if email is verified
+                    if (!$user->hasVerifiedEmail()) {
+                        // Send verification email
+                        $user->sendEmailVerificationNotification();
+                        return redirect()->back()->with('info', "Email is not verified. A verification email has been sent.");
+                    } elseif ($user->is_available == 0) {
+                        $this->incrementLoginAttempts($request);
+                        return redirect()->back()->with('error', "Sorry! Account is temporary blocked.");
+                    } else {
+                        // Email is registered and verified, but password is incorrect
+                        $this->incrementLoginAttempts($request);
+                        return redirect()->back()->with('error', "Invalid Credentials.");
+                    }
+                }
             }
+        }
+    }
 
-            // check if the password is correct
-            if (!(Hash::check($request->password, $user_data->password))) {
-                $this->incrementLoginAttempts($request);
-                return redirect()->back()->with('error', "Invalid credentials.");
-            }
+    public function register(Request $request)
+    {
+        $validator = Validator::make(
+            $request->except(['_token']),
+            [
+                'name' => ['required', 'string', 'max:255'],
+                'pen_name' => ['required', 'string', 'max:255'],
+                'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+                'password' => ['required', 'string', 'min:8', 'max:18', 'confirmed'],
+                'password_confirmation' => ['required'],
+                'city' => ['required'],
+                'state' => ['required'],
+                'country' => ['required'],
+                'terms' => ['required'],
+                'sixteen' => ['required'],
+                'g-recaptcha-response' => ['required', 'captcha'],
+            ],
+            [
+                'sixteen.required' => 'Age requirement field is required',
+                'g-recaptcha-response' => [
+                    'required' => 'Please verify that you are not a robot.',
+                    'captcha' => 'Captcha error! Try again later or contact site admin.',
+                ]
+            ]
 
-            // checking if the mail is verified, if not sending OTP
-            if ($user_data->is_verified != 1) {
-                try {
-                    $otp = rand(100000, 999999);
-                    session([
-                        'email' => $user_data->email,
+        );
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();;
+        } else {
+            try {
+
+                DB::transaction(function () use ($request) {
+                    $user = User::create([
+                        'name' => $request->name,
+                        'email' => $request->email,
+                        'password' => Hash::make($request->password),
                     ]);
 
-                    User::where('email', $request->email)
-                        ->update([
-                            'otp' => $otp,
-                            'is_verified' => 0,
-                        ]);
+                    $user->user_profile()->save(
+                        [
+                            'city' => $request->city,
+                            'pen_name' => $request->pen_name,
+                            'state' => $request->state,
+                            'country' => $request->country,
+                            'org_id' => (Session::get('org_id') != null) ? Session::get('org_id') : NULL,
+                            'bio' => $request->bio,
+                        ]
+                    );
 
-                    $title = 'Email Verification Code';
-                    $email = Session::get('email');
-                    $data = ['title' => $title, 'email' => $email, 'otp' => $otp];
-                    Mail::send('Email.emailverification', $data, function ($message) use ($data) {
-                        $message->from(env('MAIL_USERNAME'))->subject($data['title']);
-                        $message->to($data['email']);
-                    });
-                } catch (\Swift_TransportException $e) {
-                    $response = $e->getMessage();
-                    return [
-                        'status' => 0,
-                        'error' => [],
-                        'message' => 'Sorry! We are facing some complexities with sending mail.',
-                        'redirect_url' => null,
-                    ];
-                }
-
-                // else verification code successfully sent
-                return [
-                    'status' => 0,
-                    'error' => [],
-                    'ev_mail' => $request->email,
-                    'message' => 'Verification code has sent your email address. Please verify!',
-                    'redirect_url' => 'mVerifyModal',
-                ];
+                    // Send verification email
+                    $user->sendEmailVerificationNotification();
+                });
+                return redirect()->route('login')->with('success', 'Please verify your email address to complete registration.');
+            } catch (\Exception $e) {
+                return redirect()->back()->with('error', $e->getMessage());
             }
-
-            // checking if the account is not blocked
-            if ($user_data->is_available != 1) {
-                $this->incrementLoginAttempts($request);
-                return redirect()->back()->with('error', "Sorry! Account is temporary blocked.");
-            }
-
-            // else everything is fine with this account
-
-
-            // finally put session data and marking as logged in
-            session([
-                'id' => $user_data->id,
-                'name' => $user_data->name,
-                'email' => $user_data->email,
-            ]);
-
-            Auth::attempt([
-                'email' => $request->email,
-                'password' => $request->password,
-            ], true);
-
-            $this->clearLoginAttempts($request);
-
-            return [
-                'status' => 1,
-                'error' => [],
-                'message' => 'Logged in successfully!',
-                'redirect_url' => 1,
-            ];
         }
 
-        // if nothing works
-        return [
-            'status' => 0,
-            'error' => [],
-            'message' => 'Something went wrong!',
-            'redirect_url' => null,
-        ];
+
+
+
     }
 }

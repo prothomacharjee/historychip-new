@@ -13,14 +13,14 @@ return new class extends Migration
     {
         Schema::create('user_profiles', function (Blueprint $table) {
             $table->id();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->integer('org_id');
+            $table->bigInteger('user_id',false,true);
+            $table->integer('org_id')->nullable();
             $table->string('pen_name')->nullable();
             $table->string('city')->nullable();
             $table->string('state')->nullable();
             $table->string('country')->nullable();
             $table->text('bio')->nullable();
-            $table->date('dob');
+            $table->date('dob')->nullable();
             $table->string('phone')->nullable();
             $table->string('image')->nullable();
             $table->string('facebook_page_link')->nullable();
@@ -30,8 +30,8 @@ return new class extends Migration
             $table->tinyInteger('is_pic_public')->default(0);
             $table->tinyInteger('is_social_media_public')->default(0);
             $table->tinyInteger('is_bio_public')->default(0);
-
             $table->timestamps();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
