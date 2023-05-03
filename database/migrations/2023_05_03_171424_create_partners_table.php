@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('email');
             $table->string('banner');
             $table->string('title');
-            $table->longText('description')->unsigned();
+            $table->longText('description');
             $table->string('logo');
             $table->tinyInteger('status')->default(1);
             $table->timestamps();

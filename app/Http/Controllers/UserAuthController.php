@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Partner;
+use App\Models\UserProfile;
 use Illuminate\Http\Request;
 use Anhskohbo\NoCaptcha\NoCaptcha;
 use Illuminate\Support\Facades\DB;
@@ -59,11 +60,11 @@ class UserAuthController extends Controller
         $validation = Validator::make($request->all(), [
             'email' => 'required|email',
             'password' => 'required|string|min:8|max:18',
-            'g-recaptcha-response' => 'required|captcha'
+            'g-recaptcha-response' => 'required' //|captcha'
         ], [
             'g-recaptcha-response' => [
                 'required' => 'Please verify that you are not a robot.',
-                'captcha' => 'Captcha error! Try again later or contact site admin.',
+                // 'captcha' => 'Captcha error! Try again later or contact site admin.',
             ]
         ]);
 
@@ -74,7 +75,7 @@ class UserAuthController extends Controller
             if (Auth::attempt($credentials)) {
                 // User is authenticated
                 $this->clearLoginAttempts($request);
-                return redirect()->intended('home');
+                return redirect()->intended('/');
             } else {
                 // Check if email is registered
                 $user = User::where('email', $credentials['email'])->first();
@@ -116,13 +117,13 @@ class UserAuthController extends Controller
                 'country' => ['required'],
                 'terms' => ['required'],
                 'sixteen' => ['required'],
-                'g-recaptcha-response' => ['required', 'captcha'],
+                'g-recaptcha-response' => ['required'],
             ],
             [
                 'sixteen.required' => 'Age requirement field is required',
                 'g-recaptcha-response' => [
                     'required' => 'Please verify that you are not a robot.',
-                    'captcha' => 'Captcha error! Try again later or contact site admin.',
+                    // 'captcha' => 'Captcha error! Try again later or contact site admin.',
                 ]
             ]
 
@@ -140,19 +141,19 @@ class UserAuthController extends Controller
                         'password' => Hash::make($request->password),
                     ]);
 
-                    $user->user_profile()->save(
-                        [
-                            'city' => $request->city,
-                            'pen_name' => $request->pen_name,
-                            'state' => $request->state,
-                            'country' => $request->country,
-                            'org_id' => (Session::get('org_id') != null) ? Session::get('org_id') : NULL,
-                            'bio' => $request->bio,
-                        ]
-                    );
+                    $userProfile = new UserProfile;
+                    $userProfile->city = $request->city;
+                    $userProfile->pen_name = $request->pen_name;
+                    $userProfile->state = $request->state;
+                    $userProfile->country = $request->country;
+                    $userProfile->bio = $request->bio;
+                    $userProfile->org_id = (Session::get('org_id') != null) ? Session::get('org_id') : NULL;
+
+
+                    $user->user_profile()->save($userProfile);
 
                     // Send verification email
-                    $user->sendEmailVerificationNotification();
+                   // $user->sendEmailVerificationNotification();
                 });
                 return redirect()->route('login')->with('success', 'Please verify your email address to complete registration.');
             } catch (\Exception $e) {

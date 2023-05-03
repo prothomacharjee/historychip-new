@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('partner_images', function (Blueprint $table) {
             $table->id();
-            $table->integer('partner_id');
+            $table->bigInteger('partner_id', false,true);
             $table->string('image_path');
             $table->timestamps();
             $table->foreign('partner_id')->references('id')->on('partners')->onDelete('cascade');

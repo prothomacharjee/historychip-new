@@ -24,7 +24,7 @@ use App\Http\Controllers\WritingPromptController;
 //     return view('welcome');
 // });
 
-// Auth::routes();
+Auth::routes(['verify' => true]);
 
 // User Authentications
 Route::get('/login', [UserAuthController::class, 'showLoginForm'])->name('login');
