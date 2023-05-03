@@ -1990,3 +1990,9 @@ form .form-group {
     border-bottom: 1px solid #ddd;
     margin-top: 30px;
 }
+
+.softsource-profile-dropdown-button:hover{
+    border-color: transparent !important;
+    background-color: transparent !important;
+
+}

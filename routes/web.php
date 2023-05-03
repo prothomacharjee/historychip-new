@@ -34,6 +34,10 @@ Route::post('/register', [UserAuthController::class, 'register'])->name('registe
 Route::get('/password/reset', [UserAuthController::class, 'showResetPasswordForm'])->name('password.request');
 
 
+//User Profile
+Route::get('/profile', [SiteController::class, 'profile'])->name('profile');
+Route::get('/my-stories', [SiteController::class, 'my_stories'])->name('my-stories');
+
 
 Route::get('/', [SiteController::class, 'index'])->name('home');
 Route::get('/about', [SiteController::class, 'about'])->name('about');
