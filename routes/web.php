@@ -1,14 +1,15 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\SiteController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ContactController;
-use App\Http\Controllers\UserAuthController;
-use App\Http\Controllers\NoticePromptController;
 use App\Http\Controllers\PartnerController;
+use App\Http\Controllers\UserAuthController;
 use App\Http\Controllers\PartnerTypeController;
+use App\Http\Controllers\NoticePromptController;
 use App\Http\Controllers\WritingPromptController;
 
 /*
