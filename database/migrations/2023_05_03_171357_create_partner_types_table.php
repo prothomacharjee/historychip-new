@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('bill_type');
             $table->integer('max_image_count');
             $table->integer('max_content_length');
+            $table->tinyInteger('status')->default(1);
             $table->timestamps();
         });
     }

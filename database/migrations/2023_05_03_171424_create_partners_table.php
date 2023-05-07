@@ -15,10 +15,10 @@ return new class extends Migration
             $table->id();
             $table->integer('partner_type_id');
             $table->uuid('uuid');
-            $table->string('code');
-            $table->string('name');
+            $table->string('name')->unique();
             $table->string('email');
             $table->string('banner');
+            $table->string('banner_alt_text')->nullable();
             $table->string('title');
             $table->longText('description');
             $table->string('logo');

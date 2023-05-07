@@ -5,12 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class PartnerType extends Model
+class PartnerImage extends Model
 {
     protected $guarded = [];
 
-    public function partner()
+    public function partner_image()
     {
-        return $this->hasMany(Partner::class, 'partner_type_id');
+        return $this->belongsTo(Partner::class, 'partner_id');
     }
 }

@@ -147,7 +147,7 @@ class UserAuthController extends Controller
                     $userProfile->state = $request->state;
                     $userProfile->country = $request->country;
                     $userProfile->bio = $request->bio;
-                    $userProfile->org_id = (Session::get('org_id') != null) ? Session::get('org_id') : NULL;
+                    $userProfile->partner_id = ($request->partner_id != null) ? $request->partner_id : NULL;
 
 
                     $user->user_profile()->save($userProfile);

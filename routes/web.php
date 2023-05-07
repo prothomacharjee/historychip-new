@@ -7,6 +7,8 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\UserAuthController;
 use App\Http\Controllers\NoticePromptController;
+use App\Http\Controllers\PartnerController;
+use App\Http\Controllers\PartnerTypeController;
 use App\Http\Controllers\WritingPromptController;
 
 /*
@@ -97,4 +99,20 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('/store-blogs-data', [BlogController::class, 'store'])->name('admin.blogs.store');
     // Route::post('/fetch-writing-prompts-data', [BlogController::class, 'FetchWritingPromptDataById'])->name('writing-prompts.fetch');
     // Route::post('/delete-writing-prompts/{id}', [BlogController::class, 'destroy'])->name('writing-prompts.destroy');
+
+
+    // Partner Type
+    Route::get('/partner-types', [PartnerTypeController::class, 'index'])->name('admin.partner-types');
+    Route::get('/load-partner-types-data', [PartnerTypeController::class, 'LoadPartnerTypeDataTable'])->name('admin.partner-types.loadDataTable');
+    Route::post('/store-partner-types-data', [PartnerTypeController::class, 'store'])->name('admin.partner-types.store');
+    Route::post('/fetch-partner-types-data', [PartnerTypeController::class, 'FetchPartnerTypeDataById'])->name('admin.partner-types.fetch');
+    Route::post('/delete-partner-types/{id}', [PartnerTypeController::class, 'destroy'])->name('admin.partner-types.destroy');
+
+    // Partners
+    Route::get('/partners', [PartnerController::class, 'index'])->name('admin.partners');
+    Route::get('/load-partners-data', [PartnerController::class, 'LoadPartnerDataTable'])->name('admin.partners.loadDataTable');
+    Route::post('/store-partners-data', [PartnerController::class, 'store'])->name('admin.partners.store');
+    Route::post('/fetch-partners-data', [PartnerController::class, 'FetchPartnerDataById'])->name('admin.partners.fetch');
+    Route::post('/delete-partners/{id}', [PartnerController::class, 'destroy'])->name('admin.partner-types.destroy');
+
 });

@@ -164,7 +164,7 @@
                                     <input type="checkbox" id="toggle-partner"><label for="toggle-partner">Are You
                                         Willing to Join with Our Partner</label>
                                 </div>
-                                <select class="form-control" id="org_id" name="org_id" style="display:none">
+                                <select class="form-control" id="partner_id" name="partner_id" style="display:none">
                                     <option value="">Select an Partner</option>
                                     @foreach ($partners as $partner)
                                         <option value="{{ $partner->id }}">{{ $partner->name }}</option>
