@@ -41,7 +41,7 @@ class NoticePromptController extends Controller
                     DB::transaction(function () use ($input, $notice_prompt) {
                         $notice_prompt->update($input);
                     });
-                    return redirect()->route('notice-prompts')->with('success', 'Notice Prompt Updated Successfully');
+                    return redirect()->route('admin.notice-prompts')->with('success', 'Notice Prompt Updated Successfully');
                 } catch (\Exception$e) {
 
                     return redirect()->back()->with('error', $e->getMessage());
@@ -51,7 +51,7 @@ class NoticePromptController extends Controller
                     DB::transaction(function () use ($input) {
                         NoticePrompt::create($input);
                     });
-                    return redirect()->route('notice-prompts')->with('success', 'Notice Prompt Created Successfully');
+                    return redirect()->route('admin.notice-prompts')->with('success', 'Notice Prompt Created Successfully');
                 } catch (\Exception$e) {
                     return redirect()->back()->with('error', $e->getMessage());
                 }
@@ -69,7 +69,7 @@ class NoticePromptController extends Controller
             DB::transaction(function () use ($notice_prompt) {
                 $notice_prompt->delete();
             });
-            return redirect()->route('notice-prompts')->with('success', 'Notice Prompt Deleted Successfully');
+            return redirect()->route('admin.notice-prompts')->with('success', 'Notice Prompt Deleted Successfully');
         } catch (\Exception$e) {
             return redirect()->back()->with('error', $e->getMessage());
         }

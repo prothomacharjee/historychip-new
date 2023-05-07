@@ -50,6 +50,8 @@
     <link href="{{ asset('backend/plugins/metismenu/css/metisMenu.min.css?q=' . time()) }}" rel="stylesheet" />
     <link href="{{ asset('backend/plugins/datatable/css/dataTables.bootstrap5.min.css?q=' . time()) }}" rel="stylesheet" />
     <link href="{{ asset('backend/plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.min.css?q=' . time()) }}" rel="stylesheet" />
+    <link href="{{ asset('backend/plugins/select2/css/select2.min.css?q=' . time()) }}" rel="stylesheet" />
+	<link href="{{ asset('backend/plugins/select2/css/select2-bootstrap4.css?q=' . time()) }}" rel="stylesheet" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <!-- loader-->
     <link href="{{ asset('backend/css/pace.min.css?q=' . time()) }}" rel="stylesheet" />
@@ -116,6 +118,7 @@
     <script
         src="{{ asset('backend/plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.min.js?q=' . time()) }}">
     </script>
+    	<script src="{{ asset('backend/plugins/select2/js/select2.min.js?q=' . time()) }}"></script>
 
     <script src="{{ asset('backend/plugins/input-tags/js/tagsinput.js?q=' . time()) }}"></script>
     <script src="{{ asset('backend/js/summernote/summernote-lite.min.js?q=' . time()) }}"></script>

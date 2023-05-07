@@ -60,6 +60,29 @@
             </ul>
         </li>
 
+        <li>
+            <a href="{{ route('admin.partner-types') }}">
+                <div class="parent-icon"><i class='bx bx-joystick-alt'></i>
+                </div>
+                <div class="menu-title">Partner Type</div>
+            </a>
+        </li>
+
+        <li>
+            <a href="javascript:;" class="has-arrow" aria-expanded="false">
+                <div class="parent-icon"><i class="bx bx-unite"></i>
+                </div>
+                <div class="menu-title">Partners</div>
+            </a>
+            <ul class="mm-collapse">
+                <li> <a href="{{ route('admin.partners.create') }}"><i class="bx bx-right-arrow-alt"></i>Add Partner</a>
+                </li>
+                <li> <a href="{{ route('admin.partners') }}"><i class="bx bx-right-arrow-alt"></i>Partner Lists</a>
+                </li>
+
+            </ul>
+        </li>
+
     </ul>
     <!--end navigation-->
 </div>

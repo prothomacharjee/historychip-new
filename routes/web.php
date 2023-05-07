@@ -112,6 +112,7 @@ Route::group(['prefix' => 'admin'], function () {
     // Partners
     Route::get('/partners', [PartnerController::class, 'index'])->name('admin.partners');
     Route::get('/load-partners-data', [PartnerController::class, 'LoadPartnerDataTable'])->name('admin.partners.loadDataTable');
+    Route::get('/partners/create', [PartnerController::class, 'create'])->name('admin.partners.create');
     Route::post('/store-partners-data', [PartnerController::class, 'store'])->name('admin.partners.store');
     Route::post('/fetch-partners-data', [PartnerController::class, 'FetchPartnerDataById'])->name('admin.partners.fetch');
     Route::post('/delete-partners/{id}', [PartnerController::class, 'destroy'])->name('admin.partner-types.destroy');

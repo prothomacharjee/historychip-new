@@ -3,7 +3,7 @@ $(document).ready(function () {
     let logo = $(".softsource-preloader-container img");
 
     $(".softsource-select2").select2({
-        placeholder: "Select a Category",
+        placeholder: "== Please Select ==",
     });
 
     // Blink logo for 5 seconds or until process is complete

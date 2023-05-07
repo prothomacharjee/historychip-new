@@ -15,7 +15,7 @@ class PartnerTypeController extends Controller
      */
     public function index()
     {
-        return view('backend.partner-type.index')->with([
+        return view('backend.partner-types.index')->with([
             'page_title' => 'Partner Type',
         ]);
     }
@@ -45,7 +45,7 @@ class PartnerTypeController extends Controller
                     DB::transaction(function () use ($input, $partnerType) {
                         $partnerType->update($input);
                     });
-                    return redirect()->route('partner-types')->with('success', 'Partner Type Updated Successfully');
+                    return redirect()->route('admin.partner-types')->with('success', 'Partner Type Updated Successfully');
                 } catch (\Exception$e) {
 
                     return redirect()->back()->with('error', $e->getMessage());
@@ -55,7 +55,7 @@ class PartnerTypeController extends Controller
                     DB::transaction(function () use ($input) {
                         PartnerType::create($input);
                     });
-                    return redirect()->route('partner-types')->with('success', 'Partner Type Created Successfully');
+                    return redirect()->route('admin.partner-types')->with('success', 'Partner Type Created Successfully');
                 } catch (\Exception$e) {
                     return redirect()->back()->with('error', $e->getMessage());
                 }
@@ -75,7 +75,7 @@ class PartnerTypeController extends Controller
             DB::transaction(function () use ($partnerType) {
                 $partnerType->delete();
             });
-            return redirect()->route('partner-types')->with('success', 'Partner Type Deleted Successfully');
+            return redirect()->route('admin.partner-types')->with('success', 'Partner Type Deleted Successfully');
         } catch (\Exception$e) {
             return redirect()->back()->with('error', $e->getMessage());
         }

@@ -1,3 +1,37 @@
-.note-editing-area{
+.note-editing-area {
     background-color: white;
 }
+
+.softsource-image-wrapper {
+    position: relative;
+    display: inherit;
+}
+
+.softsource-image-wrapper img {
+    height: 250px !important;
+}
+
+.softsource-close-button {
+    position: absolute;
+    bottom: 50%;
+    right: 50%;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    transform: translateY(0);
+    transition: transform 0.3s ease;
+}
+
+.softsource-close-button i {
+    color: #fff;
+    font-size: 30px;
+}
+
+.softsource-close-button:hover i {
+    color: #f00;
+}
+
+.softsource-image-wrapper:hover .softsource-close-button {
+    transform: translateY(100%);
+  }

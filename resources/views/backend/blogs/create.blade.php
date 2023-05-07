@@ -119,8 +119,8 @@
                                         Jpeg, WebP) </label>
                                     <input class="form-control file-uploader" name="blog_banner" id="blog_banner"
                                         type="file" accept=".png,.jpg,.jpeg,.svg, .webp" maxFileSize="2MB"
-                                        onchange="FileUploaderValidation(this, 2, ['image/png', 'image/jpeg', 'image/svg', 'image/webp'], 'selected-file', 25)" />
-                                    <div id="file-error" class="form-text text-danger"></div>
+                                        onchange="FileUploaderValidation(this, 2, ['image/png', 'image/jpeg', 'image/svg', 'image/webp'], 'banner', 25)" />
+                                    <div id="file-error-banner" class="form-text text-danger"></div>
                                     @error('blog_banner')
                                         <div id="validationContentFeedback" class="invalid-feedback">{{ $message }}
                                         </div>
@@ -144,7 +144,7 @@
                                 </div>
 
                                 <div class="col-md-12 text-center">
-                                    <div class="selected-file">
+                                    <div class="selected-file-banner">
                                         @if (!empty($blog))
                                             @if (!empty($blog->blog_banner))
                                                 <img src="{{ $blog->blog_banner }}"

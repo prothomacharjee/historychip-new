@@ -4,13 +4,13 @@
     <div class="page-content">
         <!--breadcrumb-->
         <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-            <div class="breadcrumb-title pe-3">Notice Prompt</div>
+            <div class="breadcrumb-title pe-3">Partner Type</div>
             <div class="ps-3">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb mb-0 p-0">
                         <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}"><i class="bx bx-home-alt"></i></a>
                         </li>
-                        <li class="breadcrumb-item active" aria-current="page">Notice Prompts</li>
+                        <li class="breadcrumb-item active" aria-current="page">Partner Types</li>
                     </ol>
                 </nav>
             </div>
@@ -64,8 +64,8 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="p-4 border rounded">
-                            <form class="row g-3 needs-validation" novalidate action="{{ route('admin.notice-prompts.store') }}"
-                                method="post">
+                            <form class="row g-3 needs-validation" novalidate
+                                action="{{ route('admin.partner-types.store') }}" method="post">
                                 @csrf
                                 <input type="hidden" name="id" id="id" value="" />
                                 <div class="col-md-12">
@@ -80,37 +80,75 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-12">
-                                    <label for="content" class="form-label">Content <span
+                                    <label for="bill" class="form-label">Bill Amount <span
                                             class="text-danger">*</span></label>
-                                    <textarea minlength="3" maxlength="191" rows="10" class="form-control @error('content') is-invalid @enderror"
-                                        id="content" name="content" placeholder="Write your Content here" required
-                                        aria-describedby="validationContentFeedback">{{ old('content') }}</textarea>
+                                    <input type="number" step="0.00"
+                                        class="form-control @error('bill') is-invalid @enderror" id="bill"
+                                        name="bill" placeholder="Enter Bill Amount" required
+                                        aria-describedby="validationNameFeedback" value="{{ old('bill') }}">
                                     <div class="valid-feedback">Looks good!</div>
-                                    <div class="invalid-feedback">You must enter a notice content. Maximum 191 character and
-                                        Minimum 3 characters allowed</div>
-                                    @error('content')
-                                        <div id="validationContentFeedback" class="invalid-feedback">{{ $message }}</div>
+                                    <div class="invalid-feedback">You must enter an unique name.</div>
+                                    @error('bill')
+                                        <div id="validationNameFeedback" class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
-                                <div class="col-md-6">
-                                    <label class="form-label">Start Date & Time</label>
-                                    <input class="result form-control date-time-material" type="text" id="duration_from"
-                                        name="duration_from" placeholder="Start Date & Time"
-                                        value="{{ old('duration_from') }}">
-
+                                <div class="col-md-12">
+                                    <label for="bill_type" class="form-label">Bill Type <span
+                                            class="text-danger">*</span></label>
+                                    <select class="form-select @error('bill_type') is-invalid @enderror" id="bill_type"
+                                        name="bill_type" required aria-describedby="validationStatusFeedback">
+                                        <option value="once" {{ old('bill_type') == 'once' ? 'selected' : '' }}>Once
+                                        </option>
+                                        <option value="daily" {{ old('bill_type') == 'daily' ? 'selected' : '' }}>Daily
+                                        </option>
+                                        <option value="monthly" {{ old('bill_type') == 'monthly' ? 'selected' : '' }}>
+                                            Monthly</option>
+                                        <option value="yearly" {{ old('bill_type') == 'yearly' ? 'selected' : '' }}>Yearly
+                                        </option>
+                                    </select>
+                                    <div class="valid-feedback">Looks good!</div>
+                                    <div class="invalid-feedback">You must Select a Bill Type.</div>
+                                    @error('status')
+                                        <div id="validationStatusFeedback" class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
                                 </div>
-                                <div class="col-md-6">
-                                    <label class="form-label">End Date & Time</label>
-                                    <input class="result form-control date-time-material" type="text" id="duration_to"
-                                        name="duration_to" placeholder="End Date & Time" value="{{ old('duration_to') }}">
+                                <div class="col-md-12">
+                                    <label for="max_image_count" class="form-label">Max Image Count <span
+                                            class="text-danger">*</span></label>
+                                    <input type="number" min="6"
+                                        class="form-control @error('max_image_count') is-invalid @enderror"
+                                        id="max_image_count" name="max_image_count"
+                                        placeholder="Enter Max Image for This Type" required
+                                        aria-describedby="validationNameFeedback"
+                                        value="{{ old('max_image_count') ? old('max_image_count') : 6 }}">
+                                    <div class="valid-feedback">Looks good!</div>
+                                    <div class="invalid-feedback">You must enter Max Image for this type.</div>
+                                    @error('max_image_count')
+                                        <div id="validationNameFeedback" class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-12">
+                                    <label for="max_content_length" class="form-label">Max Content Length <span
+                                            class="text-danger">*</span></label>
+                                    <input type="number" min="500"
+                                        class="form-control @error('max_content_length') is-invalid @enderror"
+                                        id="max_content_length" name="max_content_length"
+                                        placeholder="Enter Max Content Length for This Type" required
+                                        aria-describedby="validationNameFeedback"
+                                        value="{{ old('max_content_length') ? old('max_content_length') : 500 }}">
+                                    <div class="valid-feedback">Looks good!</div>
+                                    <div class="invalid-feedback">You must enter Max Content Length for This Type.</div>
+                                    @error('max_content_length')
+                                        <div id="validationNameFeedback" class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
                                 </div>
                                 <div class="col-md-12">
                                     <label for="status" class="form-label">Status <span
                                             class="text-danger">*</span></label>
                                     <select class="form-select @error('status') is-invalid @enderror" id="status"
                                         name="status" required aria-describedby="validationStatusFeedback">
-                                        <option value="1" {{ old('status') == 1 ? 'selected' : '' }}>Active</option>
-                                        <option value="2" {{ old('status') == 0 ? 'selected' : '' }}>Inactive
+                                        <option value="1">Active</option>
+                                        <option value="0">Inactive
                                         </option>
                                     </select>
                                     <div class="valid-feedback">Looks good!</div>
@@ -141,9 +179,10 @@
                                 <thead>
                                     <tr>
                                         <th>Name</th>
-                                        <th>Content</th>
-                                        <th>Start Date & Time</th>
-                                        <th>End Date & Time</th>
+                                        <th>Bill</th>
+                                        <th>Bill Type</th>
+                                        <th>Max Image Count</th>
+                                        <th>Max Content Length</th>
                                         <th>Status</th>
                                         <th>Action</th>
                                     </tr>
@@ -153,9 +192,10 @@
                                 <tfoot>
                                     <tr>
                                         <th>Name</th>
-                                        <th>Content</th>
-                                        <th>Start Date & Time</th>
-                                        <th>End Date & Time</th>
+                                        <th>Bill</th>
+                                        <th>Bill Type</th>
+                                        <th>Max Image Count</th>
+                                        <th>Max Content Length</th>
                                         <th>Status</th>
                                         <th>Action</th>
                                     </tr>
@@ -175,18 +215,21 @@
             $("#dt_notice_prompt").DataTable({
                 "processing": true,
                 "serverSide": true,
-                "ajax": "{{ route('admin.notice-prompts.loadDataTable') }}",
+                "ajax": "{{ route('admin.partner-types.loadDataTable') }}",
                 "columns": [{
                         "data": "name"
                     },
                     {
-                        "data": "content"
+                        "data": "bill"
                     },
                     {
-                        "data": "duration_from"
+                        "data": "bill_type"
                     },
                     {
-                        "data": "duration_to"
+                        "data": "max_image_count"
+                    },
+                    {
+                        "data": "max_content_length"
                     },
                     {
                         "data": "status"
@@ -203,7 +246,7 @@
 
         function editFunc(id) {
             $.ajax({
-                url: `{{ route('admin.notice-prompts.fetch') }}`,
+                url: `{{ route('admin.partner-types.fetch') }}`,
                 data: {
                     '_token': '{{ csrf_token() }}',
                     'id': id
@@ -214,15 +257,11 @@
 
                     $("#id").val(response.id);
                     $("#name").val(response.name);
-                    $("#content").val(response.content);
-                    // $('.summernote').summernote('code', response.content);
-                    $("#duration_from").val((response.duration_from) ? moment(response.duration_from).format(
-                        'YYYY-MM-DD HH:mm') : '');
-                    $("#duration_to").val((response.duration_from) ? moment(response.duration_to).format(
-                        'YYYY-MM-DD HH:mm') : '');
-                    $("#status").val(response.status);
-                    $('#content').summernote();
-                    $('.note-icon-caret').hide();
+                    $("#bill").val(response.bill);
+                    $("#bill_type").val(response.bill_type);
+                    $("#max_image_count").val(response.max_image_count);
+                    $("#max_content_length").val(response.max_content_length);
+
                 }
             });
         }

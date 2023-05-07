@@ -10,6 +10,10 @@ $(document).ready(function () {
     $(".tag-input").tagsinput({
         confirmKeys: [13, 188], // optional: specify which keys trigger tag creation (enter key and comma key by default)
     });
+
+    $(".softsource-select2").select2({
+        placeholder: "== Please Select ==",
+    });
 });
 
 $(".date-time-material").bootstrapMaterialDatePicker({
@@ -47,8 +51,8 @@ function FileUploaderValidation(
 ) {
     const file = that.files[0];
     const reader = new FileReader();
-    const fileError = $("#file-error");
-    const selected_file = $(`.${selector_class}`);
+    const fileError = $(`#file-error-${selector_class}`);
+    const selected_file = $(`.selected-file-${selector_class}`);
 
     const fileType = file.type;
     const fileSize = file.size / 1024 / 1024; // convert to MB
@@ -87,6 +91,75 @@ function FileUploaderValidation(
         };
 
         reader.readAsDataURL(file);
+    }
+}
+
+function MultipleFileUploaderValidation(
+    that,
+    filesize_mb,
+    accepted_files,
+    selector_class,
+    image_view_width = 50
+) {
+    const files = that.files;
+
+    const maxFiles = that.max;
+
+
+    const fileError = $(`#file-error-${selector_class}`);
+    const selected_file = $(`.selected-file-${selector_class}`);
+
+    let readershow = true;
+
+    if (files.length > maxFiles) {
+        fileError.text(`You can only upload maximum of ${maxFiles} files`);
+    } else {
+        for (var i = 0; i < files.length; i++) {
+            let file = files[i];
+            const fileType = file.type;
+            const fileSize = file.size / 1024 / 1024; // convert to MB
+
+            if (!file) {
+                fileError.text("No file selected");
+                readershow = false;
+                selected_file.html("");
+                return;
+            }
+
+            if (!accepted_files.includes(fileType)) {
+                fileError.text("Invalid file type");
+                that.value = ""; // clear the file input
+                readershow = false;
+                selected_file.html("");
+                return;
+            }
+
+            if (fileSize > filesize_mb) {
+                fileError.text(`File size exceeds ${filesize_mb}MB`);
+                that.value = ""; // clear the file input
+                readershow = false;
+                selected_file.html("");
+                return;
+            }
+
+            fileError.text(""); // clear any previous errors
+
+            if (readershow) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    const imageUrl = e.target.result;
+                    selected_file.append(
+                        `<div class="col-md-2">
+                            <div class="softsource-image-wrapper text-center">
+                                <img src="${imageUrl}" alt="Selected File ${i + 1}" class="img-thumbnail w-${image_view_width}">
+                                <button type="button" class="softsource-close-button"><i class="bx bx-x-circle"></i></button>
+                            </div>
+                        </div>`
+                    );
+                };
+                reader.readAsDataURL(file);
+            }
+        }
     }
 }
 
