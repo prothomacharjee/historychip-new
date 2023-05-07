@@ -119,7 +119,7 @@
                                         Jpeg, WebP) </label>
                                     <input class="form-control file-uploader" name="blog_banner" id="blog_banner"
                                         type="file" accept=".png,.jpg,.jpeg,.svg, .webp" maxFileSize="2MB"
-                                        onchange="FileUploaderValidation(this, 2, ['image/png', 'image/jpeg', 'image/svg', 'image/webp'], 25)" />
+                                        onchange="FileUploaderValidation(this, 2, ['image/png', 'image/jpeg', 'image/svg', 'image/webp'], 'selected-file', 25)" />
                                     <div id="file-error" class="form-text text-danger"></div>
                                     @error('blog_banner')
                                         <div id="validationContentFeedback" class="invalid-feedback">{{ $message }}

@@ -120,7 +120,7 @@ class BlogController extends Controller
         $meta = Page::where('page_group', 'blog')->where('page_group_id', $id)->first();
 
         return view('backend.blogs.create')->with([
-            'page_title' => 'Create Blog',
+            'page_title' => 'Edit Blog',
             'blog' => $blog,
             'meta' => $meta,
         ]);

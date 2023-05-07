@@ -42,12 +42,13 @@ function FileUploaderValidation(
     that,
     filesize_mb,
     accepted_files,
+    selector_class,
     image_view_width = 50
 ) {
     const file = that.files[0];
     const reader = new FileReader();
     const fileError = $("#file-error");
-    const selected_file = $(".selected-file");
+    const selected_file = $(`.${selector_class}`);
 
     const fileType = file.type;
     const fileSize = file.size / 1024 / 1024; // convert to MB

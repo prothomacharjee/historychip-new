@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('partner_id', false,true);
             $table->string('image_path');
+            $table->string('image_alt_text');
             $table->timestamps();
             $table->foreign('partner_id')->references('id')->on('partners')->onDelete('cascade');
         });

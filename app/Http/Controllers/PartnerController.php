@@ -4,11 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\Page;
 use App\Models\Partner;
+use App\Models\PartnerType;
 use Illuminate\Support\Str;
+use App\Models\PartnerImage;
 use Illuminate\Http\Request;
 use App\Helpers\SoftSourceHelper;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Validator;
 
 class PartnerController extends Controller
@@ -28,8 +31,10 @@ class PartnerController extends Controller
      */
     public function create()
     {
+        $partner_types = PartnerType::where('status', 1)->get();
         return view('backend.partners.create')->with([
             'page_title' => 'Create Partner',
+            'partner_types' => $partner_types,
         ]);
     }
 
@@ -38,11 +43,9 @@ class PartnerController extends Controller
      */
     public function store(Request $request)
     {
-        //dd($request->hasFile('blog_banner'));
+
         $req_partner = $request->partner;
         $req_meta = $request->meta;
-
-        //dd($req_blog);
 
         $uniquevalidation = $req_partner['id'] ? $req_partner['id'] : '';
 
@@ -72,7 +75,6 @@ class PartnerController extends Controller
             $partner->banner_alt_text = $req_partner['banner_alt_text'];
             $partner->title = $req_partner['title'];
             $partner->description = $req_partner['description'];
-            $partner->logo = $req_partner['logo'];
             $partner->status = $req_partner['status'];
             $partner->uuid = Str::uuid()->toString();
 
@@ -91,21 +93,31 @@ class PartnerController extends Controller
                 $partner->banner = SoftSourceHelper::FileUploaderHelper($request->banner, 'backend/partner/banner');
             }
 
+            if ($request->hasFile('logo')) {
+                $partner->logo = SoftSourceHelper::FileUploaderHelper($request->logo, 'backend/partner/logo');
+            }
+
             $images = [];
             if ($request->hasFile('partner_image')) {
                 $images = SoftSourceHelper::MultipleFileUploaderHelper($request->banner, 'backend/partner/images');
             }
 
             try {
-                DB::transaction(function () use ($partner, $meta, $images) {
+                DB::transaction(function () use ($partner, $meta, $images,$req_partner) {
                     $partner->save();
                     if(!empty($images)){
-                        $partner->partner_image()->createMany($images);
+                        $partner_image = new PartnerImage;
+                        foreach ($images as $key=>$image) {
+                            $partner_image->image_path = $image;
+                            $partner_image->image_alt_text = $req_partner[$key]['image_alt_text'];
+                        }
+
+                        $partner->partner_image()->createMany($partner_image);
                     }
                     $meta->page_group_id = $partner->id;
                     $meta->save();
                 });
-                return redirect()->route('blogs')->with('success', "Partner $returnText Successfully");
+                return redirect()->route('partners')->with('success', "Partner $returnText Successfully");
             } catch (\Exception$e) {
                 return redirect()->back()->with('error', $e->getMessage());
             }
@@ -113,35 +125,92 @@ class PartnerController extends Controller
         }
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Partner $partner)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Partner $partner)
+    public function edit($id)
     {
-        //
-    }
+        $partner = Partner::findOrFail($id);
+        $meta = Page::where('page_group', 'partner')->where('page_group_id', $id)->first();
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Partner $partner)
-    {
-        //
+        return view('backend.blogs.create')->with([
+            'page_title' => 'Edit Partner',
+            'partner' => $partner,
+            'meta' => $meta,
+        ]);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Partner $partner)
+    public function destroy($id)
     {
-        //
+        try {
+            $partner = Partner::findOrFail($id);
+            DB::transaction(function () use ($partner) {
+                $partner->delete();
+            });
+            return redirect()->route('partners')->with('success', 'Partner Deleted Successfully');
+        } catch (\Exception$e) {
+            return redirect()->back()->with('error', $e->getMessage());
+        }
+    }
+
+    public function LoadPartnerDataTable(Request $request)
+    {
+        $url = 'partners';
+        // Define the columns to be fetched
+        $columns = array(
+            'id',
+            'partner_type_id',
+            'name',
+            'uuid',
+            'email',
+            'banner',
+            'banner_alt_text',
+            'title',
+            'description',
+            'logo',
+            'status',
+        );
+
+        // Define the search columns
+        // $searchColumns = array(
+        //     'blog_title',
+        //     'details',
+        // );
+
+        // Build the DataTables response
+        $data = DataTables::of(Partner::select($columns)->where('status', '=', 1))
+            ->addColumn('serial', function ($row) {
+                static $count = 0;
+                $count++;
+                return $count;
+            })
+            ->addColumn('status', function ($row) {
+                return ($row->status == 1) ? '<span class="badge bg-success">Active</span>' : '<span class="badge bg-danger">Inactive</span>';
+            })
+            ->addColumn('banner', function ($row) {
+                return ($row->banner) ? '<img src="' . asset($row->banner) . '" alt="' . $row->banner_alt_text . '" class="w-50">' : '';
+            })
+            ->addColumn('logo', function ($row) {
+                return ($row->logo) ? '<img src="' . asset($row->logo) . '" alt="' . $row->name . '" class="w-50">' : '';
+            })
+            ->addColumn('action', function ($row) use ($url) {
+                $buttons = '<a href="' . route('admin.blogs.edit', $row->id) . '" data-toggle="tooltip" title="Edit" class="edit btn btn-outline-primary btn-sm me-2"><i class="fadeInUp animate__animated bx bx-edit-alt"></i></a>';
+                $buttons .= '<button type="button" class="delete btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#delete_modal"  onclick="remove_function(' . $row->id . ', \'' . $url . '\')" title="Delete"><i class="fadeInUp animate__animated bx bx-trash-alt"></i></button>';
+
+                return $buttons;
+            })
+            ->addColumn('description', function ($row) {
+                return mb_strimwidth(strip_tags($row->description), 0, 50, "...");
+            })
+
+            ->rawColumns(['serial', 'action', 'description', 'banner', 'logo','status'])
+            ->make(true);
+
+        // Return the DataTables response
+        return $data;
     }
 }
