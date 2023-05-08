@@ -22,8 +22,8 @@ USE `historychip_new`;
 -- Dumping structure for table historychip_new.blogs
 CREATE TABLE IF NOT EXISTS `blogs` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `blog_title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `blog_description` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `blog_title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `blog_description` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `blog_date` date NOT NULL,
   `blog_banner` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `blog_banner_alt_text` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS `blogs` (
   UNIQUE KEY `blogs_blog_title_unique` (`blog_title`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table historychip_new.blogs: ~1 rows (approximately)
+-- Dumping data for table historychip_new.blogs: ~2 rows (approximately)
 INSERT INTO `blogs` (`id`, `blog_title`, `blog_description`, `blog_date`, `blog_banner`, `blog_banner_alt_text`, `status`, `is_draft`, `is_featured`, `created_by`, `updated_by`, `created_at`, `updated_at`) VALUES
 	(2, 'What is Lorem Ipsum???', '<div style="margin: 0px 14.3906px 0px 28.7969px; padding: 0px; width: 436.797px; float: left; font-family: &quot;Open Sans&quot;, Arial, sans-serif; letter-spacing: normal;"><h2 style="margin-right: 0px; margin-bottom: 10px; margin-left: 0px; padding: 0px; font-family: DauphinPlain; font-size: 24px; line-height: 24px;">What is Lorem Ipsum?</h2><p style="margin-right: 0px; margin-bottom: 15px; margin-left: 0px; padding: 0px; text-align: justify;"><strong style="margin: 0px; padding: 0px;">Lorem Ipsum</strong>&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p></div><div style="margin: 0px 28.7969px 0px 14.3906px; padding: 0px; width: 436.797px; float: right; font-family: &quot;Open Sans&quot;, Arial, sans-serif; letter-spacing: normal;"><h2 style="margin-right: 0px; margin-bottom: 10px; margin-left: 0px; padding: 0px; font-family: DauphinPlain; font-size: 24px; line-height: 24px;">Why do we use it?</h2><p style="margin-right: 0px; margin-bottom: 15px; margin-left: 0px; padding: 0px; text-align: justify;">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using \'Content here, content here\', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for \'lorem ipsum\' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</p></div>', '2023-04-24', '/storage/backend/blogs//1682339572.jpg', 'Lorem Ipsum', 1, 0, 0, NULL, NULL, '2023-04-24 08:38:35', '2023-04-24 12:36:03'),
 	(3, 'What is Lorem Ipsum2???', '<div style="margin: 0px 14.3906px 0px 28.7969px; padding: 0px; width: 436.797px; float: left; font-family: &quot;Open Sans&quot;, Arial, sans-serif; letter-spacing: normal;"><h2 style="margin-right: 0px; margin-bottom: 10px; margin-left: 0px; padding: 0px; font-family: DauphinPlain; font-size: 24px; line-height: 24px;">What is Lorem Ipsum?</h2><p style="margin-right: 0px; margin-bottom: 15px; margin-left: 0px; padding: 0px; text-align: justify;"><strong style="margin: 0px; padding: 0px;">Lorem Ipsum</strong>&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p></div><div style="margin: 0px 28.7969px 0px 14.3906px; padding: 0px; width: 436.797px; float: right; font-family: &quot;Open Sans&quot;, Arial, sans-serif; letter-spacing: normal;"><h2 style="margin-right: 0px; margin-bottom: 10px; margin-left: 0px; padding: 0px; font-family: DauphinPlain; font-size: 24px; line-height: 24px;">Why do we use it?</h2><p style="margin-right: 0px; margin-bottom: 15px; margin-left: 0px; padding: 0px; text-align: justify;">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using \'Content here, content here\', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for \'lorem ipsum\' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</p></div>', '2023-04-24', '/storage/backend/blogs//1682339572.jpg', 'Lorem Ipsum', 1, 0, 0, NULL, NULL, '2023-04-24 08:38:35', '2023-04-24 12:36:03');
@@ -46,9 +46,9 @@ INSERT INTO `blogs` (`id`, `blog_title`, `blog_description`, `blog_date`, `blog_
 -- Dumping structure for table historychip_new.contacts
 CREATE TABLE IF NOT EXISTS `contacts` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `message` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `message` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `is_read` tinyint NOT NULL DEFAULT '0',
   `is_replied` tinyint NOT NULL DEFAULT '0',
   `replied_message` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
@@ -59,18 +59,18 @@ CREATE TABLE IF NOT EXISTS `contacts` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table historychip_new.contacts: ~1 rows (approximately)
+-- Dumping data for table historychip_new.contacts: ~0 rows (approximately)
 INSERT INTO `contacts` (`id`, `name`, `email`, `message`, `is_read`, `is_replied`, `replied_message`, `replied_at`, `replied_by`, `created_at`, `updated_at`) VALUES
 	(2, 'pro', 'pro@gmail.com', 'testt', 0, 0, NULL, NULL, NULL, '2023-04-09 15:47:24', '2023-04-09 15:47:25');
 
 -- Dumping structure for table historychip_new.failed_jobs
 CREATE TABLE IF NOT EXISTS `failed_jobs` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `uuid` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `connection` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `queue` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `uuid` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `connection` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `queue` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `payload` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `exception` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `failed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`)
@@ -81,12 +81,12 @@ CREATE TABLE IF NOT EXISTS `failed_jobs` (
 -- Dumping structure for table historychip_new.migrations
 CREATE TABLE IF NOT EXISTS `migrations` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
-  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `migration` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table historychip_new.migrations: ~15 rows (approximately)
+-- Dumping data for table historychip_new.migrations: ~11 rows (approximately)
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 	(1, '2014_10_12_000000_create_users_table', 1),
 	(2, '2014_10_12_100000_create_password_reset_tokens_table', 1),
@@ -109,7 +109,7 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 CREATE TABLE IF NOT EXISTS `notice_prompts` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
-  `content` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `content` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `duration_from` datetime DEFAULT NULL,
   `duration_to` datetime DEFAULT NULL,
   `status` tinyint NOT NULL DEFAULT '1',
@@ -119,7 +119,7 @@ CREATE TABLE IF NOT EXISTS `notice_prompts` (
   UNIQUE KEY `name` (`name`)
 ) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table historychip_new.notice_prompts: ~1 rows (approximately)
+-- Dumping data for table historychip_new.notice_prompts: ~2 rows (approximately)
 INSERT INTO `notice_prompts` (`id`, `name`, `content`, `duration_from`, `duration_to`, `status`, `created_at`, `updated_at`) VALUES
 	(13, 'Mental Ηealth Professionals', '<p>adsdfsdfsdf</p>', NULL, NULL, 1, '2023-04-08 14:55:30', '2023-04-08 14:55:30'),
 	(14, 'Legal Advisors', 'sdfsdfsdfsdf', NULL, NULL, 1, '2023-04-14 17:43:10', '2023-04-14 17:43:10');
@@ -127,18 +127,18 @@ INSERT INTO `notice_prompts` (`id`, `name`, `content`, `duration_from`, `duratio
 -- Dumping structure for table historychip_new.pages
 CREATE TABLE IF NOT EXISTS `pages` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `url` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `page_title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `page_group` tinytext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `page_title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `page_group` tinytext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `page_group_id` int DEFAULT NULL,
-  `meta_title` longtext COLLATE utf8mb4_unicode_ci,
-  `meta_keywords` longtext COLLATE utf8mb4_unicode_ci,
-  `meta_description` longtext COLLATE utf8mb4_unicode_ci,
-  `og_image` text COLLATE utf8mb4_unicode_ci,
-  `og_audio` text COLLATE utf8mb4_unicode_ci,
-  `og_video` text COLLATE utf8mb4_unicode_ci,
-  `og_author` text COLLATE utf8mb4_unicode_ci,
+  `meta_title` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `meta_keywords` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `meta_description` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `og_image` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `og_audio` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `og_video` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `og_author` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `status` tinyint NOT NULL DEFAULT '1',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
@@ -147,7 +147,7 @@ CREATE TABLE IF NOT EXISTS `pages` (
   UNIQUE KEY `pages_url_unique` (`url`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table historychip_new.pages: ~1 rows (approximately)
+-- Dumping data for table historychip_new.pages: ~2 rows (approximately)
 INSERT INTO `pages` (`id`, `name`, `url`, `page_title`, `page_group`, `page_group_id`, `meta_title`, `meta_keywords`, `meta_description`, `og_image`, `og_audio`, `og_video`, `og_author`, `status`, `created_at`, `updated_at`) VALUES
 	(1, 'whatIsLoremIpsum???', 'what-is-lorem-ipsum', 'What is Lorem Ipsum???', 'blog', 2, 'Contrary to popular belief, Lorem Ipsum is not simply random', 'a,b,c,d,e,f,g,h,i,j', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled', NULL, NULL, NULL, NULL, 1, '2023-04-24 08:38:35', '2023-04-24 12:32:52'),
 	(3, 'whatIsLoremIpsum2???', 'what-is-lorem-ipsum2', 'What is Lorem Ipsum???', 'blog', 3, 'Contrary to popular belief, Lorem Ipsum is not simply random', 'a,b,c,d,e,f,g,h,i,j', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled', NULL, NULL, NULL, NULL, 1, '2023-04-24 08:38:35', '2023-04-24 12:32:52');
@@ -156,28 +156,30 @@ INSERT INTO `pages` (`id`, `name`, `url`, `page_title`, `page_group`, `page_grou
 CREATE TABLE IF NOT EXISTS `partners` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
   `partner_type_id` int NOT NULL,
-  `uuid` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `banner` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `banner_alt_text` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `description` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `logo` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `uuid` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `banner` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `banner_alt_text` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `logo` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `status` tinyint NOT NULL DEFAULT '1',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table historychip_new.partners: ~0 rows (approximately)
+-- Dumping data for table historychip_new.partners: ~1 rows (approximately)
+INSERT INTO `partners` (`id`, `partner_type_id`, `uuid`, `name`, `email`, `banner`, `banner_alt_text`, `title`, `description`, `logo`, `status`, `created_at`, `updated_at`) VALUES
+	(1, 1, '12345677789', 'Ctg', 'prothom@gmail.com', 'gg', NULL, 'test', 'sfsfsdf', 'ss', 1, '2023-05-08 10:34:13', '2023-05-08 10:34:14');
 
 -- Dumping structure for table historychip_new.partner_images
 CREATE TABLE IF NOT EXISTS `partner_images` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
   `partner_id` bigint unsigned NOT NULL,
-  `image_path` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `image_alt_text` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `image_path` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `image_alt_text` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -190,9 +192,9 @@ CREATE TABLE IF NOT EXISTS `partner_images` (
 -- Dumping structure for table historychip_new.partner_types
 CREATE TABLE IF NOT EXISTS `partner_types` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `bill` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `bill_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `bill` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `bill_type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `max_image_count` int NOT NULL,
   `max_content_length` int NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -201,15 +203,15 @@ CREATE TABLE IF NOT EXISTS `partner_types` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table historychip_new.partner_types: ~0 rows (approximately)
+-- Dumping data for table historychip_new.partner_types: ~2 rows (approximately)
 INSERT INTO `partner_types` (`id`, `name`, `bill`, `bill_type`, `max_image_count`, `max_content_length`, `created_at`, `updated_at`, `status`) VALUES
 	(1, 'Basic', '5', 'once', 6, 500, '2023-05-07 16:54:55', '2023-05-07 16:54:55', 1),
 	(2, 'Premium', '10', 'once', 10, 1000, '2023-05-07 17:00:23', '2023-05-07 17:00:23', 1);
 
 -- Dumping structure for table historychip_new.password_resets
 CREATE TABLE IF NOT EXISTS `password_resets` (
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   KEY `password_resets_email_index` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -218,8 +220,8 @@ CREATE TABLE IF NOT EXISTS `password_resets` (
 
 -- Dumping structure for table historychip_new.password_reset_tokens
 CREATE TABLE IF NOT EXISTS `password_reset_tokens` (
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -229,11 +231,11 @@ CREATE TABLE IF NOT EXISTS `password_reset_tokens` (
 -- Dumping structure for table historychip_new.personal_access_tokens
 CREATE TABLE IF NOT EXISTS `personal_access_tokens` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `tokenable_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tokenable_type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `tokenable_id` bigint unsigned NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `abilities` text COLLATE utf8mb4_unicode_ci,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `abilities` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `last_used_at` timestamp NULL DEFAULT NULL,
   `expires_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -247,11 +249,11 @@ CREATE TABLE IF NOT EXISTS `personal_access_tokens` (
 
 -- Dumping structure for table historychip_new.sessions
 CREATE TABLE IF NOT EXISTS `sessions` (
-  `id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `user_id` bigint unsigned DEFAULT NULL,
-  `ip_address` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `user_agent` text COLLATE utf8mb4_unicode_ci,
-  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `ip_address` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `user_agent` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `payload` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `last_activity` int NOT NULL,
   PRIMARY KEY (`id`),
   KEY `sessions_user_id_index` (`user_id`),
@@ -263,18 +265,18 @@ CREATE TABLE IF NOT EXISTS `sessions` (
 -- Dumping structure for table historychip_new.users
 CREATE TABLE IF NOT EXISTS `users` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
-  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `remember_token` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `users_email_unique` (`email`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table historychip_new.users: ~1 rows (approximately)
+-- Dumping data for table historychip_new.users: ~0 rows (approximately)
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
 	(6, 'Prothom Acharjee', 'peculiarprothom@gmail.com', NULL, '$2y$10$beFCxfyNrC.phcFH19loYO2Ow7pv8HTllNtds.hxqRNhsZHm9G2nW', NULL, '2023-05-03 19:01:18', '2023-05-03 19:01:18');
 
@@ -283,18 +285,18 @@ CREATE TABLE IF NOT EXISTS `user_profiles` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
   `user_id` bigint unsigned NOT NULL,
   `partner_id` int DEFAULT NULL,
-  `pen_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `city` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `state` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `country` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `bio` text COLLATE utf8mb4_unicode_ci,
+  `pen_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `city` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `state` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `country` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `bio` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `dob` date DEFAULT NULL,
-  `phone` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `facebook_page_link` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `twitter_page_link` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `linkedin_page_link` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `instagram_page_link` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `phone` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `image` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `facebook_page_link` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `twitter_page_link` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `linkedin_page_link` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `instagram_page_link` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `is_pic_public` tinyint NOT NULL DEFAULT '0',
   `is_social_media_public` tinyint NOT NULL DEFAULT '0',
   `is_bio_public` tinyint NOT NULL DEFAULT '0',
@@ -305,23 +307,23 @@ CREATE TABLE IF NOT EXISTS `user_profiles` (
   CONSTRAINT `user_profiles_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table historychip_new.user_profiles: ~1 rows (approximately)
+-- Dumping data for table historychip_new.user_profiles: ~0 rows (approximately)
 INSERT INTO `user_profiles` (`id`, `user_id`, `partner_id`, `pen_name`, `city`, `state`, `country`, `bio`, `dob`, `phone`, `image`, `facebook_page_link`, `twitter_page_link`, `linkedin_page_link`, `instagram_page_link`, `is_pic_public`, `is_social_media_public`, `is_bio_public`, `created_at`, `updated_at`) VALUES
 	(4, 6, NULL, 'prothom', 'ctg', 'ctg', 'bd', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, '2023-05-03 19:01:18', '2023-05-03 19:01:18');
 
 -- Dumping structure for table historychip_new.writing_prompts
 CREATE TABLE IF NOT EXISTS `writing_prompts` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `title` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `details` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `icon` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `title` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `details` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `icon` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status` tinyint NOT NULL DEFAULT '1',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=226 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table historychip_new.writing_prompts: ~225 rows (approximately)
+-- Dumping data for table historychip_new.writing_prompts: ~224 rows (approximately)
 INSERT INTO `writing_prompts` (`id`, `title`, `details`, `icon`, `status`, `created_at`, `updated_at`) VALUES
 	(1, 'Primary School', 'Describe your primary school. How many students attended your school? What was your favorite subject and who was your favorite teacher?', '/storage/backend/writingtips/primary.png', 1, NULL, NULL),
 	(2, 'Middle School', 'Describe your middle school. How many students attended your school? What was your favorite subject and who was your favorite teacher?', '/storage/backend/writingtips/middle.png', 1, NULL, NULL),
