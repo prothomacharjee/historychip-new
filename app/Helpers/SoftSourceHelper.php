@@ -35,9 +35,9 @@ class SoftSourceHelper
 
         $saved_paths = [];
 
-        foreach ($request_files as $key=>$request_file) {
+        foreach ($request_files as $key => $request_file) {
 
-            $custom_name = isset($custom_names[$key])? $custom_names[$key] : time();
+            $custom_name = isset($custom_names[$key]) ? $custom_names[$key] : time();
 
             $name = $custom_name . '.' . $request_file->getClientOriginalExtension();
 
@@ -48,5 +48,15 @@ class SoftSourceHelper
         }
 
         return $saved_paths;
+    }
+
+    public static function GetIntialsFromNameString($name)
+    {
+        $initials = '';
+        $words = explode(' ', $name);
+        foreach ($words as $word) {
+            $initials .= strtoupper(substr($word, 0, 1));
+        }
+        return $initials;
     }
 }

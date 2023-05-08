@@ -1991,8 +1991,75 @@ form .form-group {
     margin-top: 30px;
 }
 
-.softsource-profile-dropdown-button:hover{
+.softsource-profile-dropdown-button {
+    font-size: 10pt;
+    padding: 0px 2px 0px 2px;
+}
+
+.softsource-profile-dropdown-button:hover {
     border-color: transparent !important;
     background-color: transparent !important;
-
 }
+
+.softsource-profile-dropdown-button.show {
+    border-color: transparent !important;
+}
+
+.softsource-profile-dropdown-ulist {
+    background-color: #3e5662;
+    padding-top: 0px !important;
+    padding-bottom: 0px !important;
+}
+
+
+.softsource-notification-container {
+    position: relative;
+    display: inline-block;
+}
+
+.softsource-notification-icon{
+    padding: 0px 2px 0px 2px !important;
+    font-size: 8pt !important;
+}
+
+.softsource-notification-icon:hover {
+    border-color: transparent !important;
+    background-color: transparent !important;
+}
+
+.softsource-notification-icon.show {
+    border-color: transparent !important;
+}
+
+.softsource-notification-count {
+    background-color: red;
+    border-radius: 50%;
+    color: white;
+    font-size: 0.7em;
+    height: 1.5em;
+    line-height: 1.5em;
+    position: absolute;
+    right: -0.5em;
+    top: -0.5em;
+    text-align: center;
+    width: 1.5em;
+}
+
+.softsource-notification-dropdown {
+    /* min-width: 250px; */
+    /* right: 0; */
+    background-color: #3e5662;
+    padding-top: 0px !important;
+    padding-bottom: 0px !important;
+}
+
+/* .softsource-notification-dropdown a {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: #333;
+} */
+
+/* .softsource-notification-dropdown a:hover {
+    background-color: #f5f5f5;
+} */

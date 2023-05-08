@@ -162,9 +162,9 @@
                             @if (count($partners) > 0)
                                 <div class="checkbox">
                                     <input type="checkbox" id="toggle-partner"><label for="toggle-partner">Are You
-                                        Willing to Join with Our Partner</label>
+                                        Willing to Join with Our Partner?</label>
                                 </div>
-                                <select class="form-control" id="partner_id" name="partner_id" style="display:none">
+                                <select class="form-control select2" id="partner_id" name="partner_id" style="display:none">
                                     <option value="">Select an Partner</option>
                                     @foreach ($partners as $partner)
                                         <option value="{{ $partner->id }}">{{ $partner->name }}</option>
@@ -212,7 +212,7 @@
 
     <script>
         $(document).on('click', '#toggle-partner', function() {
-            $('#org_id').slideToggle('slow', 'swing').prop('required', true);
+            $('#partner_id').slideToggle('slow', 'swing').prop('required', true);
         })
     </script>
 

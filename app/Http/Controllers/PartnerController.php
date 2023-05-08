@@ -183,10 +183,14 @@ class PartnerController extends Controller
 
         // Build the DataTables response
         $data = DataTables::of(Partner::select($columns)->where('status', '=', 1))
+
             ->addColumn('serial', function ($row) {
                 static $count = 0;
                 $count++;
                 return $count;
+            })
+            ->addColumn('partner_type', function ($row) {
+               return $row->partner_type->name;
             })
             ->addColumn('status', function ($row) {
                 return ($row->status == 1) ? '<span class="badge bg-success">Active</span>' : '<span class="badge bg-danger">Inactive</span>';
@@ -207,7 +211,7 @@ class PartnerController extends Controller
                 return mb_strimwidth(strip_tags($row->description), 0, 50, "...");
             })
 
-            ->rawColumns(['serial', 'action', 'description', 'banner', 'logo','status'])
+            ->rawColumns(['serial', 'action', 'description', 'banner', 'logo','status', 'partner_type'])
             ->make(true);
 
         // Return the DataTables response
