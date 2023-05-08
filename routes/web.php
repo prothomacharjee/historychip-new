@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\SiteController;
 use App\Http\Controllers\AdminController;
@@ -26,6 +27,24 @@ use App\Http\Controllers\WritingPromptController;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
+
+//Artisan Routes
+Route::get('key-generate', function(){
+    Artisan::call('key:generate');
+    return "key generated";
+});
+
+Route::get('clear-config', function(){
+    Artisan::call('config:clear');
+    return "cofig cleared";
+
+});
+
+Route::get('cache-config', function(){
+    Artisan::call('config:cache');
+    return "cache setting updated";
+});
+
 
 Auth::routes(['verify' => true]);
 
