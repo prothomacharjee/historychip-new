@@ -64,7 +64,7 @@ Route::post('/getwritingprompts', [WritingPromptController::class, 'getwritingpr
 
 
 // Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function () {
-Route::group(['prefix' => 'admin'], function () {
+Route::group(['prefix' => 'powerhouse'], function () {
     Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
 
     // Notice Prompts
@@ -113,6 +113,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/partners', [PartnerController::class, 'index'])->name('admin.partners');
     Route::get('/load-partners-data', [PartnerController::class, 'LoadPartnerDataTable'])->name('admin.partners.loadDataTable');
     Route::get('/partners/create', [PartnerController::class, 'create'])->name('admin.partners.create');
+    Route::get('/partners/edit/{id}', [PartnerController::class, 'edit'])->name('admin.partners.edit');
     Route::post('/store-partners-data', [PartnerController::class, 'store'])->name('admin.partners.store');
     Route::post('/fetch-partners-data', [PartnerController::class, 'FetchPartnerDataById'])->name('admin.partners.fetch');
     Route::post('/delete-partners/{id}', [PartnerController::class, 'destroy'])->name('admin.partner-types.destroy');

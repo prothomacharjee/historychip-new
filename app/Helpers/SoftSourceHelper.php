@@ -34,19 +34,18 @@ class SoftSourceHelper
         }
 
         $saved_paths = [];
-
         foreach ($request_files as $key => $request_file) {
 
-            $custom_name = isset($custom_names[$key]) ? $custom_names[$key] : time();
+            $custom_name = isset($custom_names[$key]) ? $custom_names[$key] : time()."_".$key;
 
             $name = $custom_name . '.' . $request_file->getClientOriginalExtension();
+
 
             // Store the file in the public directory with a custom name
             Storage::disk('public')->putFileAs($path, $request_file, $name);
             // Add the saved file path to the array of saved paths.
             $saved_paths[] = Storage::url($path . $name);
         }
-
         return $saved_paths;
     }
 

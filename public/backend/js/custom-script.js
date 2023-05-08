@@ -99,6 +99,7 @@ function MultipleFileUploaderValidation(
     filesize_mb,
     accepted_files,
     selector_class,
+    image_alt_text_selector,
     image_view_width = 50
 ) {
     const files = that.files;
@@ -153,6 +154,7 @@ function MultipleFileUploaderValidation(
                             <div class="softsource-image-wrapper text-center">
                                 <img src="${imageUrl}" alt="Selected File ${i + 1}" class="img-thumbnail w-${image_view_width}">
                                 <button type="button" class="softsource-close-button"><i class="bx bx-x-circle"></i></button>
+                                <input class="form-control mt-3" name="${image_alt_text_selector}[image_alt_text][]" />
                             </div>
                         </div>`
                     );

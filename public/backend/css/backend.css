@@ -25,15 +25,15 @@
 }
 
 .softsource-close-button i {
-    color: #000;
+    color: #f00;
     font-size: 30px;
 }
 
 .softsource-close-button:hover i {
-    color: #f00;
+    color: #fff;
 }
 
 .softsource-image-wrapper:hover .softsource-close-button {
-    bottom: 100px;
+    bottom: 150px;
     opacity: 1;
 }

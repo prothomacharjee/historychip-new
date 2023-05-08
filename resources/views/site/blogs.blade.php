@@ -95,7 +95,7 @@
                     @if (count($blogs) > 0)
                         @foreach ($blogs as $blog)
                             <div class="col-lg-3 col-md-6 col-sm-6">
-                                <a href="{{ url('blogs/' . $blog->url) }}" class="d-block softsource-blog-link">
+                                <a href="{{ url($blog->url) }}" class="d-block softsource-blog-link">
                                     <div class="softsource-blog-image-box h-100">
                                         <div class="softsource-blog-image">
                                             <img class="img-fluid" src="{{ asset($blog->blog_banner) }}"
