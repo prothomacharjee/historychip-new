@@ -74,14 +74,15 @@ class PartnerController extends Controller
             $partner->email = $req_partner['email'];
             $partner->banner_alt_text = $req_partner['banner_alt_text'];
             $partner->title = $req_partner['title'];
+            $partner->short_description = $req_partner['short_description'];
             $partner->description = $req_partner['description'];
             $partner->status = $req_partner['status'];
             $partner->uuid = Str::uuid()->toString();
 
 
 
-            $meta->name = "partner.".lcfirst(str_replace(' ', '', ucwords($req_partner['name'])));
-            $meta->url = "partner/".Str::slug($req_partner['name']);
+            $meta->name = "partners.".lcfirst(str_replace(' ', '', ucwords($req_partner['name'])));
+            $meta->url = "partners/".Str::slug($req_partner['name']);
             $meta->page_title = $req_partner['title'];
             $meta->page_group = 'partner';
             $meta->meta_title = $req_meta['meta_title'];
@@ -99,6 +100,11 @@ class PartnerController extends Controller
 
             if ($request->hasFile('logo')) {
                 $partner->logo = SoftSourceHelper::FileUploaderHelper($request->logo, 'backend/partner/logo/');
+            }
+
+
+            if ($request->hasFile('top_image')) {
+                $partner->top_image = SoftSourceHelper::FileUploaderHelper($request->top_image, 'backend/partner/top-image/');
             }
 
 

@@ -150,7 +150,7 @@
 
                                         @foreach ($partner_types as $partner_type)
                                             <option
-                                                {{ !empty($partner) && ($partner_type->id == $partner->partner_type_id) ? 'selected' : '' }}
+                                                {{ !empty($partner) && $partner_type->id == $partner->partner_type_id ? 'selected' : '' }}
                                                 value="{{ $partner_type->id }}"
                                                 data-max_image="{{ $partner_type->max_image_count }}"
                                                 data-max_content_length="{{ $partner_type->max_content_length }}">
@@ -203,6 +203,49 @@
                                     </div>
                                 </div>
 
+
+                                <div class="col-md-8">
+                                    <label for="top_image" class="form-label">Top Image <span class="text-danger">*(Max - 1MB ,
+                                            Accepted - Jpg, Png, Svg, Jpeg, WebP)</span></label>
+                                    <input class="form-control file-uploader" name="top_image" id="top_image"
+                                        type="file" accept=".png,.jpg,.jpeg,.svg, .webp" maxFileSize="1MB"
+                                        onchange="FileUploaderValidation(this, 1, ['image/png', 'image/jpeg', 'image/svg', 'image/webp'], 'top-image', 25)" />
+                                    <div id="file-error-top-image" class="form-text text-danger"></div>
+                                    @error('top_image')
+                                        <div id="validationContentFeedback" class="invalid-feedback">{{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+
+                                <div class="col-md-4 text-center">
+                                    <div class="selected-file-top-image">
+                                        @if (!empty($partner))
+                                            @if (!empty($partner->top_image))
+                                                <img src="{{ $partner->top_image }}" alt="{{ $partner->top_image }}"
+                                                    class="w-25">
+                                            @else
+                                                <img src="{{ asset('backend/images/custom/no-image-icon.png') }}"
+                                                    alt="" class="w-25">
+                                            @endif
+                                        @endif
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <label for="short_description" class="form-label">Short Description <span
+                                            class="text-danger">*</span></label>
+                                    <textarea minlength="100" maxlength="350" rows="5"
+                                        class="form-control @error('short_description') is-invalid @enderror" id="short_description"
+                                        name="partner[short_description]" placeholder="Write Your Short Description Here" required
+                                        aria-describedby="validationContentFeedback">{{ old('short_description') ? old('short_description') : (!empty($partner->short_description) ? $partner->short_description : null) }}</textarea>
+
+                                    <div class="invalid-feedback">You Must Write Partner's Short Description Here.</div>
+                                    @error('short_description')
+                                        <div id="validationContentFeedback" class="invalid-feedback">{{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+
                                 @php
                                     $length = old('description') ? strlen(old('description')) : (!empty($partner->description) ? strlen(strip_tags($partner->description)) : 0);
                                 @endphp
@@ -240,7 +283,8 @@
                                                             <button type="button" class="softsource-close-button"><i
                                                                     class="bx bx-x-circle"></i></button>
                                                             <input class="form-control mt-3"
-                                                                name="partner[image_alt_text][]" value="{{ $image->image_alt_text }}"/>
+                                                                name="partner[image_alt_text][]"
+                                                                value="{{ $image->image_alt_text }}" />
                                                         </div>
                                                     </div>
                                                 @endforeach
@@ -354,7 +398,7 @@
         $(document).ready(function() {
             $("#description").summernote({
                 placeholder: "Write Your Description Here",
-                height: 300,
+                height: 400,
                 fullscreen: true,
             });
 

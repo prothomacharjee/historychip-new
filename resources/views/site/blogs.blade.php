@@ -1,16 +1,6 @@
 @extends('site.layouts.header')
 
 @section('content')
-    @php
-
-        if ($detail) {
-            $page_title = $blogs->blog_title;
-        } else {
-            $page_title = 'Blogs';
-        }
-
-    @endphp
-
 
     <!--============ Resolutions Hero Start ============-->
     <div class="position-relative softsource-top-contianer">

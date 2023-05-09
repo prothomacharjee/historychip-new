@@ -83,8 +83,8 @@ class BlogController extends Controller
                 $blog->created_by = Auth::id();
             }
 
-            $meta->name = "blog.".lcfirst(str_replace(' ', '', ucwords($req_blog['blog_title'])));
-            $meta->url = "blog/".Str::slug($req_blog['blog_title']);
+            $meta->name = "blogs.".lcfirst(str_replace(' ', '', ucwords($req_blog['blog_title'])));
+            $meta->url = "blogs/".Str::slug($req_blog['blog_title']);
             $meta->page_title = $req_blog['blog_title'];
             $meta->page_group = 'blog';
             $meta->meta_title = $req_meta['meta_title'];

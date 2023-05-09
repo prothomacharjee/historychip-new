@@ -70,8 +70,9 @@ Route::get('/privacy-policy', [SiteController::class, 'privacypolicy'])->name('p
 Route::get('/terms-and-conditions', [SiteController::class, 'termsandconditions'])->name('termsandconditions');
 Route::get('/contact-us', [SiteController::class, 'contactus'])->name('contactus');
 Route::get('/writing-prompts', [SiteController::class, 'writingprompt'])->name('writingprompt');
-Route::get('/blogs', [SiteController::class, 'blogs'])->name('blogs');
+
 Route::get('/blogs/{slug?}', [SiteController::class, 'blogs'])->name('blogs');
+Route::get('/partners/{slug?}', [SiteController::class, 'partners'])->name('partners');
 
 Route::get('/story/create', [SiteController::class, 'blogs'])->name('story.create');
 

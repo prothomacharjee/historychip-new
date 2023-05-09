@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('banner_alt_text')->nullable();
             $table->string('title');
             $table->longText('description');
+            $table->longText('short_description');
             $table->string('logo');
             $table->tinyInteger('status')->default(1);
             $table->timestamps();

@@ -63,7 +63,6 @@
             <img src="{{ asset('frontend/images/logo/logo.png') }}" class="mx-auto d-block" style="width: 150px;">
             <p class="softsource-cust-tag softsource-text-color-secondary">every person, every story, all the truth</p>
         </div>
-
     </div>
 
 
@@ -121,6 +120,7 @@
                                 <li><a class="dropdown-item" href="#">Notification 3</a></li>
                             </ul>
                         </div>
+
                         @endguest
                     </div>
                     <div>&nbsp;|&nbsp;</div>
@@ -143,8 +143,8 @@
                 <div class="d-flex align-items-center">
                     <div class="softsource-header-logo">
                         <a class="navbar-brand me-auto " href="{{ route('home') }}">
-                            <img class="img-fluid light-logo" src="{{ asset('frontend/images/logo/logo-light.png') }}" alt="History Chip Logo">
-                            <p class="softsource-cust-tag">every person, every story, all the truth</p>
+                            <img class="img-fluid light-logo" src="{{ asset($partner->logo) }}" alt="History Chip Logo">
+                            
                         </a>
                     </div>
                     <div class="softsource-bottom-nav-right">
@@ -226,6 +226,12 @@
                                 </div>
                             </nav>
                         </div>
+                    </div>
+                    <div class="softsource-header-logo">
+                        <a class="navbar-brand ms-auto " href="{{ route('home') }}">
+                            <img class="img-fluid light-logo" src="{{ asset('frontend/images/logo/logo-light.png') }}" alt="History Chip Logo">
+                            <p class="softsource-cust-tag">every person, every story, all the truth</p>
+                        </a>
                     </div>
                 </div>
             </div>
