@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\PartnerType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\View;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Validator;
 
@@ -26,7 +27,7 @@ class PartnerTypeController extends Controller
      */
     public function store(Request $request)
     {
-        $input = $request->except(['files','_token']);
+        $input = $request->except(['files', '_token']);
         $validator = Validator::make($input, [
             "name" => "required",
             "bill" => "required",
@@ -46,7 +47,7 @@ class PartnerTypeController extends Controller
                         $partnerType->update($input);
                     });
                     return redirect()->route('admin.partner-types')->with('success', 'Partner Type Updated Successfully');
-                } catch (\Exception$e) {
+                } catch (\Exception $e) {
 
                     return redirect()->back()->with('error', $e->getMessage());
                 }
@@ -54,9 +55,15 @@ class PartnerTypeController extends Controller
                 try {
                     DB::transaction(function () use ($input) {
                         PartnerType::create($input);
+
+                        $path = resource_path('views/site/partner-types'); // path to the directory for new view file
+                        $filename = 'partner-'.strtolower($input['name']).'.blade.php'; // name of the new view file
+
+                        // create the new view file with the given name and directory path
+                        View::make($path . '/' . $filename)->render();
                     });
                     return redirect()->route('admin.partner-types')->with('success', 'Partner Type Created Successfully');
-                } catch (\Exception$e) {
+                } catch (\Exception $e) {
                     return redirect()->back()->with('error', $e->getMessage());
                 }
             }
@@ -76,7 +83,7 @@ class PartnerTypeController extends Controller
                 $partnerType->delete();
             });
             return redirect()->route('admin.partner-types')->with('success', 'Partner Type Deleted Successfully');
-        } catch (\Exception$e) {
+        } catch (\Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
         }
     }
@@ -109,9 +116,9 @@ class PartnerTypeController extends Controller
             ->addColumn('status', function ($row) {
                 return ($row->status == 1) ? '<span class="badge bg-success">Active</span>' : '<span class="badge bg-danger">Inactive</span>';
             })
-            ->addColumn('action', function ($row) use($url) {
+            ->addColumn('action', function ($row) use ($url) {
                 $buttons = '<button type="button" class="edit btn btn-outline-primary btn-sm me-2" onclick="editFunc(' . $row->id . ')" title="Edit"><i class="fadeInUp animate__animated bx bx-edit-alt"></i></button>';
-                $buttons .= '<button type="button" class="delete btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#delete_modal"  onclick="remove_function('.$row->id.', \''.$url.'\')" title="Delete"><i class="fadeInUp animate__animated bx bx-trash-alt"></i></button>';
+                $buttons .= '<button type="button" class="delete btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#delete_modal"  onclick="remove_function(' . $row->id . ', \'' . $url . '\')" title="Delete"><i class="fadeInUp animate__animated bx bx-trash-alt"></i></button>';
 
                 return $buttons;
             })
