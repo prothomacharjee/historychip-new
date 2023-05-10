@@ -167,9 +167,9 @@
                                         <li class="nav-item softsource-has-children">
                                             <a class="nav-link softsource-nav-main-menu" href="javascript:;"><span>Stories</span><i class="fa-solid fa-angle-down softsource-nav-angle-down"></i></a>
                                             <ul class="softsource-submenu">
-                                                <li><a href="https://www.historychip.com/readastory"><span>Read a
+                                                <li><a href="{{ route('story.read') }}"><span>Read a
                                                             Story</span></a></li>
-                                                <li><a href="https://www.historychip.com/submitastory"><span>Write a
+                                                <li><a href="{{ route('story.write') }}"><span>Write a
                                                             Story</span></a></li>
 
                                             </ul>

@@ -281,7 +281,7 @@
                                     </div>
                                 </div>
                                 <hr>
-                                <div class="d-block text-right">
+                                <div class="d-block text-end">
                                     <button type="submit" class="btn btn-primary d-inline softsource-profile-update-btn">UPDATE</button>
                                 </div>
                             </div>

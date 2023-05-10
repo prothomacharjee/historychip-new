@@ -1,17 +1,17 @@
 <?php
 
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\BlogController;
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\NoticePromptController;
+use App\Http\Controllers\PartnerController;
+use App\Http\Controllers\PartnerTypeController;
+use App\Http\Controllers\SiteController;
+use App\Http\Controllers\UserAuthController;
+use App\Http\Controllers\WritingPromptController;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Artisan;
-use App\Http\Controllers\BlogController;
-use App\Http\Controllers\SiteController;
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\ContactController;
-use App\Http\Controllers\PartnerController;
-use App\Http\Controllers\UserAuthController;
-use App\Http\Controllers\PartnerTypeController;
-use App\Http\Controllers\NoticePromptController;
-use App\Http\Controllers\WritingPromptController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,22 +29,21 @@ use App\Http\Controllers\WritingPromptController;
 // });
 
 //Artisan Routes
-Route::get('key-generate', function(){
-    Artisan::call('key:generate');
-    return "key generated";
-});
+// Route::get('key-generate', function () {
+//     Artisan::call('key:generate');
+//     return "key generated";
+// });
 
-Route::get('clear-config', function(){
-    Artisan::call('config:clear');
-    return "cofig cleared";
+// Route::get('clear-config', function () {
+//     Artisan::call('config:clear');
+//     return "cofig cleared";
 
-});
+// });
 
-Route::get('cache-config', function(){
-    Artisan::call('config:cache');
-    return "cache setting updated";
-});
-
+// Route::get('cache-config', function () {
+//     Artisan::call('config:cache');
+//     return "cache setting updated";
+// });
 
 Auth::routes(['verify' => true]);
 
@@ -55,11 +54,9 @@ Route::get('/register', [UserAuthController::class, 'showRegistrationForm'])->na
 Route::post('/register', [UserAuthController::class, 'register'])->name('register.submit');
 Route::get('/password/reset', [UserAuthController::class, 'showResetPasswordForm'])->name('password.request');
 
-
 //User Profile
 Route::get('/profile', [SiteController::class, 'profile'])->name('profile');
 Route::get('/my-stories', [SiteController::class, 'my_stories'])->name('my-stories');
-
 
 Route::get('/', [SiteController::class, 'index'])->name('home');
 Route::get('/about', [SiteController::class, 'about'])->name('about');
@@ -70,18 +67,16 @@ Route::get('/privacy-policy', [SiteController::class, 'privacypolicy'])->name('p
 Route::get('/terms-and-conditions', [SiteController::class, 'termsandconditions'])->name('termsandconditions');
 Route::get('/contact-us', [SiteController::class, 'contactus'])->name('contactus');
 Route::get('/writing-prompts', [SiteController::class, 'writingprompt'])->name('writingprompt');
-
 Route::get('/blogs/{slug?}', [SiteController::class, 'blogs'])->name('blogs');
 Route::get('/partners/{slug?}', [SiteController::class, 'partners'])->name('partners');
-
-Route::get('/story/create', [SiteController::class, 'blogs'])->name('story.create');
+Route::get('/read-story', [SiteController::class, 'read_story'])->name('story.read');
+Route::get('/write-story', [StoryController::class, 'write_story'])->name('story.write');
 
 Route::post('/getwritingprompts', [WritingPromptController::class, 'getwritingprompts'])->name('writing-prompts.get');
 
-
+Route::post('/story/create', [StoryController::class, 'store'])->name('story.create');
 
 // ADMIN PANEL
-
 
 // Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function () {
 Route::group(['prefix' => 'powerhouse'], function () {
@@ -109,7 +104,6 @@ Route::group(['prefix' => 'powerhouse'], function () {
     Route::post('/fetch-writing-prompts-data', [WritingPromptController::class, 'FetchWritingPromptDataById'])->name('admin.writing-prompts.fetch');
     Route::post('/delete-writing-prompts/{id}', [WritingPromptController::class, 'destroy'])->name('admin.writing-prompts.destroy');
 
-
     // Blogs
     Route::get('/blogs', [BlogController::class, 'index'])->name('admin.blogs');
     Route::get('/blogs/create', [BlogController::class, 'create'])->name('admin.blogs.create');
@@ -120,7 +114,6 @@ Route::group(['prefix' => 'powerhouse'], function () {
     Route::post('/store-blogs-data', [BlogController::class, 'store'])->name('admin.blogs.store');
     // Route::post('/fetch-writing-prompts-data', [BlogController::class, 'FetchWritingPromptDataById'])->name('writing-prompts.fetch');
     // Route::post('/delete-writing-prompts/{id}', [BlogController::class, 'destroy'])->name('writing-prompts.destroy');
-
 
     // Partner Type
     Route::get('/partner-types', [PartnerTypeController::class, 'index'])->name('admin.partner-types');
