@@ -54,6 +54,30 @@ $(document).on("click", ".softsource-toggle-password", function() {
     }
 });
 
+$(document).on("click", ".softsource-softsource-", function () {
+    $('.softsource-show-action').removeClass("active");
+    $('.softsource-only-text').addClass("active");
+    $('.softsource-show-text').removeClass("col-md-8").addClass("col-md-12").css("display", "block");
+    $('.softsource-show-audio').css("display", "none");
+    $('input[name=context_type]').val("1");
+});
+
+$(document).on("click", ".softsource-only-audio", function () {
+    $('.softsource-show-action').removeClass("active");
+    $('.softsource-only-audio').addClass("active");
+    $('.softsource-show-text').css("display", "none");
+    $('.softsource-show-audio').removeClass("col-md-4").addClass("col-md-12").css("display", "block");
+    $('input[name=context_type]').val("2");
+});
+
+$(document).on("click", ".softsource-audio-text", function () {
+    $('.softsource-show-action').removeClass("active");
+    $('.softsource-audio-text').addClass("active");
+    $('.softsource-show-text').removeClass("col-md-12").addClass("col-md-8").css("display", "block");
+    $('.softsource-show-audio').removeClass("col-md-12").addClass("col-md-4").css("display", "block");
+    $('input[name=context_type]').val("3");
+});
+
 
 
 // $(document).on("change", "#category", function () {

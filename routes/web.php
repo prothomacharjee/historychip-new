@@ -1,17 +1,18 @@
 <?php
 
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\BlogController;
-use App\Http\Controllers\ContactController;
-use App\Http\Controllers\NoticePromptController;
-use App\Http\Controllers\PartnerController;
-use App\Http\Controllers\PartnerTypeController;
-use App\Http\Controllers\SiteController;
-use App\Http\Controllers\UserAuthController;
-use App\Http\Controllers\WritingPromptController;
-use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Artisan;
+use App\Http\Controllers\BlogController;
+use App\Http\Controllers\SiteController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\StoryController;
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\PartnerController;
+use App\Http\Controllers\UserAuthController;
+use App\Http\Controllers\PartnerTypeController;
+use App\Http\Controllers\NoticePromptController;
+use App\Http\Controllers\WritingPromptController;
 
 /*
 |--------------------------------------------------------------------------
@@ -70,7 +71,7 @@ Route::get('/writing-prompts', [SiteController::class, 'writingprompt'])->name('
 Route::get('/blogs/{slug?}', [SiteController::class, 'blogs'])->name('blogs');
 Route::get('/partners/{slug?}', [SiteController::class, 'partners'])->name('partners');
 Route::get('/read-story', [SiteController::class, 'read_story'])->name('story.read');
-Route::get('/write-story', [StoryController::class, 'write_story'])->name('story.write');
+Route::get('/write-story', [SiteController::class, 'write_story'])->name('story.write');
 
 Route::post('/getwritingprompts', [WritingPromptController::class, 'getwritingprompts'])->name('writing-prompts.get');
 

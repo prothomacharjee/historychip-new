@@ -16,13 +16,13 @@
         </div>
     </div>
 
-    <div class="softsource-story-submit-section pt-3">
+    <div class="softsource-write-story-submit-section pt-3">
         <div class="container">
-            <div class="container story-col-container my-5">
-                <div class="text-center tab-buttons">
-                    <button type="button" id="text" class="btn btn-blue4 my-2 px-4 show-action only-text">Only Text</button>
-                    <button type="button" id="audio" class="btn btn-blue4 my-2 px-4 show-action only-audio">Only Audio/Video</button>
-                    <button type="button" class="btn btn-blue4 my-2 px-4 show-action audio-text active">Both</button>
+            <div class="container softsource-write-story-col-container my-5">
+                <div class="text-center softsource-tab-buttons">
+                    <button type="button" id="text" class="softsource-write-story-btn my-2 px-4 show-action only-text">Only Text</button>
+                    <button type="button" id="audio" class="softsource-write-story-btn my-2 px-4 show-action only-audio">Only Audio/Video</button>
+                    <button type="button" class="softsource-write-story-btn my-2 px-4 show-action audio-text active">Both</button>
                 </div>
                 <form method="POST" name="submitStory" id="submitstory" action="javascript:;" enctype="multipart/form-data">
                     <input type="hidden" name="context_type" value="">
