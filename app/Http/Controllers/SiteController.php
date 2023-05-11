@@ -197,9 +197,8 @@ class SiteController extends Controller
         $user = User::findOrFail(Auth::id())->load('user_profile');
 
         return view('site.profile')->with([
-            'page_title' => 'Profile',
+            'page_title' => 'Read Story',
             'notices' => $this->notices,
-            'user' => $user,
 
         ]);
     }
