@@ -9,7 +9,8 @@
 
     <!-- SEO -->
     <meta name="title" content="Revenue Aid, Consulting Firm, Revenue, SoftSource, RevenueAid, Prothom Acharjee">
-    <meta name="description" content="Revenue Aid - A Unique Consulting Firm. Get Legal Help Provides and deals with all sorts of legal and professional services Keep Confidential Keep clients information confidential as for think fits and proper Avoid Unlawful Work Will not involved in unethical and unlawful work knowingly-Yeah, sure OUR MISSION OUR VISION OUR HISTORY To Our Country To contribute to the dream of Digital Bangladesh.">
+    <meta name="description"
+        content="Revenue Aid - A Unique Consulting Firm. Get Legal Help Provides and deals with all sorts of legal and professional services Keep Confidential Keep clients information confidential as for think fits and proper Avoid Unlawful Work Will not involved in unethical and unlawful work knowingly-Yeah, sure OUR MISSION OUR VISION OUR HISTORY To Our Country To contribute to the dream of Digital Bangladesh.">
     <meta name="keywords" content="Revenue Aid, Consulting Firm, Revenue, SoftSource, RevenueAid, Prothom Acharjee">
 
 
@@ -49,6 +50,12 @@
     <link rel="stylesheet" href="{{ asset('frontend/fontawsome/css/all.min.css?q=' . time()) }}">
     <link rel="stylesheet" href="{{ asset('frontend/css/select2/select2.min.css?q=' . time()) }}">
 
+    <link href="{{ asset('frontend/file-uploader/css/font-fileuploader.css') }}" rel="stylesheet">
+    <link href="{{ asset('frontend/file-uploader/css/jquery.fileuploader-theme-thumbnails.css') }}"
+        rel="stylesheet">
+    <link href="{{ asset('frontend/file-uploader/css/script.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('frontend/file-uploader/css/custom.css') }}">
+
     <link rel="stylesheet" href="{{ asset('frontend/css/frontend.css?q=' . time()) }}">
     <link rel="stylesheet" href="{{ asset('frontend/css/mediaquery.css?q=' . time()) }}">
     <link rel="stylesheet" href="{{ asset('frontend/css/keyframes.css?q=' . time()) }}">
@@ -73,11 +80,11 @@
             <div class="container softsource-nav-top d-flex align-items-center justify-content-center text-white">
                 <div class="softsource-top-nav-left px-1 d-flex">
                     @if ($notices)
-                    <marquee onmouseover="this.stop();" onmouseout="this.start();">
-                        @foreach ($notices as $notice)
-                        &nbsp;&nbsp;&nbsp;&nbsp;{{ $notice->content }}&nbsp;&nbsp;&nbsp;&nbsp;
-                        @endforeach
-                    </marquee>
+                        <marquee onmouseover="this.stop();" onmouseout="this.start();">
+                            @foreach ($notices as $notice)
+                                &nbsp;&nbsp;&nbsp;&nbsp;{{ $notice->content }}&nbsp;&nbsp;&nbsp;&nbsp;
+                            @endforeach
+                        </marquee>
                     @endif
 
 
@@ -86,52 +93,64 @@
                 <div class="softsource-top-nav-right d-flex">
                     <div class="softsource-top-nav-login-link">
                         @guest
-                        @if (Route::has('login'))
-                        <a class="" href="{{ route('login') }}">Log In</a>/<a class="" href="{{ route('register') }}">Register</a>
-                        @endif
+                            @if (Route::has('login'))
+                                <a class="" href="{{ route('login') }}">Log In</a>/<a class=""
+                                    href="{{ route('register') }}">Register</a>
+                            @endif
                         @else
-                        <!-- <div class="d-flex"> -->
-                        <div class="dropdown">
-                            <button class="btn dropdown-toggle text-white softsource-profile-dropdown-button" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                                {{ \App\Helpers\SoftSourceHelper::GetIntialsFromNameString(Auth::user()->name) }}
-                            </button>
-                            <ul class="dropdown-menu softsource-profile-dropdown-ulist" aria-labelledby="dropdownMenuButton">
-                                <li><a class="dropdown-item" href="{{ route('profile') }}">My Profile&nbsp;&nbsp;</a></li>
-                                <li><a class="dropdown-item" href="{{ route('my-stories') }}">My Stories&nbsp;&nbsp;</a></li>
-                                <li class="divider"></li>
-                                <li><a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                            <!-- <div class="d-flex"> -->
+                            <div class="dropdown">
+                                <button class="btn dropdown-toggle text-white softsource-profile-dropdown-button"
+                                    type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                    {{ \App\Helpers\SoftSourceHelper::GetIntialsFromNameString(Auth::user()->name) }}
+                                </button>
+                                <ul class="dropdown-menu softsource-profile-dropdown-ulist"
+                                    aria-labelledby="dropdownMenuButton">
+                                    <li><a class="dropdown-item" href="{{ route('profile') }}">My Profile&nbsp;&nbsp;</a>
+                                    </li>
+                                    <li><a class="dropdown-item" href="{{ route('my-stories') }}">My
+                                            Stories&nbsp;&nbsp;</a></li>
+                                    <li class="divider"></li>
+                                    <li><a class="dropdown-item" href="{{ route('logout') }}"
+                                            onclick="event.preventDefault();
                                                  document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                </li>
-                            </ul>
+                                            {{ __('Logout') }}
+                                        </a>
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                            class="d-none">
+                                            @csrf
+                                        </form>
+                                    </li>
+                                </ul>
 
-                            <a href="#" class="btn text-white softsource-notification-icon" role="button" id="notification-dropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                                <span class="fa-stack fa-lg">
-                                    <i class="fas fa-bell fa-stack-1x"></i>
-                                    <span class="softsource-notification-count">3</span>
-                                </span>
-                            </a>
-                            <ul class="dropdown-menu softsource-notification-dropdown" aria-labelledby="notification-dropdown">
-                                <li><a class="dropdown-item" href="#">Notification 1</a></li>
-                                <li><a class="dropdown-item" href="#">Notification 2</a></li>
-                                <li><a class="dropdown-item" href="#">Notification 3</a></li>
-                            </ul>
-                        </div>
+                                <a href="#" class="btn text-white softsource-notification-icon" role="button"
+                                    id="notification-dropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fas fa-bell fa-stack-1x"></i>
+                                        <span class="softsource-notification-count">3</span>
+                                    </span>
+                                </a>
+                                <ul class="dropdown-menu softsource-notification-dropdown"
+                                    aria-labelledby="notification-dropdown">
+                                    <li><a class="dropdown-item" href="#">Notification 1</a></li>
+                                    <li><a class="dropdown-item" href="#">Notification 2</a></li>
+                                    <li><a class="dropdown-item" href="#">Notification 3</a></li>
+                                </ul>
+                            </div>
                         @endguest
                     </div>
                     <div>&nbsp;|&nbsp;</div>
                     <div class="softsource-social-links">
-                        <a href="https://www.facebook.com/HistoryChip/" target="_blank" aria-label="Facebook" class="">
+                        <a href="https://www.facebook.com/HistoryChip/" target="_blank" aria-label="Facebook"
+                            class="">
                             <i class="fab fa-facebook-f"></i>
                         </a>
-                        <a href="https://instagram.com/historychipofficial?igshid=7bbizkt10clm" target="_blank" aria-label="Instagram" class=" ">
+                        <a href="https://instagram.com/historychipofficial?igshid=7bbizkt10clm" target="_blank"
+                            aria-label="Instagram" class=" ">
                             <i class="fab fa-instagram"></i>
                         </a>
-                        <a href="https://www.youtube.com/channel/UCSrIvdo034dV1rOL-adGu1g" target="_blank" aria-label="You Tube" class=" ">
+                        <a href="https://www.youtube.com/channel/UCSrIvdo034dV1rOL-adGu1g" target="_blank"
+                            aria-label="You Tube" class=" ">
                             <i class="fab fa-youtube"></i>
                         </a>
                     </div>
@@ -143,7 +162,8 @@
                 <div class="d-flex align-items-center">
                     <div class="softsource-header-logo">
                         <a class="navbar-brand me-auto " href="{{ route('home') }}">
-                            <img class="img-fluid light-logo" src="{{ asset('frontend/images/logo/logo-light.png') }}" alt="History Chip Logo">
+                            <img class="img-fluid light-logo"
+                                src="{{ asset('frontend/images/logo/logo-light.png') }}" alt="History Chip Logo">
                             <p class="softsource-cust-tag">every person, every story, all the truth</p>
                         </a>
                     </div>
@@ -151,21 +171,29 @@
                         <div class="container">
                             <nav class="navbar">
 
-                                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+                                    aria-label="Toggle navigation">
                                     <span class="navbar-toggler-icon"></span>
                                 </button>
                                 <div class="collapse navbar-collapse justify-content-center " id="navbarNav">
                                     <ul class="navbar-nav softsource-nav-menus">
                                         <li class="nav-item softsource-has-children">
-                                            <a class="nav-link softsource-nav-main-menu" href="javascript:;"><span>About</span><i class="fa-solid fa-angle-down softsource-nav-angle-down"></i></a>
+                                            <a class="nav-link softsource-nav-main-menu"
+                                                href="javascript:;"><span>About</span><i
+                                                    class="fa-solid fa-angle-down softsource-nav-angle-down"></i></a>
                                             <ul class="softsource-submenu">
-                                                <li><a href="{{ route('about') }}"><span>About History Chip</span></a></li>
+                                                <li><a href="{{ route('about') }}"><span>About History Chip</span></a>
+                                                </li>
                                                 <li><a href="{{ route('founder') }}"><span>Founder</span></a> </li>
-                                                <li><a href="{{ route('historychipfor') }}"><span>Who is History Chip for</span></a></li>
+                                                <li><a href="{{ route('historychipfor') }}"><span>Who is History Chip
+                                                            for</span></a></li>
                                             </ul>
                                         </li>
                                         <li class="nav-item softsource-has-children">
-                                            <a class="nav-link softsource-nav-main-menu" href="javascript:;"><span>Stories</span><i class="fa-solid fa-angle-down softsource-nav-angle-down"></i></a>
+                                            <a class="nav-link softsource-nav-main-menu"
+                                                href="javascript:;"><span>Stories</span><i
+                                                    class="fa-solid fa-angle-down softsource-nav-angle-down"></i></a>
                                             <ul class="softsource-submenu">
                                                 <li><a href="{{ route('story.read') }}"><span>Read a
                                                             Story</span></a></li>
@@ -175,7 +203,8 @@
                                             </ul>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link softsource-nav-main-menu" href="{{ route('writingprompt') }}">
+                                            <a class="nav-link softsource-nav-main-menu"
+                                                href="{{ route('writingprompt') }}">
                                                 <span>Writing Prompts</span>
                                             </a>
                                         </li>
@@ -202,7 +231,8 @@
                                             </a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link softsource-nav-main-menu" href="{{ route('partners') }}">
+                                            <a class="nav-link softsource-nav-main-menu"
+                                                href="{{ route('partners') }}">
                                                 <span>Partners</span>
                                             </a>
                                         </li>
@@ -213,14 +243,20 @@
                                             <form method="GET" action="/search/basic" class="mt-1">
                                                 @csrf
                                                 <div class="input-group">
-                                                    <input id="search" name="term" type="text" class="form-control border-white bg-transparent text-white softsource-nav-search-input" placeholder="Search Any Word" aria-label="Search Any Word" aria-describedby="search-icon">
-                                                    <button class="btn border-white softsource-nav-search-btn" type="submit" id="search-icon"><i class="fa fa-search text-white"></i></button>
+                                                    <input id="search" name="term" type="text"
+                                                        class="form-control border-white bg-transparent text-white softsource-nav-search-input"
+                                                        placeholder="Search Any Word" aria-label="Search Any Word"
+                                                        aria-describedby="search-icon">
+                                                    <button class="btn border-white softsource-nav-search-btn"
+                                                        type="submit" id="search-icon"><i
+                                                            class="fa fa-search text-white"></i></button>
                                                 </div>
                                             </form>
 
                                         </li>
                                         <li class="nav-item">
-                                            <a class="btn btn-sm btn-light softsource-add-story-btn mt-1 softsource-btn-hover-transition" href="#">Add A Story</a>
+                                            <a class="btn btn-sm btn-light softsource-add-story-btn mt-1 softsource-btn-hover-transition"
+                                                href="#">Add A Story</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -242,6 +278,9 @@
 
     <script src="{{ asset('frontend/js/bootstrap/bootstrap.bundle.min.js?q=' . time()) }}"></script>
     <script src="{{ asset('frontend/js/select2/select2.min.js?q=' . time()) }}"></script>
+
+    <script src="{{ asset('frontend/file-uploader/js/script.js?2.1.2') }}" type="text/javascript"></script>
+    <script src="{{ asset('frontend/file-uploader/js/file-custom.js?2.1.2') }}" type="text/javascript"></script>
 
     <script src="{{ asset('frontend/fontawsome/js/17472dc9f4.js?q=' . time()) }}"></script>
     <script src="{{ asset('frontend/js/global-variables.js?q=' . time()) }}"></script>

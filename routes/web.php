@@ -12,6 +12,7 @@ use App\Http\Controllers\PartnerController;
 use App\Http\Controllers\UserAuthController;
 use App\Http\Controllers\PartnerTypeController;
 use App\Http\Controllers\NoticePromptController;
+use App\Http\Controllers\StoryCategoryController;
 use App\Http\Controllers\WritingPromptController;
 
 /*
@@ -73,6 +74,12 @@ Route::get('/partners/{slug?}', [SiteController::class, 'partners'])->name('part
 Route::get('/read-story', [SiteController::class, 'read_story'])->name('story.read');
 Route::get('/write-story', [SiteController::class, 'write_story'])->name('story.write');
 
+
+Route::post('/save-image', [SiteController::class, 'saveimage'])->name('story.saveimage');
+Route::post('/delete-image', [SiteController::class, 'deleteimage'])->name('story.deleteimage');
+Route::post('/save-audio', [SiteController::class, 'saveaudio'])->name('story.saveaudio');
+Route::post('/delete-audio', [SiteController::class, 'deleteaudio'])->name('story.deleteaudio');
+
 Route::post('/getwritingprompts', [WritingPromptController::class, 'getwritingprompts'])->name('writing-prompts.get');
 
 Route::post('/story/create', [StoryController::class, 'store'])->name('story.create');
@@ -131,5 +138,18 @@ Route::group(['prefix' => 'powerhouse'], function () {
     Route::post('/store-partners-data', [PartnerController::class, 'store'])->name('admin.partners.store');
     Route::post('/fetch-partners-data', [PartnerController::class, 'FetchPartnerDataById'])->name('admin.partners.fetch');
     Route::post('/delete-partners/{id}', [PartnerController::class, 'destroy'])->name('admin.partner-types.destroy');
+
+
+    // Notice Prompts
+    Route::get('/story-categories', [StoryCategoryController::class, 'index'])->name('admin.story-categories');
+    Route::get('/load-story-categories-data', [StoryCategoryController::class, 'LoadStoryCategoryDataTable'])->name('admin.story-categories.loadDataTable');
+    Route::get('/load-story-level-1-categories-data', [StoryCategoryController::class, 'LoadStoryLevel1CategoryDataTable'])->name('admin.story-categories.loadDataTable1');
+    Route::get('/load-story-level-2-categories-data', [StoryCategoryController::class, 'LoadStoryLevel2CategoryDataTable'])->name('admin.story-categories.loadDataTable2');
+    Route::get('/load-story-level-3-categories-data', [StoryCategoryController::class, 'LoadStoryLevel3CategoryDataTable'])->name('admin.story-categories.loadDataTable3');
+    Route::post('/store-story-categories-data', [StoryCategoryController::class, 'store'])->name('admin.story-categories.store');
+    Route::post('/fetch-story-categories-data', [StoryCategoryController::class, 'FetchStoryCategoryDataById'])->name('admin.story-categories.fetch');
+    Route::post('/fetch-story-categories-data-by-level', [StoryCategoryController::class, 'FetchStoryCategoryDataByLevel'])->name('admin.story-categories.fetchByLevel');
+
+    Route::post('/delete-story-categories/{id}', [StoryCategoryController::class, 'destroy'])->name('admin.story-categories.destroy');
 
 });

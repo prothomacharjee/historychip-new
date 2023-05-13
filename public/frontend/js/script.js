@@ -19,21 +19,23 @@ $(document).ready(function () {
         });
     });
 
-    $('.captcha-form').submit(function (event) {
-        var form = $(this);
-        var submitButton = form.find('button[type="submit"]');
+    $(".captcha-form").submit(function (event) {
+        let form = $(this);
+        let submitButton = form.find('button[type="submit"]');
 
         if (grecaptcha && !grecaptcha.getResponse()) {
             event.preventDefault();
-            submitButton.attr('disabled', true);
-            $('.captcha-validation').html('<strong>Please complete the reCAPTCHA to submit the form.</strong>');
+            submitButton.attr("disabled", true);
+            $(".captcha-validation").html(
+                "<strong>Please complete the reCAPTCHA to submit the form.</strong>"
+            );
         }
     });
 });
 
 windows.on("scroll", function () {
-    var scroll = windows.scrollTop();
-    var headerHeight = $(".softsource-header-sticky").height();
+    let scroll = windows.scrollTop();
+    let headerHeight = $(".softsource-header-sticky").height();
 
     if (screenSize >= 320) {
         if (scroll < headerHeight) {
@@ -44,9 +46,9 @@ windows.on("scroll", function () {
     }
 });
 
-$(document).on("click", ".softsource-toggle-password", function() {
+$(document).on("click", ".softsource-toggle-password", function () {
     $(this).toggleClass("fa-eye fa-eye-slash");
-    var input = $($(this).attr("toggle"));
+    let input = $($(this).attr("toggle"));
     if (input.attr("type") == "password") {
         input.attr("type", "text");
     } else {
@@ -54,53 +56,41 @@ $(document).on("click", ".softsource-toggle-password", function() {
     }
 });
 
-$(document).on("click", ".softsource-softsource-", function () {
-    $('.softsource-show-action').removeClass("active");
-    $('.softsource-only-text').addClass("active");
-    $('.softsource-show-text').removeClass("col-md-8").addClass("col-md-12").css("display", "block");
-    $('.softsource-show-audio').css("display", "none");
-    $('input[name=context_type]').val("1");
+$(document).on("click", ".softsource-only-text", function () {
+    $(".softsource-show-action").removeClass("active");
+    $(".softsource-only-text").addClass("active");
+    $(".softsource-show-text")
+        .removeClass("col-md-8")
+        .addClass("col-md-12")
+        .css("display", "block");
+    $(".softsource-show-audio").css("display", "none");
+    $("input[name=context_type]").val("1");
 });
 
 $(document).on("click", ".softsource-only-audio", function () {
-    $('.softsource-show-action').removeClass("active");
-    $('.softsource-only-audio').addClass("active");
-    $('.softsource-show-text').css("display", "none");
-    $('.softsource-show-audio').removeClass("col-md-4").addClass("col-md-12").css("display", "block");
-    $('input[name=context_type]').val("2");
+    $(".softsource-show-action").removeClass("active");
+    $(".softsource-only-audio").addClass("active");
+    $(".softsource-show-text").css("display", "none");
+    $(".softsource-show-audio")
+        .removeClass("col-md-4")
+        .addClass("col-md-12")
+        .css("display", "block");
+    $("input[name=context_type]").val("2");
 });
 
 $(document).on("click", ".softsource-audio-text", function () {
-    $('.softsource-show-action').removeClass("active");
-    $('.softsource-audio-text').addClass("active");
-    $('.softsource-show-text').removeClass("col-md-12").addClass("col-md-8").css("display", "block");
-    $('.softsource-show-audio').removeClass("col-md-12").addClass("col-md-4").css("display", "block");
-    $('input[name=context_type]').val("3");
+    $(".softsource-show-action").removeClass("active");
+    $(".softsource-audio-text").addClass("active");
+    $(".softsource-show-text")
+        .removeClass("col-md-12")
+        .addClass("col-md-8")
+        .css("display", "block");
+    $(".softsource-show-audio")
+        .removeClass("col-md-12")
+        .addClass("col-md-4")
+        .css("display", "block");
+    $("input[name=context_type]").val("3");
 });
 
 
 
-// $(document).on("change", "#category", function () {
-//     $("#sub_category").html("");
-//     if ($(this).val() !== "") {
-//         var js = {
-//             id: $("select[name=category]")
-//                 .children("option:selected")
-//                 .data("id"),
-//             _token: $('meta[name="csrf-token"]').attr("content"),
-//         };
-//         $.post(
-//             url + "/get_level_1_by_category",
-//             js,
-//             function (data) {
-//                 var obj = JSON.parse(JSON.stringify(data));
-//                 if (obj.count > 0) {
-//                     $("[name=sub_category]").select2("destroy");
-//                     $("#sub_category").html(obj.result);
-//                     $("[name=sub_category]").select2();
-//                 }
-//             },
-//             "json"
-//         );
-//     }
-// });

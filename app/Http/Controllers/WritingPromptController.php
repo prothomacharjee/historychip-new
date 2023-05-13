@@ -54,7 +54,7 @@ class WritingPromptController extends Controller
                 DB::transaction(function () use ($writingPrompt) {
                     $writingPrompt->save();
                 });
-                return redirect()->route('writing-prompts')->with('success', "Writing Prompt $returnText Successfully");
+                return redirect()->route('admin.writing-prompts')->with('success', "Writing Prompt $returnText Successfully");
             } catch (\Exception $e) {
                 return redirect()->back()->with('error', $e->getMessage());
             }

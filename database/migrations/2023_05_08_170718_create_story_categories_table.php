@@ -13,16 +13,13 @@ return new class extends Migration
     {
         Schema::create('story_categories', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name')->unique();
             $table->text('description')->nullable();
-            $table->tinyInteger('level')->default(1);
+            $table->unsignedTinyInteger('level')->default(0);
             $table->unsignedBigInteger('parent_id')->nullable();
-            $table->string('bill_type');
-            $table->integer('max_image_count');
-            $table->integer('max_content_length');
             $table->tinyInteger('status')->default(1);
             $table->timestamps();
-            $table->foreign('parent_id')->references('id')->on('categories')->onDelete('cascade');
+            $table->foreign('parent_id')->references('id')->on('story_categories')->onDelete('cascade');
         });
     }
 

@@ -1,4 +1,3 @@
-
 <!--sidebar wrapper -->
 <div class="sidebar-wrapper" data-simplebar="true">
     <div class="sidebar-header">
@@ -83,13 +82,21 @@
             </ul>
         </li>
 
+        <li>
+            <a href="{{ route('admin.story-categories') }}">
+                <div class="parent-icon"><i class='bx bx-file'></i>
+                </div>
+                <div class="menu-title">Story Categories</div>
+            </a>
+        </li>
+
     </ul>
     <!--end navigation-->
 </div>
 <!--end sidebar wrapper -->
 
 <style scoped>
-    .logo-icon{
+    .logo-icon {
         filter: none !important;
     }
 </style>

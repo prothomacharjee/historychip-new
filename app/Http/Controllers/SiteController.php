@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Blog;
-use App\Models\Partner;
 use App\Models\User;
+use App\Models\Partner;
+use Illuminate\Http\Request;
 use App\Models\WritingPrompt;
-use Illuminate\Support\Facades\Auth;
+use App\Helpers\SoftSourceHelper;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class SiteController extends Controller
 {
@@ -211,6 +213,17 @@ class SiteController extends Controller
             'notices' => $this->notices,
 
         ]);
+    }
+
+
+    public function saveimage(Request $request)
+    {
+        return SoftSourceHelper::SaveImageBYFileUploader($request);
+    }
+
+    public function deleteimage()
+    {
+        return SoftSourceHelper::DeleteImageBYFileUploader($_POST['file']);
     }
 
 }
