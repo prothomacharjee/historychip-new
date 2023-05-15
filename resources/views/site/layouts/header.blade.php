@@ -46,6 +46,7 @@
 
     <!-- CSS -->
     <link rel="stylesheet" href="{{ asset('frontend/css/bootstrap/bootstrap.min.css?q=' . time()) }}">
+    <link href="{{ asset('frontend/input-tags/css/tagsinput.css?q=' . time()) }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('frontend/css/animate/animate.min.css?q=' . time()) }}">
     <link rel="stylesheet" href="{{ asset('frontend/fontawsome/css/all.min.css?q=' . time()) }}">
     <link rel="stylesheet" href="{{ asset('frontend/css/select2/select2.min.css?q=' . time()) }}">
@@ -63,7 +64,7 @@
     <script src="{{ asset('frontend/js/jquery/jquery.min.js?q=' . time()) }}"></script>
 </head>
 
-<body>
+<body class="softsource-no-select">
 
     <div class="softsource-preloader-container">
         <div class="softsource-blinker">
@@ -277,6 +278,7 @@
 
 
     <script src="{{ asset('frontend/js/bootstrap/bootstrap.bundle.min.js?q=' . time()) }}"></script>
+    <script src="{{ asset('frontend/input-tags/js/tagsinput.js?q=' . time()) }}"></script>
     <script src="{{ asset('frontend/js/select2/select2.min.js?q=' . time()) }}"></script>
 
     <script src="{{ asset('frontend/file-uploader/js/script.js?2.1.2') }}" type="text/javascript"></script>
@@ -284,7 +286,7 @@
 
     <script src="{{ asset('frontend/fontawsome/js/17472dc9f4.js?q=' . time()) }}"></script>
     <script src="{{ asset('frontend/js/global-variables.js?q=' . time()) }}"></script>
-    <script src="{{ asset('frontend/js/script.js?q=' . time()) }}"></script>
+    <script src="{{ asset('frontend/js/frontend.js?q=' . time()) }}"></script>
 
 
 </body>

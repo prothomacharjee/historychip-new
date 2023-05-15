@@ -241,7 +241,7 @@
                                     <label for="meta_keywords" class="form-label">Meta Keywords <span
                                             class="text-danger">* (Max 10 keywords allowed)</span></label>
                                     <input type="text"
-                                        class="form-control @error('meta_keywords') is-invalid @enderror tag-input"
+                                        class="form-control @error('meta_keywords') is-invalid @enderror softsource-tag-input"
                                         id="meta_keywords" name="meta[meta_keywords]" placeholder="Enter Meta Keywords"
                                         data-role="tagsinput"
                                         value="{{ old('meta_keywords') ? old('meta_keywords') : (!empty($meta->meta_keywords) ? $meta->meta_keywords : null) }}">

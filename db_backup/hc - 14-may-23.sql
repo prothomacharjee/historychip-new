@@ -275,7 +275,7 @@ CREATE TABLE IF NOT EXISTS `stories` (
   `sub_category_id_level_2` bigint unsigned DEFAULT NULL,
   `sub_category_id_level_3` bigint unsigned DEFAULT NULL,
   `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `author_id` bigint unsigned DEFAULT NULL,
+  `author_id` bigint unsigned NOT NULL,
   `author_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `context` longtext COLLATE utf8mb4_unicode_ci,
   `edit_count` int NOT NULL DEFAULT '0',

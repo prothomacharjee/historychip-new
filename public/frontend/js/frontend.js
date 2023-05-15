@@ -2,8 +2,21 @@ $(document).ready(function () {
     let preloader = $(".softsource-preloader-container");
     let logo = $(".softsource-preloader-container img");
 
+    $(".summernote").summernote({
+        placeholder: "Enter text here...",
+        height: 200,
+        fullscreen: true,
+    });
+
+    $(".note-icon-caret").hide();
+    $(".note-view button:last").hide();
+
     $(".softsource-select2").select2({
         placeholder: "== Please Select ==",
+    });
+
+    $(".softsource-tag-input").tagsinput({
+        confirmKeys: [13, 188], // optional: specify which keys trigger tag creation (enter key and comma key by default)
     });
 
     // Blink logo for 5 seconds or until process is complete
@@ -30,6 +43,13 @@ $(document).ready(function () {
                 "<strong>Please complete the reCAPTCHA to submit the form.</strong>"
             );
         }
+    });
+
+    var popoverTriggerList = [].slice.call(
+        document.querySelectorAll('[data-bs-toggle="popover"]')
+    );
+    var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+        return new bootstrap.Popover(popoverTriggerEl);
     });
 });
 
@@ -91,6 +111,3 @@ $(document).on("click", ".softsource-audio-text", function () {
         .css("display", "block");
     $("input[name=context_type]").val("3");
 });
-
-
-

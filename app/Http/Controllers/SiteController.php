@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Blog;
-use App\Models\User;
-use App\Models\Partner;
-use Illuminate\Http\Request;
-use App\Models\WritingPrompt;
 use App\Helpers\SoftSourceHelper;
-use Illuminate\Support\Facades\DB;
+use App\Models\Blog;
+use App\Models\Partner;
+use App\Models\StoryCategory;
+use App\Models\User;
+use App\Models\WritingPrompt;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class SiteController extends Controller
 {
@@ -205,16 +206,38 @@ class SiteController extends Controller
         ]);
     }
 
-    public function write_story()
+    public function write_story($id = null)
     {
+        $categories = StoryCategory::where(['level' => 0, 'status' => 1])->get();
+        $categories_level1 = StoryCategory::where(['level' => 1, 'status' => 1])->get();
+        $categories_level2 = StoryCategory::where(['level' => 2, 'status' => 1])->get();
+        $categories_level3 = StoryCategory::where(['level' => 3, 'status' => 1])->get();
 
-        return view('site.write-story')->with([
-            'page_title' => 'Write A Story',
-            'notices' => $this->notices,
+        if ($id) {
+            //story
+            $story = Story::findOrFail($id);
+            return view('site.write-story')->with([
+                'page_title' => 'Write A Story',
+                'notices' => $this->notices,
+                'categories' => $categories,
+                'categories_level1' => $categories_level1,
+                'categories_level2' => $categories_level2,
+                'categories_level3' => $categories_level3,
 
-        ]);
+            ]);
+        } else {
+            return view('site.write-story')->with([
+                'page_title' => 'Write A Story',
+                'notices' => $this->notices,
+                'categories' => $categories,
+                'categories_level1' => $categories_level1,
+                'categories_level2' => $categories_level2,
+                'categories_level3' => $categories_level3,
+
+            ]);
+        }
+
     }
-
 
     public function saveimage(Request $request)
     {

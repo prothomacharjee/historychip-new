@@ -131,7 +131,7 @@
 
     <!--app JS-->
     <script src="{{ asset('backend/js/app.js?q=' . time()) }}"></script>
-    <script src="{{ asset('backend/js/custom-script.js?q=' . time()) }}"></script>
+    <script src="{{ asset('backend/js/backend.js?q=' . time()) }}"></script>
 
 </body>
 

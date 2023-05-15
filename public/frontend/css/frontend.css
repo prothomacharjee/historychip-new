@@ -8,7 +8,7 @@ body {
     color: #696969;
     position: relative;
     background-color: #ffffff;
-    overflow: hidden;
+    /* overflow: hidden; */
 }
 
 a,
@@ -89,6 +89,8 @@ input[type="checkbox"] {
     margin: 0 10px 0 3px;
     cursor: pointer;
 }
+
+
 
 form input:focus::-webkit-input-placeholder {
     color: transparent;
@@ -189,6 +191,25 @@ form .form-group {
 .active > .page-link {
     color: #ffffff !important;
     background-color: #556f7c !important;
+}
+
+.note-editing-area {
+    background-color: white;
+}
+
+.softsource-no-select {
+    -webkit-user-select: none; /* Safari */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently supported by most modern browsers */
+}
+
+
+.softsource-selectable {
+    -webkit-user-select: auto; /* Safari */
+    -moz-user-select: auto; /* Firefox */
+    -ms-user-select: auto; /* Internet Explorer/Edge */
+    user-select: auto; /* Non-prefixed version, currently supported by most modern browsers */
 }
 
 .softsource-preloader-container {

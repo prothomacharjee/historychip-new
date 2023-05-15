@@ -7,7 +7,7 @@ $(document).ready(function () {
     $(".note-icon-caret").hide();
     $(".note-view button:last").hide();
 
-    $(".tag-input").tagsinput({
+    $(".softsource-tag-input").tagsinput({
         confirmKeys: [13, 188], // optional: specify which keys trigger tag creation (enter key and comma key by default)
     });
 

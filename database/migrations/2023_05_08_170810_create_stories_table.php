@@ -13,13 +13,13 @@ return new class extends Migration
     {
         Schema::create('stories', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('category_id')->nullable();
-            $table->unsignedBigInteger('sub_category_id_level_1')->nullable();
-            $table->unsignedBigInteger('sub_category_id_level_2')->nullable();
-            $table->unsignedBigInteger('sub_category_id_level_3')->nullable();
+            $table->string('category_id')->nullable();
+            $table->string('sub_category_id_level_1')->nullable();
+            $table->string('sub_category_id_level_2')->nullable();
+            $table->string('sub_category_id_level_3')->nullable();
 
             $table->string('title');
-            $table->unsignedBigInteger('author_id')->nullable();
+            $table->unsignedBigInteger('author_id');
             $table->longText('context')->nullable();
 
             $table->integer('edit_count')->default(0);

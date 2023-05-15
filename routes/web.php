@@ -71,8 +71,8 @@ Route::get('/contact-us', [SiteController::class, 'contactus'])->name('contactus
 Route::get('/writing-prompts', [SiteController::class, 'writingprompt'])->name('writingprompt');
 Route::get('/blogs/{slug?}', [SiteController::class, 'blogs'])->name('blogs');
 Route::get('/partners/{slug?}', [SiteController::class, 'partners'])->name('partners');
-Route::get('/read-story', [SiteController::class, 'read_story'])->name('story.read');
-Route::get('/write-story', [SiteController::class, 'write_story'])->name('story.write');
+Route::get('/stories/{slug?}', [SiteController::class, 'read_story'])->name('story.read');
+Route::get('/write-story/{slug?}', [SiteController::class, 'write_story'])->name('story.write');
 
 
 Route::post('/save-image', [SiteController::class, 'saveimage'])->name('story.saveimage');
