@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Helpers\SoftSourceHelper;
 use App\Models\Blog;
-use App\Models\Partner;
-use App\Models\StoryCategory;
 use App\Models\User;
-use App\Models\WritingPrompt;
+use App\Models\Story;
+use App\Models\Partner;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use App\Models\StoryCategory;
+use App\Models\WritingPrompt;
+use App\Helpers\SoftSourceHelper;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class SiteController extends Controller
 {
@@ -212,32 +213,22 @@ class SiteController extends Controller
         $categories_level1 = StoryCategory::where(['level' => 1, 'status' => 1])->get();
         $categories_level2 = StoryCategory::where(['level' => 2, 'status' => 1])->get();
         $categories_level3 = StoryCategory::where(['level' => 3, 'status' => 1])->get();
+        $story = ($id)?Story::findOrFail($id):null;
+        $page_title = ($id)?'Update Story':'Write A Story';
 
-        if ($id) {
-            //story
-            $story = Story::findOrFail($id);
-            return view('site.write-story')->with([
-                'page_title' => 'Write A Story',
-                'notices' => $this->notices,
-                'categories' => $categories,
-                'categories_level1' => $categories_level1,
-                'categories_level2' => $categories_level2,
-                'categories_level3' => $categories_level3,
+        return view('site.write-story')->with([
+            'page_title' => $page_title,
+            'notices' => $this->notices,
+            'categories' => $categories,
+            'categories_level1' => $categories_level1,
+            'categories_level2' => $categories_level2,
+            'categories_level3' => $categories_level3,
+            'story' => $story,
 
-            ]);
-        } else {
-            return view('site.write-story')->with([
-                'page_title' => 'Write A Story',
-                'notices' => $this->notices,
-                'categories' => $categories,
-                'categories_level1' => $categories_level1,
-                'categories_level2' => $categories_level2,
-                'categories_level3' => $categories_level3,
-
-            ]);
-        }
+        ]);
 
     }
+
 
     public function saveimage(Request $request)
     {
@@ -248,5 +239,36 @@ class SiteController extends Controller
     {
         return SoftSourceHelper::DeleteImageBYFileUploader($_POST['file']);
     }
+
+
+    public function FetchSubCatByParentCategory(Request $request)
+    {
+        $level = $request['level'];
+        $id = $request['id'];
+        $id = is_array($id) ? $id : array($id);
+
+        $childCategories = StoryCategory::where(['status'=>1])
+        ->when(!empty($id), function ($query) use ($id) {
+            return $query->whereIn('parent_id', $id);
+        })
+        ->when(!is_null($level), function ($query, $level) {
+            return $query->where('level', $level);
+        })
+        ->orderBy('name')->get();
+
+
+        $html = "";
+        foreach ($childCategories as $childCategory) {
+            $html .= "<option value='".$childCategory->id."'>".$childCategory->name."</option>";
+        }
+
+        $value = array(
+            "result" => $html,
+            "count" => count($childCategories)
+        );
+        echo json_encode($value);
+    }
+
+
 
 }

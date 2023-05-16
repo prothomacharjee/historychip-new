@@ -98,7 +98,7 @@
                         </div>
 
                         <div class="col-md-4">
-                            <label for="tags" class="form-label">Stiry Tags (Max 15 tags allowed)</label>
+                            <label for="tags" class="form-label">Story Tags (Max 15 tags allowed)</label>
                             <input type="text"
                                 class="form-control @error('tags') is-invalid @enderror softsource-tag-input" id="tags"
                                 name="tags" placeholder="Enter Meta Keywords" data-role="tagsinput"
@@ -117,20 +117,20 @@
                         </div>
 
                         @php
-                            $category_id = old('category_id') ? old('category_id') : (!empty($story->category_id) ? $story->category_id : null);
-                            $sub_category_id_level_1 = old('sub_category_id_level_1') ? old('sub_category_id_level_1') : (!empty($story->sub_category_id_level_1) ? $story->sub_category_id_level_1 : null);
-                            $sub_category_id_level_2 = old('sub_category_id_level_2') ? old('sub_category_id_level_2') : (!empty($story->sub_category_id_level_2) ? $story->sub_category_id_level_2 : null);
-                            $sub_category_id_level_3 = old('sub_category_id_level_3') ? old('sub_category_id_level_3') : (!empty($story->sub_category_id_level_3) ? $story->sub_category_id_level_3 : null);
+                            $category_id = old('category_id') ? old('category_id') : (!empty($story->category_id) ? $story->category_id : []);
+                            $sub_category_id_level_1 = old('sub_category_id_level_1') ? old('sub_category_id_level_1') : (!empty($story->sub_category_id_level_1) ? $story->sub_category_id_level_1 : []);
+                            $sub_category_id_level_2 = old('sub_category_id_level_2') ? old('sub_category_id_level_2') : (!empty($story->sub_category_id_level_2) ? $story->sub_category_id_level_2 : []);
+                            $sub_category_id_level_3 = old('sub_category_id_level_3') ? old('sub_category_id_level_3') : (!empty($story->sub_category_id_level_3) ? $story->sub_category_id_level_3 : []);
                         @endphp
 
-                        <div class="col-md-3">
+                        <div class="col-md-3 mt-3">
                             <label class="form-label">Category <span class="text-danger">* (Max 3)</span></label>
-                            <select class="form-control @error('category_id') is-invalid @enderror" name="category_id[]"
+                            <select class="form-control @error('category_id') is-invalid @enderror story-category-select2 " name="category_id[]"
                                 multiple id='category_id' required>
                                 <option value="">Please Select</option>
                                 @foreach ($categories as $category)
                                     <option value="{{ $category->id }}"
-                                        {{ in_array($category['id'], $category_id) ? 'selected' : '' }}>
+                                        {{ in_array($category->id, $category_id) ? 'selected' : '' }}>
                                         {{ $category->name }}</option>
                                 @endforeach
                             </select>
@@ -142,18 +142,18 @@
                                 </div>
                             @enderror
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-3 mt-3">
                             <label class="form-label">Level 1 Sub Category</label>
-                            <select class="form-control @error('sub_category_id_level_1') is-invalid @enderror"
+                            <select class="form-control @error('sub_category_id_level_1') is-invalid @enderror story-category-select2"
                                 name="sub_category_id_level_1[]" multiple id='sub_category_id_level_1'
                                 {{ !empty($sub_category_id_level_1) ? '' : 'disabled' }}>
-                                
+
                                 @if (!empty($sub_category_id_level_1))
                                     <option value="">Please Select</option>
-                                    @foreach ($categories as $category)
-                                        <option value="{{ $category->id }}"
-                                            {{ in_array($category['id'], $category_id) ? 'selected' : '' }}>
-                                            {{ $category->name }}</option>
+                                    @foreach ($categories_level1 as $category_level1)
+                                        <option value="{{ $category_level1->id }}"
+                                            {{ in_array($category_level1->id, $sub_category_id_level_1) ? 'selected' : '' }}>
+                                            {{ $category_level1->name }}</option>
                                     @endforeach
                                 @endif
                             </select>
@@ -166,6 +166,109 @@
                             @enderror
                         </div>
 
+                        <div class="col-md-3 mt-3">
+                            <label class="form-label">Level 2 Sub Category</label>
+                            <select class="form-control @error('sub_category_id_level_2') is-invalid @enderror story-category-select2"
+                                name="sub_category_id_level_2[]" multiple id='sub_category_id_level_2'
+                                {{ !empty($sub_category_id_level_2) ? '' : 'disabled' }}>
+
+                                @if (!empty($sub_category_id_level_2))
+                                    <option value="">Please Select</option>
+                                    @foreach ($categories_level2 as $category_level2)
+                                        <option value="{{ $category_level2->id }}"
+                                            {{ in_array($category_level2->id, $sub_category_id_level_2) ? 'selected' : '' }}>
+                                            {{ $category_level2->name }}</option>
+                                    @endforeach
+                                @endif
+                            </select>
+                            <div class="valid-feedback">Looks good!</div>
+                            <div class="invalid-feedback">You must seelct at least one Category. Max 3</div>
+
+                            @error('sub_category_id_level_2')
+                                <div id="validationContentFeedback" class="invalid-feedback">{{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+
+                        <div class="col-md-3 mt-3">
+                            <label class="form-label">Level 3 Sub Category</label>
+                            <select class="form-control @error('sub_category_id_level_3') is-invalid @enderror story-category-select2"
+                                name="sub_category_id_level_3[]" multiple id='sub_category_id_level_3'
+                                {{ !empty($sub_category_id_level_3) ? '' : 'disabled' }}>
+
+                                @if (!empty($sub_category_id_level_3))
+                                    <option value="">Please Select</option>
+                                    @foreach ($categories_level3 as $category_level3)
+                                        <option value="{{ $category_level3->id }}"
+                                            {{ in_array($category_level3->id, $sub_category_id_level_3) ? 'selected' : '' }}>
+                                            {{ $category_level3->name }}</option>
+                                    @endforeach
+                                @endif
+                            </select>
+                            <div class="valid-feedback">Looks good!</div>
+                            <div class="invalid-feedback">You must seelct at least one Category. Max 3</div>
+
+                            @error('sub_category_id_level_3')
+                                <div id="validationContentFeedback" class="invalid-feedback">{{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+
+                        <div class="col-md-12 mt-3">
+                            <input id="anonymous" type="checkbox" name="anonymous" value="1" defaultValue="0">
+                            <label for="name">
+                                <h6>Tag this story as Anonymous</h6>
+                            </label>
+                        </div>
+
+                        {{-- <div class="col-md-8 show-text">
+                            <label>
+                                <h6>Content</h6>
+                            </label>
+                            <textarea id="context" class="form-input w-100 softsource-summernote" name="context" rows="16"
+                                required="true" placeholder="Tell the world your story..."><?php echo $context; ?></textarea>
+                            <span id="maxContentPost"></span>
+                        </div>
+                        <div class="col-md-4 show-audio">
+                            <label>
+                                <h6>Audio/Video</h6>
+                            </label>
+
+                            <label><input <?php if ($audioconvert == 1) {
+                                echo 'checked';
+                            } ?> class="form-check-input" type="checkbox"
+                                    id="audioconvertcheck">Keep Audio Only for a Video File (Video File
+                                will converted to audio).</label>
+                            <!-- Star -->
+                            <div class="form-group form-row align-items-center">
+                                <div class="col-md-12">
+                                    <label>Audio/Video Credit <span class="avcreditRequired required">*</span>:</label>
+                                    <input id="photo-credit" type="text" class="form-input form-control"
+                                        {{ $errors->has('avcredit') ? ' is-invalid' : '' }}" name="avcredit"
+                                        value="<?php echo $avcredit; ?>" required
+                                        placeholder="Audio/Video Credit (Required if Uploaded)">
+
+
+                                    @if ($errors->has('avcredit'))
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $errors->first('avcredit') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+                            </div>
+                            <!-- End -->
+                            <input type="file" name="audio_file_front"
+                                data-id="{{ url('submitastory/delete_audio') }}"
+                                data-fileuploader-files='<?php echo json_encode($audio_preload); ?>'
+                                data-url="{{ url('submitastory/save_audio') }}" data-name="story">
+                            <div id="errorBlock" class="help-block"></div>
+                            <input type="hidden" name="audio_file" class="file-saver" value="<?php echo $audio_path; ?>">
+
+                            <input type="hidden" name="audioconvert" id="audioconvert" class="audioconvert"
+                                value="<?php echo $audioconvert; ?>">
+
+                        </div> --}}
+
 
 
                 </form>
@@ -176,14 +279,9 @@
 
     <script>
         $(document).ready(function() {
-            // $("#blog_description").summernote({
-            //     placeholder: "Write Your Blog Content Here",
-            //     height: 300,
-            //     fullscreen: true,
-            // });
-
-            $('#category_id,#sub_category_id_level_1,#sub_category_id_level_2,#sub_category_id_level_3').select2({
-                maximumSelectionLength: 3
+            $('.story-category-select2').select2({
+                maximumSelectionLength: 3,
+                placeholder: "Please Select"
             });
         });
 
@@ -193,9 +291,34 @@
             }
         });
 
+
+
         function saveAsDraft() {
             $('#is_draft').val('1');
             $('#blog_form').submit();
         }
+
+        $('#description').on('summernote.keyup', function() {
+            let content = $('.note-editable').text();
+            let maxLength = $('#description').attr('maxLength');
+            let counter = content.length;
+
+            if (counter <= maxLength) {
+                $('.partner-description-word-count').text(counter + '/' + maxLength).removeClass(
+                    'text-danger');
+            } else {
+                var newtext = content.substring(0, content.length - 1);
+                $('.partner-description-word-count').addClass('text-danger');
+                $('.note-editable').text(newtext);
+                // Move the cursor to the end of the div
+                let selector = document.getElementsByClassName('note-editable')[0];
+                var range = document.createRange();
+                range.selectNodeContents(selector);
+                range.collapse(false);
+                var sel = window.getSelection();
+                sel.removeAllRanges();
+                sel.addRange(range);
+            }
+        })
     </script>
 @endsection

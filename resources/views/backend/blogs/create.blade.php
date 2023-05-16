@@ -102,7 +102,7 @@
                                 <div class="col-md-12">
                                     <label for="blog_description" class="form-label">Blog Content <span
                                             class="text-danger">*</span></label>
-                                    <textarea rows="10" class="form-control @error('blog_description') is-invalid @enderror" id="blog_description"
+                                    <textarea rows="10" class="form-control softsource-summernote @error('blog_description') is-invalid @enderror" id="blog_description"
                                         name="blog[blog_description]" placeholder="Write Your Blog Content Here" required
                                         aria-describedby="validationContentFeedback">{{ old('blog_description') ? old('blog_description') : (!empty($blog->blog_description) ? $blog->blog_description : null) }}</textarea>
 
@@ -270,13 +270,6 @@
     </div>
 
     <script>
-        $(document).ready(function() {
-            $("#blog_description").summernote({
-                placeholder: "Write Your Blog Content Here",
-                height: 300,
-                fullscreen: true,
-            });
-        });
 
         $('#meta_keywords').on('itemAdded', function(event) {
             if ($(this).tagsinput('items').length > 10) {

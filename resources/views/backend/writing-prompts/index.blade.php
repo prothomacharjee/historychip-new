@@ -83,7 +83,7 @@
                                 <div class="col-md-12">
                                     <label for="details" class="form-label">Details <span
                                             class="text-danger">*</span></label>
-                                    <textarea rows="10" class="form-control summernote @error('details') is-invalid @enderror" id="details"
+                                    <textarea rows="10" class="form-control softsource-summernote @error('details') is-invalid @enderror" id="details"
                                         name="details" placeholder="Write your details here" required aria-describedby="validationContentFeedback">{{ old('details') }}</textarea>
                                     <div class="valid-feedback">Looks good!</div>
                                     <div class="invalid-feedback">You must enter details.</div>
@@ -225,7 +225,7 @@
                     $("#id").val(response.id);
                     $("#title").val(response.title);
                     $("#details").val(response.details);
-                    $('.summernote').summernote('code', response.details);
+                    $('.softsource-summernote').summernote('code', response.details);
                     $("#status").val(response.status);
                     let img = (response.icon) ? `<img src="${response.icon}" alt="${response.title}" class="w-50">` : `<img src="{{ asset('backend/images/custom/no-image-icon.png') }}" alt="${response.title}" class="w-75">`;
                     $(".selected-file").html(img);

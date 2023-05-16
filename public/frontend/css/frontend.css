@@ -143,6 +143,10 @@ form .form-group {
     margin-bottom: 1rem;
 }
 
+.bootstrap-tagsinput{
+    padding: 6px !important;
+}
+
 .resize-none {
     resize: none;
 }

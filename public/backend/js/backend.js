@@ -1,7 +1,7 @@
 $(document).ready(function () {
-    $(".summernote").summernote({
-        placeholder: "Enter text here...",
-        height: 200,
+    $(".softsource-summernote").summernote({
+        placeholder: "Enter content here...",
+        height: 300,
         fullscreen: true,
     });
     $(".note-icon-caret").hide();

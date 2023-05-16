@@ -80,6 +80,10 @@ Route::post('/delete-image', [SiteController::class, 'deleteimage'])->name('stor
 Route::post('/save-audio', [SiteController::class, 'saveaudio'])->name('story.saveaudio');
 Route::post('/delete-audio', [SiteController::class, 'deleteaudio'])->name('story.deleteaudio');
 
+Route::post('/subcat-by-parentcat', [SiteController::class, 'FetchSubCatByParentCategory'])->name('story.subCatByParentCategory');
+
+
+
 Route::post('/getwritingprompts', [WritingPromptController::class, 'getwritingprompts'])->name('writing-prompts.get');
 
 Route::post('/story/create', [StoryController::class, 'store'])->name('story.create');

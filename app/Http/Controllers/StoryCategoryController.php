@@ -303,4 +303,6 @@ class StoryCategoryController extends Controller
         $data = StoryCategory::where('level', $request->level)->get();
         echo json_encode($data);
     }
+
+    
 }

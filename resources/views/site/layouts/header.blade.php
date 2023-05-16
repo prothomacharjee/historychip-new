@@ -57,6 +57,8 @@
     <link href="{{ asset('frontend/file-uploader/css/script.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('frontend/file-uploader/css/custom.css') }}">
 
+    <link href="{{ asset('frontend/css/summernote/summernote-lite.min.css?q=' . time()) }}" rel="stylesheet">
+
     <link rel="stylesheet" href="{{ asset('frontend/css/frontend.css?q=' . time()) }}">
     <link rel="stylesheet" href="{{ asset('frontend/css/mediaquery.css?q=' . time()) }}">
     <link rel="stylesheet" href="{{ asset('frontend/css/keyframes.css?q=' . time()) }}">
@@ -283,6 +285,8 @@
 
     <script src="{{ asset('frontend/file-uploader/js/script.js?2.1.2') }}" type="text/javascript"></script>
     <script src="{{ asset('frontend/file-uploader/js/file-custom.js?2.1.2') }}" type="text/javascript"></script>
+
+    <script src="{{ asset('frontend/js/summernote/summernote-lite.min.js?q=' . time()) }}"></script>
 
     <script src="{{ asset('frontend/fontawsome/js/17472dc9f4.js?q=' . time()) }}"></script>
     <script src="{{ asset('frontend/js/global-variables.js?q=' . time()) }}"></script>

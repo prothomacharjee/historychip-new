@@ -2,9 +2,9 @@ $(document).ready(function () {
     let preloader = $(".softsource-preloader-container");
     let logo = $(".softsource-preloader-container img");
 
-    $(".summernote").summernote({
-        placeholder: "Enter text here...",
-        height: 200,
+    $(".softsource-summernote").summernote({
+        placeholder: "Enter content here...",
+        height: 300,
         fullscreen: true,
     });
 
@@ -110,4 +110,55 @@ $(document).on("click", ".softsource-audio-text", function () {
         .addClass("col-md-4")
         .css("display", "block");
     $("input[name=context_type]").val("3");
+});
+
+//Story Categories
+$(document).on("change", "#category_id", function () {
+    $('#sub_category_id_level_1, #sub_category_id_level_2, #sub_category_id_level_3').html("").attr("disabled", true);
+    var js = {
+        "id": $(this).val(),
+        'level': 1,
+        "_token": $('meta[name="csrf-token"]').attr('content'),
+    };
+    $.post("/subcat-by-parentcat", js, function (data) {
+        if(data.count>0){
+            $('#sub_category_id_level_1').html(data.result).attr("disabled", false);
+        }
+    }, "json");
+});
+
+$(document).on("change", "#sub_category_id_level_1", function () {
+    if ($(this).val() !== '') {
+        $('#sub_category_id_level_2, #sub_category_id_level_3').html("").attr("disabled", true);
+        var js = {
+            "_token": $('meta[name="csrf-token"]').attr('content'),
+            "id": $(this).val(),
+            'level': 2,
+        };
+        $.post("/subcat-by-parentcat", js, function (data) {
+            if(data.count>0){
+                $('#sub_category_id_level_2').html(data.result).attr("disabled", false);
+            }
+        }, "json");
+    } else {
+        $('#sub_category_id_level_2, #sub_category_id_level_3').attr("disabled", true);
+    }
+});
+
+$(document).on("change", "#sub_category_id_level_2", function () {
+    if ($(this).val() !== '') {
+        $('#sub_category_id_level_2, #sub_category_id_level_3').html("").attr("disabled", true);
+        var js = {
+            "_token": $('meta[name="csrf-token"]').attr('content'),
+            "id": $(this).val(),
+            'level': 3,
+        };
+        $.post("/subcat-by-parentcat", js, function (data) {
+            if(data.count>0){
+                $('#sub_category_id_level_3').html(data.result).attr("disabled", false);
+            }
+        }, "json");
+    } else {
+        $('#sub_category_id_level_2, #sub_category_id_level_3').attr("disabled", true);
+    }
 });
