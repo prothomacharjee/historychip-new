@@ -240,6 +240,16 @@ class SiteController extends Controller
         return SoftSourceHelper::DeleteImageBYFileUploader($_POST['file']);
     }
 
+    public function saveaudio(Request $request)
+    {
+        return SoftSourceHelper::SaveAudioBYFileUploader($request);
+    }
+
+    public function deleteaudio()
+    {
+        return SoftSourceHelper::DeleteAudioBYFileUploader($_POST['file']);
+    }
+
 
     public function FetchSubCatByParentCategory(Request $request)
     {

@@ -27,18 +27,19 @@ return new class extends Migration
             $table->string('author_name');
 
             $table->string('photo_credit')->nullable();
-            $table->string('audio_credit')->nullable();
-            $table->string('video_credit')->nullable();
+            $table->string('audio_video_credit')->nullable();
 
             $table->tinyInteger('is_anonymous')->default(0);
             $table->tinyInteger('is_approved')->default(0);
+            $table->tinyInteger('is_draft')->default(0);
+            $table->tinyInteger('is_audioconvert')->default(0);
 
             $table->string('event_dates')->nullable();
             $table->string('event_detail_dates')->nullable();
             $table->string('event_location')->nullable();
             $table->string('header_image_path')->nullable();
-            $table->string('audio_path')->nullable();
-            $table->string('video_path')->nullable();
+            $table->string('audio_video_path')->nullable();
+
             $table->longText('tags')->nullable();
 
             $table->tinyInteger('status')->default(1);

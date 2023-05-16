@@ -75,6 +75,7 @@ Route::get('/stories/{slug?}', [SiteController::class, 'read_story'])->name('sto
 Route::get('/write-story/{slug?}', [SiteController::class, 'write_story'])->name('story.write');
 
 
+
 Route::post('/save-image', [SiteController::class, 'saveimage'])->name('story.saveimage');
 Route::post('/delete-image', [SiteController::class, 'deleteimage'])->name('story.deleteimage');
 Route::post('/save-audio', [SiteController::class, 'saveaudio'])->name('story.saveaudio');

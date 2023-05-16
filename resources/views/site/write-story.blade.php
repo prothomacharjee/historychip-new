@@ -3,9 +3,14 @@
 @section('content')
     @php
         $preload = '';
+        $category_id = old('category_id') ? old('category_id') : (!empty($story->category_id) ? $story->category_id : []);
+        $sub_category_id_level_1 = old('sub_category_id_level_1') ? old('sub_category_id_level_1') : (!empty($story->sub_category_id_level_1) ? $story->sub_category_id_level_1 : []);
+        $sub_category_id_level_2 = old('sub_category_id_level_2') ? old('sub_category_id_level_2') : (!empty($story->sub_category_id_level_2) ? $story->sub_category_id_level_2 : []);
+        $sub_category_id_level_3 = old('sub_category_id_level_3') ? old('sub_category_id_level_3') : (!empty($story->sub_category_id_level_3) ? $story->sub_category_id_level_3 : []);
+        $length = old('context') ? strlen(old('context')) : (!empty($partner->context) ? strlen(strip_tags($partner->context)) : 0);
+        $max_story_content_length = '12000';
+        $min_story_content_length = '500';
     @endphp
-
-
 
     <div class="position-relative softsource-top-contianer">
         <div class="container">
@@ -34,9 +39,12 @@
                     <button type="button"
                         class="softsource-write-story-btn my-2 px-4 softsource-show-action softsource-audio-text active">Both</button>
                 </div>
-                <form method="POST" name="submitStory" id="submitstory" action="javascript:;"
-                    enctype="multipart/form-data">
+                <form method="POST" name="submitStory" id="submitstory" action="{{ route('story.create') }}" novalidate
+                    class="row g-3 needs-validation" enctype="multipart/form-data">
                     @csrf
+                    <input type="hidden" name="is_draft" id="is_draft"
+                        value="{{ old('is_draft') ? old('is_draft') : (!empty($partner->is_draft) ? $partner->is_draft : null) }}" />
+
                     <div class="row pt-3">
                         <div class="col-12">
                             <div class="form-group form-md-floating-label image-upload-banner">
@@ -116,17 +124,10 @@
                             @enderror
                         </div>
 
-                        @php
-                            $category_id = old('category_id') ? old('category_id') : (!empty($story->category_id) ? $story->category_id : []);
-                            $sub_category_id_level_1 = old('sub_category_id_level_1') ? old('sub_category_id_level_1') : (!empty($story->sub_category_id_level_1) ? $story->sub_category_id_level_1 : []);
-                            $sub_category_id_level_2 = old('sub_category_id_level_2') ? old('sub_category_id_level_2') : (!empty($story->sub_category_id_level_2) ? $story->sub_category_id_level_2 : []);
-                            $sub_category_id_level_3 = old('sub_category_id_level_3') ? old('sub_category_id_level_3') : (!empty($story->sub_category_id_level_3) ? $story->sub_category_id_level_3 : []);
-                        @endphp
-
                         <div class="col-md-3 mt-3">
                             <label class="form-label">Category <span class="text-danger">* (Max 3)</span></label>
-                            <select class="form-control @error('category_id') is-invalid @enderror story-category-select2 " name="category_id[]"
-                                multiple id='category_id' required>
+                            <select class="form-control @error('category_id') is-invalid @enderror story-category-select2 "
+                                name="category_id[]" multiple id='category_id' required>
                                 <option value="">Please Select</option>
                                 @foreach ($categories as $category)
                                     <option value="{{ $category->id }}"
@@ -144,7 +145,8 @@
                         </div>
                         <div class="col-md-3 mt-3">
                             <label class="form-label">Level 1 Sub Category</label>
-                            <select class="form-control @error('sub_category_id_level_1') is-invalid @enderror story-category-select2"
+                            <select
+                                class="form-control @error('sub_category_id_level_1') is-invalid @enderror story-category-select2"
                                 name="sub_category_id_level_1[]" multiple id='sub_category_id_level_1'
                                 {{ !empty($sub_category_id_level_1) ? '' : 'disabled' }}>
 
@@ -168,7 +170,8 @@
 
                         <div class="col-md-3 mt-3">
                             <label class="form-label">Level 2 Sub Category</label>
-                            <select class="form-control @error('sub_category_id_level_2') is-invalid @enderror story-category-select2"
+                            <select
+                                class="form-control @error('sub_category_id_level_2') is-invalid @enderror story-category-select2"
                                 name="sub_category_id_level_2[]" multiple id='sub_category_id_level_2'
                                 {{ !empty($sub_category_id_level_2) ? '' : 'disabled' }}>
 
@@ -192,7 +195,8 @@
 
                         <div class="col-md-3 mt-3">
                             <label class="form-label">Level 3 Sub Category</label>
-                            <select class="form-control @error('sub_category_id_level_3') is-invalid @enderror story-category-select2"
+                            <select
+                                class="form-control @error('sub_category_id_level_3') is-invalid @enderror story-category-select2"
                                 name="sub_category_id_level_3[]" multiple id='sub_category_id_level_3'
                                 {{ !empty($sub_category_id_level_3) ? '' : 'disabled' }}>
 
@@ -214,60 +218,68 @@
                             @enderror
                         </div>
 
-                        <div class="col-md-12 mt-3">
-                            <input id="anonymous" type="checkbox" name="anonymous" value="1" defaultValue="0">
-                            <label for="name">
+                        <div class="col-md-12 mt-3 form-check">
+                            <input id="is_anonymous" type="checkbox" name="is_anonymous" value="0"
+                                defaultValue="0">
+                            <label for="is_anonymous" class="form-check-label">
                                 <h6>Tag this story as Anonymous</h6>
                             </label>
                         </div>
 
-                        {{-- <div class="col-md-8 show-text">
-                            <label>
-                                <h6>Content</h6>
-                            </label>
-                            <textarea id="context" class="form-input w-100 softsource-summernote" name="context" rows="16"
-                                required="true" placeholder="Tell the world your story..."><?php echo $context; ?></textarea>
-                            <span id="maxContentPost"></span>
+                        <div class="col-md-8 mt-3 softsource-show-text">
+                            <label for="context" class="form-label">Story Content <span class="text-danger">* (Min 500
+                                    and Max 12000)</span></label>
+                            <textarea maxlength="{{ $max_story_content_length }}" minlength="{{ $min_story_content_length }}" rows="16"
+                                class="form-control softsource-summernote @error('context') is-invalid @enderror" id="context" name="context"
+                                placeholder="Tell the world your story..." required aria-describedby="validationContentFeedback">{{ old('context') ? old('context') : (!empty($story->context) ? $story->context : null) }}</textarea>
+                            <div class="text-end story-context-word-count">
+                                {{ $length }}/{{ $max_story_content_length }}</div>
+                            <div class="valid-feedback">Looks good!</div>
+                            <div class="invalid-feedback">You Must Write Your Story Content Here.</div>
+                            @error('context')
+                                <div id="validationContentFeedback" class="invalid-feedback">{{ $message }}
+                                </div>
+                            @enderror
                         </div>
-                        <div class="col-md-4 show-audio">
-                            <label>
-                                <h6>Audio/Video</h6>
-                            </label>
+                        <div class="col-md-4 row mt-3 softsource-show-audio">
 
-                            <label><input <?php if ($audioconvert == 1) {
-                                echo 'checked';
-                            } ?> class="form-check-input" type="checkbox"
-                                    id="audioconvertcheck">Keep Audio Only for a Video File (Video File
-                                will converted to audio).</label>
-                            <!-- Star -->
-                            <div class="form-group form-row align-items-center">
-                                <div class="col-md-12">
-                                    <label>Audio/Video Credit <span class="avcreditRequired required">*</span>:</label>
-                                    <input id="photo-credit" type="text" class="form-input form-control"
-                                        {{ $errors->has('avcredit') ? ' is-invalid' : '' }}" name="avcredit"
-                                        value="<?php echo $avcredit; ?>" required
-                                        placeholder="Audio/Video Credit (Required if Uploaded)">
+                            <div class="col-md-12">
+                                <label for="" class="form-label">Audio/Video</label>
+                                <input type="file" name="story_audio_video" id="story_audio_video"
+                                    data-id="{{ route('story.deleteaudio') }}" data-fileuploader-files=''
+                                    data-url="{{ route('story.saveaudio') }}" data-name="story">
+                                <div id="errorBlock" class="help-block"></div>
+                                <span class="text-danger audio-upload-error-show"></span>
+                                <input type="hidden" name="audio_video_path" id="audio_video_path"
+                                    class="front_file-saver" value="">
+                            </div>
 
-
-                                    @if ($errors->has('avcredit'))
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('avcredit') }}</strong>
-                                        </span>
-                                    @endif
+                            <div class="col-md-12 audioconvert_div" style="display:none">
+                                <div class="form-check d-flex">
+                                    <input type="checkbox" id="is_audioconvert" name="is_audioconvert" value="0">
+                                    <label class="form-check-label" style="font-size: 10pt" for="is_audioconvert">Keep
+                                        Audio Only for a Video File (Video File will converted to audio).</label>
                                 </div>
                             </div>
-                            <!-- End -->
-                            <input type="file" name="audio_file_front"
-                                data-id="{{ url('submitastory/delete_audio') }}"
-                                data-fileuploader-files='<?php echo json_encode($audio_preload); ?>'
-                                data-url="{{ url('submitastory/save_audio') }}" data-name="story">
-                            <div id="errorBlock" class="help-block"></div>
-                            <input type="hidden" name="audio_file" class="file-saver" value="<?php echo $audio_path; ?>">
 
-                            <input type="hidden" name="audioconvert" id="audioconvert" class="audioconvert"
-                                value="<?php echo $audioconvert; ?>">
+                            <div class="col-12 audio_video_credit_div" style="display:none">
+                                <label for="audio_video_credit" class="form-label">Audio/Video Credit <span
+                                        class="text-danger">*</span></label>
+                                <input type="text"
+                                    class="form-control @error('audio_video_credit') is-invalid @enderror"
+                                    id="audio_video_credit" name="audio_video_credit" placeholder="Photo Credit"
+                                    aria-describedby="validationPhotoCreditFeedback"
+                                    value="{{ old('audio_video_credit') ? old('audio_video_credit') : (!empty($story->audio_video_credit) ? $story->audio_video_credit : null) }}">
+                                <div class="valid-feedback">Looks good!</div>
+                                <div class="invalid-feedback">You must enter an photo credit.</div>
+                                @error('audio_video_credit')
+                                    <div id="validationPhotoCreditFeedback" class="invalid-feedback">{{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
 
-                        </div> --}}
+
+                        </div>
 
 
 
@@ -283,6 +295,61 @@
                 maximumSelectionLength: 3,
                 placeholder: "Please Select"
             });
+
+            $("#context").summernote({
+                placeholder: "Tell the world your story...",
+                height: 400,
+                fullscreen: true,
+                toolbar: [
+                    ['style', ['bold', 'italic', 'underline']],
+                    ['font', ['strikethrough', 'superscript', 'subscript']],
+                    ['color', []],
+                    ['insert', ['picture']],
+                    ['para', ['ul', 'ol', 'paragraph']],
+                    ['fontsize', ['fontsize']],
+                    ['link', ['link']],
+                    ['view', ['fullscreen', 'codeview']]
+                ],
+                callbacks: {
+                    onKeydown: function(e) {
+                        var t = e.currentTarget.innerText;
+                        if (t.trim().length >= Number('{{ $max_story_content_length }}')) {
+                            //delete keys, arrow keys, copy, cut, select all
+                            if (e.keyCode != 8 && !(e.keyCode >= 37 && e.keyCode <= 40) && e.keyCode !=
+                                46 && !(e.keyCode == 88 && e.ctrlKey) && !(e.keyCode == 67 && e
+                                    .ctrlKey) && !(e.keyCode == 65 && e.ctrlKey)) {
+                                e.preventDefault();
+                            }
+                            $('.story-context-word-count').addClass('text-danger');
+                        }
+                    },
+                    onKeyup: function(e) {
+                        var t = e.currentTarget.innerText;
+                        $('.story-context-word-count').text(
+                            `${t.length} / {{ $max_story_content_length }}`).removeClass(
+                            'text-danger');
+                    },
+                    onPaste: function(e) {
+                        var t = e.currentTarget.innerText;
+                        var bufferText = ((e.originalEvent || e).clipboardData || window.clipboardData)
+                            .getData('Text');
+                        e.preventDefault();
+                        var maxPaste = bufferText.length;
+                        if (t.length + bufferText.length > Number('{{ $max_story_content_length }}')) {
+                            maxPaste = Number('{{ $max_story_content_length }}') - t.length;
+                        }
+                        if (maxPaste > 0) {
+                            document.execCommand('insertText', false, bufferText.substring(0,
+                                maxPaste));
+                        }
+                        $('.story-context-word-count').text(
+                            `${t.length} / {{ $max_story_content_length }}`).removeClass(
+                            'text-danger');
+                    }
+                }
+            });
+
+
         });
 
         $('#tags').on('itemAdded', function(event) {
@@ -292,33 +359,29 @@
         });
 
 
+        $(document).on('change', '#is_anonymous', function() {
+            var valueInput = $(this);
+            if ($(this).is(":checked")) {
+                valueInput.val("1");
+            } else {
+                valueInput.val("0");
+            }
+        });
+
+        $(document).on('change', '#is_audioconvert', function() {
+            var valueInput = $(this);
+            if ($(this).is(":checked")) {
+                valueInput.val("1");
+            } else {
+                valueInput.val("0");
+            }
+        });
+
+
 
         function saveAsDraft() {
             $('#is_draft').val('1');
             $('#blog_form').submit();
         }
-
-        $('#description').on('summernote.keyup', function() {
-            let content = $('.note-editable').text();
-            let maxLength = $('#description').attr('maxLength');
-            let counter = content.length;
-
-            if (counter <= maxLength) {
-                $('.partner-description-word-count').text(counter + '/' + maxLength).removeClass(
-                    'text-danger');
-            } else {
-                var newtext = content.substring(0, content.length - 1);
-                $('.partner-description-word-count').addClass('text-danger');
-                $('.note-editable').text(newtext);
-                // Move the cursor to the end of the div
-                let selector = document.getElementsByClassName('note-editable')[0];
-                var range = document.createRange();
-                range.selectNodeContents(selector);
-                range.collapse(false);
-                var sel = window.getSelection();
-                sel.removeAllRanges();
-                sel.addRange(range);
-            }
-        })
     </script>
 @endsection

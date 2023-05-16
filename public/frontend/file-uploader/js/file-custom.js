@@ -199,7 +199,7 @@ $(document).ready(function () {
         button: 'Browse Banner Image',
     });
 
-    $('input[name="audio_file_front"]').fileuploader({
+    $('input[name="story_audio_video"]').fileuploader({
         limit: 1,
         maxSize: 100000,
         extensions: ['audio/*', 'video/*'],
@@ -217,7 +217,7 @@ $(document).ready(function () {
                 '</div>',
         theme: 'dragdrop',
         upload: {
-            url: $('input[name="audio_file_front"]').attr("data-url"),
+            url: $('input[name="story_audio_video"]').attr("data-url"),
             data: {'_token': $('meta[name="csrf-token"]').attr('content')},
             type: 'POST',
             enctype: 'multipart/form-data',
@@ -235,32 +235,41 @@ $(document).ready(function () {
                     item.html.find('.fileuploader-action-remove').addClass('fileuploader-action-success');
                     item.html.find('.fileuploader-action-remove').addClass('audio-remove');
 
-
                     var attr_name = (item.input.attr("data-attr-name")) ? item.input.attr("data-attr-name") : 'file-saver';
                     setTimeout(function () {
                         item.html.find('.progress-holder').hide();
-                        $(".show-audio .fileuploader-input").addClass("disabled");
+                        $(".softsource-show-audio .fileuploader-input").addClass("disabled");
                         item.html.find('.fileuploader-action-popup, .fileuploader-item-image').show();
-                        item.html.find('.show-audio .fileuploader-action-remove').before('<button type="button" class="fileuploader-action fileuploader-action-sort" title="Sort"><i class="fileuploader-icon-sort"></i></button>');
+                        item.html.find('.softsource-show-audio .fileuploader-action-remove').before('<button type="button" class="fileuploader-action fileuploader-action-sort" title="Sort"><i class="fileuploader-icon-sort"></i></button>');
                     }, 400);
                     $('.' + attr_name).val(filename.filename);
                     item.popup.open();
 
+                    $('#audio_video_path').val(filename.path);
+                    $('.audioconvert_div,.audio_video_credit_div').fadeIn(1000);
+                    $('#audio_video_credit').prop('required', true);
+
                 }
                 else
                 {
-                    alert(filename.warnings[0]);
+                    $('.audio-upload-error-show').html(filename.warnings[0]);
+                    $('#audio_video_path').val('');
+                    $('.audioconvert_div,.audio_video_credit_div').fadeOut(500);
+                    $('#audio_video_credit').prop('required', false);
                     item.remove();
                 }
 
             },
             onError: function (data, item) {
                 if (data.size > (1000 * (1024 * 1024))) {
-                    alert('The maximum file size allowed 1 GB');
-                    $('.show-audio .fileuploader-action-remove').trigger("click");
+                    $('.audio-upload-error-show').html('The maximum file size allowed 1 GB');
+                    // alert('The maximum file size allowed 1 GB');
+                    $('.softsource-show-audio .fileuploader-action-remove').trigger("click");
                 } else {
-                    alert('Failed to upload File!!!');
-                    $('.show-audio .fileuploader-action-remove').trigger("click");
+                    $('.audio-upload-error-show').html('Failed to upload File!!!');
+
+                    // alert('Failed to upload File!!!');
+                    $('.softsource-show-audio .fileuploader-action-remove').trigger("click");
                 }
             },
             onProgress: function (data, item) {
@@ -274,19 +283,13 @@ $(document).ready(function () {
             }
         },
         thumbnails: {
-//            onImageLoaded: function (item) {
-//                if (!item.html.find('.fileuploader-action-edit').length)
-//                    item.html.find('.fileuploader-action-remove').before('<button type="button" class="fileuploader-action fileuploader-action-popup fileuploader-action-edit" title="Edit"><i class="fileuploader-icon-edit"></i></button>');
-//                item.image.hide();
-//                item.popup.open();
-//            },
             onImageLoaded: function (item, listEl, parentEl, newInputEl, inputEl) {
-                $(".show-audio .fileuploader-action-remove").on("click", function (e)
+                $(".softsource-show-audio .fileuploader-action-remove").on("click", function (e)
                 {
                     item.remove(e);
 
                 })
-                $(".show-audio .fileuploader-input").addClass("disabled");
+                $(".softsource-show-audio .fileuploader-input").addClass("disabled");
 
             },
             popup: {
@@ -326,15 +329,11 @@ $(document).ready(function () {
                 '_token': $('meta[name="csrf-token"]').attr('content')
             });
             $('.' + attr_name).val("");
-            $(".show-audio .fileuploader-input").removeClass("disabled");
-            // console.log(inputEl)
-            // console.log(newInputEl)
-            // console.log(parentEl)
-            // console.log(listEl)
-            // console.log(e)
+            $(".softsource-show-audio .fileuploader-input").removeClass("disabled");
 
-
-
+            $('#audio_video_path').val('');
+            $('.audioconvert_div,.audio_video_credit_div').fadeOut(500);
+            $('#audio_video_credit').prop('required', false);
         }
     });
 });
