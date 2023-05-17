@@ -20,7 +20,7 @@
     <meta property="og:type" content="website" />
 
     <meta property="og:title" content="{{ $page_title }} | {{ config('app.name', 'SoftSource') }}" />
-    {{-- <meta property="og:url" content="<?= base_url() ?>" />
+    {{-- <meta property="og:url" content="" />
 	<meta property="og:site_name" content="Revenue Aid" />
 	<meta property="og:image" content="<?php echo base_url() . 'assets/webassets/images/Asset 1.png'; ?>" />
 	<meta property="og:description"

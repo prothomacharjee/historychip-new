@@ -195,15 +195,29 @@ class SiteController extends Controller
         ]);
     }
 
-    public function read_story()
+    public function read_story($slug = null)
     {
+        if ($slug) {
+            # code...
+            // $stories = Story::findOrFail(Auth::id())->load('user_profile');
+        }
+        else{
+            $stories = DB::table('stories as s')
+                ->join('pages as p', 's.id', '=', 'p.page_group_id')
+                ->select(DB::raw('s.*, p.id as page_id, p.name, p.url, p.page_title, p.meta_title, p.meta_keywords, p.meta_description'))
+                ->where('p.page_group', '=', 'story')
+                ->where(['s.status' => 1, 's.is_approved' => 1, 's.is_draft'=>0])
+                ->paginate(12);
+            $page_title = 'Read Stories';
+            $detail = false;
 
-        $user = User::findOrFail(Auth::id())->load('user_profile');
+        }
 
         return view('site.profile')->with([
-            'page_title' => 'Read Story',
+            'page_title' => $page_title,
             'notices' => $this->notices,
-
+            'stories' => $stories,
+            'detail' => $detail,
         ]);
     }
 
