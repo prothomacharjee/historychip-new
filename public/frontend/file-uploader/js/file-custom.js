@@ -212,7 +212,7 @@ $(document).ready(function () {
                 '<h3 class="fileuploader-input-caption"><span>Choose photo to upload</span></h3>' +
                 '<p>${captions.or}</p>' +
                 '<button type="button" class="fileuploader-input-button"><span>${captions.button}</span></button>' +
-                '<br><br><span><span class="required">*</span> Note: Audio or video ( MP3 or MP4 can be added) files can be uploaded here. </span>' +
+                '<br><br><span><span class="text-danger">*</span> Note: Audio or video ( MP3 or MP4 can be added) files can be uploaded here. </span>' +
                 '</div>' +
                 '</div>',
         theme: 'dragdrop',
@@ -336,7 +336,7 @@ $(document).ready(function () {
 
 
 
-            $('.' + attr_name).val("");
+            // $('.' + attr_name).val("");
             $(".softsource-show-audio .fileuploader-input").removeClass("disabled");
 
             $('#audio_video_path').val('');

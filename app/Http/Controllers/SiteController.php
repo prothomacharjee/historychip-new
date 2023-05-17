@@ -18,10 +18,11 @@ class SiteController extends Controller
 
     public function index()
     {
+        $categories = StoryCategory::where(['level' => 0, 'status' => 1])->get();
         return view('site.index')->with([
             'page_title' => 'Home',
             'notices' => $this->notices,
-            'categories' => [],
+            'categories' => $categories,
             'stories' => [],
         ]);
     }

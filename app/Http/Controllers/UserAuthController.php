@@ -82,7 +82,8 @@ class UserAuthController extends Controller
                 if (!$user) {
                     // Notify user that email is not registered
                     $this->incrementLoginAttempts($request);
-                    return redirect()->back()->with('error', "This Email is not registered in our system. <a href='route('register')'>Register Now</a>");
+
+                    return redirect()->back()->with('error', "This Email is not registered in our system.");
                 } else {
                     // Check if email is verified
                     if (!$user->hasVerifiedEmail()) {

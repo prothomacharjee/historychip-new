@@ -32,151 +32,72 @@
         </div>
     </div>
 
-    <section class="softsource-index-section2 py-5">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-md-6">
-                    <h4>Your donations will help History Chip raise the voices of all people all over the world,
-                        including those whose voices couldn't be heard before, while, at the same time, it fulfills
-                        its promise to provide more truth to history.</h4>
-                </div>
-                <div class="col-md-6 text-center">
-                    <p><a href="/donation" class="btn softsource-btn softsource-donation-btn">Donate Now</a></p>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <section class="softsource-index-section3">
+
+    <!-- Section 1: Daily Prompt Generator -->
+    <section class="bg-light py-5">
         <div class="container">
-            <div class="row align-items-center">
-                <div class="col-md-6 text-center">
-                    <h5>You are not ordinary,
-                        <br>you are extraordinary.
-                    </h5>
-                    <p>We invite people like you, extraordinary people from all walks of life, living in different
-                        places to share their life experiences.</p>
+            <div class="row">
+                <div class="col-md-8">
+                    <h2 class="mb-1">Daily Prompt Generator</h2>
+
+                    <div class="softsource-word-text-box d-flex">
+                        {{-- <textarea name="WordBox" id="wordbox" tabindex="0" rows="2"></textarea> --}}
+                        <div id="wordbox" class="softsource-wordbox"></div>
+                        <input type="hidden" value="0" id="word_index_prev" tabindex="-1">
+                        <input type="hidden" value="0" id="word_index_curr" tabindex="-1">
+                        <input type="BUTTON" value="GENERATE PROMPT" onclick="PickRandomWord();" id="button"
+                            class="softsource-writing-prompt-button" tabindex="1">
+                    </div>
+                    <button type="button" class="softsource-btn-direction backBtn"><i class="fa fa-arrow-left"
+                            aria-hidden="true"></i></button>
+                    <button type="button" class="softsource-btn-direction nextBtn"><i class="fa fa-arrow-right"
+                            aria-hidden="true"></i></button>
+
                 </div>
-                <div class="col-md-6 text-center">
-                    <p>Watch Video</p>
-                    <a onclick="PlayVideo_Index();" return="" false;" id="startPlayback" class="softsource-video-link">
-                        <img src="{{ asset('frontend/images/web_img/play-btn.png') }}" class="img-fluid">
-                    </a>
-                    <div class="softsource-h-video">
-                        <video id="softsource-pop-hc-video" width="750" height="560" controls="" class="d-none">
-                            <source type="video/mp4" src="{{ asset('frontend/videos/pop-hc.mp4') }}">
-                            Your browser does not support playing this Video
-                        </video>
-                        <span class="softsource-video-close d-none" onclick="PlayVideo_Index()"><i
-                                class="fa fa-xmark fa-sm"></i></span>
+                <div class="col-4 text-center">
+                    <div class="footer-box d-inline-block px-3 py-4">
+                        <div class="softsource-add-your-story-box softsource-btn-hover-transition">
+                            <a href="https://www.historychip.com/submitastory"
+                                class="softsource-add-your-story-box-btn softsource-btn-hover-transition">Add
+                                Your Story</a>
+                            <div class="softsource-add-story-link">
+                                <a title="Add with Audio" href="https://www.historychip.com/submitastory?type=audio"><i
+                                        class="fa fa-music" aria-hidden="true"></i></a>
+                                <a title="Add with Video" href="https://www.historychip.com/submitastory?type=audio"><i
+                                        class="fa fa-video" aria-hidden="true"></i></a>
+                                <a title="Add Only Text" href="https://www.historychip.com/submitastory?type=text"
+                                    class="music"><i class="fa fa-file" aria-hidden="true"></i></a>
+                            </div>
+                        </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </section>
 
-
-    <section class="softsource-index-section4">
+    <!-- Section 2: Featured Stories -->
+    <section class="py-5">
         <div class="container">
-            <div class="row">
-                <div class="col-12 text-center">
-                    <p>Our mission is to celebrate the stories of all humans and open up the world of human resilience,
-                        triumph, and everyday experiences to our readers and storytellers.</p>
-                    <!-- <h5>The stories we tell today are the success stories of yesterday. </h5> -->
-                    <a href="/about" class="softsource-learn-more mt-3">Learn More</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="softsource-index-section5">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-7 softsource-index-section5-left-part text-center">
-                    <h4>Our memories are fallible, <br>
-                        that's why we want your story to expand the truth of our world.</h4>
-                    <p>History Chip is your voice, your writing, your story and an essential part of the majestic
-                        history of our world.</p>
-                </div>
-                <div class="col-md-5 softsource-index-section5-right-part text-center">
-                    <img src="{{ asset('frontend/images/web_img/add-story-bg.jpg') }}" class="img-fluid w-100"
-                        alt="success stories">
-                    <a href="/submitastory" class="softsource-learn-more">Add Your Story</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="softsource-index-section6">
-        <div class="form-sec">
-            <label for="cars">Search Stories</label>
-            <form class="softsource-port-form" method="GET" action="">
-                <select class="softsource-custom-select softsource-select2" name='category' id="category" required="">
-                    <option selected="" value=""> - Search by category -</option>
-                    <?php
-                if (count($categories) > 0) {
-                    foreach ($categories as $category) {
-                        ?>
-                    <option value="<?php echo $category['category_name']; ?>" data-id="<?php echo $category['id']; ?>">
-                        <?php echo $category['category_name']; ?></option>
-                    <?php
-                    }
-                }
-                ?>
-                </select>
-                <select class="softsource-custom-select softsource-select2" name="sub_category" id="sub_category">
-                    <option selected="" value="">Choose a Sub-category</option>
-                </select>
-                <button class="softsource-btn softsource-port-cust-btn"><i
-                        class="flaticon-magnifying-glass"></i><span>Go</span></button>
-            </form>
-        </div>
-    </section>
-
-    <section class="py-0 softsource-index-section7">
-        <div class="container">
-
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                     <div class="section-title-wrap text-center mb-5">
-                        <h4 class="new-theme">Recent Story Chips</h4>
+                        <h2 class="new-theme">Featured Stories</h2>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-12">
                     <div class="row">
-                        <?php
-                        foreach ($stories as $story) {
 
-
-                            $headerImage = '';
-
-                            if (is_null($story->header_image_path) or $story->header_image_path == "") {
-                                $headerImage = "/assets/img/stories/Banner72pi2.jpg";
-                            } else {
-                                $headerImage = $story->header_image_path;
-                            }
-
-                            if ($story->anonymous || strcmp(env("STORY_LINK_TO_AUTHOR", "false"), "true") != 0) {
-                                $authorLink = $story->author;
-                            }
-
-                            $audioPath = null;
-                            $audioPath = null;
-                            if ($story->audio_relative_path) {
-                                $audioPath = asset($story->audio_relative_path);
-                            }
-                            ?>
                         <div class="col-lg-4 col-md-6 mt-0">
                             <!--======= Single Blog Item Start ========-->
                             <div class="softsource-single-blog-item blog-grid">
                                 <!-- Post Feature Start -->
                                 <div class="post-feature softsource-blog-thumbnail">
-                                    <a href="/stories/<?php echo $story->id; ?>">
-                                        <img class="img-fluid" src="<?php echo $headerImage; ?>" alt="<?php echo $story->title; ?>"
-                                            style="width: 370px;">
+                                    <a href="#">
+                                        <img class="img-fluid" src="{{ asset('frontend/images/web_img/demo.jpg') }}"
+                                            alt="Header Image" style="width: 370px;">
                                     </a>
                                 </div>
                                 <!-- Post Feature End -->
@@ -185,38 +106,41 @@
                                     <div class="post-meta">
                                         <div class="post-date">
                                             <span class="far fa-user meta-icon"></span>
-                                            <?php
-                                            if ($story->anonymous || strcmp(env('STORY_LINK_TO_AUTHOR', 'false'), 'true') != 0) {
-                                                $authorLink = $story->author;
-                                            }
-                                            ?>
-                                            <a href="/author/<?php echo $story->author_id; ?>"><?php echo $story->author; ?></a>
+                                            <a href="#">
+                                                Author Name
+                                            </a>
 
                                         </div>
                                         <div class="softsource-h-line"></div>
                                     </div>
                                     <h5 class="post-title font-weight--bold pt-3">
-                                        <a href="/stories/<?php echo $story->id; ?>"><?php echo strip_tags(substr($story->title, 0, 30)); ?></a>
+                                        <a href="#">
+                                            Story Title
+                                        </a>
                                     </h5>
                                     <div class="post-excerpt">
-                                        <p>
 
-                                        <p><?php echo strip_tags(substr(preg_replace('/<img[^>]+\>/i', '', $story->context), 0, 120)); ?>......
+                                        <p>
+                                            Lorem Ipsum is simply dummy text of the printing and typesetting
+                                            industry. Lorem Ipsum has been the industry's standard dummy text
+                                            ever since the 1500s, when an unknown printer took a galley of type
+                                            and scrambled it to make a type specimen book. It has survived not
+                                            only five centuries,......
                                         </p>
-                                        </p>
+
                                     </div>
 
                                     <div style="width: 100%; height: 33px;">
-                                        @if ($audioPath)
-                                            <audio style="width: 96%; height: 40px; margin-left: 2%; margin-right: 2%"
-                                                controls controlsList="nodownload">
-                                                <source src="{{ $audioPath }}">
-                                                Your browser does not support the audio element.
-                                            </audio>
-                                        @endif
+
+                                        <audio style="width: 96%; height: 40px; margin-left: 2%; margin-right: 2%" controls
+                                            controlsList="nodownload">
+                                            <source src="">
+                                            Your browser does not support the audio element.
+                                        </audio>
+
                                     </div>
                                     <div class="btn-text">
-                                        <a href="/stories/<?php echo $story->id; ?>">Read more
+                                        <a href="#">Read more
                                             <svg width="48" height="48" viewBox="0 0 48 48" fill="none"
                                                 xmlns="http://www.w3.org/2000/svg">
                                                 <path d="M10 24H38" stroke="#3D5762" stroke-width="0.7"
@@ -233,17 +157,485 @@
                             </div>
                             <!--===== Single Blog Item End =========-->
                         </div>
-                        <?php
-                        }
-                        ?>
+
+                        <div class="col-lg-4 col-md-6 mt-0">
+                            <!--======= Single Blog Item Start ========-->
+                            <div class="softsource-single-blog-item blog-grid">
+                                <!-- Post Feature Start -->
+                                <div class="post-feature softsource-blog-thumbnail">
+                                    <a href="#">
+                                        <img class="img-fluid" src="{{ asset('frontend/images/web_img/demo.jpg') }}"
+                                            alt="Header Image" style="width: 370px;">
+                                    </a>
+                                </div>
+                                <!-- Post Feature End -->
+                                <!-- Post info Start -->
+                                <div class="post-info lg-blog-post-info cust-story">
+                                    <div class="post-meta">
+                                        <div class="post-date">
+                                            <span class="far fa-user meta-icon"></span>
+
+                                            <a href="#">
+                                                Author Name
+                                            </a>
+
+                                        </div>
+                                        <div class="softsource-h-line"></div>
+                                    </div>
+                                    <h5 class="post-title font-weight--bold pt-3">
+                                        <a href="#">
+                                            Story Title
+                                        </a>
+                                    </h5>
+                                    <div class="post-excerpt">
+
+                                        <p>
+                                            Lorem Ipsum is simply dummy text of the printing and typesetting
+                                            industry. Lorem Ipsum has been the industry's standard dummy text
+                                            ever since the 1500s, when an unknown printer took a galley of type
+                                            and scrambled it to make a type specimen book. It has survived not
+                                            only five centuries,......
+                                        </p>
+
+                                    </div>
+
+                                    <div style="width: 100%; height: 33px;">
+
+                                        <audio style="width: 96%; height: 40px; margin-left: 2%; margin-right: 2%" controls
+                                            controlsList="nodownload">
+                                            <source src="">
+                                            Your browser does not support the audio element.
+                                        </audio>
+
+                                    </div>
+                                    <div class="btn-text">
+                                        <a href="#">Read more
+                                            <svg width="48" height="48" viewBox="0 0 48 48" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M10 24H38" stroke="#3D5762" stroke-width="0.7"
+                                                    stroke-linecap="round" stroke-linejoin="round" />
+                                                <path d="M30 32L38 24" stroke="#3D5762" stroke-width="0.7"
+                                                    stroke-linecap="round" stroke-linejoin="round" />
+                                                <path d="M30 16L38 24" stroke="#3D5762" stroke-width="0.7"
+                                                    stroke-linecap="round" stroke-linejoin="round" />
+                                            </svg>
+                                        </a>
+                                    </div>
+                                </div>
+                                <!-- Post info End -->
+                            </div>
+                            <!--===== Single Blog Item End =========-->
+                        </div>
+
+                        <div class="col-lg-4 col-md-6 mt-0">
+                            <!--======= Single Blog Item Start ========-->
+                            <div class="softsource-single-blog-item blog-grid">
+                                <!-- Post Feature Start -->
+                                <div class="post-feature softsource-blog-thumbnail">
+                                    <a href="#">
+                                        <img class="img-fluid" src="{{ asset('frontend/images/web_img/demo.jpg') }}"
+                                            alt="Header Image" style="width: 370px;">
+                                    </a>
+                                </div>
+                                <!-- Post Feature End -->
+                                <!-- Post info Start -->
+                                <div class="post-info lg-blog-post-info cust-story">
+                                    <div class="post-meta">
+                                        <div class="post-date">
+                                            <span class="far fa-user meta-icon"></span>
+
+                                            <a href="#">
+                                                Author Name
+                                            </a>
+
+                                        </div>
+                                        <div class="softsource-h-line"></div>
+                                    </div>
+                                    <h5 class="post-title font-weight--bold pt-3">
+                                        <a href="#">
+                                            Story Title
+                                        </a>
+                                    </h5>
+                                    <div class="post-excerpt">
+
+                                        <p>
+                                            Lorem Ipsum is simply dummy text of the printing and typesetting
+                                            industry. Lorem Ipsum has been the industry's standard dummy text
+                                            ever since the 1500s, when an unknown printer took a galley of type
+                                            and scrambled it to make a type specimen book. It has survived not
+                                            only five centuries,......
+                                        </p>
+
+                                    </div>
+
+                                    <div style="width: 100%; height: 33px;">
+
+                                        <audio style="width: 96%; height: 40px; margin-left: 2%; margin-right: 2%" controls
+                                            controlsList="nodownload">
+                                            <source src="">
+                                            Your browser does not support the audio element.
+                                        </audio>
+
+                                    </div>
+                                    <div class="btn-text">
+                                        <a href="#">Read more
+                                            <svg width="48" height="48" viewBox="0 0 48 48" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M10 24H38" stroke="#3D5762" stroke-width="0.7"
+                                                    stroke-linecap="round" stroke-linejoin="round" />
+                                                <path d="M30 32L38 24" stroke="#3D5762" stroke-width="0.7"
+                                                    stroke-linecap="round" stroke-linejoin="round" />
+                                                <path d="M30 16L38 24" stroke="#3D5762" stroke-width="0.7"
+                                                    stroke-linecap="round" stroke-linejoin="round" />
+                                            </svg>
+                                        </a>
+                                    </div>
+                                </div>
+                                <!-- Post info End -->
+                            </div>
+                            <!--===== Single Blog Item End =========-->
+                        </div>
                     </div>
                 </div>
+
                 <div class="section-under-heading text-center section-space--mt_40"></a></div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-12 text-center">
+                    <button class="softsource-btn softsource-port-cust-btn"><i
+                            class="flaticon-magnifying-glass"></i><span>READ MORE STORIES</span></button>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- Section 3: Search Stories -->
+    <section class="bg-light py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                    <div class="section-title-wrap text-center mb-5">
+                        <h2 class="new-theme">Search Stories</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 text-center">
+
+                    <form class="softsource-port-form d-flex" method="GET" action="">
+                        <select class="form-control softsource-custom-select story-category-select2" name='category_id'
+                            id="category_id" required="">
+                            <option value="">Please Select</option>
+                            @foreach ($categories as $category)
+                                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                            @endforeach
+
+                        </select>
+                        <select class="form-control softsource-custom-select story-category-select2" name="sub_category_id_level_1" id="sub_category_id_level_1" disabled>
+
+                        </select>
+                        <button class="softsource-btn softsource-port-cust-btn"><i
+                                class="flaticon-magnifying-glass"></i><span>Go</span></button>
+                    </form>
+
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-lg-2 col-md-2 ml-auto mr-auto">
+
+                </div>
+                <div class="col-md-4 col-md-4 ml-auto mr-auto mb-5">
+                    <div class="_form_15"></div>
+                    <script src="https://historychip.activehosted.com/f/embed.php?id=15" type="text/javascript" charset="utf-8"></script>
+                </div>
+                <div class="col-lg-4 col-md-4 ml-auto mr-auto mb-5">
+                    <img src="{{ asset('frontend/images/web_img/quick-easy.png') }}" alt="writing tips quick easy">
+                </div>
+                <div class="col-lg-2 col-md-2 ml-auto mr-auto">
+
+                </div>
+
+                <div class="col-md-12 text-center">
+                    <a class="softsource-btn btn-lg mt-4" href="{{ route('story.write') }}">Submit Your STORY</a>
+                    {{-- <button class="softsource-btn btn-lg mt-4">Submit Your STORY</button> --}}
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Section 4: Intro of History Chip -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8">
+                    <h2 class="mb-4">Intro of History Chip</h2>
+                    <p>History Chip is a place where EVERYONE, ANYWHERE, is invited to share true stories. It’s
+                        that
+                        simple! All of our stories together are the BIG PICTURE. That’s why I built this site,
+                        because
+                        EVERYBODY should be part of the story of our world. It’s like a huge library written by
+                        all of
+                        us. Join me and be part of the story!</p>
+                </div>
+                <div class="col-md-4 text-center">
+                    {{-- <button class="softsource-btn btn-lg mt-4">Submit Your STORY</button> --}}
+                    <a class="softsource-btn btn-lg mt-4" href="{{ route('story.write') }}">Submit Your STORY</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 5: Latest Blogs -->
+    <section class="bg-light py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                    <div class="section-title-wrap text-center mb-5">
+                        <h2 class="new-theme">Featured Blogs</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-12">
+                    <div class="row">
+
+                        <div class="col-lg-4 col-md-6 mt-0">
+                            <!--======= Single Blog Item Start ========-->
+                            <div class="softsource-single-blog-item blog-grid">
+                                <!-- Post Feature Start -->
+                                <div class="post-feature softsource-blog-thumbnail">
+                                    <a href="#">
+                                        <img class="img-fluid" src="{{ asset('frontend/images/web_img/demo.jpg') }}"
+                                            alt="Header Image" style="width: 370px;">
+                                    </a>
+                                </div>
+                                <!-- Post Feature End -->
+                                <!-- Post info Start -->
+                                <div class="post-info lg-blog-post-info cust-story">
+                                    <div class="post-meta">
+                                        <div class="post-date">
+                                            <span class="far fa-user meta-icon"></span>
+
+                                            <a href="#">
+                                                Author Name
+                                            </a>
+
+                                        </div>
+                                        <div class="softsource-h-line"></div>
+                                    </div>
+                                    <h5 class="post-title font-weight--bold pt-3">
+                                        <a href="#">
+                                            Blog Title
+                                        </a>
+                                    </h5>
+                                    <div class="post-excerpt">
+
+                                        <p>
+                                            Lorem Ipsum is simply dummy text of the printing and typesetting
+                                            industry. Lorem Ipsum has been the industry's standard dummy text
+                                            ever since the 1500s, when an unknown printer took a galley of type
+                                            and scrambled it to make a type specimen book. It has survived not
+                                            only five centuries,......
+                                        </p>
+
+                                    </div>
+
+                                    <div style="width: 100%; height: 33px;">
+
+                                        <audio style="width: 96%; height: 40px; margin-left: 2%; margin-right: 2%" controls
+                                            controlsList="nodownload">
+                                            <source src="">
+                                            Your browser does not support the audio element.
+                                        </audio>
+
+                                    </div>
+                                    <div class="btn-text">
+                                        <a href="#">Read more
+                                            <svg width="48" height="48" viewBox="0 0 48 48" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M10 24H38" stroke="#3D5762" stroke-width="0.7"
+                                                    stroke-linecap="round" stroke-linejoin="round" />
+                                                <path d="M30 32L38 24" stroke="#3D5762" stroke-width="0.7"
+                                                    stroke-linecap="round" stroke-linejoin="round" />
+                                                <path d="M30 16L38 24" stroke="#3D5762" stroke-width="0.7"
+                                                    stroke-linecap="round" stroke-linejoin="round" />
+                                            </svg>
+                                        </a>
+                                    </div>
+                                </div>
+                                <!-- Post info End -->
+                            </div>
+                            <!--===== Single Blog Item End =========-->
+                        </div>
+
+                        <div class="col-lg-4 col-md-6 mt-0">
+                            <!--======= Single Blog Item Start ========-->
+                            <div class="softsource-single-blog-item blog-grid">
+                                <!-- Post Feature Start -->
+                                <div class="post-feature softsource-blog-thumbnail">
+                                    <a href="#">
+                                        <img class="img-fluid" src="{{ asset('frontend/images/web_img/demo.jpg') }}"
+                                            alt="Header Image" style="width: 370px;">
+                                    </a>
+                                </div>
+                                <!-- Post Feature End -->
+                                <!-- Post info Start -->
+                                <div class="post-info lg-blog-post-info cust-story">
+                                    <div class="post-meta">
+                                        <div class="post-date">
+                                            <span class="far fa-user meta-icon"></span>
+
+                                            <a href="#">
+                                                Author Name
+                                            </a>
+
+                                        </div>
+                                        <div class="softsource-h-line"></div>
+                                    </div>
+                                    <h5 class="post-title font-weight--bold pt-3">
+                                        <a href="#">
+                                            Blog Title
+                                        </a>
+                                    </h5>
+                                    <div class="post-excerpt">
+
+                                        <p>
+                                            Lorem Ipsum is simply dummy text of the printing and typesetting
+                                            industry. Lorem Ipsum has been the industry's standard dummy text
+                                            ever since the 1500s, when an unknown printer took a galley of type
+                                            and scrambled it to make a type specimen book. It has survived not
+                                            only five centuries,......
+                                        </p>
+
+                                    </div>
+
+                                    <div style="width: 100%; height: 33px;">
+
+                                        <audio style="width: 96%; height: 40px; margin-left: 2%; margin-right: 2%" controls
+                                            controlsList="nodownload">
+                                            <source src="">
+                                            Your browser does not support the audio element.
+                                        </audio>
+
+                                    </div>
+                                    <div class="btn-text">
+                                        <a href="#">Read more
+                                            <svg width="48" height="48" viewBox="0 0 48 48" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M10 24H38" stroke="#3D5762" stroke-width="0.7"
+                                                    stroke-linecap="round" stroke-linejoin="round" />
+                                                <path d="M30 32L38 24" stroke="#3D5762" stroke-width="0.7"
+                                                    stroke-linecap="round" stroke-linejoin="round" />
+                                                <path d="M30 16L38 24" stroke="#3D5762" stroke-width="0.7"
+                                                    stroke-linecap="round" stroke-linejoin="round" />
+                                            </svg>
+                                        </a>
+                                    </div>
+                                </div>
+                                <!-- Post info End -->
+                            </div>
+                            <!--===== Single Blog Item End =========-->
+                        </div>
+
+                        <div class="col-lg-4 col-md-6 mt-0">
+                            <!--======= Single Blog Item Start ========-->
+                            <div class="softsource-single-blog-item blog-grid">
+                                <!-- Post Feature Start -->
+                                <div class="post-feature softsource-blog-thumbnail">
+                                    <a href="#">
+                                        <img class="img-fluid" src="{{ asset('frontend/images/web_img/demo.jpg') }}"
+                                            alt="Header Image" style="width: 370px;">
+                                    </a>
+                                </div>
+                                <!-- Post Feature End -->
+                                <!-- Post info Start -->
+                                <div class="post-info lg-blog-post-info cust-story">
+                                    <div class="post-meta">
+                                        <div class="post-date">
+                                            <span class="far fa-user meta-icon"></span>
+
+                                            <a href="#">
+                                                Author Name
+                                            </a>
+
+                                        </div>
+                                        <div class="softsource-h-line"></div>
+                                    </div>
+                                    <h5 class="post-title font-weight--bold pt-3">
+                                        <a href="#">
+                                            BLog Title
+                                        </a>
+                                    </h5>
+                                    <div class="post-excerpt">
+
+                                        <p>
+                                            Lorem Ipsum is simply dummy text of the printing and typesetting
+                                            industry. Lorem Ipsum has been the industry's standard dummy text
+                                            ever since the 1500s, when an unknown printer took a galley of type
+                                            and scrambled it to make a type specimen book. It has survived not
+                                            only five centuries,......
+                                        </p>
+
+                                    </div>
+
+                                    <div style="width: 100%; height: 33px;">
+
+                                        <audio style="width: 96%; height: 40px; margin-left: 2%; margin-right: 2%" controls
+                                            controlsList="nodownload">
+                                            <source src="">
+                                            Your browser does not support the audio element.
+                                        </audio>
+
+                                    </div>
+                                    <div class="btn-text">
+                                        <a href="#">Read more
+                                            <svg width="48" height="48" viewBox="0 0 48 48" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M10 24H38" stroke="#3D5762" stroke-width="0.7"
+                                                    stroke-linecap="round" stroke-linejoin="round" />
+                                                <path d="M30 32L38 24" stroke="#3D5762" stroke-width="0.7"
+                                                    stroke-linecap="round" stroke-linejoin="round" />
+                                                <path d="M30 16L38 24" stroke="#3D5762" stroke-width="0.7"
+                                                    stroke-linecap="round" stroke-linejoin="round" />
+                                            </svg>
+                                        </a>
+                                    </div>
+                                </div>
+                                <!-- Post info End -->
+                            </div>
+                            <!--===== Single Blog Item End =========-->
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="section-under-heading text-center section-space--mt_40"></a></div> -->
+                <div class="col-3"></div>
+                <div class="col-6 text-center mt-5">
+                    <form class="newsletter-form">
+                        <h3>Sign-up for our newsletter</h3>
+                        <div class="input-group mb-3 mt-2">
+                            <input type="email" class="form-control" placeholder="Email address" id="email"
+                                required>
+                            <button class="softsource-btn" type="submit">Subscribe</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-3"></div>
             </div>
         </div>
     </section>
 
     <script>
+            $(document).ready(function() {
+                $('.story-category-select2').select2({
+                    maximumSelectionLength: 3,
+                    placeholder: "Please Select"
+                });
+
+            });
+
         function stopTimer() {
             window.clearInterval(timerID);
         }
@@ -251,16 +643,15 @@
         function PlayVideo_Index() {
             if (whichState === 0) {
                 stopTimer();
-                $(".softsource-video-link .ht-popup-video.video-button").css( "display","none");
+                $(".softsource-video-link .ht-popup-video.video-button").css("display", "none");
                 $("#softsource-pop-hc-video").removeClass("d-none");
                 $("#softsource-pop-hc-video")[0].play();
                 whichState = 1;
                 $(".softsource-video-close").removeClass("d-none");
-            }
-            else {
+            } else {
                 $("#softsource-pop-hc-video")[0].pause();
                 $("#softsource-pop-hc-video").addClass("d-none");
-                $(".softsource-video-link .ht-popup-video.video-button").css("display","block");
+                $(".softsource-video-link .ht-popup-video.video-button").css("display", "block");
                 whichState = 0;
                 $(".softsource-video-close").addClass("d-none");
             }

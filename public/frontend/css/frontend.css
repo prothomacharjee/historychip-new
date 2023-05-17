@@ -2492,4 +2492,13 @@ input:checked+.softsource-slider-toggle:before {
     font-weight: 500;
 }
 
+.softsource-custom-select {
+    width: 200px;
+    font-size: 15px;
+    border-radius: 0px;
+    text-transform: capitalize;
+    cursor: pointer;
+    margin-right: 30px;
+    background: none;
+}
 

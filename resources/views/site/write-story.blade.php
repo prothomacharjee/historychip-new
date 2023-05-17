@@ -39,7 +39,7 @@
                     <button type="button"
                         class="softsource-write-story-btn my-2 px-4 softsource-show-action softsource-audio-text active">Both</button>
                 </div>
-                <form method="POST" name="submitStory" id="submitstory" action="{{ route('story.create') }}" novalidate
+                <form method="POST" name="submitStory" id="story_form" action="{{ route('story.create') }}" novalidate
                     class="row g-3 needs-validation" enctype="multipart/form-data">
                     @csrf
                     <input type="hidden" name="is_draft" id="is_draft"
@@ -246,7 +246,8 @@
                             <div class="col-md-12">
                                 <label for="" class="form-label">Audio/Video</label>
                                 <input type="file" name="story_audio_video" id="story_audio_video"
-                                    data-id="{{ route('story.deleteaudio') }}" data-fileuploader-files='{{ $preload }}'
+                                    data-id="{{ route('story.deleteaudio') }}"
+                                    data-fileuploader-files='{{ $preload }}'
                                     data-url="{{ route('story.saveaudio') }}" data-name="story">
                                 <div id="errorBlock" class="help-block"></div>
                                 <span class="text-danger audio-upload-error-show"></span>
@@ -279,6 +280,74 @@
                             </div>
                         </div>
 
+                        <div class="col-md-4 mt-3">
+                            <label for="event_location" class="form-label">Event Location <span
+                                    class="text-danger">*</span></label>
+                            <input type="text" class="form-control @error('event_location') is-invalid @enderror"
+                                id="event_location" name="event_location" placeholder="Event Location" required
+                                aria-describedby="validationEventLocationFeedback"
+                                value="{{ old('event_location') ? old('event_location') : (!empty($story->event_location) ? $story->event_location : null) }}">
+                            <span class="fa fa-question-circle field-icon" data-bs-toggle="popover"
+                                data-bs-placement="top" data-bs-trigger="hover"
+                                data-bs-content="Please be as specific as you are able. If you know the city and state where this story
+                                                      happened, please enter that (Austin, Texas, U.S.A.). If you only know the city or state and
+                                                      country enter that, (Johannesburg, South Africa). If you only know the country where this story
+                                                      happened, please enter the country (Japan)."></span>
+                            <div class="valid-feedback">Looks good!</div>
+                            <div class="invalid-feedback">You must enter an event location.</div>
+                            @error('event_location')
+                                <div id="validationEventLocationFeedback" class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <div class="col-md-4 mt-3">
+                            <label for="event_detail_dates" class="form-label">Event Period/Instance <span
+                                    class="text-danger">*</span></label>
+                            <input type="text" class="form-control @error('event_detail_dates') is-invalid @enderror"
+                                id="event_detail_dates" name="event_detail_dates" placeholder="Event Period/Instance"
+                                required aria-describedby="validationEventDetailsDateFeedback"
+                                value="{{ old('event_detail_dates') ? old('event_detail_dates') : (!empty($story->event_detail_dates) ? $story->event_detail_dates : null) }}">
+                            <span class="fa fa-question-circle field-icon" data-bs-toggle="popover"
+                                data-bs-placement="top" data-bs-trigger="hover"
+                                data-bs-content="If your story spans a period of time, be as specific as possible, for instance, Spring 2004, 1960s, 2001-2003."></span>
+                            <div class="valid-feedback">Looks good!</div>
+                            <div class="invalid-feedback">You must enter an event period or instances.</div>
+                            @error('event_detail_dates')
+                                <div id="validationEventDetailsDateFeedback" class="invalid-feedback">{{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+
+                        <div class="col-md-4 mt-3">
+                            <label for="event_dates" class="form-label">Event Date <span
+                                    class="text-danger">*</span></label>
+                            <input type="date" class="form-control @error('event_dates') is-invalid @enderror"
+                                id="event_dates" name="event_dates" placeholder="Event Date"
+                                aria-describedby="validationEventDateFeedback"
+                                value="{{ old('event_dates') ? old('event_dates') : (!empty($story->event_dates) ? $story->event_dates : null) }}">
+                            <span class="fa fa-question-circle field-icon" data-bs-toggle="popover"
+                                data-bs-placement="top" data-bs-trigger="hover"
+                                data-bs-content="If you know the exact date for your story add it here."></span>
+                            <div class="valid-feedback">Looks good!</div>
+                            {{-- <div class="invalid-feedback">You must enter an event location.</div> --}}
+                            @error('event_dates')
+                                <div id="validationEventDateFeedback" class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <div class="col-md-6 mt-5 softsource-tab-buttons">
+                            <button class="softsource-write-story-btn" type="submit">Save</button>
+                            <button class="softsource-write-story-btn" onclick="saveAsDraft()" type="button">Save as
+                                Draft</button>
+                            {{-- <button class="softsource-write-story-btn" type="reset">Reset</button> --}}
+                            <button class="softsource-write-story-btn" type="button">Preview</button>
+                        </div>
+
+                        <div class="col-md-6 mt-5 softsource-tab-buttons text-end">
+                            <a href="{{ route('my-stories') }}" class="softsource-write-story-btn">My Stories<i class="fa fa-angle-right"></i></a>
+
+                        </div>
+
 
 
                 </form>
@@ -296,7 +365,7 @@
 
             $("#context").summernote({
                 placeholder: "Tell the world your story...",
-                height: 400,
+                height: 530,
                 fullscreen: true,
                 toolbar: [
                     ['style', ['bold', 'italic', 'underline']],
@@ -379,7 +448,15 @@
 
         function saveAsDraft() {
             $('#is_draft').val('1');
-            $('#blog_form').submit();
+            $('#story_form').submit();
         }
+
+        function initAutocomplete() {
+            const input = document.getElementById('event_location');
+            const autocomplete = new google.maps.places.Autocomplete(input);
+        }
+    </script>
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDUt1OY_N0UIhT8fE6QKlmf5Zs94rCINZ0&libraries=places&callback=initAutocomplete">
     </script>
 @endsection
