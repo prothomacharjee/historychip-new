@@ -246,7 +246,7 @@
                             <div class="col-md-12">
                                 <label for="" class="form-label">Audio/Video</label>
                                 <input type="file" name="story_audio_video" id="story_audio_video"
-                                    data-id="{{ route('story.deleteaudio') }}" data-fileuploader-files=''
+                                    data-id="{{ route('story.deleteaudio') }}" data-fileuploader-files='{{ $preload }}'
                                     data-url="{{ route('story.saveaudio') }}" data-name="story">
                                 <div id="errorBlock" class="help-block"></div>
                                 <span class="text-danger audio-upload-error-show"></span>

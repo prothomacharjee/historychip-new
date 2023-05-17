@@ -38,6 +38,7 @@ return new class extends Migration
             $table->string('event_detail_dates')->nullable();
             $table->string('event_location')->nullable();
             $table->string('header_image_path')->nullable();
+            $table->string('header_image_alt_text')->nullable();
             $table->string('audio_video_path')->nullable();
 
             $table->longText('tags')->nullable();

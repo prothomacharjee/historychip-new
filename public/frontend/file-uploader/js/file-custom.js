@@ -322,12 +322,20 @@ $(document).ready(function () {
             },
         },
         onRemove: function (list, listEl, parentEl, newInputEl, inputEl, e) {
-            var attr_name = (inputEl.attr("data-attr-name")) ? inputEl.attr("data-attr-name") : 'file-saver';
+            //var attr_name = (inputEl.attr("data-attr-name")) ? inputEl.attr("data-attr-name") : 'file-saver';
             // console.log($('.' + attr_name).val());
+            // $.post(inputEl[0].dataset.id, {
+            //     'file': $('.' + attr_name).val(),
+            //     '_token': $('meta[name="csrf-token"]').attr('content')
+            // });
+
             $.post(inputEl[0].dataset.id, {
-                file: $('.' + attr_name).val(),
-                '_token': $('meta[name="csrf-token"]').attr('content')
-            });
+                file: list.name,
+                "_token": $('meta[name="csrf-token"]').attr('content'),
+            })
+
+
+
             $('.' + attr_name).val("");
             $(".softsource-show-audio .fileuploader-input").removeClass("disabled");
 

@@ -60,6 +60,7 @@ Route::get('/password/reset', [UserAuthController::class, 'showResetPasswordForm
 Route::get('/profile', [SiteController::class, 'profile'])->name('profile');
 Route::get('/my-stories', [SiteController::class, 'my_stories'])->name('my-stories');
 
+//Sites
 Route::get('/', [SiteController::class, 'index'])->name('home');
 Route::get('/about', [SiteController::class, 'about'])->name('about');
 Route::get('/founder', [SiteController::class, 'founder'])->name('founder');
@@ -72,22 +73,22 @@ Route::get('/writing-prompts', [SiteController::class, 'writingprompt'])->name('
 Route::get('/blogs/{slug?}', [SiteController::class, 'blogs'])->name('blogs');
 Route::get('/partners/{slug?}', [SiteController::class, 'partners'])->name('partners');
 Route::get('/stories/{slug?}', [SiteController::class, 'read_story'])->name('story.read');
-Route::get('/write-story/{slug?}', [SiteController::class, 'write_story'])->name('story.write');
+
+Route::get('/write-story/{slug?}', [SiteController::class, 'write_story'])->name('story.write')->middleware('auth');
+
+
+Route::post('/save-image', [SiteController::class, 'saveimage'])->name('story.saveimage')->middleware('auth');
+Route::post('/delete-image', [SiteController::class, 'deleteimage'])->name('story.deleteimage')->middleware('auth');
+Route::post('/save-audio', [SiteController::class, 'saveaudio'])->name('story.saveaudio')->middleware('auth');
+Route::post('/delete-audio', [SiteController::class, 'deleteaudio'])->name('story.deleteaudio')->middleware('auth');
+
+Route::post('/subcat-by-parentcat', [SiteController::class, 'FetchSubCatByParentCategory'])->name('story.subCatByParentCategory')->middleware('auth');
 
 
 
-Route::post('/save-image', [SiteController::class, 'saveimage'])->name('story.saveimage');
-Route::post('/delete-image', [SiteController::class, 'deleteimage'])->name('story.deleteimage');
-Route::post('/save-audio', [SiteController::class, 'saveaudio'])->name('story.saveaudio');
-Route::post('/delete-audio', [SiteController::class, 'deleteaudio'])->name('story.deleteaudio');
+Route::post('/getwritingprompts', [WritingPromptController::class, 'getwritingprompts'])->name('writing-prompts.get')->middleware('auth');
 
-Route::post('/subcat-by-parentcat', [SiteController::class, 'FetchSubCatByParentCategory'])->name('story.subCatByParentCategory');
-
-
-
-Route::post('/getwritingprompts', [WritingPromptController::class, 'getwritingprompts'])->name('writing-prompts.get');
-
-Route::post('/story/create', [StoryController::class, 'store'])->name('story.create');
+Route::post('/story/create', [StoryController::class, 'store'])->name('story.create')->middleware('auth');
 
 // ADMIN PANEL
 

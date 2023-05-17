@@ -261,6 +261,7 @@ class SiteController extends Controller
 
     public function deleteaudio()
     {
+
         return SoftSourceHelper::DeleteAudioBYFileUploader($_POST['file']);
     }
 
