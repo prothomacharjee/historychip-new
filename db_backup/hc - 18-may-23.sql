@@ -54,7 +54,7 @@ CREATE TABLE IF NOT EXISTS `contacts` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table historychip_new.contacts: ~1 rows (approximately)
+-- Dumping data for table historychip_new.contacts: ~0 rows (approximately)
 INSERT INTO `contacts` (`id`, `name`, `email`, `message`, `is_read`, `is_replied`, `replied_message`, `replied_at`, `replied_by`, `created_at`, `updated_at`) VALUES
 	(2, 'pro', 'pro@gmail.com', 'testt', 0, 0, NULL, NULL, NULL, '2023-04-09 15:47:24', '2023-04-09 15:47:25');
 
@@ -162,16 +162,16 @@ CREATE TABLE IF NOT EXISTS `partners` (
   `banner_alt_text` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `description` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `short_description` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `short_description` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `logo` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `top_image` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `top_image` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `status` tinyint NOT NULL DEFAULT '1',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table historychip_new.partners: ~1 rows (approximately)
+-- Dumping data for table historychip_new.partners: ~0 rows (approximately)
 INSERT INTO `partners` (`id`, `partner_type_id`, `uuid`, `name`, `email`, `banner`, `banner_alt_text`, `title`, `description`, `short_description`, `logo`, `top_image`, `status`, `created_at`, `updated_at`) VALUES
 	(3, 1, '2d739f8f-11de-42e4-b823-60af5f438fd0', 'Testy', 'pro@pro.com', '/storage/backend/partner/banner/1683569312.jpg', 'Tes banner', 'What is Lorem Ipsum?', '<p><strong style="margin: 0px; padding: 0px; font-family: &quot;Open Sans&quot;, Arial, sans-serif; letter-spacing: normal; text-align: justify;">Lorem Ipsum</strong><span style="font-family: &quot;Open Sans&quot;, Arial, sans-serif; letter-spacing: normal; text-align: justify;">&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s</span><br></p>', 'In these stories you will read about friendships, love, despair, disappointments, successes, crushes, sports, fashion, schoolwork, and teachers.\r\n\r\nThese stories are recollections of Yorktown Public High School as told by alumni (students and teachers) of Yorktown.', '/storage/backend/partner/logo/1683569312.png', '/storage/backend/partner/top-image/1683654913.jpg', 1, '2023-05-08 18:08:32', '2023-05-09 17:55:14');
 
@@ -270,27 +270,29 @@ CREATE TABLE IF NOT EXISTS `sessions` (
 -- Dumping structure for table historychip_new.stories
 CREATE TABLE IF NOT EXISTS `stories` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `category_id` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `sub_category_id_level_1` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `sub_category_id_level_2` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `sub_category_id_level_3` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `category_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `sub_category_id_level_1` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `sub_category_id_level_2` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `sub_category_id_level_3` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `author_id` bigint unsigned NOT NULL,
-  `author_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `context` longtext COLLATE utf8mb4_unicode_ci,
+  `author_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `context` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `edit_count` int NOT NULL DEFAULT '0',
   `photo_credit` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `audio_video_credit` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `is_anonymous` tinyint NOT NULL DEFAULT '0',
   `is_draft` tinyint NOT NULL DEFAULT '0',
   `is_approved` tinyint NOT NULL DEFAULT '0',
+  `is_featured` tinyint NOT NULL DEFAULT '0',
   `is_audioconvert` tinyint NOT NULL DEFAULT '0',
-  `event_dates` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `event_detail_dates` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `event_location` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `header_image_path` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `event_dates` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `event_detail_dates` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `event_location` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `header_image_path` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `header_image_alt_text` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `audio_video_path` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `tags` longtext COLLATE utf8mb4_unicode_ci,
+  `tags` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `status` tinyint NOT NULL DEFAULT '1',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
@@ -304,8 +306,8 @@ CREATE TABLE IF NOT EXISTS `stories` (
 -- Dumping structure for table historychip_new.story_categories
 CREATE TABLE IF NOT EXISTS `story_categories` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `description` text COLLATE utf8mb4_unicode_ci,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `level` tinyint unsigned NOT NULL DEFAULT '0',
   `parent_id` bigint unsigned DEFAULT NULL,
   `status` tinyint NOT NULL DEFAULT '1',
@@ -337,7 +339,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   UNIQUE KEY `users_email_unique` (`email`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table historychip_new.users: ~1 rows (approximately)
+-- Dumping data for table historychip_new.users: ~0 rows (approximately)
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
 	(6, 'Prothom Acharjee', 'peculiarprothom@gmail.com', NULL, '$2y$10$beFCxfyNrC.phcFH19loYO2Ow7pv8HTllNtds.hxqRNhsZHm9G2nW', NULL, '2023-05-03 19:01:18', '2023-05-03 19:01:18');
 
@@ -368,7 +370,7 @@ CREATE TABLE IF NOT EXISTS `user_profiles` (
   CONSTRAINT `user_profiles_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table historychip_new.user_profiles: ~1 rows (approximately)
+-- Dumping data for table historychip_new.user_profiles: ~0 rows (approximately)
 INSERT INTO `user_profiles` (`id`, `user_id`, `partner_id`, `pen_name`, `city`, `state`, `country`, `bio`, `dob`, `phone`, `image`, `facebook_page_link`, `twitter_page_link`, `linkedin_page_link`, `instagram_page_link`, `is_pic_public`, `is_social_media_public`, `is_bio_public`, `created_at`, `updated_at`) VALUES
 	(4, 6, NULL, 'prothom', 'ctg', 'ctg', 'bd', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, '2023-05-03 19:01:18', '2023-05-03 19:01:18');
 
