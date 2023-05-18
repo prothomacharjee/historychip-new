@@ -2,6 +2,9 @@
 
 @section('content')
     @php
+
+        $type = isset($_GET['type']) ? $_GET['type'] : null;
+
         $preload = '';
         $category_id = old('category_id') ? old('category_id') : (!empty($story->category_id) ? $story->category_id : []);
         $sub_category_id_level_1 = old('sub_category_id_level_1') ? old('sub_category_id_level_1') : (!empty($story->sub_category_id_level_1) ? $story->sub_category_id_level_1 : []);
@@ -59,7 +62,21 @@
                                 value="">
                         </div>
 
-                        <div class="col-12 photo_credit_div" style="display:none">
+                        <div class="col-6 photo_credit_div" style="display:none">
+                            <label for="header_image_alt_text" class="form-label">Banner Alter Text <span
+                                    class="text-danger">*</span></label>
+                            <input type="text" class="form-control @error('header_image_alt_text') is-invalid @enderror"
+                                id="header_image_alt_text" name="header_image_alt_text" placeholder="Enter an alternative text for the banenr"
+                                aria-describedby="validationPhotoAltCreditFeedback"
+                                value="{{ old('header_image_alt_text') ? old('header_image_alt_text') : (!empty($story->header_image_alt_text) ? $story->header_image_alt_text : null) }}">
+                            <div class="valid-feedback">Looks good!</div>
+                            <div class="invalid-feedback">You must enter an alternative text for the banenr.</div>
+                            @error('header_image_alt_text')
+                                <div id="validationPhotoAltCreditFeedback" class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <div class="col-6 photo_credit_div" style="display:none">
                             <label for="photo_credit" class="form-label">Photo Credit <span
                                     class="text-danger">*</span></label>
                             <input type="text" class="form-control @error('photo_credit') is-invalid @enderror"
@@ -108,8 +125,8 @@
                         <div class="col-md-4">
                             <label for="tags" class="form-label">Story Tags (Max 15 tags allowed)</label>
                             <input type="text"
-                                class="form-control @error('tags') is-invalid @enderror softsource-tag-input" id="tags"
-                                name="tags" placeholder="Enter Meta Keywords" data-role="tagsinput"
+                                class="form-control @error('tags') is-invalid @enderror softsource-tag-input"
+                                id="tags" name="tags" placeholder="Enter Meta Keywords" data-role="tagsinput"
                                 value="{{ old('tags') ? old('tags') : (!empty($story->tags) ? $story->tags : null) }}">
                             <span class="fa fa-question-circle field-icon" data-bs-toggle="popover"
                                 data-bs-placement="top" data-bs-trigger="hover"
@@ -344,7 +361,8 @@
                         </div>
 
                         <div class="col-md-6 mt-5 softsource-tab-buttons text-end">
-                            <a href="{{ route('my-stories') }}" class="softsource-write-story-btn">My Stories<i class="fa fa-angle-right"></i></a>
+                            <a href="{{ route('my-stories') }}" class="softsource-write-story-btn">My Stories<i
+                                    class="fa fa-angle-right"></i></a>
 
                         </div>
 
@@ -358,6 +376,11 @@
 
     <script>
         $(document).ready(function() {
+            let type = {{ $type }};
+            if (type) {
+                $("#" + type).trigger("click");
+            }
+
             $('.story-category-select2').select2({
                 maximumSelectionLength: 3,
                 placeholder: "Please Select"

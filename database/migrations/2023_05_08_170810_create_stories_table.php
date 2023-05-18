@@ -33,6 +33,7 @@ return new class extends Migration
             $table->tinyInteger('is_approved')->default(0);
             $table->tinyInteger('is_draft')->default(0);
             $table->tinyInteger('is_audioconvert')->default(0);
+            $table->tinyInteger('is_featured')->default(0);
 
             $table->string('event_dates')->nullable();
             $table->string('event_detail_dates')->nullable();

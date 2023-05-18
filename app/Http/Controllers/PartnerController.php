@@ -88,7 +88,7 @@ class PartnerController extends Controller
             $meta->meta_title = $req_meta['meta_title'];
             $meta->meta_keywords = $req_meta['meta_keywords'];
             $meta->meta_description = $req_meta['meta_description'];
-            $meta->og_author = Auth::id();
+            $meta->og_author = Auth::user()->name;
             $meta->status = $req_partner['status'];
 
 
