@@ -89,6 +89,7 @@ Route::post('/subcat-by-parentcat', [SiteController::class, 'FetchSubCatByParent
 Route::post('/getwritingprompts', [WritingPromptController::class, 'getwritingprompts'])->name('writing-prompts.get')->middleware('auth');
 
 Route::post('/story/create', [StoryController::class, 'store'])->name('story.create')->middleware('auth');
+Route::post('/story/comment', [StoryController::class, 'save_comment'])->name('story.comment')->middleware('auth');
 
 // ADMIN PANEL
 

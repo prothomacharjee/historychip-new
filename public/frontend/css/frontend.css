@@ -90,8 +90,6 @@ input[type="checkbox"] {
     cursor: pointer;
 }
 
-
-
 form input:focus::-webkit-input-placeholder {
     color: transparent;
 }
@@ -192,7 +190,7 @@ form .form-group {
     color: #556f7c !important;
 }
 
-.active>.page-link {
+.active > .page-link {
     color: #ffffff !important;
     background-color: #556f7c !important;
 }
@@ -211,7 +209,6 @@ form .form-group {
     user-select: none;
     /* Non-prefixed version, currently supported by most modern browsers */
 }
-
 
 .softsource-selectable {
     -webkit-user-select: auto;
@@ -304,7 +301,7 @@ form .form-group {
     margin-left: 55px;
 }
 
-.softsource-header-logo>a img {
+.softsource-header-logo > a img {
     width: 100%;
 }
 
@@ -388,14 +385,14 @@ form .form-group {
     margin-top: -8px;
 }
 
-.softsource-nav-menus>li.nav-item {
+.softsource-nav-menus > li.nav-item {
     padding-left: 24px;
     padding-right: 24px;
     margin: 0;
     position: relative;
 }
 
-.softsource-nav-menus>li.nav-item::after {
+.softsource-nav-menus > li.nav-item::after {
     content: "";
     display: inline-block;
     background-color: #fff;
@@ -406,7 +403,7 @@ form .form-group {
     right: 0;
 }
 
-.softsource-nav-menus>li.nav-item:last-child::after {
+.softsource-nav-menus > li.nav-item:last-child::after {
     content: none;
 }
 
@@ -439,7 +436,7 @@ form .form-group {
     width: 90%;
 }
 
-.softsource-nav-menus .softsource-nav-main-menu>span {
+.softsource-nav-menus .softsource-nav-main-menu > span {
     position: relative;
     transition: all 0.2s ease-in-out;
 }
@@ -488,13 +485,13 @@ form .form-group {
     margin: 0;
 }
 
-.softsource-submenu>li {
+.softsource-submenu > li {
     position: relative;
     border-bottom: 1px solid #fff;
     padding-bottom: 5px;
 }
 
-.softsource-submenu>li>a {
+.softsource-submenu > li > a {
     display: block;
     padding: 5px 20px;
     color: #aabdc3;
@@ -504,12 +501,12 @@ form .form-group {
     transition: 0s;
 }
 
-.softsource-submenu>li>a>span {
+.softsource-submenu > li > a > span {
     position: relative;
     font-size: 14px;
 }
 
-.softsource-submenu>li>a>span:after {
+.softsource-submenu > li > a > span:after {
     content: "";
     width: 0;
     height: 1px;
@@ -524,7 +521,7 @@ form .form-group {
     transition: 0.3s;
 }
 
-.softsource-has-children:hover>.softsource-submenu {
+.softsource-has-children:hover > .softsource-submenu {
     -webkit-transform: translateY(0);
     -ms-transform: translateY(0);
     transform: translateY(0);
@@ -532,11 +529,11 @@ form .form-group {
     opacity: 1;
 }
 
-.softsource-submenu>li>a:hover {
+.softsource-submenu > li > a:hover {
     color: #778b91;
 }
 
-.softsource-submenu>li>a:hover>span:after {
+.softsource-submenu > li > a:hover > span:after {
     width: 100%;
     left: 0;
     right: auto;
@@ -977,7 +974,9 @@ form .form-group {
     padding: 0;
 }
 
-.softsource-index-section5 .softsource-index-section5-right-part .softsource-learn-more {
+.softsource-index-section5
+    .softsource-index-section5-right-part
+    .softsource-learn-more {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -1040,7 +1039,7 @@ form .form-group {
     line-height: 10px;
 }
 
-.softsource-port-form>.select2-container .select2-selection--single {
+.softsource-port-form > .select2-container .select2-selection--single {
     height: 47px;
     border-radius: 0;
 }
@@ -1057,7 +1056,7 @@ form .form-group {
     text-align: center;
 }
 
-.softsource-blog-thumbnail a>img {
+.softsource-blog-thumbnail a > img {
     box-shadow: 1px 6px 20px 0px rgb(221 221 221);
 }
 
@@ -1225,19 +1224,31 @@ form .form-group {
     pointer-events: none;
 }
 
-.softsource-about-video-link .softsource-video-button .softsource-video-mark .wave-pulse {
+.softsource-about-video-link
+    .softsource-video-button
+    .softsource-video-mark
+    .wave-pulse {
     width: 1px;
     height: 0;
     margin: 0 auto;
 }
 
-.softsource-about-video-link .softsource-video-button .softsource-video-mark .wave-pulse::before {
+.softsource-about-video-link
+    .softsource-video-button
+    .softsource-video-mark
+    .wave-pulse::before {
     -webkit-animation-delay: 0.75s !important;
     animation-delay: 0.75s !important;
 }
 
-.softsource-about-video-link .softsource-video-button .softsource-video-mark .wave-pulse::before,
-.softsource-about-video-link .softsource-video-button .softsource-video-mark .wave-pulse::after {
+.softsource-about-video-link
+    .softsource-video-button
+    .softsource-video-mark
+    .wave-pulse::before,
+.softsource-about-video-link
+    .softsource-video-button
+    .softsource-video-mark
+    .wave-pulse::after {
     opacity: 0;
     content: "";
     display: block;
@@ -1263,7 +1274,10 @@ form .form-group {
     transform: translate(-50%, -50%);
 }
 
-.softsource-about-video-link .softsource-video-button .video-button__two .video-play {
+.softsource-about-video-link
+    .softsource-video-button
+    .video-button__two
+    .video-play {
     width: 78px;
     height: 78px;
     background: #778b91;
@@ -1277,7 +1291,10 @@ form .form-group {
     box-shadow: 0 20px 30px rgba(255, 255, 255, 0.45);
 }
 
-.softsource-about-video-link .softsource-video-button .video-button__two .video-play-icon {
+.softsource-about-video-link
+    .softsource-video-button
+    .video-button__two
+    .video-play-icon {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -1290,7 +1307,10 @@ form .form-group {
     letter-spacing: 3px;
 }
 
-.softsource-about-video-link .softsource-video-button .video-button__two .video-play-icon::before {
+.softsource-about-video-link
+    .softsource-video-button
+    .video-button__two
+    .video-play-icon::before {
     content: "";
     position: absolute;
     top: 0;
@@ -1383,7 +1403,8 @@ form .form-group {
 }
 
 .softsource-founder-section {
-    background: url(../images/patterns/mitech-home-infotechno-section-company-bg.png) top 140px left no-repeat,
+    background: url(../images/patterns/mitech-home-infotechno-section-company-bg.png)
+            top 140px left no-repeat,
         -webkit-linear-gradient(top, #fff 0, #f5f5f5 100%);
 }
 
@@ -1604,17 +1625,30 @@ form .form-group {
     border-bottom-right-radius: 0;
 }
 
-.softsource-faq-accordion-wrapper .card-header h5 button[aria-expanded="true"] span i:nth-child(2) {
+.softsource-faq-accordion-wrapper
+    .card-header
+    h5
+    button[aria-expanded="true"]
+    span
+    i:nth-child(2) {
     visibility: visible;
     opacity: 1;
     display: inline;
 }
 
-.softsource-faq-accordion-wrapper .card-header h5 button[aria-expanded="true"]:before {
+.softsource-faq-accordion-wrapper
+    .card-header
+    h5
+    button[aria-expanded="true"]:before {
     height: 100%;
 }
 
-.softsource-faq-accordion-wrapper .card-header h5 button[aria-expanded="false"] span i:nth-child(1) {
+.softsource-faq-accordion-wrapper
+    .card-header
+    h5
+    button[aria-expanded="false"]
+    span
+    i:nth-child(1) {
     visibility: visible;
     opacity: 1;
     display: inline;
@@ -1873,8 +1907,10 @@ form .form-group {
 }
 
 .softsource-writingprompt-share {
-    background-image: linear-gradient(rgba(50, 68, 76, 0.76),
-            rgba(85, 111, 124, 0.91)),
+    background-image: linear-gradient(
+            rgba(50, 68, 76, 0.76),
+            rgba(85, 111, 124, 0.91)
+        ),
         url(../images/web_img/wanttoshare.png);
     background-position: center;
     background-size: cover;
@@ -2247,7 +2283,7 @@ form .form-group {
     flex: 1;
 }
 
-.softsource-profile-details .softsource-media-body>.row {
+.softsource-profile-details .softsource-media-body > .row {
     padding: 10px 0;
 }
 
@@ -2328,15 +2364,15 @@ input[type="checkbox"] {
     border-radius: 50%;
 }
 
-input:checked+.softsource-slider-toggle {
+input:checked + .softsource-slider-toggle {
     background-color: #2196f3;
 }
 
-input:focus+.softsource-slider-toggle {
+input:focus + .softsource-slider-toggle {
     box-shadow: 0 0 1px #2196f3;
 }
 
-input:checked+.softsource-slider-toggle:before {
+input:checked + .softsource-slider-toggle:before {
     -webkit-transform: translateX(26px);
     -ms-transform: translateX(26px);
     transform: translateX(26px);
@@ -2431,7 +2467,7 @@ input:checked+.softsource-slider-toggle:before {
 }
 
 .softsource-story-item-details {
-    background: #F6F5FF;
+    background: #f6f5ff;
     padding: 20px;
     padding-top: 10px;
     position: relative;
@@ -2472,7 +2508,7 @@ input:checked+.softsource-slider-toggle:before {
     font-size: 18px;
 }
 
-.softsource-story-item-details .story-excerpt{
+.softsource-story-item-details .story-excerpt {
     word-wrap: break-word;
 }
 
@@ -2492,6 +2528,16 @@ input:checked+.softsource-slider-toggle:before {
     font-weight: 500;
 }
 
+.softsource-story-item-details:hover {
+    background: #3d5762;
+    color: #fff;
+}
+
+.softsource-story-item-details:hover h5,
+.softsource-story-item-details:hover a {
+    color: #fff;
+}
+
 .softsource-custom-select {
     width: 200px;
     font-size: 15px;
@@ -2502,3 +2548,26 @@ input:checked+.softsource-slider-toggle:before {
     background: none;
 }
 
+.softsource-story-section {
+    position: relative;
+    margin-top: -100px;
+}
+
+.softsource-individual-story-text {
+    /* white-space: pre-line; */
+    text-align: justify;
+    word-wrap: break-word;
+}
+
+.softsource-btn-social {
+    display: block;
+    height: 45px;
+    width: 45px;
+    border-radius: 50%;
+    border: none;
+    background-color: transparent;
+}
+
+.softsource-story-border-bottom {
+    border-bottom: 1px solid rgb(193, 193, 193) !important;
+}

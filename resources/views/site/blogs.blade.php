@@ -113,6 +113,18 @@
                         @endforeach
                     @endif
                 </div>
+                @if (count($blogs) > 0)
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 text-center">
+                            <div style="width: 280px;margin: 0 auto;" class="d-flex justify-content-center pagination">
+                                @csrf
+                                {!! $blogs->links() !!}
+                            </div>
+                        </div>
+                    </div>
+                @endif
+
+
             @endif
 
         </div>

@@ -29,6 +29,47 @@
         </div>
     </div>
 
+    <div class="row">
+        <div class="col-12">
+            @if (session('success'))
+                <div class="alert border-0 border-start border-5 border-success alert-dismissible fade show py-2">
+                    <div class="d-flex align-items-center">
+                        <div class="font-35 text-success"><i class='bx bxs-check-circle'></i>
+                        </div>
+                        <div class="ms-3">
+                            <h6 class="mb-0 text-success">{{ session('success') }}</h6>
+                        </div>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
+            @if (session('error'))
+                <div class="alert border-0 border-start border-5 border-danger alert-dismissible fade show py-2">
+                    <div class="d-flex align-items-center">
+                        <div class="font-35 text-danger"><i class='bx bxs-message-square-x'></i>
+                        </div>
+                        <div class="ms-3">
+                            <h6 class="mb-0 text-danger">{{ session('error') }}</h6>
+                        </div>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
+            @if (session('info'))
+                <div class="alert border-0 border-start border-5 border-info alert-dismissible fade show py-2">
+                    <div class="d-flex align-items-center">
+                        <div class="font-35 text-info"><i class='bx bx-info-square'></i>
+                        </div>
+                        <div class="ms-3">
+                            <h6 class="mb-0 text-info">{{ session('info') }}</h6>
+                        </div>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
+        </div>
+    </div>
+
     <div class="softsource-write-story-submit-section pt-3">
         <div class="container">
             <div class="container softsource-write-story-col-container my-5">
@@ -42,11 +83,11 @@
                     <button type="button"
                         class="softsource-write-story-btn my-2 px-4 softsource-show-action softsource-audio-text active">Both</button>
                 </div>
-                <form method="POST" name="submitStory" id="story_form" action="{{ route('story.create') }}" novalidate
-                    class="row g-3 needs-validation" enctype="multipart/form-data">
+                <form class="row g-3 needs-validation" method="post" novalidate action="{{ route('story.create') }}"
+                    id="story_form" enctype="multipart/form-data">
                     @csrf
                     <input type="hidden" name="is_draft" id="is_draft"
-                        value="{{ old('is_draft') ? old('is_draft') : (!empty($partner->is_draft) ? $partner->is_draft : null) }}" />
+                        value="{{ old('is_draft') ? old('is_draft') : (!empty($partner->is_draft) ? $partner->is_draft : 0) }}" />
 
                     <div class="row pt-3">
                         <div class="col-12">
@@ -62,11 +103,12 @@
                                 value="">
                         </div>
 
-                        <div class="col-6 photo_credit_div" style="display:none">
+                        <div class="col-6 photo_credit_div mt-3" style="display:none">
                             <label for="header_image_alt_text" class="form-label">Banner Alter Text <span
                                     class="text-danger">*</span></label>
                             <input type="text" class="form-control @error('header_image_alt_text') is-invalid @enderror"
-                                id="header_image_alt_text" name="header_image_alt_text" placeholder="Enter an alternative text for the banenr"
+                                id="header_image_alt_text" name="header_image_alt_text"
+                                placeholder="Enter an alternative text for the banenr"
                                 aria-describedby="validationPhotoAltCreditFeedback"
                                 value="{{ old('header_image_alt_text') ? old('header_image_alt_text') : (!empty($story->header_image_alt_text) ? $story->header_image_alt_text : null) }}">
                             <div class="valid-feedback">Looks good!</div>
@@ -76,7 +118,7 @@
                             @enderror
                         </div>
 
-                        <div class="col-6 photo_credit_div" style="display:none">
+                        <div class="col-6 photo_credit_div mt-3" style="display:none">
                             <label for="photo_credit" class="form-label">Photo Credit <span
                                     class="text-danger">*</span></label>
                             <input type="text" class="form-control @error('photo_credit') is-invalid @enderror"
@@ -90,11 +132,12 @@
                             @enderror
                         </div>
 
-                        <div class="col-4">
+                        <div class="col-4 mt-3">
 
                             <label for="title" class="form-label">Title <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control @error('title') is-invalid @enderror" id="title"
-                                name="title" placeholder="Title" aria-describedby="validationTitleFeedback"
+                            <input type="text" class="form-control @error('title') is-invalid @enderror"
+                                id="title" name="title" placeholder="Title"
+                                aria-describedby="validationTitleFeedback"
                                 value="{{ old('title') ? old('title') : (!empty($story->title) ? $story->title : null) }}"
                                 required>
                             <div class="valid-feedback">Looks good!</div>
@@ -104,7 +147,7 @@
                             @enderror
                         </div>
 
-                        <div class="col-md-4">
+                        <div class="col-md-4 mt-3">
 
                             <label for="author_name" class="form-label">A Story by <span
                                     class="text-danger">*</span></label>
@@ -122,7 +165,7 @@
 
                         </div>
 
-                        <div class="col-md-4">
+                        <div class="col-md-4 mt-3">
                             <label for="tags" class="form-label">Story Tags (Max 15 tags allowed)</label>
                             <input type="text"
                                 class="form-control @error('tags') is-invalid @enderror softsource-tag-input"
@@ -236,8 +279,8 @@
                         </div>
 
                         <div class="col-md-12 mt-3 form-check">
-                            <input id="is_anonymous" type="checkbox" name="is_anonymous" value="0"
-                                defaultValue="0">
+                            <input id="is_anonymous_check" type="checkbox" name="is_anonymous_check" value="0">
+                            <input id="is_anonymous" type="hidden" name="is_anonymous" value="0">
                             <label for="is_anonymous" class="form-check-label">
                                 <h6>Tag this story as Anonymous</h6>
                             </label>
@@ -274,7 +317,8 @@
 
                             <div class="col-md-12 audioconvert_div" style="display:none">
                                 <div class="form-check d-flex">
-                                    <input type="checkbox" id="is_audioconvert" name="is_audioconvert" value="0">
+                                    <input type="checkbox" id="is_audioconvert_check" name="is_audioconvert_check" value="0">
+                                    <input type="hidden" id="is_audioconvert" name="is_audioconvert" value="0">
                                     <label class="form-check-label" style="font-size: 10pt" for="is_audioconvert">Keep
                                         Audio Only for a Video File (Video File will converted to audio).</label>
                                 </div>
@@ -285,7 +329,7 @@
                                         class="text-danger">*</span></label>
                                 <input type="text"
                                     class="form-control @error('audio_video_credit') is-invalid @enderror"
-                                    id="audio_video_credit" name="audio_video_credit" placeholder="Photo Credit"
+                                    id="audio_video_credit" name="audio_video_credit" placeholder="Audio/Video Credit"
                                     aria-describedby="validationPhotoCreditFeedback"
                                     value="{{ old('audio_video_credit') ? old('audio_video_credit') : (!empty($story->audio_video_credit) ? $story->audio_video_credit : null) }}">
                                 <div class="valid-feedback">Looks good!</div>
@@ -336,8 +380,7 @@
                         </div>
 
                         <div class="col-md-4 mt-3">
-                            <label for="event_dates" class="form-label">Event Date <span
-                                    class="text-danger">*</span></label>
+                            <label for="event_dates" class="form-label">Event Date</label>
                             <input type="date" class="form-control @error('event_dates') is-invalid @enderror"
                                 id="event_dates" name="event_dates" placeholder="Event Date"
                                 aria-describedby="validationEventDateFeedback"
@@ -376,14 +419,14 @@
 
     <script>
         $(document).ready(function() {
-            let type = {{ $type }};
+            let type = '{{ $type }}';
             if (type) {
-                $("#" + type).trigger("click");
+                $(`#${type}`).trigger("click");
             }
 
             $('.story-category-select2').select2({
                 maximumSelectionLength: 3,
-                placeholder: "Please Select"
+                placeholder: "Please Select",
             });
 
             $("#context").summernote({
@@ -398,7 +441,7 @@
                     ['para', ['ul', 'ol', 'paragraph']],
                     ['fontsize', ['fontsize']],
                     ['link', ['link']],
-                    ['view', ['fullscreen', 'codeview']]
+                    ['view', ['fullscreen', 'codeview']],
                 ],
                 callbacks: {
                     onKeydown: function(e) {
@@ -449,21 +492,27 @@
         });
 
 
-        $(document).on('change', '#is_anonymous', function() {
+        $(document).on('change', '#is_anonymous_check', function() {
             var valueInput = $(this);
+            var hiddenInput = $('#is_anonymous');
             if ($(this).is(":checked")) {
                 valueInput.val("1");
+                hiddenInput.val("1");
             } else {
                 valueInput.val("0");
+                hiddenInput.val("0");
             }
         });
 
-        $(document).on('change', '#is_audioconvert', function() {
+        $(document).on('change', '#is_audioconvert_check', function() {
             var valueInput = $(this);
+            var hiddenInput = $('#is_audioconvert');
             if ($(this).is(":checked")) {
                 valueInput.val("1");
+                hiddenInput.val("1");
             } else {
                 valueInput.val("0");
+                hiddenInput.val("0");
             }
         });
 

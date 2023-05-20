@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Blog;
+use App\Models\Page;
 use App\Models\User;
 use App\Models\Story;
 use App\Models\Partner;
@@ -196,25 +197,51 @@ class SiteController extends Controller
         ]);
     }
 
+    public function my_stories()
+    {
+        return view('site.my-stories')->with([
+            'page_title' => 'My Stories',
+            'notices' => $this->notices,
+
+        ]);
+    }
+
     public function read_story($slug = null)
     {
         if ($slug) {
             # code...
             // $stories = Story::findOrFail(Auth::id())->load('user_profile');
-        }
-        else{
-            $stories = DB::table('stories as s')
-                ->join('pages as p', 's.id', '=', 'p.page_group_id')
-                ->select(DB::raw('s.*, p.id as page_id, p.name, p.url, p.page_title, p.meta_title, p.meta_keywords, p.meta_description'))
+
+            $slugParts = explode('-', $slug);
+            $firstWord = $slugParts[0];
+            // $remainingPart = implode('-', array_slice($slugParts, 1));
+
+            $stories = //DB::table('stories as s')
+            Story::with('base_category','level1_category','level2_category', 'level3_category', 'author_details')
+                ->join('pages as p', 'stories.id', '=', 'p.page_group_id')
+                ->select(DB::raw('stories.*, p.id as page_id, p.name, p.url, p.page_title, p.meta_title, p.meta_keywords, p.meta_description'))
                 ->where('p.page_group', '=', 'story')
-                ->where(['s.status' => 1, 's.is_approved' => 1, 's.is_draft'=>0])
+                ->where('p.page_group_id', '=', $firstWord)
+                ->where(['stories.id' => $firstWord])
+                ->first();
+
+            $author = Page::where(['page_group'=>'author', 'page_group_id'=> $stories->author_id]);
+
+            $page_title =  $stories->title;
+            $detail = true;
+        } else {
+            $stories = //DB::table('stories as s')
+            Story::with('base_category','level1_category','level2_category', 'level3_category', 'author_details')
+                ->join('pages as p', 'stories.id', '=', 'p.page_group_id')
+                ->select(DB::raw('stories.*, p.id as page_id, p.name, p.url, p.page_title, p.meta_title, p.meta_keywords, p.meta_description'))
+                ->where('p.page_group', '=', 'story')
+                ->where(['stories.status' => 1, 'stories.is_approved' => 1, 'stories.is_draft' => 0])
                 ->paginate(12);
             $page_title = 'Read Stories';
             $detail = false;
-
         }
 
-        return view('site.profile')->with([
+        return view('site.stories')->with([
             'page_title' => $page_title,
             'notices' => $this->notices,
             'stories' => $stories,
@@ -228,8 +255,8 @@ class SiteController extends Controller
         $categories_level1 = StoryCategory::where(['level' => 1, 'status' => 1])->get();
         $categories_level2 = StoryCategory::where(['level' => 2, 'status' => 1])->get();
         $categories_level3 = StoryCategory::where(['level' => 3, 'status' => 1])->get();
-        $story = ($id)?Story::findOrFail($id):null;
-        $page_title = ($id)?'Update Story':'Write A Story';
+        $story = ($id) ? Story::findOrFail($id) : null;
+        $page_title = ($id) ? 'Update Story' : 'Write A Story';
 
         return view('site.write-story')->with([
             'page_title' => $page_title,
@@ -243,7 +270,6 @@ class SiteController extends Controller
         ]);
 
     }
-
 
     public function saveimage(Request $request)
     {
@@ -266,35 +292,31 @@ class SiteController extends Controller
         return SoftSourceHelper::DeleteAudioBYFileUploader($_POST['file']);
     }
 
-
     public function FetchSubCatByParentCategory(Request $request)
     {
         $level = $request['level'];
         $id = $request['id'];
         $id = is_array($id) ? $id : array($id);
 
-        $childCategories = StoryCategory::where(['status'=>1])
-        ->when(!empty($id), function ($query) use ($id) {
-            return $query->whereIn('parent_id', $id);
-        })
-        ->when(!is_null($level), function ($query, $level) {
-            return $query->where('level', $level);
-        })
-        ->orderBy('name')->get();
-
+        $childCategories = StoryCategory::where(['status' => 1])
+            ->when(!empty($id), function ($query) use ($id) {
+                return $query->whereIn('parent_id', $id);
+            })
+            ->when(!is_null($level), function ($query, $level) {
+                return $query->where('level', $level);
+            })
+            ->orderBy('name')->get();
 
         $html = "";
         foreach ($childCategories as $childCategory) {
-            $html .= "<option value='".$childCategory->id."'>".$childCategory->name."</option>";
+            $html .= "<option value='" . $childCategory->id . "'>" . $childCategory->name . "</option>";
         }
 
         $value = array(
             "result" => $html,
-            "count" => count($childCategories)
+            "count" => count($childCategories),
         );
         echo json_encode($value);
     }
-
-
 
 }
