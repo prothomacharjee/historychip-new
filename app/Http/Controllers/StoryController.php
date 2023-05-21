@@ -21,14 +21,14 @@ class StoryController extends Controller
      */
     public function index()
     {
-        return view('backend.story.index')->with([
+        return view('backend.stories.index')->with([
             'page_title' => 'Stories',
         ]);
     }
 
     public function comments()
     {
-        return view('backend.story.comments')->with([
+        return view('backend.stories.comments')->with([
             'page_title' => 'Story Comments',
         ]);
     }
