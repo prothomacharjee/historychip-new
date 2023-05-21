@@ -33,6 +33,12 @@ class Story extends Model
         return $this->belongsTo(User::class, 'author_id');
     }
 
+    public function approval_details()
+    {
+        return $this->belongsTo(User::class, 'approved_by');
+    }
+
+
     public function comments()
     {
         return $this->hasMany(Story::class, 'story_id');

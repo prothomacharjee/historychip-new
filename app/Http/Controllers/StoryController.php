@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use Exception;
 use App\Models\Page;
+use App\Models\User;
 use App\Models\Story;
 use Illuminate\Support\Str;
 use App\Models\StoryComment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Validator;
 
 class StoryController extends Controller
@@ -19,15 +21,16 @@ class StoryController extends Controller
      */
     public function index()
     {
-        //
+        return view('backend.story.index')->with([
+            'page_title' => 'Stories',
+        ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function comments()
     {
-        //
+        return view('backend.story.comments')->with([
+            'page_title' => 'Story Comments',
+        ]);
     }
 
     /**
@@ -35,7 +38,6 @@ class StoryController extends Controller
      */
     public function store(Request $request)
     {
-
         $validator = Validator::make($request->except(['_token']), [
             "title" => "required",
             "author_name" => "required",
@@ -169,6 +171,236 @@ class StoryController extends Controller
                 'msg' => $e->getMessage(),
             ]);
         }
+    }
 
+    public function LoadApproveStoryDataTable(Request $request)
+    {
+        $url = 'stories';
+        // Define the columns to be fetched
+        $columns = array(
+            'id',
+            'title',
+            'author_id',
+            'created_at',
+            'approval_date_time',
+            'approved_by',
+            'approval_date_time',
+            'status',
+        );
+
+        // Build the DataTables response
+        $data = DataTables::of(Story::select($columns)->where('is_approved', '=', 1))
+            ->addColumn('serial', function ($row) {
+                static $count = 0;
+                $count++;
+                return $count;
+            })
+            ->addColumn('status', function ($row) {
+                return ($row->status == 1) ? '<span class="badge bg-success">Active</span>' : '<span class="badge bg-danger">Inactive</span>';
+            })
+
+            ->addColumn('author', function ($row) {
+                return User::where('id', $row->author_id)->first()->name;
+            })
+            ->addColumn('approval', function ($row) {
+                return User::where('id', $row->approved_by)->first()->name;
+            })
+            ->addColumn('action', function ($row) use ($url) {
+                $buttons = '<a href="' . route('admin.blogs.edit', $row->id) . '" data-toggle="tooltip" title="Edit" class="edit btn btn-outline-primary btn-sm me-2"><i class="fadeInUp animate__animated bx bx-edit-alt"></i></a>';
+                $buttons .= '<button type="button" class="delete btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#delete_modal"  onclick="remove_function(' . $row->id . ', \'' . $url . '\')" title="Delete"><i class="fadeInUp animate__animated bx bx-trash-alt"></i></button>';
+
+                return $buttons;
+            })
+            ->editColumn('created_at', function ($row) {
+                return ($row->created_at) ? date('Y-m-d H:i', strtotime($row->created_at)) : '';
+            })
+            ->editColumn('approval_date_time', function ($row) {
+                return ($row->approval_date_time) ? date('Y-m-d H:i', strtotime($row->approval_date_time)) : '';
+            })
+
+            ->rawColumns(['serial', 'author', 'action', 'status', 'approval'])
+            ->make(true);
+
+        // Return the DataTables response
+        return $data;
+    }
+
+    public function LoadFeaturedStoryDataTable(Request $request)
+    {
+        $url = 'stories';
+        // Define the columns to be fetched
+        $columns = array(
+            'id',
+            'title',
+            'author_id',
+            'created_at',
+            'approval_date_time',
+            'is_featured',
+        );
+
+        // Build the DataTables response
+        $data = DataTables::of(Story::select($columns)->where('is_approved', '=', 1)->where('is_featured', '=', 1))
+            ->addColumn('serial', function ($row) {
+                static $count = 0;
+                $count++;
+                return $count;
+            })
+            ->addColumn('approval', function ($row) {
+                return User::where('id', $row->approved_by)->first()->name;
+            })
+            ->addColumn('author', function ($row) {
+                return User::where('id', $row->author_id)->first()->name;
+            })
+            ->addColumn('action', function ($row) use ($url) {
+                $buttons = '<a href="' . route('admin.blogs.edit', $row->id) . '" data-toggle="tooltip" title="Edit" class="edit btn btn-outline-primary btn-sm me-2"><i class="fadeInUp animate__animated bx bx-edit-alt"></i></a>';
+                $buttons .= '<button type="button" class="delete btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#delete_modal"  onclick="remove_function(' . $row->id . ', \'' . $url . '\')" title="Delete"><i class="fadeInUp animate__animated bx bx-trash-alt"></i></button>';
+
+                return $buttons;
+            })
+            ->editColumn('created_at', function ($row) {
+                return ($row->created_at) ? date('Y-m-d H:i', strtotime($row->created_at)) : '';
+            })
+            ->editColumn('approval_date_time', function ($row) {
+                return ($row->approval_date_time) ? date('Y-m-d H:i', strtotime($row->approval_date_time)) : '';
+            })
+            // ->addColumn('blog_description', function ($row) {
+            //     return mb_strimwidth(strip_tags($row->blog_description), 0, 50, "...");
+            // })
+
+            ->rawColumns(['serial', 'author', 'action', 'approval'])
+            ->make(true);
+
+        // Return the DataTables response
+        return $data;
+    }
+
+    public function LoadWaitingStoryDataTable(Request $request)
+    {
+        $url = 'stories';
+        // Define the columns to be fetched
+
+        $columns = array(
+            'id',
+            'title',
+            'author_id',
+            'created_at',
+        );
+
+        // Define the search columns
+
+        // Build the DataTables response
+        $data = DataTables::of(Story::select($columns)->where('is_approved', '=', 0))
+            ->addColumn('serial', function ($row) {
+                static $count = 0;
+                $count++;
+                return $count;
+            })
+            ->addColumn('author', function ($row) {
+                return User::where('id', $row->author_id)->first()->name;
+            })
+            ->addColumn('action', function ($row) use ($url) {
+                $buttons = '<a href="' . route('admin.blogs.edit', $row->id) . '" data-toggle="tooltip" title="Edit" class="edit btn btn-outline-primary btn-sm me-2"><i class="fadeInUp animate__animated bx bx-edit-alt"></i></a>';
+                $buttons .= '<button type="button" class="delete btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#delete_modal"  onclick="remove_function(' . $row->id . ', \'' . $url . '\')" title="Delete"><i class="fadeInUp animate__animated bx bx-trash-alt"></i></button>';
+                return $buttons;
+            })
+            ->editColumn('created_at', function ($row) {
+                return ($row->created_at) ? date('Y-m-d H:i', strtotime($row->created_at)) : '';
+            })
+            ->rawColumns(['serial', 'author', 'action'])
+            ->make(true);
+
+        // Return the DataTables response
+        return $data;
+    }
+
+    public function LoadRejectedStoryDataTable(Request $request)
+    {
+        $url = 'stories';
+        // Define the columns to be fetched
+        $columns = array(
+            'id',
+            'title',
+            'author_id',
+            'created_at',
+            'approval_date_time',
+            'approved_by',
+            'approval_date_time',
+            'status',
+        );
+
+        // Build the DataTables response
+        $data = DataTables::of(Story::select($columns)->where('is_approved', '=', 2))
+            ->addColumn('serial', function ($row) {
+                static $count = 0;
+                $count++;
+                return $count;
+            })
+            ->addColumn('status', function ($row) {
+                return ($row->status == 1) ? '<span class="badge bg-success">Active</span>' : '<span class="badge bg-danger">Inactive</span>';
+            })
+
+            ->addColumn('author', function ($row) {
+                return User::where('id', $row->author_id)->first()->name;
+            })
+            ->addColumn('approval', function ($row) {
+                return User::where('id', $row->approved_by)->first()->name;
+            })
+            ->addColumn('action', function ($row) use ($url) {
+                $buttons = '<a href="' . route('admin.blogs.edit', $row->id) . '" data-toggle="tooltip" title="Edit" class="edit btn btn-outline-primary btn-sm me-2"><i class="fadeInUp animate__animated bx bx-edit-alt"></i></a>';
+                $buttons .= '<button type="button" class="delete btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#delete_modal"  onclick="remove_function(' . $row->id . ', \'' . $url . '\')" title="Delete"><i class="fadeInUp animate__animated bx bx-trash-alt"></i></button>';
+
+                return $buttons;
+            })
+            ->editColumn('created_at', function ($row) {
+                return ($row->created_at) ? date('Y-m-d H:i', strtotime($row->created_at)) : '';
+            })
+            ->editColumn('approval_date_time', function ($row) {
+                return ($row->approval_date_time) ? date('Y-m-d H:i', strtotime($row->approval_date_time)) : '';
+            })
+
+            ->rawColumns(['serial', 'author', 'action', 'status', 'approval'])
+            ->make(true);
+
+        // Return the DataTables response
+        return $data;
+    }
+
+    public function LoadDraftedStoryDataTable(Request $request)
+    {
+        $url = 'stories';
+        // Define the columns to be fetched
+
+        $columns = array(
+            'id',
+            'title',
+            'author_id',
+            'created_at',
+        );
+
+        // Define the search columns
+
+        // Build the DataTables response
+        $data = DataTables::of(Story::select($columns)->where('is_draft', '=', 1))
+            ->addColumn('serial', function ($row) {
+                static $count = 0;
+                $count++;
+                return $count;
+            })
+            ->addColumn('author', function ($row) {
+                return User::where('id', $row->author_id)->first()->name;
+            })
+            ->addColumn('action', function ($row) use ($url) {
+                $buttons = '<a href="' . route('admin.blogs.edit', $row->id) . '" data-toggle="tooltip" title="Edit" class="edit btn btn-outline-primary btn-sm me-2"><i class="fadeInUp animate__animated bx bx-edit-alt"></i></a>';
+                $buttons .= '<button type="button" class="delete btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#delete_modal"  onclick="remove_function(' . $row->id . ', \'' . $url . '\')" title="Delete"><i class="fadeInUp animate__animated bx bx-trash-alt"></i></button>';
+                return $buttons;
+            })
+            ->editColumn('created_at', function ($row) {
+                return ($row->created_at) ? date('Y-m-d H:i', strtotime($row->created_at)) : '';
+            })
+            ->rawColumns(['serial', 'author', 'action'])
+            ->make(true);
+
+        // Return the DataTables response
+        return $data;
     }
 }

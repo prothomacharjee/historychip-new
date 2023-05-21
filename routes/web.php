@@ -147,7 +147,7 @@ Route::group(['prefix' => 'powerhouse'], function () {
     Route::post('/delete-partners/{id}', [PartnerController::class, 'destroy'])->name('admin.partner-types.destroy');
 
 
-    // Notice Prompts
+    // Story Category
     Route::get('/story-categories', [StoryCategoryController::class, 'index'])->name('admin.story-categories');
     Route::get('/load-story-categories-data', [StoryCategoryController::class, 'LoadStoryCategoryDataTable'])->name('admin.story-categories.loadDataTable');
     Route::get('/load-story-level-1-categories-data', [StoryCategoryController::class, 'LoadStoryLevel1CategoryDataTable'])->name('admin.story-categories.loadDataTable1');
@@ -158,5 +158,17 @@ Route::group(['prefix' => 'powerhouse'], function () {
     Route::post('/fetch-story-categories-data-by-level', [StoryCategoryController::class, 'FetchStoryCategoryDataByLevel'])->name('admin.story-categories.fetchByLevel');
 
     Route::post('/delete-story-categories/{id}', [StoryCategoryController::class, 'destroy'])->name('admin.story-categories.destroy');
+
+
+    //Stories
+
+    Route::get('/stories', [StoryController::class, 'index'])->name('admin.stories');
+    Route::get('/story-comments', [StoryController::class, 'comments'])->name('admin.stories.comments');
+
+    Route::get('/load-approved-stories-data', [StoryController::class, 'LoadApproveStoryDataTable'])->name('admin.stories.LoadApproveStoryDataTable');
+    Route::get('/load-featured-stories-data', [StoryController::class, 'LoadFeaturedStoryDataTable'])->name('admin.stories.LoadFeaturedStoryDataTable');
+    Route::get('/load-waiting-stories-data', [StoryController::class, 'LoadWaitingStoryDataTable'])->name('admin.stories.LoadWaitingStoryDataTable');
+    Route::get('/load-rejected-stories-data', [StoryController::class, 'LoadRejectedStoryDataTable'])->name('admin.stories.LoadRejectedStoryDataTable');
+    Route::get('/load-drafted-stories-data', [StoryController::class, 'LoadDraftedStoryDataTable'])->name('admin.stories.LoadDraftedStoryDataTable');
 
 });

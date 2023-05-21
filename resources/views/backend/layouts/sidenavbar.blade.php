@@ -90,6 +90,21 @@
             </a>
         </li>
 
+        <li>
+            <a href="javascript:;" class="has-arrow" aria-expanded="false">
+                <div class="parent-icon"><i class="bx bx-book-content"></i>
+                </div>
+                <div class="menu-title">Stories</div>
+            </a>
+            <ul class="mm-collapse">
+                <li> <a href="{{ route('admin.stories') }}"><i class="bx bx-right-arrow-alt"></i>Stories</a>
+                </li>
+                <li> <a href="{{ route('admin.stories.comments') }}"><i class="bx bx-right-arrow-alt"></i>Story Comments</a>
+                </li>
+
+            </ul>
+        </li>
+
     </ul>
     <!--end navigation-->
 </div>

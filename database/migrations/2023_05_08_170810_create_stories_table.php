@@ -20,6 +20,7 @@ return new class extends Migration
 
             $table->string('title');
             $table->unsignedBigInteger('author_id');
+
             $table->longText('context')->nullable();
 
             $table->integer('edit_count')->default(0);
@@ -45,6 +46,9 @@ return new class extends Migration
             $table->longText('tags')->nullable();
 
             $table->tinyInteger('status')->default(1);
+            $table->unsignedBigInteger('approved_by')->nullable();
+            $table->dateTime('approval_date_time')->nullable();
+
             $table->timestamps();
 
             $table->foreign('author_id')->references('id')->on('users')->onDelete('cascade');
