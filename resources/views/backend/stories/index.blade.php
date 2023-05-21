@@ -150,14 +150,13 @@
                         <table id="dt_featured_story_table" class="table table-striped table-bordered data-tables" style="width:100%">
                             <thead>
                                 <tr>
-                                <th>SL</th>
+                                    <th>SL</th>
                                     <th>Title</th>
                                     <th>Author</th>
-                                    <th>Status</th>
+
                                     <th>Date/Time</th>
                                     <th>Approved By</th>
                                     <th>Approved Date/Time</th>
-                                    <th>Featured</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -165,14 +164,12 @@
                             </tbody>
                             <tfoot>
                                 <tr>
-                                <th>SL</th>
+                                    <th>SL</th>
                                     <th>Title</th>
                                     <th>Author</th>
-                                    <th>Status</th>
                                     <th>Date/Time</th>
                                     <th>Approved By</th>
                                     <th>Approved Date/Time</th>
-                                    <th>Featured</th>
                                     <th>Action</th>
                                 </tr>
                             </tfoot>
@@ -188,7 +185,6 @@
                                     <th>Title</th>
                                     <th>Author</th>
                                     <th>Date/Time</th>
-                                    <th>Fetured</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -200,7 +196,6 @@
                                     <th>Title</th>
                                     <th>Author</th>
                                     <th>Date/Time</th>
-                                    <th>Fetured</th>
                                     <th>Action</th>
                                 </tr>
                             </tfoot>
@@ -212,7 +207,7 @@
                         <table id="dt_rejected_story_table" class="table table-striped table-bordered data-tables" style="width:100%">
                             <thead>
                                 <tr>
-                                <th>SL</th>
+                                    <th>SL</th>
                                     <th>Title</th>
                                     <th>Author</th>
                                     <th>Status</th>
@@ -226,7 +221,7 @@
                             </tbody>
                             <tfoot>
                                 <tr>
-                                <th>Title</th>
+                                    <th>Title</th>
                                     <th>Author</th>
                                     <th>Status</th>
                                     <th>Date/Time</th>
@@ -245,10 +240,8 @@
                                 <tr>
                                     <th>SL</th>
                                     <th>Title</th>
-                                    <th>Description</th>
-                                    <th>Date</th>
-                                    <th>Banner</th>
-                                    <th>Banner Alt Text</th>
+                                    <th>Author</th>
+                                    <th>Date/Time</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -258,10 +251,8 @@
                                 <tr>
                                     <th>SL</th>
                                     <th>Title</th>
-                                    <th>Description</th>
-                                    <th>Date</th>
-                                    <th>Banner</th>
-                                    <th>Banner Alt Text</th>
+                                    <th>Author</th>
+                                    <th>Date/Time</th>
                                     <th>Action</th>
                                 </tr>
                             </tfoot>
@@ -328,9 +319,7 @@
                 {
                     "data": "author"
                 },
-                {
-                    "data": "status"
-                },
+
                 {
                     "data": "created_at"
                 },
@@ -361,9 +350,6 @@
                 },
                 {
                     "data": "author"
-                },
-                {
-                    "data": "status"
                 },
                 {
                     "data": "created_at"
