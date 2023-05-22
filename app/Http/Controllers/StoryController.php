@@ -407,4 +407,167 @@ class StoryController extends Controller
         // Return the DataTables response
         return $data;
     }
+
+    public function LoadApproveCommentDataTable(Request $request)
+    {
+        $url = 'comments';
+        // Define the columns to be fetched
+        $columns = array(
+            'id',
+            'user_id',
+            'story_id',
+            'created_at',
+            'accepted_by',
+            'accepted',
+            'accepting_date_time',
+            'comment',
+            'updated_at'
+        );
+        // Build the DataTables response
+        $data = DataTables::of(StoryComment::select($columns)->where('accepted', '=', 1)->with('story.author_details','commenteter','accepter'))
+            ->addColumn('serial', function ($row) {
+                static $count = 0;
+                $count++;
+                return $count;
+            })
+            ->addColumn('story_title', function ($row) {
+
+                return $row->story->title;
+            })
+            ->addColumn('story_author', function ($row) {
+
+                return $row->story->author_details->name;
+            })
+            ->addColumn('commentator', function ($row) {
+                return $row->commenteter->name;
+            })
+            ->addColumn('approval', function ($row) {
+                return $row->accepter->name??'';
+            })
+            ->addColumn('action', function ($row) use ($url) {
+                $buttons = '<a href="' . route('admin.blogs.edit', $row->id) . '" data-toggle="tooltip" title="Edit" class="edit btn btn-outline-primary btn-sm me-2"><i class="fadeInUp animate__animated bx bx-edit-alt"></i></a>';
+                $buttons .= '<button type="button" class="delete btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#delete_modal"  onclick="remove_function(' . $row->id . ', \'' . $url . '\')" title="Delete"><i class="fadeInUp animate__animated bx bx-trash-alt"></i></button>';
+
+                return $buttons;
+            })
+            ->editColumn('created_at', function ($row) {
+                return ($row->created_at) ? date('Y-m-d H:i', strtotime($row->created_at)) : '';
+            })
+            ->editColumn('accepting_date_time', function ($row) {
+                return ($row->accepting_date_time) ? date('Y-m-d H:i', strtotime($row->accepting_date_time)) : '';
+            })
+
+            ->rawColumns(['serial','story_title', 'story_author','commentator', 'action', 'approval'])
+            ->make(true);
+
+        // Return the DataTables response
+        return $data;
+    }
+
+    public function LoadWaitingCommentDataTable(Request $request)
+    {
+        $url = 'comments';
+        // Define the columns to be fetched
+        $columns = array(
+            'id',
+            'user_id',
+            'story_id',
+            'comment',
+            'created_at',
+            'updated_at'
+        );
+        // Build the DataTables response
+        $data = DataTables::of(StoryComment::select($columns)->where('accepted', '=', 0)->with('story.author_details','commentator','accepter'))
+            ->addColumn('serial', function ($row) {
+                static $count = 0;
+                $count++;
+                return $count;
+            })
+            ->addColumn('story_title', function ($row) {
+
+                return $row->story->title;
+            })
+            ->addColumn('story_author', function ($row) {
+
+                return $row->story->author_details->name;
+            })
+            ->addColumn('commentator', function ($row) {
+                return $row->commentator->name;
+            })
+
+            ->addColumn('action', function ($row) use ($url) {
+                $buttons = '<a href="' . route('admin.blogs.edit', $row->id) . '" data-toggle="tooltip" title="Edit" class="edit btn btn-outline-primary btn-sm me-2"><i class="fadeInUp animate__animated bx bx-edit-alt"></i></a>';
+                $buttons .= '<button type="button" class="delete btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#delete_modal"  onclick="remove_function(' . $row->id . ', \'' . $url . '\')" title="Delete"><i class="fadeInUp animate__animated bx bx-trash-alt"></i></button>';
+
+                return $buttons;
+            })
+            ->editColumn('created_at', function ($row) {
+                return ($row->created_at) ? date('Y-m-d H:i', strtotime($row->created_at)) : '';
+            })
+
+
+            ->rawColumns(['serial','story_title', 'story_author','commentator', 'action', 'approval'])
+            ->make(true);
+
+        // Return the DataTables response
+        return $data;
+    }
+
+    public function LoadRejectedCommentDataTable(Request $request)
+    {
+        $url = 'comments';
+        // Define the columns to be fetched
+        $columns = array(
+            'id',
+            'user_id',
+            'story_id',
+            'created_at',
+            'accepted_by',
+            'accepted',
+            'accepting_date_time',
+            'comment',
+            'updated_at'
+        );
+        // Build the DataTables response
+        $data = DataTables::of(StoryComment::select($columns)->where('accepted', '=', 2)->with('story.author_details','commenteter','accepter'))
+            ->addColumn('serial', function ($row) {
+                static $count = 0;
+                $count++;
+                return $count;
+            })
+            ->addColumn('story_title', function ($row) {
+
+                return $row->story->title;
+            })
+            ->addColumn('story_author', function ($row) {
+
+                return $row->story->author_details->name;
+            })
+            ->addColumn('commentator', function ($row) {
+                return $row->story->commenteter->name;
+            })
+            ->addColumn('approval', function ($row) {
+                return $row->story->accepter->name??'';
+            })
+            ->addColumn('action', function ($row) use ($url) {
+                $buttons = '<a href="' . route('admin.blogs.edit', $row->id) . '" data-toggle="tooltip" title="Edit" class="edit btn btn-outline-primary btn-sm me-2"><i class="fadeInUp animate__animated bx bx-edit-alt"></i></a>';
+                $buttons .= '<button type="button" class="delete btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#delete_modal"  onclick="remove_function(' . $row->id . ', \'' . $url . '\')" title="Delete"><i class="fadeInUp animate__animated bx bx-trash-alt"></i></button>';
+
+                return $buttons;
+            })
+            ->editColumn('created_at', function ($row) {
+                return ($row->created_at) ? date('Y-m-d H:i', strtotime($row->created_at)) : '';
+            })
+            ->editColumn('accepting_date_time', function ($row) {
+                return ($row->accepting_date_time) ? date('Y-m-d H:i', strtotime($row->accepting_date_time)) : '';
+            })
+
+            ->rawColumns(['serial','story_title', 'story_author','commentator', 'action', 'approval'])
+            ->make(true);
+
+        // Return the DataTables response
+        return $data;
+    }
+
+
 }

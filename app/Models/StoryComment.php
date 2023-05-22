@@ -9,7 +9,7 @@ class StoryComment extends Model
 {
     protected $guarded = [];
 
-    public function commenteter()
+    public function commentator()
     {
         return $this->belongsTo(User::class, 'user_id');
     }

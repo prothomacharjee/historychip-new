@@ -171,4 +171,8 @@ Route::group(['prefix' => 'powerhouse'], function () {
     Route::get('/load-rejected-stories-data', [StoryController::class, 'LoadRejectedStoryDataTable'])->name('admin.stories.LoadRejectedStoryDataTable');
     Route::get('/load-drafted-stories-data', [StoryController::class, 'LoadDraftedStoryDataTable'])->name('admin.stories.LoadDraftedStoryDataTable');
 
+    Route::get('/load-approved-comments-data', [StoryController::class, 'LoadApproveCommentDataTable'])->name('admin.stories.LoadApproveCommentDataTable');
+    Route::get('/load-waiting-comments-data', [StoryController::class, 'LoadWaitingCommentDataTable'])->name('admin.stories.LoadWaitingCommentDataTable');
+    Route::get('/load-rejected-comments-data', [StoryController::class, 'LoadRejectedCommentDataTable'])->name('admin.stories.LoadRejectedCommentDataTable');
+
 });
