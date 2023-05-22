@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\SoftSourceHelper;
 use App\Models\Blog;
 use App\Models\Page;
-use App\Models\User;
-use App\Models\Story;
 use App\Models\Partner;
-use Illuminate\Http\Request;
+use App\Models\Story;
 use App\Models\StoryCategory;
+use App\Models\User;
 use App\Models\WritingPrompt;
-use App\Helpers\SoftSourceHelper;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class SiteController extends Controller
 {
@@ -199,9 +199,20 @@ class SiteController extends Controller
 
     public function my_stories()
     {
+
+        $published_stories = Story::FetchStoryByAuthorID(Auth::id(),12, 1);
+        $waiting_stories = Story::FetchStoryByAuthorID(Auth::id(),12, 1);
+        $rejected_stories = Story::FetchStoryByAuthorID(Auth::id(),12, 1);
+        $draft_stories = Story::FetchStoryByAuthorID(Auth::id(),12, null, 1);
+
+
         return view('site.my-stories')->with([
             'page_title' => 'My Stories',
             'notices' => $this->notices,
+            'published_stories' => $published_stories,
+            'waiting_stories' => $waiting_stories,
+            'rejected_stories' => $rejected_stories,
+            'draft_stories' => $draft_stories,
 
         ]);
     }
@@ -216,27 +227,14 @@ class SiteController extends Controller
             $firstWord = $slugParts[0];
             // $remainingPart = implode('-', array_slice($slugParts, 1));
 
-            $stories = //DB::table('stories as s')
-            Story::with('base_category','level1_category','level2_category', 'level3_category', 'author_details')
-                ->join('pages as p', 'stories.id', '=', 'p.page_group_id')
-                ->select(DB::raw('stories.*, p.id as page_id, p.name, p.url, p.page_title, p.meta_title, p.meta_keywords, p.meta_description'))
-                ->where('p.page_group', '=', 'story')
-                ->where('p.page_group_id', '=', $firstWord)
-                ->where(['stories.id' => $firstWord])
-                ->first();
+            $stories = Story::FetchSingleStory($firstWord);
 
-            $author = Page::where(['page_group'=>'author', 'page_group_id'=> $stories->author_id]);
+            $author = Page::where(['page_group' => 'author', 'page_group_id' => $stories->author_id]);
 
-            $page_title =  $stories->title;
+            $page_title = $stories->title;
             $detail = true;
         } else {
-            $stories = //DB::table('stories as s')
-            Story::with('base_category','level1_category','level2_category', 'level3_category', 'author_details')
-                ->join('pages as p', 'stories.id', '=', 'p.page_group_id')
-                ->select(DB::raw('stories.*, p.id as page_id, p.name, p.url, p.page_title, p.meta_title, p.meta_keywords, p.meta_description'))
-                ->where('p.page_group', '=', 'story')
-                ->where(['stories.status' => 1, 'stories.is_approved' => 1, 'stories.is_draft' => 0])
-                ->paginate(12);
+            $stories = Story::FetchAllStory();
             $page_title = 'Read Stories';
             $detail = false;
         }

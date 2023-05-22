@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
 
 class Story extends Model
@@ -61,5 +62,49 @@ class Story extends Model
 
         return $cleanString;
     }
+
+    public static function FetchSingleStory($slug = null)
+    {
+        return Story::with('base_category', 'level1_category', 'level2_category', 'level3_category', 'author_details')
+                ->join('pages as p', 'stories.id', '=', 'p.page_group_id')
+                ->select(DB::raw('stories.*, p.id as page_id, p.name, p.url, p.page_title, p.meta_title, p.meta_keywords, p.meta_description'))
+                ->where('p.page_group', '=', 'story')
+                ->where('p.page_group_id', '=', $slug)
+                ->where(['stories.id' => $slug])
+                ->first();
+    }
+
+    public static function FetchAllStory(){
+        return Story::with('base_category', 'level1_category', 'level2_category', 'level3_category', 'author_details')
+        ->join('pages as p', 'stories.id', '=', 'p.page_group_id')
+        ->select(DB::raw('stories.*, p.id as page_id, p.name, p.url, p.page_title, p.meta_title, p.meta_keywords, p.meta_description'))
+        ->where('p.page_group', '=', 'story')
+        ->where(['stories.status' => 1, 'stories.is_approved' => 1, 'stories.is_draft' => 0])
+        ->paginate(12);
+    }
+
+    public static function FetchStoryByAuthorID($author_id, $paginated_number=9, $is_approved=null, $is_draft = null){
+
+        $approval_condition = ($is_approved!=null);
+        $draft_condition = ($is_draft!=null);
+
+        return Story::with('base_category', 'level1_category', 'level2_category', 'level3_category', 'author_details')
+        ->join('pages as p', 'stories.id', '=', 'p.page_group_id')
+        ->select(DB::raw('stories.*, p.id as page_id, p.name, p.url, p.page_title, p.meta_title, p.meta_keywords, p.meta_description'))
+        ->where('stories.author_id', '=', $author_id)
+        ->where('p.page_group', '=', 'story')
+        ->where(['stories.status' => 1, 'stories.is_approved' => 1, 'stories.is_draft' => 0])
+        ->when($approval_condition, function ($query, $is_approved) {
+            // Apply additional conditions if the condition is true
+            return $query->where('stories.is_approved', '=', $is_approved);
+        })
+        ->when($draft_condition, function ($query, $is_draft) {
+            // Apply additional conditions if the condition is true
+            return $query->where('stories.is_draft', '=', $is_draft);
+        })
+        ->paginate($paginated_number);
+    }
+
+
 
 }
