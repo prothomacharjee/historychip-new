@@ -2574,6 +2574,7 @@ input:checked + .softsource-slider-toggle:before {
 
 .softsource-my-story-tab-wrap{
     margin: 0 -10px;
+    border: none !important;
 }
 
 .softsource-my-story-tab-wrap li {

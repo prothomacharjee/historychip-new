@@ -200,10 +200,10 @@ class SiteController extends Controller
     public function my_stories()
     {
 
-        $published_stories = Story::FetchStoryByAuthorID(Auth::id(),12, 1);
-        $waiting_stories = Story::FetchStoryByAuthorID(Auth::id(),12, 1);
-        $rejected_stories = Story::FetchStoryByAuthorID(Auth::id(),12, 1);
-        $draft_stories = Story::FetchStoryByAuthorID(Auth::id(),12, null, 1);
+        $published_stories = Story::FetchStoryByAuthorIDAndApprovalType(Auth::id(),12, 1);
+        $waiting_stories = Story::FetchStoryByAuthorIDAndApprovalType(Auth::id(),12, 0);
+        $rejected_stories = Story::FetchStoryByAuthorIDAndApprovalType(Auth::id(),12,2);
+        $draft_stories = Story::FetchDraftStoryByAuthorID(Auth::id(),12, 1);
 
 
         return view('site.my-stories')->with([
