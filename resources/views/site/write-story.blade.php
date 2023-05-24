@@ -317,7 +317,8 @@
 
                             <div class="col-md-12 audioconvert_div" style="display:none">
                                 <div class="form-check d-flex">
-                                    <input type="checkbox" id="is_audioconvert_check" name="is_audioconvert_check" value="0">
+                                    <input type="checkbox" id="is_audioconvert_check" name="is_audioconvert_check"
+                                        value="0">
                                     <input type="hidden" id="is_audioconvert" name="is_audioconvert" value="0">
                                     <label class="form-check-label" style="font-size: 10pt" for="is_audioconvert">Keep
                                         Audio Only for a Video File (Video File will converted to audio).</label>
@@ -416,6 +417,12 @@
 
         </div>
     </div>
+
+    <style scoped>
+        #event_dates::-webkit-calendar-picker-indicator {
+            display: none;
+        }
+    </style>
 
     <script>
         $(document).ready(function() {

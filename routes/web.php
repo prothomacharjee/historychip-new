@@ -52,9 +52,9 @@ Auth::routes(['verify' => true]);
 // User Authentications
 Route::get('/login', [UserAuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [UserAuthController::class, 'login'])->name('login.submit');
-Route::get('/register', [UserAuthController::class, 'showRegistrationForm'])->name('register');
+Route::get('/register', [UserAuthController::class, 'showRegistrationForm'])->name('register')->middleware('guest');
 Route::post('/register', [UserAuthController::class, 'register'])->name('register.submit');
-Route::get('/password/reset', [UserAuthController::class, 'showResetPasswordForm'])->name('password.request');
+Route::get('/password/reset', [UserAuthController::class, 'showResetPasswordForm'])->name('password.request')->middleware('guest');
 
 //User Profile
 Route::get('/profile', [SiteController::class, 'profile'])->name('profile');

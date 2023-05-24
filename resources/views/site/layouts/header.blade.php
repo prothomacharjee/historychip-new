@@ -52,8 +52,7 @@
     <link rel="stylesheet" href="{{ asset('frontend/css/select2/select2.min.css?q=' . time()) }}">
 
     <link href="{{ asset('frontend/file-uploader/css/font-fileuploader.css') }}" rel="stylesheet">
-    <link href="{{ asset('frontend/file-uploader/css/jquery.fileuploader-theme-thumbnails.css') }}"
-        rel="stylesheet">
+    <link href="{{ asset('frontend/file-uploader/css/jquery.fileuploader-theme-thumbnails.css') }}" rel="stylesheet">
     <link href="{{ asset('frontend/file-uploader/css/script.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('frontend/file-uploader/css/custom.css') }}">
 
@@ -218,8 +217,10 @@
                                             </a>
                                             <ul class="softsource-submenu">
                                                 <li><a href="{{ route('faq') }}"><span>FAQ</span></a></li>
-                                                <li><a href="{{ route('register') }}"><span>Registration</span></a>
-                                                </li>
+                                                @guest
+                                                    <li><a href="{{ route('register') }}"><span>Registration</span></a>
+                                                    </li>
+                                                @endguest
                                                 <li><a href="{{ route('privacypolicy') }}"><span>Privacy
                                                             Policy</span></a></li>
                                                 <li><a href="{{ route('termsandconditions') }}"><span>Term
