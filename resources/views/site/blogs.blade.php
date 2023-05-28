@@ -2,6 +2,15 @@
 
 @section('content')
 
+@if ($detail)
+<style>
+
+    .softsoutce-top-banner-text{
+        font-weight:700;
+    }
+</style>
+@endif
+
     <!--============ Resolutions Hero Start ============-->
     <div class="position-relative softsource-top-contianer">
         <div class="container">
@@ -65,13 +74,13 @@
                             <div class="row justify-content-between">
                                 <div class="col-12 col-md-auto text-center">
                                     @if ($previous and count($previous) > 0)
-                                        <a href="{{ url('blogs/' . $previous[0]->url) }}"><i class="fa fa-arrow-left"></i>
+                                        <a href="{{ url($previous[0]->url) }}"><i class="fa fa-arrow-left"></i>
                                             Previous Blog</a>
                                     @endif
                                 </div>
                                 @if ($next and count($next) > 0)
                                     <div class="col-12 col-md-auto text-center">
-                                        <a href="{{ url('blogs/' . $next[0]->url) }}">Next Blog <i
+                                        <a href="{{ url($next[0]->url) }}">Next Blog <i
                                                 class="fa fa-arrow-right"></i></a>
                                     </div>
                                 @endif
