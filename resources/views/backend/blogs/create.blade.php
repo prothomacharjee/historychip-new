@@ -57,8 +57,6 @@
             </div>
 
             <div class="col">
-                {{-- <h6 class="mb-0 text-uppercase">Notice Prompts</h6>
-                <hr /> --}}
                 <div class="card">
                     <div class="card-body">
                         <div class="p-4 border rounded">

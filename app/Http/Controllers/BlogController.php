@@ -52,6 +52,7 @@ class BlogController extends Controller
             "blog_description" => "required",
             "blog_date" => "required",
             "status" => "required",
+            'blog_banner' => 'required|file|max:2048|mimes:jpeg,png,svg,webp',
         ]);
 
         if ($validator->fails()) {
@@ -64,17 +65,17 @@ class BlogController extends Controller
 
             $returnText = $req_blog['id'] ? 'Updated' : 'Saved';
 
-            $blog->blog_title = $req_blog['blog_title'];
-            $blog->blog_description = $req_blog['blog_description'];
-            $blog->blog_date = $req_blog['blog_date'];
-            $blog->blog_banner_alt_text = $req_blog['blog_banner_alt_text'];
-            $blog->status = $req_blog['status'];
-            $blog->is_draft = $req_blog['is_draft'];
+            $blog->blog_title = trim($req_blog['blog_title']);
+            $blog->blog_description = trim($req_blog['blog_description']);
+            $blog->blog_date = trim($req_blog['blog_date']);
+            $blog->blog_banner_alt_text = trim($req_blog['blog_banner_alt_text']);
+            $blog->status = trim($req_blog['status']);
+            $blog->is_draft = trim($req_blog['is_draft']);
 
             if ($req_blog['is_draft']==1) {
                 $blog->is_featured = 0;
             } else {
-                $blog->is_featured = $req_blog['is_featured'];
+                $blog->is_featured = trim($req_blog['is_featured']);
             }
 
             if ($req_blog['id']) {
@@ -83,15 +84,15 @@ class BlogController extends Controller
                 $blog->created_by = Auth::id();
             }
 
-            $meta->name = "blogs.".lcfirst(str_replace(' ', '', ucwords($req_blog['blog_title'])));
-            $meta->url = "blogs/".Str::slug($req_blog['blog_title']);
-            $meta->page_title = $req_blog['blog_title'];
-            $meta->page_group = 'blog';
-            $meta->meta_title = $req_meta['meta_title'];
-            $meta->meta_keywords = $req_meta['meta_keywords'];
-            $meta->meta_description = $req_meta['meta_description'];
+            $meta->name = trim("blogs.".lcfirst(str_replace(' ', '', ucwords($req_blog['blog_title']))));
+            $meta->url = trim("blogs/".Str::slug($req_blog['blog_title']));
+            $meta->page_title = trim($req_blog['blog_title']);
+            $meta->page_group = trim('blog');
+            $meta->meta_title = trim($req_meta['meta_title']);
+            $meta->meta_keywords = trim($req_meta['meta_keywords']);
+            $meta->meta_description = trim($req_meta['meta_description']);
             $meta->og_author = Auth::user()->name;
-            $meta->status = $req_blog['status'];
+            $meta->status = trim($req_blog['status']);
 
             if ($request->hasFile('blog_banner')) {
                 $blog->blog_banner = SoftSourceHelper::FileUploaderHelper($request->blog_banner, 'backend/blogs/');

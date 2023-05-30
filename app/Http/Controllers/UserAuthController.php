@@ -31,6 +31,7 @@ class UserAuthController extends Controller
             'page_title' => 'Register',
             'notices' => $this->notices,
             'partners' => $partners,
+            'meta' => $this->pages,
         ]);
     }
 
@@ -41,6 +42,7 @@ class UserAuthController extends Controller
         return view('auth.login')->with([
             'page_title' => 'Login',
             'notices' => $this->notices,
+            'meta' => $this->pages,
         ]);
     }
 

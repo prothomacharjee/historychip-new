@@ -25,6 +25,7 @@ class SiteController extends Controller
             'notices' => $this->notices,
             'categories' => $categories,
             'stories' => [],
+            'meta' => $this->pages,
         ]);
     }
 
@@ -33,6 +34,7 @@ class SiteController extends Controller
         return view('site.about')->with([
             'page_title' => 'About Us',
             'notices' => $this->notices,
+            'meta' => $this->pages,
         ]);
     }
 
@@ -41,6 +43,7 @@ class SiteController extends Controller
         return view('site.founder')->with([
             'page_title' => 'Home',
             'notices' => $this->notices,
+            'meta' => $this->pages,
         ]);
     }
 
@@ -49,6 +52,7 @@ class SiteController extends Controller
         return view('site.historychipfor')->with([
             'page_title' => 'Home',
             'notices' => $this->notices,
+            'meta' => $this->pages,
         ]);
     }
 
@@ -57,6 +61,7 @@ class SiteController extends Controller
         return view('site.faq')->with([
             'page_title' => 'Home',
             'notices' => $this->notices,
+            'meta' => $this->pages,
         ]);
     }
 
@@ -65,6 +70,7 @@ class SiteController extends Controller
         return view('site.privacypolicy')->with([
             'page_title' => 'Privacy Policy',
             'notices' => $this->notices,
+            'meta' => $this->pages,
         ]);
     }
 
@@ -73,6 +79,7 @@ class SiteController extends Controller
         return view('site.termsandconditions')->with([
             'page_title' => 'Terms & Conditions',
             'notices' => $this->notices,
+            'meta' => $this->pages,
         ]);
     }
 
@@ -81,6 +88,7 @@ class SiteController extends Controller
         return view('site.contactus')->with([
             'page_title' => 'Contact Us',
             'notices' => $this->notices,
+            'meta' => $this->pages,
         ]);
     }
 
@@ -91,6 +99,7 @@ class SiteController extends Controller
             'page_title' => 'Writing Prompt',
             'notices' => $this->notices,
             'writingprompt' => $writingprompt,
+            'meta' => $this->pages,
         ]);
     }
 
@@ -103,8 +112,8 @@ class SiteController extends Controller
             $blogs = DB::table('blogs as b')
                 ->join('pages as p', 'b.id', '=', 'p.page_group_id')
                 ->select(DB::raw('b.id as blog_id, b.blog_title, b.blog_description, b.blog_date, b.blog_banner, b.blog_banner_alt_text, p.id as page_id, p.name, p.url, p.page_title, p.meta_title, p.meta_keywords, p.meta_description'))
-                ->where('p.page_group', '=', 'blog')
-                ->where('p.url', '=', "blogs/" . $slug)
+                ->where('p.id', '=', $this->pages->id)
+                // ->where('p.url', '=', "/blogs/" . $slug)
                 ->where('b.status', '=', 1)
                 ->first();
 
@@ -133,6 +142,7 @@ class SiteController extends Controller
             'detail' => $detail,
             'previous' => $previous,
             'next' => $next,
+            'meta' => $this->pages,
 
         ]);
 
@@ -145,8 +155,8 @@ class SiteController extends Controller
             $partner = DB::table('partners as b')
                 ->join('pages as p', 'b.id', '=', 'p.page_group_id')
                 ->select(DB::raw('b.id as partner_id,b.name as partner_name, b.title, b.description, b.banner, b.banner_alt_text,b.logo,b.short_description,b.top_image, p.id as page_id, p.name, p.url, p.page_title, p.meta_title, p.meta_keywords, p.meta_description'))
-                ->where('p.page_group', '=', 'partner')
-                ->where('p.url', '=', "partners/" . $slug)
+                ->where('p.id', '=', $this->pages->id)
+                // ->where('p.url', '=', "partners/" . $slug)
                 ->where('b.status', '=', 1)
                 ->first();
 
@@ -178,6 +188,7 @@ class SiteController extends Controller
                 'page_title' => $page_title,
                 'notices' => $this->notices,
                 'partners' => $partners,
+                'meta' => $this->pages,
 
             ]);
         }
@@ -193,6 +204,7 @@ class SiteController extends Controller
             'page_title' => 'Profile',
             'notices' => $this->notices,
             'user' => $user,
+            'meta' => $this->pages,
 
         ]);
     }
@@ -213,6 +225,7 @@ class SiteController extends Controller
             'waiting_stories' => $waiting_stories,
             'rejected_stories' => $rejected_stories,
             'draft_stories' => $draft_stories,
+            'meta' => $this->pages,
 
         ]);
     }
@@ -244,6 +257,7 @@ class SiteController extends Controller
             'notices' => $this->notices,
             'stories' => $stories,
             'detail' => $detail,
+            'meta' => $this->pages,
         ]);
     }
 
@@ -264,6 +278,7 @@ class SiteController extends Controller
             'categories_level2' => $categories_level2,
             'categories_level3' => $categories_level3,
             'story' => $story,
+            'meta' => $this->pages,
 
         ]);
 
