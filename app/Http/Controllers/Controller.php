@@ -37,7 +37,7 @@ class Controller extends BaseController
         $url = url()->current(); //Route::current()->uri();
         $basePath = url('/');
         $pathAfterBase = str_replace($basePath, '', $url);
-// dd($pathAfterBase);
+
         $this->pages = Page::where('url', $pathAfterBase)->first();
 
         // dd($this->pages);

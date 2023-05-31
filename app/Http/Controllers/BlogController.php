@@ -52,7 +52,7 @@ class BlogController extends Controller
             "blog_description" => "required",
             "blog_date" => "required",
             "status" => "required",
-            'blog_banner' => 'required|file|max:2048|mimes:jpeg,png,svg,webp',
+            // 'blog_banner' => 'required|file|max:2048|mimes:jpeg,png,svg,webp',
         ]);
 
         if ($validator->fails()) {
@@ -85,7 +85,7 @@ class BlogController extends Controller
             }
 
             $meta->name = trim("blogs.".lcfirst(str_replace(' ', '', ucwords($req_blog['blog_title']))));
-            $meta->url = trim("blogs/".Str::slug($req_blog['blog_title']));
+            $meta->url = trim("/blogs/".Str::slug($req_blog['blog_title']));
             $meta->page_title = trim($req_blog['blog_title']);
             $meta->page_group = trim('blog');
             $meta->meta_title = trim($req_meta['meta_title']);

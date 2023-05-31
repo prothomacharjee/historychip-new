@@ -82,7 +82,7 @@ class PartnerController extends Controller
 
 
             $meta->name = "partners.".lcfirst(str_replace(' ', '', ucwords($req_partner['name'])));
-            $meta->url = "partners/".Str::slug($req_partner['name']);
+            $meta->url = "/partners/".Str::slug($req_partner['name']);
             $meta->page_title = $req_partner['title'];
             $meta->page_group = 'partner';
             $meta->meta_title = $req_meta['meta_title'];
@@ -130,7 +130,7 @@ class PartnerController extends Controller
 
                         if($req_partner['id']){
                             $partner->partner_image()->delete();
-                            $partner->partner_image()->createMany($productpurchaseorderdetails);
+                            $partner->partner_image()->createMany($partner_images);
                         }
                         else{
 

@@ -84,23 +84,23 @@ class StoryController extends Controller
             $meta->meta_title = $request->title;
             $meta->meta_keywords = $request->tags;
             $meta->meta_description = strlen(strip_tags($request->context)) > 100 ? substr(strip_tags($request->context), 0, 100) . ' . . .' : strip_tags($request->context);
-            $meta->og_author = Auth::user()->name;
+            $meta->og_author = $request->author_name;
 
             try {
-                DB::transaction(function () use ($story, $meta) {
+                DB::transaction(function () use ($story, $meta,$request) {
                     $story->save();
                     $meta->page_group_id = $story->id;
                     $meta->name = "stories." . $story->id . lcfirst(str_replace(' ', '', ucwords($request->title)));
-                    $meta->url = "stories/" . $story->id . "-" . Str::slug($request->title);
+                    $meta->url = "/stories/" . $story->id . "-" . Str::slug($request->title);
                     $meta->save();
 
-                    $authorPage = Pages::where(['page_group' => 'auhtor', 'page_group_id' => Auth::id()])->first();
+                    $authorPage = Page::where(['page_group' => 'auhtor', 'page_group_id' => Auth::id()])->first();
                     if (empty($authorPage)) {
                         $authorMeta = new Page;
                         $authorMeta->page_group = 'auhtor';
                         $authorMeta->page_group_id = Auth::id();
-                        $authorMeta->name = "author." . lcfirst(str_replace(' ', '', ucwords(Auth::user()->name)));
-                        $authorMeta->url = "author/" . Str::slug(Auth::user()->name);
+                        $authorMeta->name = "authors." . lcfirst(str_replace(' ', '', ucwords(Auth::user()->name)));
+                        $authorMeta->url = "/authors/" . Str::slug(Auth::user()->name);
                         $authorMeta->page_title = Auth::user()->name;
                         $authorMeta->meta_title = Auth::user()->name;
                         $authorMeta->meta_keywords = Auth::user()->name . ", History Chip, History Chip Author";

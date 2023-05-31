@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('state')->nullable();
             $table->string('country')->nullable();
             $table->text('bio')->nullable();
-            $table->date('dob')->nullable();
+            $table->string('dob')->nullable();
             $table->string('phone')->nullable();
             $table->string('image')->nullable();
             $table->string('facebook_page_link')->nullable();
