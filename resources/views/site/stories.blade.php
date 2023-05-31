@@ -183,7 +183,9 @@
                     </div>
 
                     <div class="col-lg-8 m-auto softsource-story-comment-section softsource-story-border-bottom mb-3 pb-4">
-                        <div id="commentmsg" class="alert border-0 border-start border-5 border-success alert-dismissible fade show py-2" style="display: none">
+                        <div id="commentmsg"
+                            class="alert border-0 border-start border-5 border-success alert-dismissible fade show py-2"
+                            style="display: none">
                             <div class="d-flex align-items-center">
                                 <div class="font-35 text-success"><i class='bx bxs-check-circle'></i>
                                 </div>
@@ -312,11 +314,21 @@
                 @else
                     @if (count($stories) > 0)
                         @foreach ($stories as $story)
+                        @php
+
+                            if ($story->header_image_path == "") {
+                                $headerImage = "/storage/frontend/stories/images/Banner72pi2.jpg";
+                            } else {
+                                $headerImage = $story->header_image_path;
+                            }
+                        @endphp
+
                             <div class="col-lg-4 col-md-6 mb-5 animate__animated fadeInUp">
                                 <div class="softsource-story-item-div">
                                     <div class="softsource-story-item-image text-center">
                                         <a href="{{ url($story->url) }}">
-                                            <img class="img-fluid" src="{{ asset($story->header_image_path) }}"
+                                            <img class="img-fluid"
+                                                src="{{ asset($headerImage) }}"
                                                 alt="{{ $story->header_image_alt_text }}" style="width: 370px;">
                                         </a>
                                     </div>

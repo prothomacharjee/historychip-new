@@ -20,11 +20,12 @@ class SiteController extends Controller
     public function index()
     {
         $categories = StoryCategory::where(['level' => 0, 'status' => 1])->get();
+        $fetured_stories = Story::FetchAllFeaturedStory();
         return view('site.index')->with([
             'page_title' => 'Home',
             'notices' => $this->notices,
             'categories' => $categories,
-            'stories' => [],
+            'fetured_stories' => $fetured_stories,
             'meta' => $this->pages,
         ]);
     }
@@ -129,7 +130,7 @@ class SiteController extends Controller
                 ->join('pages as p', 'b.id', '=', 'p.page_group_id')
                 ->select(DB::raw('b.id as blog_id, b.blog_title, b.blog_description, b.blog_date, b.blog_banner, b.blog_banner_alt_text, p.id as page_id, p.name, p.url, p.page_title, p.meta_title, p.meta_keywords, p.meta_description'))
                 ->where('p.page_group', '=', 'blog')
-                ->where('b.status', '=', 1)
+                ->where('b.status', '=', 1)->orderBy('b.id', 'DESC')
                 ->paginate(20);
             $page_title = 'Blogs';
             $detail = false;

@@ -179,8 +179,8 @@
                             <div class="ml-2">
                                 @guest
                                 @if (Route::has('login'))
-                                <a href="#" class="btn softsource-home-btn-register">Register</a>
-                                <a href="#" class="btn softsource-home-btn-login">Login</a>
+                                <a href="{{ route('register') }}" class="btn softsource-home-btn-register">Register</a>
+                                <a href="{{ route('login') }}" class="btn softsource-home-btn-login">Login</a>
                                 @endif
                                 @else
                                 <div class="dropdown">
@@ -203,17 +203,17 @@
                                         </li>
                                     </ul>
 
-                                    <a href="#" class="btn text-white softsource-notification-icon" role="button" id="notification-dropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                    {{-- <a href="#" class="btn text-white softsource-notification-icon" role="button" id="notification-dropdown" data-bs-toggle="dropdown" aria-expanded="false">
                                         <span class="fa-stack fa-lg">
                                             <i class="fas fa-bell fa-stack-1x"></i>
                                             <span class="softsource-notification-count">3</span>
                                         </span>
-                                    </a>
-                                    <ul class="dropdown-menu softsource-notification-dropdown" aria-labelledby="notification-dropdown">
+                                    </a> --}}
+                                    {{-- <ul class="dropdown-menu softsource-notification-dropdown" aria-labelledby="notification-dropdown">
                                         <li><a class="dropdown-item" href="#">Notification 1</a></li>
                                         <li><a class="dropdown-item" href="#">Notification 2</a></li>
                                         <li><a class="dropdown-item" href="#">Notification 3</a></li>
-                                    </ul>
+                                    </ul> --}}
                                 </div>
                                 @endguest
                             </div>

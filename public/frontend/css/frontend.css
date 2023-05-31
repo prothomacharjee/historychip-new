@@ -292,11 +292,15 @@ form .form-group {
 }
 
 .softsource-top-section {
-    padding: 5px 0;
+    padding: 0 0;
     /* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); */
   }
 
 .softsource-top-section div {
+}
+
+.softsource-bottom-section{
+    margin-top: -10px;
 }
 
 .softsource-header-logo {
@@ -337,7 +341,7 @@ form .form-group {
 }
 
 .softsource-scrolling-notice {
-  padding: 5px 0;
+  padding: 0 0;
 }
 
 .softsource-scrolling-notice marquee {

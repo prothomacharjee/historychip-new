@@ -79,7 +79,7 @@ class Story extends Model
         ->join('pages as p', 'stories.id', '=', 'p.page_group_id')
         ->select(DB::raw('stories.*, p.id as page_id, p.name, p.url, p.page_title, p.meta_title, p.meta_keywords, p.meta_description'))
         ->where('p.page_group', '=', 'story')
-        ->where(['stories.status' => 1, 'stories.is_approved' => 1, 'stories.is_draft' => 0])
+        ->where(['stories.status' => 1, 'stories.is_approved' => 1, 'stories.is_draft' => 0])->latest()
         ->paginate(12);
     }
 
@@ -91,7 +91,7 @@ class Story extends Model
         ->where('stories.author_id', '=', $author_id)
         ->where('p.page_group', '=', 'story')
         ->where('stories.is_approved', '=', $is_approved)
-        ->where('stories.is_draft', '<>', 1)
+        ->where('stories.is_draft', '<>', 1)->latest()
         ->paginate($paginated_number);
     }
 
@@ -102,8 +102,17 @@ class Story extends Model
         ->select(DB::raw('stories.*, p.id as page_id, p.name, p.url, p.page_title, p.meta_title, p.meta_keywords, p.meta_description'))
         ->where('stories.author_id', '=', $author_id)
         ->where('p.page_group', '=', 'story')
-        ->where('stories.is_draft', '=', $is_draft)
+        ->where('stories.is_draft', '=', $is_draft)->latest()
         ->paginate($paginated_number);
+    }
+
+    public static function FetchAllFeaturedStory(){
+        return Story::with('base_category', 'level1_category', 'level2_category', 'level3_category', 'author_details')
+        ->join('pages as p', 'stories.id', '=', 'p.page_group_id')
+        ->select(DB::raw('stories.*, p.id as page_id, p.name, p.url, p.page_title, p.meta_title, p.meta_keywords, p.meta_description'))
+        ->where('p.page_group', '=', 'story')
+        ->where(['stories.status' => 1, 'stories.is_featured' => 1])->latest()
+        ->get();
     }
 
 
