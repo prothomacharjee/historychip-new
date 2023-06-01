@@ -128,7 +128,7 @@ return [
 
     'cookie' => env(
         'SESSION_COOKIE',
-        Str::slug(env('APP_NAME', 'laravel'), '_').'_session'
+        Str::slug(env('APP_NAME', 'laravel'), '_') . '_session'
     ),
 
     /*
@@ -197,5 +197,22 @@ return [
     */
 
     'same_site' => 'lax',
+
+    'guards' => [
+        'web' => [
+            'driver' => 'database',
+            'provider' => 'users',
+            'table' => 'sessions', // Specify the custom session table name for users
+        ],
+
+        'admin' => [
+            'driver' => 'database',
+            'provider' => 'admins',
+            'table' => 'admin_sessions', // Specify the custom session table name
+        ],
+    ],
+
+
+
 
 ];
