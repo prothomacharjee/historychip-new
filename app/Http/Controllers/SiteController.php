@@ -21,11 +21,14 @@ class SiteController extends Controller
     {
         $categories = StoryCategory::where(['level' => 0, 'status' => 1])->get();
         $fetured_stories = Story::FetchAllFeaturedStory();
+        $fetured_blogs = Blog::FetchAllFeaturedBlogs();
+
         return view('site.index')->with([
             'page_title' => 'Home',
             'notices' => $this->notices,
             'categories' => $categories,
             'fetured_stories' => $fetured_stories,
+            'fetured_blogs' => $fetured_blogs,
             'meta' => $this->pages,
         ]);
     }

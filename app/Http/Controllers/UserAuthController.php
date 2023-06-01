@@ -74,7 +74,7 @@ class UserAuthController extends Controller
             return redirect()->back()->withErrors($validation)->withInput();
         } else {
             $credentials = $request->only('email', 'password');
-            if (Auth::attempt($credentials)) {
+            if (Auth::guard('users')->attempt($credentials, $request->get('remember'))) {
                 // User is authenticated
                 $this->clearLoginAttempts($request);
                 return redirect()->intended('/');
