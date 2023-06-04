@@ -9,9 +9,13 @@ use App\Models\Story;
 use Illuminate\Support\Str;
 use App\Models\StoryComment;
 use Illuminate\Http\Request;
+use App\Mail\NewStorySubmitted;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Session;
 use Yajra\DataTables\Facades\DataTables;
+use App\Mail\StorySubmissionConfirmation;
 use Illuminate\Support\Facades\Validator;
 
 class StoryController extends Controller
@@ -108,6 +112,7 @@ class StoryController extends Controller
                         $authorMeta->og_author = 'History Chip';
                         $authorMeta->save();
                     }
+                    $this->SendStorySubmissionConfirmationMail($meta->url);
                 });
                 return redirect()->route('my-stories')->with('success', "Thank you for submitting your story, we will review it and send an email when published.");
             } catch (Exception $e) {
@@ -171,6 +176,26 @@ class StoryController extends Controller
                 'msg' => $e->getMessage(),
             ]);
         }
+    }
+
+    public function SendStorySubmissionConfirmationMail2Way($url){
+        $user = Auth::user();
+        $details = [
+            'title' => 'Story Submission Acknowledgement From History Chip',
+            'theBody' => 'Thank you for submitting your story, we will review it and send an email when published.',
+            'theComment' => "",
+            'signature' => 'Jean McGavin',
+        ];
+        $details_admin = [
+            'title' => 'New Story has been submitted in Historychip',
+            'name' => $user->name,
+            'email' => $user->email,
+            'url' => $url
+        ];
+
+        Mail::to($user->email)->send(new StorySubmissionConfirmation($details));
+        Mail::to('jean@historychip.com')->send(new NewStorySubmitted($details_admin));
+        Session::flash('success', 'Story Submitted Successfully');
     }
 
     public function LoadApproveStoryDataTable(Request $request)
