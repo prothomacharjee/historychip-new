@@ -371,7 +371,7 @@
 
             $.ajax({
                 type: 'POST',
-                url: '{{ route('writing-prompts.get') }}',
+                url: '{{ route("writing-prompts.get") }}',
                 data: {
                     '_token': '{{ csrf_token() }}',
                 },

@@ -35,10 +35,10 @@
 
 
 <!-- Section 1: Daily Prompt Generator -->
-<section class="py-5 softsource-home-daily-prompt-div" id="sec-2">
+<section class="pt-5 softsource-home-daily-prompt-div" id="sec-2">
     <div class="container">
         <div class="row">
-            <div class="col-md-12 mx-auto d-flex softsource-home-daily-prompt text-center">
+            <div class="col-md-12 col-xxl-12 col-xl-12 col-lg-12 col-12 col-sm-12 mx-auto d-flex softsource-home-daily-prompt text-center">
                 <div class="softsource-home-daily-prompt-genrator">
                     <h2 class="text-center softsource-home-daily-prompt-header">Daily Prompt Generator</h2>
                     <div class="softsource-home-daily-prompt-word-text-box d-flex mx-5">
@@ -67,17 +67,17 @@
 
 <!-- Section 2: Featured Stories -->
 @if (!empty($fetured_stories))
-<section class="py-5">
+<section class="">
     <div class="container">
         <div class="row">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                 <div class="section-title-wrap text-center mb-5">
                     <h2 class="new-theme">Featured Stories</h2>
                 </div>
             </div>
         </div>
         <div class="row">
-            <div class="col-12">
+            <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                 <div class="row">
 
                     @foreach ($fetured_stories as $key => $story)
@@ -89,7 +89,7 @@
                     $headerImage = $story->header_image_path;
                     }
                     @endphp
-                    <div class="col-lg-4 col-md-6 mb-5 animate__animated fadeInUp">
+                    <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 mb-5 animate__animated fadeInUp">
                         <div class="softsource-story-item-div">
                             <div class="softsource-story-item-image text-center">
                                 <a href="{{ url($story->url) }}">

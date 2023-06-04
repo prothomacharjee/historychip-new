@@ -80,15 +80,15 @@
             <div class="softsource-top-section softsource-header-sticky">
                 <div class="mx-5">
                     <div class="row align-items-center">
-                        <div class="col-md-2">
+                        <div class="col-md-2 col-xxl-2 col-xl-2 col-lg-2 col-2 col-sm-2">
                             <div class="softsource-header-logo">
-                                <a class="navbar-brand ms-auto " href="#">
+                                <a class="navbar-brand ms-auto " href="{{ route('home') }}">
                                     <img class="img-fluid light-logo" src="{{ asset('frontend/images/logo/logo-light.png') }}" alt="History Chip Logo">
                                     <p class="softsource-cust-tag">every person, every story, all the truth</p>
                                 </a>
                             </div>
                         </div>
-                        <div class="col-md-8">
+                        <div class="col-md-8 col-xxl-8 col-xl-8 col-lg-8 col-8 col-sm-8">
                             <nav class="navbar">
 
                                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -175,7 +175,7 @@
                                 </div>
                             </nav>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-2 col-md-2 col-xxl-2 col-xl-2 col-lg-2 col-2	col-sm-2">
                             <div class="ml-2">
                                 @guest
                                 @if (Route::has('login'))

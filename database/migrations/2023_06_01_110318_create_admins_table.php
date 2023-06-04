@@ -22,6 +22,7 @@ return new class extends Migration
             $table->date('token_2fa_expiry')->nullable();
             $table->string('remember_token')->nullable();
             $table->string('reset_token')->nullable();
+            $table->tinyInteger('is_available')->default(1);
             $table->timestamps();
             $table->foreign('admin_group_id')->references('id')->on('admin_groups')->onDelete('cascade');
         });

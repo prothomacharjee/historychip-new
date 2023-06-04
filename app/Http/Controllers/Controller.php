@@ -2,15 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Page;
 use App\Models\NoticePrompt;
-use Illuminate\Support\Facades\Route;
-use function PHPUnit\Framework\isNull;
-use Illuminate\Routing\Controller as BaseController;
-use Illuminate\Foundation\Validation\ValidatesRequests;
-
+use App\Models\Page;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Illuminate\Foundation\Validation\ValidatesRequests;
+use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Support\Facades\Route;
 
 class Controller extends BaseController
 {
@@ -37,19 +34,31 @@ class Controller extends BaseController
                     });
             })->get();
 
-
             // // Get the current route name
             // $routeName = Route::currentRouteName();
             // // Get the current URL
             $url = url()->current(); //Route::current()->uri();
             $basePath = url('/');
             $pathAfterBase = str_replace($basePath, '', $url);
-
+            // dd(Route::getRoutes());
             $this->pages = Page::where('url', $pathAfterBase)->first();
+            $routeExists = false;
 
-            if (is_null($this->pages)) {
-                abort('404');
+            foreach (Route::getRoutes() as $route) {
+
+                if ($route->uri === str_replace('/','', $pathAfterBase)) {
+                    $routeExists = true;
+                    break;
+                }
             }
+
+
+            // if (is_null($this->pages)) {
+            //     abort('404');
+            // }
+            // else{
+
+            // }
             // dd($this->pages);
         }
     }

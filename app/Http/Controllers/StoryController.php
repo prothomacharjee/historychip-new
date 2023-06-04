@@ -248,10 +248,13 @@ class StoryController extends Controller
                 return $count;
             })
             ->addColumn('approval', function ($row) {
-                return User::where('id', $row->approved_by)->first()->name;
+                $user = User::where('id', $row->approved_by)->first();
+                return ($user)?$user->name:'';
+
             })
             ->addColumn('author', function ($row) {
-                return User::where('id', $row->author_id)->first()->name;
+                $user = User::where('id', $row->author_id)->first();
+                return $user->name;
             })
             ->addColumn('action', function ($row) use ($url) {
                 $buttons = '<a href="' . route('admin.blogs.edit', $row->id) . '" data-toggle="tooltip" title="Edit" class="edit btn btn-outline-primary btn-sm me-2"><i class="fadeInUp animate__animated bx bx-edit-alt"></i></a>';

@@ -109,6 +109,9 @@ class SiteController extends Controller
 
     public function blogs($slug = null)
     {
+        if(is_null($this->pages)){
+            abort('404');
+        }
         $previous = [];
         $next = [];
         if ($slug) {
@@ -155,6 +158,9 @@ class SiteController extends Controller
     public function partners($slug = null)
     {
         if ($slug) {
+            if(is_null($this->pages)){
+                abort('404');
+            }
 
             $partner = DB::table('partners as b')
                 ->join('pages as p', 'b.id', '=', 'p.page_group_id')
@@ -239,7 +245,9 @@ class SiteController extends Controller
         if ($slug) {
             # code...
             // $stories = Story::findOrFail(Auth::id())->load('user_profile');
-
+            if(is_null($this->pages)){
+                abort('404');
+            }
             $slugParts = explode('-', $slug);
             $firstWord = $slugParts[0];
             // $remainingPart = implode('-', array_slice($slugParts, 1));
@@ -335,5 +343,7 @@ class SiteController extends Controller
         );
         echo json_encode($value);
     }
+
+
 
 }

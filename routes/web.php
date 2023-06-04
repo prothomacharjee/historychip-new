@@ -1,19 +1,19 @@
 <?php
 
+use App\Http\Controllers\AdminAuthController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\BlogController;
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\NoticePromptController;
+use App\Http\Controllers\PartnerController;
+use App\Http\Controllers\PartnerTypeController;
+use App\Http\Controllers\SiteController;
+use App\Http\Controllers\StoryCategoryController;
+use App\Http\Controllers\StoryController;
+use App\Http\Controllers\UserAuthController;
+use App\Http\Controllers\WritingPromptController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Artisan;
-use App\Http\Controllers\BlogController;
-use App\Http\Controllers\SiteController;
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\StoryController;
-use App\Http\Controllers\ContactController;
-use App\Http\Controllers\PartnerController;
-use App\Http\Controllers\UserAuthController;
-use App\Http\Controllers\PartnerTypeController;
-use App\Http\Controllers\NoticePromptController;
-use App\Http\Controllers\StoryCategoryController;
-use App\Http\Controllers\WritingPromptController;
 
 /*
 |--------------------------------------------------------------------------
@@ -76,25 +76,29 @@ Route::get('/stories/{slug?}', [SiteController::class, 'read_story'])->name('sto
 
 Route::get('/write-story/{slug?}', [SiteController::class, 'write_story'])->name('story.write')->middleware('auth');
 
-
 Route::post('/save-image', [SiteController::class, 'saveimage'])->name('story.saveimage')->middleware('auth');
 Route::post('/delete-image', [SiteController::class, 'deleteimage'])->name('story.deleteimage')->middleware('auth');
 Route::post('/save-audio', [SiteController::class, 'saveaudio'])->name('story.saveaudio')->middleware('auth');
 Route::post('/delete-audio', [SiteController::class, 'deleteaudio'])->name('story.deleteaudio')->middleware('auth');
 
-Route::post('/subcat-by-parentcat', [SiteController::class, 'FetchSubCatByParentCategory'])->name('story.subCatByParentCategory')->middleware('auth');
+Route::post('/subcat-by-parentcat', [SiteController::class, 'FetchSubCatByParentCategory'])->name('story.subCatByParentCategory');
 
-
-
-Route::post('/getwritingprompts', [WritingPromptController::class, 'getwritingprompts'])->name('writing-prompts.get')->middleware('auth');
+Route::post('/getwritingprompts', [WritingPromptController::class, 'getwritingprompts'])->name('writing-prompts.get');
 
 Route::post('/story/create', [StoryController::class, 'store'])->name('story.create')->middleware('auth');
 Route::post('/story/comment', [StoryController::class, 'save_comment'])->name('story.comment')->middleware('auth');
 
 // ADMIN PANEL
 
+Route::get('powerhouse', [AdminAuthController::class, 'showLoginForm'])->name('admin.login');
+Route::post('powerhouse/login', [AdminAuthController::class, 'login'])->name('admin.login.submit');
+
 // Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function () {
-Route::group(['prefix' => 'powerhouse'], function () {
+Route::group(['prefix' => 'powerhouse', 'middleware' => 'admin'], function () {
+
+    Route::get('/logout', [AdminAuthController::class, 'logout'])->name('admin.logout');
+
+    //Dashboard
     Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
 
     // Notice Prompts
@@ -144,8 +148,7 @@ Route::group(['prefix' => 'powerhouse'], function () {
     Route::get('/partners/edit/{id}', [PartnerController::class, 'edit'])->name('admin.partners.edit');
     Route::post('/store-partners-data', [PartnerController::class, 'store'])->name('admin.partners.store');
     Route::post('/fetch-partners-data', [PartnerController::class, 'FetchPartnerDataById'])->name('admin.partners.fetch');
-    Route::post('/delete-partners/{id}', [PartnerController::class, 'destroy'])->name('admin.partner-types.destroy');
-
+    Route::post('/delete-partners/{id}', [PartnerController::class, 'destroy'])->name('admin.partners.destroy');
 
     // Story Category
     Route::get('/story-categories', [StoryCategoryController::class, 'index'])->name('admin.story-categories');
@@ -158,7 +161,6 @@ Route::group(['prefix' => 'powerhouse'], function () {
     Route::post('/fetch-story-categories-data-by-level', [StoryCategoryController::class, 'FetchStoryCategoryDataByLevel'])->name('admin.story-categories.fetchByLevel');
 
     Route::post('/delete-story-categories/{id}', [StoryCategoryController::class, 'destroy'])->name('admin.story-categories.destroy');
-
 
     //Stories
 

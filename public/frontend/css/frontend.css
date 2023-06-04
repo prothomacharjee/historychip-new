@@ -363,6 +363,11 @@ form .form-group {
   /* padding: 0; */
 }
 
+.softsource-home-daily-prompt-div{
+    bottom: 200px;
+    position: relative;
+}
+
 .softsource-home-daily-prompt {
   background: rgba(28, 28, 28, 20%);
   backdrop-filter: blur(10.5px);
@@ -370,8 +375,7 @@ form .form-group {
   justify-content: center;
   align-items: center;
   height: 285px;
-  bottom: 200px;
-  position: relative;
+
   padding-right: 0px;
   z-index: 2;
 }
