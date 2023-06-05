@@ -46,6 +46,10 @@
     .softsource-home-text-over-video-div {
         transform: translate(-28%, -50%) !important;
     }
+
+    .softsource-home-daily-prompt-header{
+        font-size: 58px;
+    }
 }
 
 @media only screen and (max-width: 1680px) {
@@ -55,6 +59,10 @@
 
     .softsource-home-top-scroll {
         bottom: 150px;
+    }
+
+    .softsource-home-daily-prompt-header{
+        font-size: 51px;
     }
 }
 
@@ -69,13 +77,11 @@
 
     .softsource-home-text-over-video-div {
         transform: translate(-20%, -50%) !important;
-    }
-}
-
-@media only screen and (max-width: 1440px) {
-    .softsource-home-text-over-video-div {
-        transform: translate(-20%, -50%) !important;
         left: 65% !important;
+    }
+
+    .softsource-home-daily-prompt-header{
+        font-size: 44px;
     }
 }
 
@@ -123,16 +129,12 @@
     }
 
     .softsource-home-daily-prompt-header{
-        font-size: 40px;
+        font-size: 35px;
     }
+
+
 }
 
-@media (min-width: 992px) {
-    .cust-col [class*="col-lg"] {
-        width: 20%;
-        max-width: 20%;
-    }
-}
 
 @media (min-width: 1200px) {
     .softsource-index-section6 .form-sec {
