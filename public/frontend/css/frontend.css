@@ -512,11 +512,10 @@ form .form-group {
     border: 1px solid #95a8ae;
 }
 
-.softsource-home-search-story-section-title-wrap{
+.softsource-home-search-story-section-title-wrap {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
+
 }
 
 .softsource-home-search-story-title {
@@ -536,9 +535,91 @@ form .form-group {
 .softsource-home-search-story-horizontal-line {
     width: 593px;
     border: 3px solid #778a91;
-    position: relative;
-    left: 70px;
 }
+
+.softsource-home-search-story-section-category-wrap {
+}
+
+.softsource-home-search-story-form {
+    background: rgba(255, 255, 255, 1);
+    backdrop-filter: blur(5.5px);
+    border-radius: 40px;
+    align-items: center;
+    justify-content: flex-start;
+    width: fit-content;
+}
+
+.softsource-home-search-story-form-category-label {
+    font-family: "Poppins";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    color: #000000;
+}
+
+.softsource-home-search-story-form-category-select {
+    background: #ffffff;
+    border: 1px solid #adadad;
+    border-radius: 9px;
+    box-sizing: border-box;
+    width: 216px;
+    height: 57px;
+    font-size: 15px;
+    text-transform: capitalize;
+    cursor: pointer;
+    margin-right: 30px;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.softsource-home-search-story-form-category-button {
+    padding: 12px 13px;
+    width: 57px;
+    height: 57px;
+    background: #3e5662;
+    border: 1px solid #ffffff;
+    backdrop-filter: blur(12.5px);
+    border-radius: 10px;
+    font-family: "Poppins";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 160%;
+    letter-spacing: -0.02em;
+    color: #ffffff;
+}
+
+.softsource-home-search-story-form-category-button:hover {
+    background: #3e5662;
+    border: 1px solid #ffffff;
+    color: #ffffff;
+}
+
+.softsource-home-writing-prompt-section {
+    background-image: url(../../frontend/images/web_img/home-wp.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.softsource-home-search-writing-prompt-title-wrap{
+    display: flex;
+    flex-direction: column;
+
+}
+
+.softsource-home-writing-prompt-title {
+    font-family: "Montserrat";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 90px;
+    line-height: 102.5%;
+    text-transform: uppercase;
+    color: #000000;
+}
+
+
 
 /* .softsource-header-logo {
     flex-basis: 17%;
@@ -2850,16 +2931,6 @@ input:checked + .softsource-slider-toggle:before {
 .softsource-story-item-details:hover h5,
 .softsource-story-item-details:hover a {
     color: #fff;
-}
-
-.softsource-custom-select {
-    width: 200px;
-    font-size: 15px;
-    border-radius: 0px;
-    text-transform: capitalize;
-    cursor: pointer;
-    margin-right: 30px;
-    background: none;
 }
 
 .softsource-story-section {

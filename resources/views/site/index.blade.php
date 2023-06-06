@@ -49,11 +49,11 @@
                         </div>
                         <!-- <div class="text-start">
 
-                                                            <button type="button" class="btn-direction backBtn"><i class="fa fa-arrow-left"
-                                                                    aria-hidden="true"></i></button>
-                                                            <button type="button" class="btn-direction nextBtn"><i class="fa fa-arrow-right"
-                                                                    aria-hidden="true"></i></button>
-                                                        </div> -->
+                                                                                            <button type="button" class="btn-direction backBtn"><i class="fa fa-arrow-left"
+                                                                                                    aria-hidden="true"></i></button>
+                                                                                            <button type="button" class="btn-direction nextBtn"><i class="fa fa-arrow-right"
+                                                                                                    aria-hidden="true"></i></button>
+                                                                                        </div> -->
                     </div>
                     <div class="softsource-home-daily-prompt-add-story">
                         <div class="softsource-home-daily-prompt-add-story-link">
@@ -163,7 +163,7 @@
                 <div class="row mt-3">
                     <div class="col-12 text-center">
                         <a href="{{ route('story.read') }}"
-                            class="btn softsource-home-fetured-story-read-more-story-btn">Read More Stories</a>
+                            class="btn softsource-home-fetured-story-read-more-story-btn px-5">Read More Stories</a>
                     </div>
                 </div>
             </div>
@@ -173,35 +173,80 @@
 
 
     <!-- Section 3: Search Stories -->
-    <section class="py-5 my-5">
-        <div class="row">
-            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
-                <div class="softsource-home-search-story-section-title-wrap mb-5">
-                    <div class="softsource-home-search-story-title">Search <br><span> Stories</span></div>
-                    <div class="softsource-home-search-story-horizontal-line"></div>
+    <section class="bg-light py-5 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+                    <div class="softsource-home-search-story-section-title-wrap mb-5">
+                        <div class="softsource-home-search-story-title">Search <br><span> Stories</span></div>
+                        <div class="softsource-home-search-story-horizontal-line"></div>
+                    </div>
                 </div>
-            </div>
-            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
-                <div class="softsource-home-search-story-section-title-wrap mb-5">
-                    <div class="softsource-home-search-story-title">Search <br><span> Stories</span></div>
-                    <div class="softsource-home-search-story-horizontal-line"></div>
+                <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+                    <div class="softsource-home-search-story-section-category-wrap p-3">
+                        <form class="softsource-home-search-story-form d-flex p-5" method="Post" action="">
+                            <div class="">
+                                <label for="category_id"
+                                    class="form-label softsource-home-search-story-form-category-label">Select
+                                    Category</label>
+                                <select class="form-control softsource-home-search-story-form-category-select"
+                                    name='category_id' id="category_id" required>
+                                    <option value="">Please Select</option>
+                                    @foreach ($categories as $category)
+                                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="">
+                                <label for="sub_category_id_level_1"
+                                    class="form-label softsource-home-search-story-form-category-label">Select Sub
+                                    Category</label>
+                                <select class="form-control softsource-home-search-story-form-category-select"
+                                    name="sub_category_id_level_1" id="sub_category_id_level_1" disabled>
+
+                                </select>
+                            </div>
+                            <div class="mt-4">
+
+                                <button
+                                    class="btn softsource-home-search-story-form-category-button"><span>Go</span></button>
+                            </div>
+
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="bg-light py-5 my-5">
-        <div class="row">
-            <div class="col-lg-6 col-md-12 col-sm-12 col-12">
+    <!-- Section 4: Writing Prompt -->
+    <section class="py-5 softsource-home-writing-prompt-section">
 
-            </div>
-        </div>
         <div class="container">
+
+            <div class="row">
+                <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+                    <div class="container">
+                        <div class="softsource-home-search-writing-prompt-title-wrap mb-5">
+                            <div class="softsource-home-writing-prompt-title mt-5">Want<br>Creative<br>Writing<br>Prompts?</div>
+                            <div class="">
+                                <a href="{{ route('story.write') }}" class="btn softsource-home-fetured-story-read-more-story-btn px-5">Submit Your Story</a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+                    <div class="_form_15"></div>
+                    <script src="https://historychip.activehosted.com/f/embed.php?id=15" type="text/javascript" charset="utf-8"></script>
+                </div>
+            </div>
 
             <div class="row">
                 <div class="col-md-12 text-center">
 
-                    <form class="softsource-port-form d-flex" method="GET" action="">
+                    {{-- <form class="softsource-port-form d-flex" method="GET" action="">
                         <select class="form-control softsource-custom-select story-category-select2" name='category_id'
                             id="category_id" required="">
                             <option value="">Please Select</option>
@@ -216,18 +261,17 @@
                         </select>
                         <button class="softsource-btn softsource-port-cust-btn"><i
                                 class="flaticon-magnifying-glass"></i><span>Go</span></button>
-                    </form>
+                    </form> --}}
 
                 </div>
 
             </div>
-            <div class="row">
+            {{-- <div class="row">
                 <div class="col-lg-2 col-md-2 ml-auto mr-auto">
 
                 </div>
                 <div class="col-md-4 col-md-4 ml-auto mr-auto mb-5">
-                    <div class="_form_15"></div>
-                    <script src="https://historychip.activehosted.com/f/embed.php?id=15" type="text/javascript" charset="utf-8"></script>
+
                 </div>
                 <div class="col-lg-4 col-md-4 ml-auto mr-auto mb-5">
                     <img src="{{ asset('frontend/images/web_img/quick-easy.png') }}" alt="writing tips quick easy">
@@ -238,9 +282,9 @@
 
                 <div class="col-md-12 text-center">
                     <a class="softsource-btn btn-lg mt-4" href="{{ route('story.write') }}">Submit Your STORY</a>
-                    {{-- <button class="softsource-btn btn-lg mt-4">Submit Your STORY</button> --}}
+
                 </div>
-            </div>
+            </div> --}}
 
         </div>
     </section>
@@ -364,10 +408,11 @@
 
     <script>
         $(document).ready(function() {
-            $('.story-category-select2').select2({
-                maximumSelectionLength: 3,
-                placeholder: "Please Select"
-            });
+            // $('.story-category-select2').select2({
+            //     maximumSelectionLength: 3,
+            //     placeholder: "Please Select"
+            // });
+
 
         });
 
