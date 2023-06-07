@@ -72,7 +72,7 @@ class BlogController extends Controller
             $blog->status = trim($req_blog['status']);
             $blog->is_draft = trim($req_blog['is_draft']);
 
-            if ($req_blog['is_draft']==1) {
+            if ($req_blog['is_draft'] == 1) {
                 $blog->is_featured = 0;
             } else {
                 $blog->is_featured = trim($req_blog['is_featured']);
@@ -84,8 +84,8 @@ class BlogController extends Controller
                 $blog->created_by = Auth::id();
             }
 
-            $meta->name = trim("blogs.".lcfirst(str_replace(' ', '', ucwords($req_blog['blog_title']))));
-            $meta->url = trim("/blogs/".Str::slug($req_blog['blog_title']));
+            $meta->name = trim("blogs." . lcfirst(str_replace(' ', '', ucwords($req_blog['blog_title']))));
+            $meta->url = trim("/blogs/" . Str::slug($req_blog['blog_title']));
             $meta->page_title = trim($req_blog['blog_title']);
             $meta->page_group = trim('blog');
             $meta->meta_title = trim($req_meta['meta_title']);
@@ -104,11 +104,10 @@ class BlogController extends Controller
                     $meta->page_group_id = $blog->id;
                     $meta->save();
                 });
-                return redirect()->route('blogs')->with('success', "Blog $returnText Successfully");
-            } catch (\Exception$e) {
+                return redirect()->route('admin.blogs')->with('success', "Blog $returnText Successfully");
+            } catch (\Exception $e) {
                 return redirect()->back()->with('error', $e->getMessage());
             }
-
         }
     }
 
@@ -131,9 +130,17 @@ class BlogController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Blog $blog)
+    public function destroy($id)
     {
-        //
+        try {
+            $blog = Blog::findOrFail($id);
+            DB::transaction(function () use ($blog) {
+                $blog->delete();
+            });
+            return redirect()->route('admin.blogs')->with('success', 'Blogs Deleted Successfully');
+        } catch (\Exception$e) {
+            return redirect()->back()->with('error', $e->getMessage());
+        }
     }
 
     public function LoadRegularBlogDataTable(Request $request)
@@ -146,7 +153,6 @@ class BlogController extends Controller
             'blog_description',
             'blog_date',
             'blog_banner',
-            'blog_banner_alt_text',
             'status',
         );
 
@@ -172,6 +178,7 @@ class BlogController extends Controller
             })
             ->addColumn('action', function ($row) use ($url) {
                 $buttons = '<a href="' . route('admin.blogs.edit', $row->id) . '" data-toggle="tooltip" title="Edit" class="edit btn btn-outline-primary btn-sm me-2"><i class="fadeInUp animate__animated bx bx-edit-alt"></i></a>';
+                $buttons .= '<a href="' . route('admin.blogs.feature', ['id' => $row->id, 'status' => 1]) . '" data-toggle="tooltip" title="Feature" class="edit btn btn-outline-warning btn-sm me-2"><i class="fadeInUp animate__animated bx bx-edit-alt"></i></a>';
                 $buttons .= '<button type="button" class="delete btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#delete_modal"  onclick="remove_function(' . $row->id . ', \'' . $url . '\')" title="Delete"><i class="fadeInUp animate__animated bx bx-trash-alt"></i></button>';
 
                 return $buttons;
@@ -197,7 +204,6 @@ class BlogController extends Controller
             'blog_description',
             'blog_date',
             'blog_banner',
-            'blog_banner_alt_text',
             'status',
         );
 
@@ -223,6 +229,7 @@ class BlogController extends Controller
             })
             ->addColumn('action', function ($row) use ($url) {
                 $buttons = '<a href="' . route('admin.blogs.edit', $row->id) . '" data-toggle="tooltip" title="Edit" class="edit btn btn-outline-primary btn-sm me-2"><i class="fadeInUp animate__animated bx bx-edit-alt"></i></a>';
+                $buttons .= '<a href="' . route('admin.blogs.feature', ['id' => $row->id, 'status' => 0]) . '" data-toggle="tooltip" title="Un Feature" class="edit btn btn-outline-warning btn-sm me-2"><i class="fadeInUp animate__animated bx bx-edit-alt"></i></a>';
                 $buttons .= '<button type="button" class="delete btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#delete_modal"  onclick="remove_function(' . $row->id . ', \'' . $url . '\')" title="Delete"><i class="fadeInUp animate__animated bx bx-trash-alt"></i></button>';
 
                 return $buttons;
@@ -247,7 +254,6 @@ class BlogController extends Controller
             'blog_description',
             'blog_date',
             'blog_banner',
-            'blog_banner_alt_text',
             'status',
         );
 
@@ -287,4 +293,24 @@ class BlogController extends Controller
         return $data;
     }
 
+    public function ChangeFeatureStatus($id, $status)
+    {
+        $count = Blog::where('is_featured', 1)->count();
+        if ($count <= 3) {
+
+            $returnText = ($status == 1) ? 'Featured' : 'Un-Featured';
+            try {
+                DB::transaction(function () use ($id, $status) {
+                    $blog = Blog::findOrFail($id);
+                    $blog->is_featured = $status;
+                    $blog->update();
+                });
+                return redirect()->route('admin.blogs')->with('success', "Blog $returnText Successfully");
+            } catch (\Exception $e) {
+                return redirect()->back()->with('error', $e->getMessage());
+            }
+        } else {
+            return redirect()->route('admin.blogs')->with('info', "Already Three Featured Blog Existed");
+        }
+    }
 }

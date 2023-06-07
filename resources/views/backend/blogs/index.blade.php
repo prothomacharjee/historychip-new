@@ -102,7 +102,6 @@
                                                 <th>Description</th>
                                                 <th>Date</th>
                                                 <th>Banner</th>
-                                                <th>Banner Alt Text</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
@@ -115,7 +114,6 @@
                                                 <th>Description</th>
                                                 <th>Date</th>
                                                 <th>Banner</th>
-                                                <th>Banner Alt Text</th>
                                                 <th>Action</th>
                                             </tr>
                                         </tfoot>
@@ -133,7 +131,6 @@
                                                 <th>Description</th>
                                                 <th>Date</th>
                                                 <th>Banner</th>
-                                                <th>Banner Alt Text</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
@@ -146,7 +143,6 @@
                                                 <th>Description</th>
                                                 <th>Date</th>
                                                 <th>Banner</th>
-                                                <th>Banner Alt Text</th>
                                                 <th>Action</th>
                                             </tr>
                                         </tfoot>
@@ -164,7 +160,6 @@
                                                 <th>Description</th>
                                                 <th>Date</th>
                                                 <th>Banner</th>
-                                                <th>Banner Alt Text</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
@@ -177,7 +172,6 @@
                                                 <th>Description</th>
                                                 <th>Date</th>
                                                 <th>Banner</th>
-                                                <th>Banner Alt Text</th>
                                                 <th>Action</th>
                                             </tr>
                                         </tfoot>
@@ -218,10 +212,6 @@
                         "data": "blog_banner"
                     },
                     {
-                        "data": "blog_banner_alt_text"
-                    },
-
-                    {
                         "data": "action",
                         orderable: false,
                         searchable: false
@@ -251,10 +241,6 @@
                         "data": "blog_banner"
                     },
                     {
-                        "data": "blog_banner_alt_text"
-                    },
-
-                    {
                         "data": "action",
                         orderable: false,
                         searchable: false
@@ -282,9 +268,6 @@
                     },
                     {
                         "data": "blog_banner"
-                    },
-                    {
-                        "data": "blog_banner_alt_text"
                     },
 
                     {

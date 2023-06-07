@@ -127,12 +127,13 @@ Route::group(['prefix' => 'powerhouse', 'middleware' => 'admin'], function () {
     Route::get('/blogs', [BlogController::class, 'index'])->name('admin.blogs');
     Route::get('/blogs/create', [BlogController::class, 'create'])->name('admin.blogs.create');
     Route::get('/blogs/edit/{id}', [BlogController::class, 'edit'])->name('admin.blogs.edit');
+    Route::get('/blogs/feature/{id}/{status}', [BlogController::class, 'ChangeFeatureStatus'])->name('admin.blogs.feature');
     Route::get('/load-regular-blogs-data', [BlogController::class, 'LoadRegularBlogDataTable'])->name('admin.blogs.LoadRegularBlogDataTable');
     Route::get('/load-featured-blogs-data', [BlogController::class, 'LoadFeaturedBlogDataTable'])->name('admin.blogs.LoadFeaturedBlogDataTable');
     Route::get('/load-drafted-blogs-data', [BlogController::class, 'LoadDraftedBlogDataTable'])->name('admin.blogs.LoadDraftedBlogDataTable');
     Route::post('/store-blogs-data', [BlogController::class, 'store'])->name('admin.blogs.store');
     // Route::post('/fetch-writing-prompts-data', [BlogController::class, 'FetchWritingPromptDataById'])->name('writing-prompts.fetch');
-    // Route::post('/delete-writing-prompts/{id}', [BlogController::class, 'destroy'])->name('writing-prompts.destroy');
+    Route::post('/delete-blogs/{id}', [BlogController::class, 'destroy'])->name('admin.blogs.destroy');
 
     // Partner Type
     Route::get('/partner-types', [PartnerTypeController::class, 'index'])->name('admin.partner-types');

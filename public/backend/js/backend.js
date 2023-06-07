@@ -33,7 +33,7 @@ $(".time-material").bootstrapMaterialDatePicker({
 function remove_function(id, url) {
     if (id) {
         var form = $("#removeForm");
-        form.attr("action", `/delete-${url}/${id}`);
+        form.attr("action", `/powerhouse/delete-${url}/${id}`);
 
         $(".delete-confirm").on("click", function (e) {
             form.submit();
