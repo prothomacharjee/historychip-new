@@ -127,7 +127,7 @@ Route::group(['prefix' => 'powerhouse', 'middleware' => 'admin'], function () {
     Route::get('/blogs', [BlogController::class, 'index'])->name('admin.blogs');
     Route::get('/blogs/create', [BlogController::class, 'create'])->name('admin.blogs.create');
     Route::get('/blogs/edit/{id}', [BlogController::class, 'edit'])->name('admin.blogs.edit');
-    Route::get('/blogs/feature/{id}/{status}', [BlogController::class, 'ChangeFeatureStatus'])->name('admin.blogs.feature');
+    Route::get('/blogs/feature/{id}/{status}', [BlogController::class, 'ChangeBlogFeatureStatus'])->name('admin.blogs.feature');
     Route::get('/load-regular-blogs-data', [BlogController::class, 'LoadRegularBlogDataTable'])->name('admin.blogs.LoadRegularBlogDataTable');
     Route::get('/load-featured-blogs-data', [BlogController::class, 'LoadFeaturedBlogDataTable'])->name('admin.blogs.LoadFeaturedBlogDataTable');
     Route::get('/load-drafted-blogs-data', [BlogController::class, 'LoadDraftedBlogDataTable'])->name('admin.blogs.LoadDraftedBlogDataTable');
@@ -163,6 +163,8 @@ Route::group(['prefix' => 'powerhouse', 'middleware' => 'admin'], function () {
 
     Route::post('/delete-story-categories/{id}', [StoryCategoryController::class, 'destroy'])->name('admin.story-categories.destroy');
 
+
+
     //Stories
 
     Route::get('/stories', [StoryController::class, 'index'])->name('admin.stories');
@@ -178,4 +180,8 @@ Route::group(['prefix' => 'powerhouse', 'middleware' => 'admin'], function () {
     Route::get('/load-waiting-comments-data', [StoryController::class, 'LoadWaitingCommentDataTable'])->name('admin.stories.LoadWaitingCommentDataTable');
     Route::get('/load-rejected-comments-data', [StoryController::class, 'LoadRejectedCommentDataTable'])->name('admin.stories.LoadRejectedCommentDataTable');
 
+    Route::get('/stories/edit/{id}', [StoryController::class, 'edit'])->name('admin.stories.edit');
+    Route::post('/delete-stories/{id}', [StoryController::class, 'destroy'])->name('admin.stories.destroy');
+
+    Route::get('/stories/staus/{id}/{approval_status?}/{featured_status?}', [StoryController::class, 'ChangeStoryStatus'])->name('admin.stories.status');
 });

@@ -233,7 +233,9 @@ class StoryController extends Controller
                 return ($user)?$user->name:'';
             })
             ->addColumn('action', function ($row) use ($url) {
-                $buttons = '<a href="' . route('admin.blogs.edit', $row->id) . '" data-toggle="tooltip" title="Edit" class="edit btn btn-outline-primary btn-sm me-2"><i class="fadeInUp animate__animated bx bx-edit-alt"></i></a>';
+                $buttons = '<a href="' . route('admin.stories.edit', $row->id) . '" data-toggle="tooltip" title="Edit" class="edit btn btn-outline-primary btn-sm me-2"><i class="fadeInUp animate__animated bx bx-edit-alt"></i></a>';
+                $buttons .= '<a href="' . route('admin.stories.status', ['id' => $row->id, 'featured_status' => 1]) . '" data-toggle="tooltip" title="Featured" class="edit btn btn-outline-warning btn-sm me-2"><i class="fadeInUp animate__animated bx bx-edit-alt"></i></a>';
+                $buttons .= '<a href="' . route('admin.stories.status', ['id' => $row->id, 'approval_status' => 2]) . '" data-toggle="tooltip" title="Reject" class="edit btn btn-outline-warning btn-sm me-2"><i class="fadeInUp animate__animated bx bx-edit-alt"></i></a>';
                 $buttons .= '<button type="button" class="delete btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#delete_modal"  onclick="remove_function(' . $row->id . ', \'' . $url . '\')" title="Delete"><i class="fadeInUp animate__animated bx bx-trash-alt"></i></button>';
 
                 return $buttons;
@@ -282,7 +284,8 @@ class StoryController extends Controller
                 return $user->name;
             })
             ->addColumn('action', function ($row) use ($url) {
-                $buttons = '<a href="' . route('admin.blogs.edit', $row->id) . '" data-toggle="tooltip" title="Edit" class="edit btn btn-outline-primary btn-sm me-2"><i class="fadeInUp animate__animated bx bx-edit-alt"></i></a>';
+                $buttons = '<a href="' . route('admin.stories.edit', $row->id) . '" data-toggle="tooltip" title="Edit" class="edit btn btn-outline-primary btn-sm me-2"><i class="fadeInUp animate__animated bx bx-edit-alt"></i></a>';
+                $buttons .= '<a href="' . route('admin.stories.status', ['id' => $row->id, 'featured_status' => 0]) . '" data-toggle="tooltip" title="Un-Featured" class="edit btn btn-outline-warning btn-sm me-2"><i class="fadeInUp animate__animated bx bx-edit-alt"></i></a>';
                 $buttons .= '<button type="button" class="delete btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#delete_modal"  onclick="remove_function(' . $row->id . ', \'' . $url . '\')" title="Delete"><i class="fadeInUp animate__animated bx bx-trash-alt"></i></button>';
 
                 return $buttons;
@@ -329,7 +332,9 @@ class StoryController extends Controller
                 return User::where('id', $row->author_id)->first()->name;
             })
             ->addColumn('action', function ($row) use ($url) {
-                $buttons = '<a href="' . route('admin.blogs.edit', $row->id) . '" data-toggle="tooltip" title="Edit" class="edit btn btn-outline-primary btn-sm me-2"><i class="fadeInUp animate__animated bx bx-edit-alt"></i></a>';
+                $buttons = '<a href="' . route('admin.stories.edit', $row->id) . '" data-toggle="tooltip" title="Edit" class="edit btn btn-outline-primary btn-sm me-2"><i class="fadeInUp animate__animated bx bx-edit-alt"></i></a>';
+                $buttons .= '<a href="' . route('admin.stories.status', ['id' => $row->id, 'approval_status' => 1]) . '" data-toggle="tooltip" title="Approve" class="edit btn btn-outline-warning btn-sm me-2"><i class="fadeInUp animate__animated bx bx-edit-alt"></i></a>';
+                $buttons .= '<a href="' . route('admin.stories.status', ['id' => $row->id, 'approval_status' => 2]) . '" data-toggle="tooltip" title="Reject" class="edit btn btn-outline-warning btn-sm me-2"><i class="fadeInUp animate__animated bx bx-edit-alt"></i></a>';
                 $buttons .= '<button type="button" class="delete btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#delete_modal"  onclick="remove_function(' . $row->id . ', \'' . $url . '\')" title="Delete"><i class="fadeInUp animate__animated bx bx-trash-alt"></i></button>';
                 return $buttons;
             })
@@ -378,7 +383,8 @@ class StoryController extends Controller
                 return ($user)?$user->name:'';
             })
             ->addColumn('action', function ($row) use ($url) {
-                $buttons = '<a href="' . route('admin.blogs.edit', $row->id) . '" data-toggle="tooltip" title="Edit" class="edit btn btn-outline-primary btn-sm me-2"><i class="fadeInUp animate__animated bx bx-edit-alt"></i></a>';
+                $buttons = '<a href="' . route('admin.stories.edit', $row->id) . '" data-toggle="tooltip" title="Edit" class="edit btn btn-outline-primary btn-sm me-2"><i class="fadeInUp animate__animated bx bx-edit-alt"></i></a>';
+                $buttons .= '<a href="' . route('admin.stories.status', ['id' => $row->id, 'approval_status' => 1]) . '" data-toggle="tooltip" title="Approve" class="edit btn btn-outline-warning btn-sm me-2"><i class="fadeInUp animate__animated bx bx-edit-alt"></i></a>';
                 $buttons .= '<button type="button" class="delete btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#delete_modal"  onclick="remove_function(' . $row->id . ', \'' . $url . '\')" title="Delete"><i class="fadeInUp animate__animated bx bx-trash-alt"></i></button>';
 
                 return $buttons;
@@ -422,7 +428,7 @@ class StoryController extends Controller
                 return User::where('id', $row->author_id)->first()->name;
             })
             ->addColumn('action', function ($row) use ($url) {
-                $buttons = '<a href="' . route('admin.blogs.edit', $row->id) . '" data-toggle="tooltip" title="Edit" class="edit btn btn-outline-primary btn-sm me-2"><i class="fadeInUp animate__animated bx bx-edit-alt"></i></a>';
+                $buttons = '<a href="' . route('admin.stories.edit', $row->id) . '" data-toggle="tooltip" title="Edit" class="edit btn btn-outline-primary btn-sm me-2"><i class="fadeInUp animate__animated bx bx-edit-alt"></i></a>';
                 $buttons .= '<button type="button" class="delete btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#delete_modal"  onclick="remove_function(' . $row->id . ', \'' . $url . '\')" title="Delete"><i class="fadeInUp animate__animated bx bx-trash-alt"></i></button>';
                 return $buttons;
             })
@@ -436,6 +442,73 @@ class StoryController extends Controller
         return $data;
     }
 
+    public function ChangeStoryStatus($id, $approval_status = null, $featured_status = null)
+    {
+
+        if($approval_status){
+            $returnText = ($approval_status == 1) ? 'Approved' : 'Rejected';
+            try {
+                DB::transaction(function () use ($id, $approval_status) {
+                    $story = Story::findOrFail($id);
+                    $story->is_approved = $approval_status;
+                    $story->update();
+                });
+                return redirect()->route('admin.stories')->with('success', "Story $returnText Successfully");
+            } catch (\Exception $e) {
+                return redirect()->back()->with('error', $e->getMessage());
+            }
+        }
+        elseif($featured_status){
+            $count = Story::where('is_featured', 1)->count();
+            if ($count <= 3) {
+                $returnText = ($featured_status == 1) ? 'Featured' : 'Un-Featured';
+                try {
+                    DB::transaction(function () use ($id, $featured_status) {
+                        $story = Story::findOrFail($id);
+                        $story->is_featured = $featured_status;
+                        $story->update();
+                    });
+                    return redirect()->route('admin.stories')->with('success', "Story $returnText Successfully");
+                } catch (\Exception $e) {
+                    return redirect()->back()->with('error', $e->getMessage());
+                }
+            } else {
+                return redirect()->route('admin.blogs')->with('info', "Already Three Featured Blog Existed");
+            }
+        }
+        else{
+            return redirect()->route('admin.blogs')->with('info', "You are trying a wrong URL.");
+        }
+
+        // $count = Story::where('is_featured', 1)->count();
+        // if ($count <= 3) {
+
+        //     $returnText = ($status == 1) ? 'Featured' : 'Un-Featured';
+        //     try {
+        //         DB::transaction(function () use ($id, $status) {
+        //             $blog = Story::findOrFail($id);
+        //             $blog->is_featured = $status;
+        //             $blog->update();
+        //         });
+        //         return redirect()->route('admin.blogs')->with('success', "Blog $returnText Successfully");
+        //     } catch (\Exception $e) {
+        //         return redirect()->back()->with('error', $e->getMessage());
+        //     }
+        // } else {
+        //     return redirect()->route('admin.blogs')->with('info', "Already Three Featured Blog Existed");
+        // }
+    }
+
+
+
+
+
+
+
+
+
+
+// Story Comments
     public function LoadApproveCommentDataTable(Request $request)
     {
         $url = 'comments';
@@ -473,7 +546,7 @@ class StoryController extends Controller
                 return $row->accepter->name??'';
             })
             ->addColumn('action', function ($row) use ($url) {
-                $buttons = '<a href="' . route('admin.blogs.edit', $row->id) . '" data-toggle="tooltip" title="Edit" class="edit btn btn-outline-primary btn-sm me-2"><i class="fadeInUp animate__animated bx bx-edit-alt"></i></a>';
+                $buttons = '<a href="' . route('admin.stories.edit', $row->id) . '" data-toggle="tooltip" title="Edit" class="edit btn btn-outline-primary btn-sm me-2"><i class="fadeInUp animate__animated bx bx-edit-alt"></i></a>';
                 $buttons .= '<button type="button" class="delete btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#delete_modal"  onclick="remove_function(' . $row->id . ', \'' . $url . '\')" title="Delete"><i class="fadeInUp animate__animated bx bx-trash-alt"></i></button>';
 
                 return $buttons;
@@ -524,7 +597,7 @@ class StoryController extends Controller
             })
 
             ->addColumn('action', function ($row) use ($url) {
-                $buttons = '<a href="' . route('admin.blogs.edit', $row->id) . '" data-toggle="tooltip" title="Edit" class="edit btn btn-outline-primary btn-sm me-2"><i class="fadeInUp animate__animated bx bx-edit-alt"></i></a>';
+                $buttons = '<a href="' . route('admin.stories.edit', $row->id) . '" data-toggle="tooltip" title="Edit" class="edit btn btn-outline-primary btn-sm me-2"><i class="fadeInUp animate__animated bx bx-edit-alt"></i></a>';
                 $buttons .= '<button type="button" class="delete btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#delete_modal"  onclick="remove_function(' . $row->id . ', \'' . $url . '\')" title="Delete"><i class="fadeInUp animate__animated bx bx-trash-alt"></i></button>';
 
                 return $buttons;
@@ -578,7 +651,7 @@ class StoryController extends Controller
                 return $row->story->accepter->name??'';
             })
             ->addColumn('action', function ($row) use ($url) {
-                $buttons = '<a href="' . route('admin.blogs.edit', $row->id) . '" data-toggle="tooltip" title="Edit" class="edit btn btn-outline-primary btn-sm me-2"><i class="fadeInUp animate__animated bx bx-edit-alt"></i></a>';
+                $buttons = '<a href="' . route('admin.stories.edit', $row->id) . '" data-toggle="tooltip" title="Edit" class="edit btn btn-outline-primary btn-sm me-2"><i class="fadeInUp animate__animated bx bx-edit-alt"></i></a>';
                 $buttons .= '<button type="button" class="delete btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#delete_modal"  onclick="remove_function(' . $row->id . ', \'' . $url . '\')" title="Delete"><i class="fadeInUp animate__animated bx bx-trash-alt"></i></button>';
 
                 return $buttons;
@@ -596,6 +669,8 @@ class StoryController extends Controller
         // Return the DataTables response
         return $data;
     }
+
+
 
 
 }

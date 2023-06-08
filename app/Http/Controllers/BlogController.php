@@ -293,7 +293,7 @@ class BlogController extends Controller
         return $data;
     }
 
-    public function ChangeFeatureStatus($id, $status)
+    public function ChangeBlogFeatureStatus($id, $status)
     {
         $count = Blog::where('is_featured', 1)->count();
         if ($count <= 3) {

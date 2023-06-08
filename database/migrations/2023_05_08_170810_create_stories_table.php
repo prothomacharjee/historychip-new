@@ -24,6 +24,7 @@ return new class extends Migration
             $table->longText('context')->nullable();
 
             $table->integer('edit_count')->default(0);
+            $table->integer('rejection_count')->default(0);
 
             $table->string('author_name');
 
