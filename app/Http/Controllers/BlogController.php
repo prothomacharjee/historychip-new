@@ -184,7 +184,8 @@ class BlogController extends Controller
                 return $buttons;
             })
             ->addColumn('blog_description', function ($row) {
-                return mb_strimwidth(strip_tags($row->blog_description), 0, 50, "...");
+                $return = mb_strimwidth(strip_tags($row->blog_description), 0, 50, "...");
+                return $return;
             })
 
             ->rawColumns(['serial', 'action', 'blog_description', 'blog_banner'])

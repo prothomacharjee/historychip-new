@@ -117,7 +117,8 @@ class WritingPromptController extends Controller
                 return $buttons;
             })
             ->addColumn('details', function ($row) {
-                return mb_strimwidth($row->details, 0, 15, "...");
+                $return = mb_strimwidth($row->details, 0, 15, "...");
+                return $return;
             })
             ->rawColumns(['serial', 'status', 'action', 'details', 'icon'])
             ->make(true);

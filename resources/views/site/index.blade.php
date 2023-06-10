@@ -44,16 +44,16 @@
                     <div class="softsource-home-daily-prompt-genrator">
                         <h2 class="text-center softsource-home-daily-prompt-header">Daily Prompt Generator</h2>
                         <div class="softsource-home-daily-prompt-word-text-box d-flex mx-5">
-                            <div id="wordbox" class="wordbox"></div>
-                            <input class="ms-auto" type="BUTTON" value="GENERATE PROMPT" tabindex="0">
+                            <div id="softsource-wordbox" class="softsource-wordbox"></div>
+                            <input class="ms-auto generate-prompt-button" type="BUTTON" value="GENERATE PROMPT" tabindex="0">
                         </div>
                         <!-- <div class="text-start">
 
-                                                                                            <button type="button" class="btn-direction backBtn"><i class="fa fa-arrow-left"
-                                                                                                    aria-hidden="true"></i></button>
-                                                                                            <button type="button" class="btn-direction nextBtn"><i class="fa fa-arrow-right"
-                                                                                                    aria-hidden="true"></i></button>
-                                                                                        </div> -->
+                                                                                                                        <button type="button" class="btn-direction backBtn"><i class="fa fa-arrow-left"
+                                                                                                                                aria-hidden="true"></i></button>
+                                                                                                                        <button type="button" class="btn-direction nextBtn"><i class="fa fa-arrow-right"
+                                                                                                                                aria-hidden="true"></i></button>
+                                                                                                                    </div> -->
                     </div>
                     <div class="softsource-home-daily-prompt-add-story">
                         <div class="softsource-home-daily-prompt-add-story-link">
@@ -75,7 +75,7 @@
     <!-- Section 2: Featured Stories -->
     @if (!empty($fetured_stories))
         <section class="py-5 my-5">
-            <div class="row px-5">
+            <div class="row mx-1 px-5">
                 <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                     <div class="softsource-home-fetured-story-section-title-wrap text-center mb-5 ps-5 d-flex">
                         <div class="softsource-home-fetured-story-top-title">Featured &nbsp;<span> Stories</span></div>
@@ -88,7 +88,6 @@
                 <div class="row">
                     <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                         <div class="row">
-
                             @foreach ($fetured_stories as $key => $story)
                                 @php
 
@@ -157,11 +156,9 @@
 
                         </div>
                     </div>
-
-                    <div class="section-under-heading text-center section-space--mt_40"></a></div>
                 </div>
                 <div class="row mt-3">
-                    <div class="col-12 text-center">
+                    <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 text-center">
                         <a href="{{ route('story.read') }}"
                             class="btn softsource-home-fetured-story-read-more-story-btn px-5">Read More Stories</a>
                     </div>
@@ -221,121 +218,78 @@
 
     <!-- Section 4: Writing Prompt -->
     <section class="py-5 softsource-home-writing-prompt-section">
-
         <div class="container">
-
             <div class="row">
                 <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
-                    <div class="container">
-                        <div class="softsource-home-search-writing-prompt-title-wrap mb-5">
-                            <div class="softsource-home-writing-prompt-title mt-5">Want<br>Creative<br>Writing<br>Prompts?</div>
-                            <div class="">
-                                <a href="{{ route('story.write') }}" class="btn softsource-home-fetured-story-read-more-story-btn px-5">Submit Your Story</a>
-                            </div>
+                    <div class="softsource-home-search-writing-prompt-title-wrap mb-5">
+                        <div class="softsource-home-writing-prompt-title mt-5">Want<br>Creative<br>Writing<br>Prompts?
+                        </div>
+                        <div class="">
+                            <a href="{{ route('story.write') }}"
+                                class="btn softsource-home-fetured-story-read-more-story-btn px-5">Submit Your Story</a>
                         </div>
                     </div>
-
                 </div>
 
                 <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
-                <div class="_form_17"></div>
-                <script src="https://historychip.activehosted.com/f/embed.php?id=17" type="text/javascript" charset="utf-8"></script>
+                    <div class="_form_17"></div>
+                    <script src="https://historychip.activehosted.com/f/embed.php?id=17" type="text/javascript" charset="utf-8"></script>
                     <!-- <div class="_form_15"></div>
-                    <script src="https://historychip.activehosted.com/f/embed.php?id=15" type="text/javascript" charset="utf-8"></script> -->
+                                                <script src="https://historychip.activehosted.com/f/embed.php?id=15" type="text/javascript" charset="utf-8"></script> -->
                 </div>
             </div>
-
-            <div class="row">
-                <div class="col-md-12 text-center">
-
-                    {{-- <form class="softsource-port-form d-flex" method="GET" action="">
-                        <select class="form-control softsource-custom-select story-category-select2" name='category_id'
-                            id="category_id" required="">
-                            <option value="">Please Select</option>
-                            @foreach ($categories as $category)
-                                <option value="{{ $category->id }}">{{ $category->name }}</option>
-                            @endforeach
-
-                        </select>
-                        <select class="form-control softsource-custom-select story-category-select2"
-                            name="sub_category_id_level_1" id="sub_category_id_level_1" disabled>
-
-                        </select>
-                        <button class="softsource-btn softsource-port-cust-btn"><i
-                                class="flaticon-magnifying-glass"></i><span>Go</span></button>
-                    </form> --}}
-
-                </div>
-
-            </div>
-            {{-- <div class="row">
-                <div class="col-lg-2 col-md-2 ml-auto mr-auto">
-
-                </div>
-                <div class="col-md-4 col-md-4 ml-auto mr-auto mb-5">
-
-                </div>
-                <div class="col-lg-4 col-md-4 ml-auto mr-auto mb-5">
-                    <img src="{{ asset('frontend/images/web_img/quick-easy.png') }}" alt="writing tips quick easy">
-                </div>
-                <div class="col-lg-2 col-md-2 ml-auto mr-auto">
-
-                </div>
-
-                <div class="col-md-12 text-center">
-                    <a class="softsource-btn btn-lg mt-4" href="{{ route('story.write') }}">Submit Your STORY</a>
-
-                </div>
-            </div> --}}
-
         </div>
     </section>
 
-    <!-- Section 4: Intro of History Chip -->
-    <section class="py-5">
+    <!-- Section 5: Intro of History Chip -->
+    <section class="py-5 my-5">
         <div class="container">
             <div class="row">
-                <div class="col-md-8">
-                    <h2 class="mb-4">Intro of History Chip</h2>
-                    <p>History Chip is a place where EVERYONE, ANYWHERE, is invited to share true stories. It’s
-                        that
-                        simple! All of our stories together are the BIG PICTURE. That’s why I built this site,
-                        because
-                        EVERYBODY should be part of the story of our world. It’s like a huge library written by
-                        all of
-                        us. Join me and be part of the story!</p>
+                <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 mt-5">
+                    <h2 class="softsource-home-intro-title mb-4">Intro of <br><span>HistoryChip</span></h2>
+                    <p class="softsource-home-intro-sub-title">History Chip is a place where EVERYONE, ANYWHERE, is invited
+                        to share true stories. It’s that simple!
+                        All of our stories together are the BIG PICTURE. That’s why I built this site, because EVERYBODY
+                        should be part of the story of our world. It’s like a huge library written by all of us. Join me and
+                        be part of the story!</p>
+                    <a class="btn softsource-home-fetured-story-read-more-story-btn mt-4"
+                        href="{{ route('story.read') }}">Read More Story</a>
                 </div>
-                <div class="col-md-4 text-center">
-                    {{-- <button class="softsource-btn btn-lg mt-4">Submit Your STORY</button> --}}
-                    <a class="softsource-btn btn-lg mt-4" href="{{ route('story.write') }}">Submit Your STORY</a>
+                <div
+                    class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 text-center softsource-home-intro-second-div">
+                    <img src="{{ asset('frontend/images/web_img/hc-world.svg') }}" alt="History Chip Intro"
+                        class="img-fluid w-100">
                 </div>
             </div>
         </div>
     </section>
+
+    <!-- Section 6: Featured Blogs -->
     @if (!empty($fetured_blogs))
-        <!-- Section 5: Latest Blogs -->
-        <section class="bg-light py-5">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-12">
-                        <div class="section-title-wrap text-center mb-5">
-                            <h2 class="new-theme">Featured Blogs</h2>
-                        </div>
+        <section class="my-5 py-5">
+            <div class="row mx-1 px-5">
+                <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <div class="softsource-home-fetured-story-section-title-wrap text-center mb-5 ps-5 d-flex">
+                        <div class="softsource-home-fetured-blog-horizontal-line"></div>
+                        <div class="softsource-home-fetured-blog-top-title">Featured &nbsp;<span> Blogs</span></div>
                     </div>
                 </div>
+            </div>
+
+            <div class="container mt-5">
+
                 <div class="row mt-3">
-                    <div class="col-12">
+                    <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                         <div class="row">
                             @foreach ($fetured_blogs as $key => $blog)
                                 @php
-
                                     if ($blog->blog_banner == '') {
                                         $blog_banner = '/storage/frontend/stories/images/Banner72pi2.jpg';
                                     } else {
                                         $blog_banner = $blog->blog_banner;
                                     }
                                 @endphp
-                                <div class="col-lg-4 col-md-6 mt-0">
+                                <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 mt-0">
                                     <!--======= Single Blog Item Start ========-->
                                     <div class="softsource-single-blog-item blog-grid">
                                         <!-- Post Feature Start -->
@@ -390,33 +344,86 @@
                             @endforeach
                         </div>
                     </div>
-                    <!-- <div class="section-under-heading text-center section-space--mt_40"></a></div> -->
-                    <div class="col-3"></div>
-                    <div class="col-6 text-center mt-5">
-                        <form class="newsletter-form">
-                            <h3>Sign-up for our newsletter</h3>
-                            <div class="input-group mb-3 mt-2">
-                                <input type="email" class="form-control" placeholder="Email address" id="email"
-                                    required>
-                                <button class="softsource-btn" type="submit">Subscribe</button>
-                            </div>
-                        </form>
+                    <div class="row mt-3">
+                        <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 text-center">
+                            <a href="{{ route('story.read') }}"
+                                class="btn softsource-home-fetured-story-read-more-story-btn px-5">Read More Stories</a>
+                        </div>
                     </div>
-                    <div class="col-3"></div>
                 </div>
             </div>
         </section>
     @endif
 
+    <!-- Section 7: News Letter -->
+    <section class="py-5 my-5">
+        <div class="container">
+            <div class="row softsource-home-newsletter-div">
+                <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mx-auto mt-5 pt-5">
+                    <h3 class="softsource-home-newsletter-title"><span>Sign-up</span> for our newsletter</h3>
+                </div>
+                <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6 mx-auto">
+                    <form class="newsletter-form">
+                        <div class="input-group mb-3">
+                            <input type="email" class="form-control softsource-home-newsletter-input"
+                                placeholder="Email address" id="email" required
+                                aria-describedby="button_newsletter_button" aria-label="Email address">
+                            <button class="btn softsource-home-newsletter-btn" type="submit"
+                                id="button_newsletter_button">Subscribe</button>
+                        </div>
+                        {{-- <div class="input-group mb-3">
+                            <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" >
+                            <button class="btn btn-outline-secondary" type="button" id="button-addon2">Button</button>
+                          </div> --}}
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
     <script>
         $(document).ready(function() {
-            // $('.story-category-select2').select2({
-            //     maximumSelectionLength: 3,
-            //     placeholder: "Please Select"
-            // });
+
+            $.ajax({
+                type: 'POST',
+                url: '{{ route('writing-prompts.get') }}',
+                data: {
+                    '_token': '{{ csrf_token() }}',
+                },
+                success: function(data) {
+                    //console.log('writingprompt', data.writingprompt);
+                    NumberOfWords = data.writingprompt.length;
+                    words = new BuildArray(NumberOfWords);
+
+                    for (let i = 0; i < NumberOfWords; i++) {
+
+                        if (data.writingprompt[i].details == '') {
+                            words[i] = `Write Something On "${data.writingprompt[i].title}"`;
+                        } else {
+                            words[i] = data.writingprompt[i].details;
+
+                        }
+                    }
 
 
-        });
+                }
+            });
+
+
+            $(".generate-prompt-button").click(function() {
+                PickRandomWord();
+            });
+
+            $(".backBtn").click(function() {
+                $(".softsource-wordbox").html(words[$("#word_index_prev").val()]);
+            });
+
+            $(".nextBtn").click(function() {
+                $(".softsource-wordbox").html(words[$("#word_index_curr").val()]);
+            });
+
+        })
 
         function stopTimer() {
             window.clearInterval(timerID);
@@ -454,5 +461,66 @@
         }
 
         $("#softsource-pop-hc-video").on("ended", onVideoEnd);
+
+        let history = ['0', '0', '0'];
+        var words = [];
+        var NumberOfWords = 0;
+
+        $(document).ready(function() {
+
+            $.ajax({
+                type: 'POST',
+                url: "{{ route('writing-prompts.get') }}",
+                data: {
+                    '_token': '{{ csrf_token() }}',
+                },
+                success: function(data) {
+                    //console.log('writingprompt', data.writingprompt);
+                    NumberOfWords = data.writingprompt.length;
+                    words = new BuildArray(NumberOfWords);
+
+                    for (let i = 0; i < NumberOfWords; i++) {
+
+                        if (data.writingprompt[i].details == '') {
+                            words[i] = `Write Something On "${data.writingprompt[i].title}"`;
+                        } else {
+                            words[i] = data.writingprompt[i].details;
+
+                        }
+                    }
+
+
+                }
+            });
+
+
+            $(".backBtn").click(function() {
+                $(".softsource-wordbox").html(words[$("#word_index_prev").val()]);
+            });
+
+            $(".nextBtn").click(function() {
+                $(".softsource-wordbox").html(words[$("#word_index_curr").val()]);
+            });
+
+        })
+
+        function BuildArray(size) {
+            this.length = size
+            for (var i = 1; i <= size; i++) {
+                this[i] = null
+            }
+            return this
+        }
+
+        function PickRandomWord() {
+            // Generate a random number between 1 and NumberOfWords
+            var rnd = Math.ceil(Math.random() * NumberOfWords)
+
+            // Display the word inside the text box
+            $(".softsource-wordbox").html(words[rnd]);
+            $("#word_index_prev").val($("#word_index_curr").val());
+            $("#word_index_curr").val(rnd);
+
+        }
     </script>
 @endsection

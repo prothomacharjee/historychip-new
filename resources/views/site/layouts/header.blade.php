@@ -226,9 +226,9 @@
                 <div class="softsource-scrolling-notice">
                     <marquee behavior="scroll" direction="left">
                         <ul class="softsource-scrolling-notice-lists-container">
-                            <li>This is a scrolling notice bar.</li>
-                            <li>Lorem ipsum dolor sit amet</li>
-                            <li>consectetur adipiscing elit</li>
+                            @foreach ($notices as $notice)
+                            <li>{{ $notice->content }}</li>
+                            @endforeach
                         </ul>
                     </marquee>
                 </div>

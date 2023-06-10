@@ -108,7 +108,8 @@ class NoticePromptController extends Controller
                 return $buttons;
             })
             ->addColumn('content', function ($row) {
-                return mb_strimwidth($row->content, 0, 15, "...");
+                $new_des = mb_strimwidth($row->content, 0, 15, "...");
+                return $new_des;
             })
             ->editColumn('duration_from', function ($row) {
                 return ($row->duration_from) ? date('Y-m-d H:i', strtotime($row->duration_from)) : '';

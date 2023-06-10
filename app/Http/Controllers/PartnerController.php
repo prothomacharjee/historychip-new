@@ -233,7 +233,8 @@ class PartnerController extends Controller
                 return $buttons;
             })
             ->addColumn('description', function ($row) {
-                return mb_strimwidth(strip_tags($row->description), 0, 50, "...");
+                $new_description = mb_strimwidth(strip_tags($row->description), 0, 50, "...");
+                return $new_description;
             })
 
             ->rawColumns(['serial', 'action', 'description', 'banner', 'logo','status', 'partner_type'])

@@ -515,7 +515,6 @@ form .form-group {
 .softsource-home-search-story-section-title-wrap {
     display: flex;
     flex-direction: column;
-
 }
 
 .softsource-home-search-story-title {
@@ -603,10 +602,9 @@ form .form-group {
     background-repeat: no-repeat;
 }
 
-.softsource-home-search-writing-prompt-title-wrap{
+.softsource-home-search-writing-prompt-title-wrap {
     display: flex;
     flex-direction: column;
-
 }
 
 .softsource-home-writing-prompt-title {
@@ -619,8 +617,114 @@ form .form-group {
     color: #000000;
 }
 
+.softsource-home-intro-title {
+    font-family: "Montserrat";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 106px;
+    line-height: 102.5%;
+    text-transform: uppercase;
+    color: #000000;
+}
 
+.softsource-home-intro-title span {
+    font-family: "Montserrat";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 86px;
+    line-height: 102.5%;
+    text-transform: uppercase;
+    color: #95a8ae;
+}
 
+.softsource-home-intro-sub-title {
+    font-family: "Poppins";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 150%;
+    text-align: justify;
+    letter-spacing: -0.03em;
+    color: #464646;
+}
+
+.softsource-home-fetured-blog-top-title {
+    font-family: "Montserrat";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 106px;
+    line-height: 102.5%;
+    display: flex;
+    align-items: center;
+    text-transform: uppercase;
+
+    color: #000000;
+}
+
+.softsource-home-fetured-blog-top-title span {
+    color: #95a8ae;
+}
+
+.softsource-home-fetured-blog-horizontal-line {
+    width: 382px;
+    border: 3px solid #95a8ae;
+}
+
+.softsource-home-newsletter-div {
+    background-image: url(../../frontend/images/web_img/hc-world.svg);
+    height: 300px;
+    background-position: top;
+    background-size: inherit;
+    background-repeat: no-repeat;
+    text-align: center;
+}
+
+.softsource-home-newsletter-title {
+    font-family: "Montserrat";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 66px;
+    line-height: 102.5%;
+    text-transform: uppercase;
+    color: #000;
+}
+
+.softsource-home-newsletter-title span {
+    color: #95a8ae;
+}
+
+.softsource-home-newsletter-input {
+    height: 60px;
+    background: #d3dce7;
+    border: 1px solid #d3dce7;
+    backdrop-filter: blur(12.5px);
+    border-top-left-radius: 25px !important;
+    border-bottom-left-radius: 25px !important;
+    padding-left: 50px;
+}
+
+.softsource-home-newsletter-btn {
+    width: 180px;
+    height: 60px;
+    background: #3e5662;
+    border: 1px solid #d3dce7;
+    backdrop-filter: blur(12.5px);
+    border-radius: 25px;
+
+    font-family: "Poppins";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 160%;
+    letter-spacing: -0.02em;
+    color: #ffffff;
+}
+.softsource-home-newsletter-btn:hover {
+    color: #ffffff;
+    background: #3e5662;
+    border: 1px solid #d3dce7;
+    backdrop-filter: blur(12.5px);
+}
 /* .softsource-header-logo {
     flex-basis: 17%;
     display: flex;
@@ -982,6 +1086,32 @@ form .form-group {
     padding: 5px 20px;
 }
 
+.softsource-footer {
+    background: #3d5561;
+}
+
+.softsource-footer-div-1 {
+    /* display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center; */
+}
+
+.softsource-footer-cust-tag {
+    font-family: "Plus Jakarta Sans";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 121.5%;
+    letter-spacing: -0.02em;
+    color: #ffffff;
+}
+
+.softsource-footer-logo-div,
+.softsource-footer-social-div {
+    max-width: fit-content;
+}
+
 .softsource-footer-horizontal-border {
     position: relative;
     background: #3d5762;
@@ -990,40 +1120,29 @@ form .form-group {
     top: 82px;
 }
 
-.softsource-footer-image a {
-    text-align: center;
-    position: relative;
-    margin: 0 auto;
-    display: inline-block;
-    background: #fff;
-}
-
-.softsource-footer-image img {
-    max-width: 181px;
-}
-
-.softsource-footer-image-tag {
-    color: #3e5662;
-    font-family: adorn-roman, sans-serif;
-    font-weight: 400;
-    font-size: 12px;
-    text-align: center;
-}
-
 .softsource-footer-widget-wrapper {
-    margin-bottom: -35px;
+    /* margin-bottom: -35px; */
 }
 
 .softsource-footer-widget {
-    margin-bottom: 30px;
+    /* margin-bottom: 30px; */
 }
 
 .softsource-footer-widget__title {
     margin-top: 0px;
-    color: #334249;
     font-weight: normal;
     font-size: 16px;
     margin-bottom: 20px;
+    font-family: "Adorn Serif";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 150%;
+    letter-spacing: -0.02em;
+
+    color: #ffffff;
+
+    mix-blend-mode: normal;
 }
 
 .softsource-footer-widget__title:after {
@@ -1043,22 +1162,15 @@ form .form-group {
 }
 
 .softsource-footer-widget__list li {
-    margin-bottom: 0px;
-}
-
-.softsource-footer-login-btn {
-    background-color: #3d5762 !important;
-    border: 1.5px solid #778b91 !important;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    border-radius: 0;
-    color: #fff;
-    font-weight: 500;
-    line-height: 35px;
-}
-
-.softsource-footer-login-btn:hover {
+    margin-bottom: 25px;
+    font-family: "Open Sans";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 150%;
+    letter-spacing: -0.02em;
     color: #ffffff;
-    background: #3d5762;
+    mix-blend-mode: normal;
 }
 
 .softsource-social-networks .item {
@@ -1066,14 +1178,26 @@ form .form-group {
 }
 
 .softsource-social-networks .item .social-link {
-    display: block;
-    padding: 5px 8px;
+    padding: 0px 2px;
 }
 
-.softsource-border-light {
-    background: #3d5762;
+.softsource-footer-border {
+    border: 3px solid rgba(255, 255, 255, 0.16);
     height: 1px;
     width: 100%;
+}
+
+.softsource-footer-copyright-text, .softsource-footer-poweredby-text {
+    font-family: "Plus Jakarta Sans";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 17px;
+    line-height: 150%;
+    letter-spacing: -0.02em;
+
+    color: #ffffff;
+
+    mix-blend-mode: normal;
 }
 
 .softsource-firstline-header {
@@ -2272,7 +2396,9 @@ form .form-group {
     text-align: center;
     font-size: medium;
     padding-right: 3px;
+    padding-left: 5px;
     width: -webkit-fill-available;
+    overflow-y: auto;
 }
 
 .softsource-writing-prompt-button {
