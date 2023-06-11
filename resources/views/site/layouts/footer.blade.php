@@ -20,21 +20,21 @@
                              </a>
                          </li>
                          <li class="item">
-                             <a href="https://instagram.com/historychipofficial?igshid=7bbizkt10clm" target="_blank"
-                                 aria-label="Instgram" class="social-link">
-                                 <img alt="instagram-icon"
-                                     src="{{ asset('frontend/images/social-media/ytVector1.svg') }}">
-                             </a>
-                         </li>
-
-
-                         <li class="item">
                              <a href="https://www.youtube.com/channel/UCSrIvdo034dV1rOL-adGu1g" target="_blank"
                                  aria-label="You Tube" class="social-link">
                                  <img alt="youtube-icon"
+                                     src="{{ asset('frontend/images/social-media/ytVector.png') }}">
+                             </a>
+                         </li>
+                         <li class="item">
+                             <a href="https://instagram.com/historychipofficial?igshid=7bbizkt10clm" target="_blank"
+                                 aria-label="Instgram" class="social-link">
+                                 <img alt="instagram-icon"
                                      src="{{ asset('frontend/images/social-media/insVector.svg') }}">
                              </a>
                          </li>
+
+
                      </ul>
                  </div>
 

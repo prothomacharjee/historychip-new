@@ -8,9 +8,9 @@
     <meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
 
     <!-- SEO -->
-    <meta name="title" content="Revenue Aid, Consulting Firm, Revenue, SoftSource, RevenueAid, Prothom Acharjee">
-    <meta name="description" content="Revenue Aid - A Unique Consulting Firm. Get Legal Help Provides and deals with all sorts of legal and professional services Keep Confidential Keep clients information confidential as for think fits and proper Avoid Unlawful Work Will not involved in unethical and unlawful work knowingly-Yeah, sure OUR MISSION OUR VISION OUR HISTORY To Our Country To contribute to the dream of Digital Bangladesh.">
-    <meta name="keywords" content="Revenue Aid, Consulting Firm, Revenue, SoftSource, RevenueAid, Prothom Acharjee">
+    <meta name="title" content="{{ $meta->meta_title??''}}">
+    <meta name="description" content="{{ $meta->meta_description??''}}">
+    <meta name="keywords" content="{{($meta->meta_keywords)?$meta->meta_keywords.', ':''}}SoftSource, Prothom Acharjee">
 
 
     <!-- Social Media -->
@@ -18,17 +18,19 @@
     <meta property="og:locale" content="en_US" />
     <meta property="og:type" content="website" />
 
-    <meta property="og:title" content="{{ $page_title }} | {{ config('app.name', 'SoftSource') }}" />
-    {{-- <meta property="og:url" content="<?= base_url() ?>" />
-	<meta property="og:site_name" content="Revenue Aid" />
-	<meta property="og:image" content="<?php echo base_url() . 'assets/webassets/images/Asset 1.png'; ?>" />
-	<meta property="og:description"
-			content="Get Legal Help Provides and deals with all sorts of legal and professional services Keep Confidential Keep clients information confidential as for think fits and proper Avoid Unlawful Work Will not involved in unethical and unlawful work knowingly-Yeah, sure OUR MISSION OUR VISION OUR HISTORY To Our Country To contribute to the dream of Digital Bangladesh." />
-	<meta property="article:modified_time" content="<?= date('d-M-Y H:i:s') ?>" /> --}}
+    <meta property="og:title" content="{{ $meta->page_title??''}} | {{ config('app.name', 'SoftSource') }}" />
+    <meta property="og:url" content="{{ url()->current() }}" />
+    <meta property="og:site_name" content="{{ config('app.name', 'SoftSource') }}" />
+    <meta property="og:image" content="{{ ($meta->og_image)? asset($meta->og_image):'' }}" />
+    <meta property="og:audio" content="{{ ($meta->og_audio)? asset($meta->og_audio):'' }}" />
+    <meta property="og:video" content="{{ ($meta->og_video)? asset($meta->og_video):'' }}" />
+    <meta property="og:description" content="{{ $meta->meta_description??'' }}" />
+    <meta property="og:author" content="{{ $meta->og_author??'' }}" />
+    <meta property="article:modified_time" content="{{ date('d-M-Y H:i:s', strtotime($meta->updated_at)) }}" />
 
     <!-- Author Info -->
     <meta name="author" content="SoftSource, Bangladesh">
-    <meta name="author" content="Prothom Acharjee">
+    <meta name="author" content="Prothom Acharjee (Developer)">
     <meta name="author" content="01818105488">
 
     <!-- Icon -->
@@ -37,17 +39,25 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ $page_title }} | {{ config('app.name', 'Laravel') }}</title>
+    <title>{{ $meta->page_title }} | {{ config('app.name', 'Laravel') }}</title>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;800&display=swap" rel="stylesheet">
-
+    <!-- <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;800&display=swap" rel="stylesheet"> -->
+    <link rel="stylesheet" href="{{ asset('frontend/css/fonts.css') }}">
     <!-- CSS -->
     <link rel="stylesheet" href="{{ asset('frontend/css/bootstrap/bootstrap.min.css?q=' . time()) }}">
+    <link href="{{ asset('frontend/input-tags/css/tagsinput.css?q=' . time()) }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('frontend/css/animate/animate.min.css?q=' . time()) }}">
     <link rel="stylesheet" href="{{ asset('frontend/fontawsome/css/all.min.css?q=' . time()) }}">
     <link rel="stylesheet" href="{{ asset('frontend/css/select2/select2.min.css?q=' . time()) }}">
+
+    <link href="{{ asset('frontend/file-uploader/css/font-fileuploader.css') }}" rel="stylesheet">
+    <link href="{{ asset('frontend/file-uploader/css/jquery.fileuploader-theme-thumbnails.css') }}" rel="stylesheet">
+    <link href="{{ asset('frontend/file-uploader/css/script.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('frontend/file-uploader/css/custom.css') }}">
+
+    <link href="{{ asset('frontend/css/summernote/summernote-lite.min.css?q=' . time()) }}" rel="stylesheet">
 
     <link rel="stylesheet" href="{{ asset('frontend/css/frontend.css?q=' . time()) }}">
     <link rel="stylesheet" href="{{ asset('frontend/css/mediaquery.css?q=' . time()) }}">
@@ -56,7 +66,7 @@
     <script src="{{ asset('frontend/js/jquery/jquery.min.js?q=' . time()) }}"></script>
 </head>
 
-<body>
+<body class="softsource-no-select">
 
     <div class="softsource-preloader-container">
         <div class="softsource-blinker">
@@ -65,90 +75,20 @@
         </div>
     </div>
 
-
     <div class="softsource-main_content">
         <div class="navbar-expand-lg navbar-light softsource-nav-bg">
-            <!-- Top Part -->
-            <div class="container softsource-nav-top d-flex align-items-center justify-content-center text-white">
-                <div class="softsource-top-nav-left px-1 d-flex">
-                    @if ($notices)
-                    <marquee onmouseover="this.stop();" onmouseout="this.start();">
-                        @foreach ($notices as $notice)
-                        &nbsp;&nbsp;&nbsp;&nbsp;{{ $notice->content }}&nbsp;&nbsp;&nbsp;&nbsp;
-                        @endforeach
-                    </marquee>
-                    @endif
-
-
-                </div>
-
-                <div class="softsource-top-nav-right d-flex">
-                    <div class="softsource-top-nav-login-link">
-                        @guest
-                        @if (Route::has('login'))
-                        <a class="" href="{{ route('login') }}">Log In</a>/<a class="" href="{{ route('register') }}">Register</a>
-                        @endif
-                        @else
-                        <!-- <div class="d-flex"> -->
-                        <div class="dropdown">
-                            <button class="btn dropdown-toggle text-white softsource-profile-dropdown-button" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                                {{ \App\Helpers\SoftSourceHelper::GetIntialsFromNameString(Auth::user()->name) }}
-                            </button>
-                            <ul class="dropdown-menu softsource-profile-dropdown-ulist" aria-labelledby="dropdownMenuButton">
-                                <li><a class="dropdown-item" href="{{ route('profile') }}">My Profile&nbsp;&nbsp;</a></li>
-                                <li><a class="dropdown-item" href="{{ route('my-stories') }}">My Stories&nbsp;&nbsp;</a></li>
-                                <li class="divider"></li>
-                                <li><a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                 document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                </li>
-                            </ul>
-
-                            <a href="#" class="btn text-white softsource-notification-icon" role="button" id="notification-dropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                                <span class="fa-stack fa-lg">
-                                    <i class="fas fa-bell fa-stack-1x"></i>
-                                    <span class="softsource-notification-count">3</span>
-                                </span>
-                            </a>
-                            <ul class="dropdown-menu softsource-notification-dropdown" aria-labelledby="notification-dropdown">
-                                <li><a class="dropdown-item" href="#">Notification 1</a></li>
-                                <li><a class="dropdown-item" href="#">Notification 2</a></li>
-                                <li><a class="dropdown-item" href="#">Notification 3</a></li>
-                            </ul>
+            <div class="softsource-top-section softsource-header-sticky">
+                <div class="mx-5">
+                    <div class="row align-items-center">
+                        <div class="col-md-1 col-xxl-1 col-xl-1 col-lg-1 col-1 col-sm-1">
+                            <div class="softsource-header-logo">
+                                <a class="navbar-brand ms-auto " href="{{ url($partner->url) }}">
+                                    <img class="img-fluid light-logo" src="{{ asset($partner->logo) }}" alt="{{ $partner->partner_name }} Logo">
+                                    <!-- <p class="softsource-cust-tag">every person, every story, all the truth</p> -->
+                                </a>
+                            </div>
                         </div>
-
-                        @endguest
-                    </div>
-                    <div>&nbsp;|&nbsp;</div>
-                    <div class="softsource-social-links">
-                        <a href="https://www.facebook.com/HistoryChip/" target="_blank" aria-label="Facebook" class="">
-                            <i class="fab fa-facebook-f"></i>
-                        </a>
-                        <a href="https://instagram.com/historychipofficial?igshid=7bbizkt10clm" target="_blank" aria-label="Instagram" class=" ">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                        <a href="https://www.youtube.com/channel/UCSrIvdo034dV1rOL-adGu1g" target="_blank" aria-label="You Tube" class=" ">
-                            <i class="fab fa-youtube"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <!-- Bottom Part -->
-            <div class="navbar-bottom softsource-header-sticky">
-
-                <div class="d-flex align-items-center">
-                    <div class="softsource-header-logo">
-                        <a class="navbar-brand me-auto " href="{{ route('home') }}">
-                            <img class="img-fluid light-logo" src="{{ asset($partner->logo) }}" alt="History Chip Logo">
-
-                        </a>
-                    </div>
-                    <div class="softsource-bottom-nav-right">
-                        <div class="container">
+                        <div class="col-md-8 col-xxl-8 col-xl-8 col-lg-8 col-8 col-sm-8">
                             <nav class="navbar">
 
                                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -159,9 +99,11 @@
                                         <li class="nav-item softsource-has-children">
                                             <a class="nav-link softsource-nav-main-menu" href="javascript:;"><span>About</span><i class="fa-solid fa-angle-down softsource-nav-angle-down"></i></a>
                                             <ul class="softsource-submenu">
-                                                <li><a href="{{ route('about') }}"><span>About History Chip</span></a></li>
+                                                <li><a href="{{ route('about') }}"><span>About History Chip</span></a>
+                                                </li>
                                                 <li><a href="{{ route('founder') }}"><span>Founder</span></a> </li>
-                                                <li><a href="{{ route('historychipfor') }}"><span>Who is History Chip for</span></a></li>
+                                                <li><a href="{{ route('historychipfor') }}"><span>Who is History Chip
+                                                            for</span></a></li>
                                             </ul>
                                         </li>
                                         <li class="nav-item softsource-has-children">
@@ -186,8 +128,10 @@
                                             </a>
                                             <ul class="softsource-submenu">
                                                 <li><a href="{{ route('faq') }}"><span>FAQ</span></a></li>
+                                                @guest
                                                 <li><a href="{{ route('register') }}"><span>Registration</span></a>
                                                 </li>
+                                                @endguest
                                                 <li><a href="{{ route('privacypolicy') }}"><span>Privacy
                                                             Policy</span></a></li>
                                                 <li><a href="{{ route('termsandconditions') }}"><span>Term
@@ -206,52 +150,122 @@
                                                 <span>Partners</span>
                                             </a>
                                         </li>
-
                                     </ul>
-                                    <ul class="navbar-nav ms-auto">
+                                    <!-- <ul class="navbar-nav ms-auto">
                                         <li class="nav-item">
-                                            <form method="GET" action="/search/basic" class="mt-1">
-                                                @csrf
+                                            <form method="GET" action="#" class="mt-1">
+
                                                 <div class="input-group">
-                                                    <input id="search" name="term" type="text" class="form-control border-white bg-transparent text-white softsource-nav-search-input" placeholder="Search Any Word" aria-label="Search Any Word" aria-describedby="search-icon">
-                                                    <button class="btn border-white softsource-nav-search-btn" type="submit" id="search-icon"><i class="fa fa-search text-white"></i></button>
+                                                    <input id="search" name="term" type="text"
+                                                        class="form-control border-white bg-transparent text-white softsource-nav-search-input"
+                                                        placeholder="Search Any Word" aria-label="Search Any Word"
+                                                        aria-describedby="search-icon">
+                                                    <button class="btn border-white softsource-nav-search-btn"
+                                                        type="submit" id="search-icon"><i
+                                                            class="fa fa-search text-white"></i></button>
                                                 </div>
                                             </form>
 
                                         </li>
                                         <li class="nav-item">
-                                            <a class="btn btn-sm btn-light softsource-add-story-btn mt-1 softsource-btn-hover-transition" href="#">Add A Story</a>
+                                            <a class="btn btn-sm btn-light softsource-add-story-btn mt-1 softsource-btn-hover-transition"
+                                                href="#">Add A Story</a>
                                         </li>
-                                    </ul>
+                                    </ul> -->
                                 </div>
                             </nav>
                         </div>
-                    </div>
-                    <div class="softsource-header-logo">
-                        <a class="navbar-brand ms-auto " href="{{ route('home') }}">
-                            <img class="img-fluid light-logo" src="{{ asset('frontend/images/logo/logo-light.png') }}" alt="History Chip Logo">
-                            <p class="softsource-cust-tag">every person, every story, all the truth</p>
-                        </a>
+                        <div class="col-md-2 col-md-2 col-xxl-2 col-xl-2 col-lg-2 col-2	col-sm-2">
+                            <div class="ml-2">
+                                @guest
+                                @if (Route::has('login'))
+                                <a href="{{ route('register') }}" class="btn softsource-home-btn-register">Register</a>
+                                <a href="{{ route('login') }}" class="btn softsource-home-btn-login">Login</a>
+                                @endif
+                                @else
+                                <div class="dropdown">
+                                    <button class="btn dropdown-toggle text-white softsource-profile-dropdown-button" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                        {{ \App\Helpers\SoftSourceHelper::GetIntialsFromNameString(Auth::user()->name) }}
+                                    </button>
+                                    <ul class="dropdown-menu softsource-profile-dropdown-ulist" aria-labelledby="dropdownMenuButton">
+                                        <li><a class="dropdown-item" href="{{ route('profile') }}">My Profile&nbsp;&nbsp;</a>
+                                        </li>
+                                        <li><a class="dropdown-item" href="{{ route('my-stories') }}">My
+                                                Stories&nbsp;&nbsp;</a></li>
+                                        <li class="divider"></li>
+                                        <li><a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                 document.getElementById('logout-form').submit();">
+                                                {{ __('Logout') }}
+                                            </a>
+                                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                                @csrf
+                                            </form>
+                                        </li>
+                                    </ul>
+
+                                    {{-- <a href="#" class="btn text-white softsource-notification-icon" role="button" id="notification-dropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <span class="fa-stack fa-lg">
+                                            <i class="fas fa-bell fa-stack-1x"></i>
+                                            <span class="softsource-notification-count">3</span>
+                                        </span>
+                                    </a> --}}
+                                    {{-- <ul class="dropdown-menu softsource-notification-dropdown" aria-labelledby="notification-dropdown">
+                                        <li><a class="dropdown-item" href="#">Notification 1</a></li>
+                                        <li><a class="dropdown-item" href="#">Notification 2</a></li>
+                                        <li><a class="dropdown-item" href="#">Notification 3</a></li>
+                                    </ul> --}}
+                                </div>
+                                @endguest
+                            </div>
+                        </div>
+                        <div class="col-md-1 col-xxl-1 col-xl-1 col-lg-1 col-1 col-sm-1">
+                            <div class="softsource-header-logo">
+                                <a class="navbar-brand ms-auto " href="{{ route('home') }}">
+                                    <img class="img-fluid light-logo" src="{{ asset('frontend/images/logo/logo-light.png') }}" alt="History Chip Logo">
+                                    <p class="softsource-cust-tag" style="margin-left: -36px;">every person, every story, all the truth</p>
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
+
+            <div class="softsource-bottom-section">
+                <div class="softsource-scrolling-notice">
+                    <marquee behavior="scroll" direction="left">
+                        <ul class="softsource-scrolling-notice-lists-container">
+                            @foreach ($notices as $notice)
+                            <li>{{ $notice->content }}</li>
+                            @endforeach
+                        </ul>
+                    </marquee>
+                </div>
+            </div>
+
+
         </div>
 
         <main class="">
             @yield('content')
+            @include('site.layouts.footer')
         </main>
-        @include('site.layouts.footer')
     </div>
 
     <!-- JS -->
 
 
     <script src="{{ asset('frontend/js/bootstrap/bootstrap.bundle.min.js?q=' . time()) }}"></script>
+    <script src="{{ asset('frontend/input-tags/js/tagsinput.js?q=' . time()) }}"></script>
     <script src="{{ asset('frontend/js/select2/select2.min.js?q=' . time()) }}"></script>
+
+    <script src="{{ asset('frontend/file-uploader/js/script.js?2.1.2') }}" type="text/javascript"></script>
+    <script src="{{ asset('frontend/file-uploader/js/file-custom.js?2.1.2') }}" type="text/javascript"></script>
+
+    <script src="{{ asset('frontend/js/summernote/summernote-lite.min.js?q=' . time()) }}"></script>
 
     <script src="{{ asset('frontend/fontawsome/js/17472dc9f4.js?q=' . time()) }}"></script>
     <script src="{{ asset('frontend/js/global-variables.js?q=' . time()) }}"></script>
-    <script src="{{ asset('frontend/js/script.js?q=' . time()) }}"></script>
+    <script src="{{ asset('frontend/js/frontend.js?q=' . time()) }}"></script>
 
 
 </body>

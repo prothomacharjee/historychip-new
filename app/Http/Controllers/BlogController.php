@@ -52,7 +52,7 @@ class BlogController extends Controller
             "blog_description" => "required",
             "blog_date" => "required",
             "status" => "required",
-            // 'blog_banner' => 'required|file|max:2048|mimes:jpeg,png,svg,webp',
+         'blog_banner' => 'file|max:2048|mimes:jpeg,png,svg,webp',
         ]);
 
         if ($validator->fails()) {

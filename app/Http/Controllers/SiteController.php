@@ -174,14 +174,14 @@ class SiteController extends Controller
 
             $page_title = $partner->title;
 
-            $viewPage = "site.partner-types." . strtolower($partnerimages->partner_type->name);
+            $viewPage = "site.partner-types.partner-" . strtolower($partnerimages->partner_type->name);
 
-            return view($viewPage)->with([
+            return view('site.partner-types.partner-basic')->with([
                 'page_title' => $page_title,
                 'notices' => $this->notices,
                 'partner' => $partner,
                 'partnerimages' => $partnerimages,
-
+                'meta' => $this->pages,
             ]);
 
         } else {

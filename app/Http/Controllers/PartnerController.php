@@ -43,7 +43,7 @@ class PartnerController extends Controller
      */
     public function store(Request $request)
     {
-
+        dd($request);
         $req_partner = $request->partner;
         $req_meta = $request->meta;
 

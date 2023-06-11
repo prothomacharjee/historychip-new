@@ -78,7 +78,7 @@
     <div class="softsource-main_content">
         <div class="navbar-expand-lg navbar-light softsource-nav-bg">
             <div class="softsource-top-section softsource-header-sticky">
-                <div class="mx-5">
+                <div class="">
                     <div class="row align-items-center">
                         <div class="col-md-2 col-xxl-2 col-xl-2 col-lg-2 col-2 col-sm-2">
                             <div class="softsource-header-logo">

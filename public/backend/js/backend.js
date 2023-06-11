@@ -149,7 +149,7 @@ function MultipleFileUploaderValidation(
                 const reader = new FileReader();
                 reader.onload = function (e) {
                     const imageUrl = e.target.result;
-                    selected_file.append(
+                    selected_file.html(
                         `<div class="col-md-2">
                             <div class="softsource-image-wrapper text-center">
                                 <img src="${imageUrl}" alt="Selected File ${i + 1}" class="img-thumbnail w-${image_view_width}">
