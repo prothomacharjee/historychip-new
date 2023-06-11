@@ -3,9 +3,11 @@
 @section('content')
     <style scoped>
         .softsource-top-contianer {
-            background-image: linear-gradient(rgba(50, 68, 76, 0.76), rgba(79, 104, 116, 0.71)), url("{{ asset($partner->banner) }}");
+            background-image:  url("{{ asset($partner->banner) }}");
             background-position: center;
             background-size: cover;
+            padding-top: 195px;
+            padding-bottom: 204px;
         }
     </style>
 

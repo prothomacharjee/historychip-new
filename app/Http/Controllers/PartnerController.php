@@ -43,7 +43,7 @@ class PartnerController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request);
+        //dd($request);
         $req_partner = $request->partner;
         $req_meta = $request->meta;
 
@@ -88,7 +88,7 @@ class PartnerController extends Controller
             $meta->meta_title = $req_meta['meta_title'];
             $meta->meta_keywords = $req_meta['meta_keywords'];
             $meta->meta_description = $req_meta['meta_description'];
-            $meta->og_author = Auth::user()->name;
+            $meta->og_author = Auth::guard('admin')->user()->name;
             $meta->status = $req_partner['status'];
 
 

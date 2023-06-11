@@ -394,8 +394,18 @@
         <!--end row-->
     </div>
 
+    @php
+        $partner_type_id = (!empty($partner->partner_type_id)  ? $partner->partner_type_id : 0)
+    @endphp
+
     <script>
         $(document).ready(function() {
+            let $partner_type_id = '{{ $partner_type_id }}';
+            if ($partner_type_id != 0) {
+                $('#partner_type_id').change();
+            }
+
+
             $("#description").summernote({
                 placeholder: "Write Your Description Here",
                 height: 400,

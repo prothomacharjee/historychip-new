@@ -50,7 +50,7 @@
 
                                     <div class="softsource-partner-hr"></div>
                                     <h5 class="softsource-partner-title pt-3">
-                                        <a href="{{ url($partner->url) }}">{{ $partner->title }}</a>
+                                        <a href="{{ url($partner->url) }}">{{ mb_strimwidth(strip_tags($partner->title), 0, 50, "...") }}</a>
                                     </h5>
                                     <div class="text-break mt-5">
                                         <p>{{ mb_strimwidth(strip_tags($partner->description), 0, 25, '...') }}</p>

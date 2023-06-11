@@ -79,9 +79,9 @@ class BlogController extends Controller
             }
 
             if ($req_blog['id']) {
-                $blog->updated_by = Auth::id();
+                $blog->updated_by = Auth::guard('admin')->id();
             } else {
-                $blog->created_by = Auth::id();
+                $blog->created_by = Auth::guard('admin')->id();
             }
 
             $meta->name = trim("blogs." . lcfirst(str_replace(' ', '', ucwords($req_blog['blog_title']))));
@@ -91,7 +91,7 @@ class BlogController extends Controller
             $meta->meta_title = trim($req_meta['meta_title']);
             $meta->meta_keywords = trim($req_meta['meta_keywords']);
             $meta->meta_description = trim($req_meta['meta_description']);
-            $meta->og_author = Auth::user()->name;
+            $meta->og_author = Auth::guard('admin')->user()->name;
             $meta->status = trim($req_blog['status']);
 
             if ($request->hasFile('blog_banner')) {
