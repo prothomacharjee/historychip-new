@@ -10,7 +10,7 @@
     <!-- SEO -->
     <meta name="title" content="{{ $meta->meta_title??''}}">
     <meta name="description" content="{{ $meta->meta_description??''}}">
-    <meta name="keywords" content="{{($meta->meta_keywords)?$meta->meta_keywords.', ':''}}SoftSource, Prothom Acharjee">
+    <meta name="keywords" content="{{$meta->meta_keywords??''}}">
 
 
     <!-- Social Media -->

@@ -1,19 +1,20 @@
 <?php
 
-use App\Http\Controllers\AdminAuthController;
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\BlogController;
-use App\Http\Controllers\ContactController;
-use App\Http\Controllers\NoticePromptController;
-use App\Http\Controllers\PartnerController;
-use App\Http\Controllers\PartnerTypeController;
-use App\Http\Controllers\SiteController;
-use App\Http\Controllers\StoryCategoryController;
-use App\Http\Controllers\StoryController;
-use App\Http\Controllers\UserAuthController;
-use App\Http\Controllers\WritingPromptController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BlogController;
+use App\Http\Controllers\SiteController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\StoryController;
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\PartnerController;
+use App\Http\Controllers\RedirectController;
+use App\Http\Controllers\UserAuthController;
+use App\Http\Controllers\AdminAuthController;
+use App\Http\Controllers\PartnerTypeController;
+use App\Http\Controllers\NoticePromptController;
+use App\Http\Controllers\StoryCategoryController;
+use App\Http\Controllers\WritingPromptController;
 
 /*
 |--------------------------------------------------------------------------
@@ -87,6 +88,14 @@ Route::post('/getwritingprompts', [WritingPromptController::class, 'getwritingpr
 
 Route::post('/story/create', [StoryController::class, 'store'])->name('story.create')->middleware('auth');
 Route::post('/story/comment', [StoryController::class, 'save_comment'])->name('story.comment')->middleware('auth');
+
+
+
+
+
+// Redirection Url
+Route::redirect('/blogdetail/{id}/{slug}', '/blogs/{slug}', 301);
+
 
 // ADMIN PANEL
 

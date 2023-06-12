@@ -18,7 +18,7 @@ class Controller extends BaseController
 
     public function __construct()
     {
-        if (strpos(Route::currentRouteName(), 'admin.') === 0) {
+        if (strpos(Route::currentRouteName(), 'admin.') === 0 || strpos(Route::currentRouteName(), 'api.') === 0) {
 
         } else {
 
@@ -43,6 +43,8 @@ class Controller extends BaseController
             // dd(Route::getRoutes());
             $this->pages = Page::where('url', $pathAfterBase)->first();
             $routeExists = false;
+
+
 
             foreach (Route::getRoutes() as $route) {
 

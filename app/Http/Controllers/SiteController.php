@@ -209,6 +209,7 @@ class SiteController extends Controller
     {
 
         $user = User::findOrFail(Auth::id())->load('user_profile');
+        //dd($this->pages);
 
         return view('site.profile')->with([
             'page_title' => 'Profile',

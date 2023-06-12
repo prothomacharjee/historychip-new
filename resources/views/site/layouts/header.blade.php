@@ -10,7 +10,7 @@
     <!-- SEO -->
     <meta name="title" content="{{ $meta->meta_title??''}}">
     <meta name="description" content="{{ $meta->meta_description??''}}">
-    <meta name="keywords" content="{{($meta->meta_keywords)?$meta->meta_keywords.', ':''}}SoftSource, Prothom Acharjee">
+    <meta name="keywords" content="{{$meta->meta_keywords??''}}">
 
 
     <!-- Social Media -->
@@ -21,12 +21,12 @@
     <meta property="og:title" content="{{ $meta->page_title??''}} | {{ config('app.name', 'SoftSource') }}" />
     <meta property="og:url" content="{{ url()->current() }}" />
     <meta property="og:site_name" content="{{ config('app.name', 'SoftSource') }}" />
-    <meta property="og:image" content="{{ ($meta->og_image)? asset($meta->og_image):'' }}" />
+    <meta property="og:image" content="{{ ($meta->og_image)? asset($meta->og_image):asset('frontend/images/logo/logo-light.png') }}" />
     <meta property="og:audio" content="{{ ($meta->og_audio)? asset($meta->og_audio):'' }}" />
     <meta property="og:video" content="{{ ($meta->og_video)? asset($meta->og_video):'' }}" />
     <meta property="og:description" content="{{ $meta->meta_description??'' }}" />
     <meta property="og:author" content="{{ $meta->og_author??'' }}" />
-    <meta property="article:modified_time" content="{{ date('d-M-Y H:i:s', strtotime($meta->updated_at)) }}" />
+    <meta property="article:modified_time" content="{{ $meta->updated_at??'' }}" />
 
     <!-- Author Info -->
     <meta name="author" content="SoftSource, Bangladesh">
