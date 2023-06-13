@@ -20,3 +20,5 @@ use App\Http\Controllers\ApiController;
 // });
 
 Route::get('/stories/{slug?}', [ApiController::class, 'api_read_story'])->name('api.story.read');
+Route::post('/login', [ApiController::class, 'api_login'])->name('api.login');
+Route::post('/register', [ApiController::class, 'api_register'])->name('api.register');

@@ -163,9 +163,17 @@ class UserAuthController extends Controller
                 return redirect()->back()->with('error', $e->getMessage());
             }
         }
-
-
-
-
     }
+
+    public function showResetPasswordForm()
+    {
+
+        return view('auth.passwords.email')->with([
+            'page_title' => 'Reset',
+            'notices' => $this->notices,
+            'meta' => $this->pages,
+        ]);
+    }
+
+
 }
