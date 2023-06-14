@@ -74,7 +74,7 @@ Route::get('/writing-prompts', [SiteController::class, 'writingprompt'])->name('
 Route::get('/blogs/{slug?}', [SiteController::class, 'blogs'])->name('blogs');
 Route::get('/partners/{slug?}', [SiteController::class, 'partners'])->name('partners');
 Route::get('/stories/{slug?}', [SiteController::class, 'read_story'])->name('story.read');
-Route::get('/author/{slug?}', [SiteController::class, 'author_stories'])->name('author-stories');
+Route::get('/authors/{slug?}', [SiteController::class, 'author_stories'])->name('author-stories');
 
 Route::get('/write-story/{slug?}', [SiteController::class, 'write_story'])->name('story.write')->middleware('auth');
 
@@ -89,9 +89,6 @@ Route::post('/getwritingprompts', [WritingPromptController::class, 'getwritingpr
 
 Route::post('/story/create', [StoryController::class, 'store'])->name('story.create')->middleware('auth');
 Route::post('/story/comment', [StoryController::class, 'save_comment'])->name('story.comment')->middleware('auth');
-
-
-
 
 
 // Redirection Url

@@ -1,13 +1,7 @@
 @extends('site.layouts.header')
 
 @section('content')
-<style scoped>
-    .softsource-top-contianer {
-        background-image: url("{{ asset('frontend/images/web_img/about-banner.jpg') }}");
-        background-position: center;
-        background-size: cover;
-    }
-</style>
+
 <!--============ Resolutions Hero Start ============-->
 <div class="position-relative softsource-top-contianer">
     <div class="container">

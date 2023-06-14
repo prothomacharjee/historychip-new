@@ -40,7 +40,8 @@ class Controller extends BaseController
             $url = url()->current(); //Route::current()->uri();
             $basePath = url('/');
             $pathAfterBase = str_replace($basePath, '', $url);
-            // dd(Route::getRoutes());
+            
+
             $this->pages = Page::where('url', $pathAfterBase)->first();
             $routeExists = false;
 

@@ -92,10 +92,12 @@ class UserAuthController extends Controller
                         // Send verification email
                         $user->sendEmailVerificationNotification();
                         return redirect()->back()->with('info', "Email is not verified. A verification email has been sent.");
-                    } elseif ($user->is_available == 0) {
-                        $this->incrementLoginAttempts($request);
-                        return redirect()->back()->with('error', "Sorry! Account is temporary blocked.");
-                    } else {
+                    }
+                    // elseif ($user->is_available == 0) {
+                    //     $this->incrementLoginAttempts($request);
+                    //     return redirect()->back()->with('error', "Sorry! Account is temporary blocked.");
+                    // } 
+                    else {
                         // Email is registered and verified, but password is incorrect
                         $this->incrementLoginAttempts($request);
                         return redirect()->back()->with('error', "Invalid Credentials.");
