@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Page Not Found.</title>
+        <title>404. Page Not Found.</title>
 
         <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
 
@@ -35,12 +35,15 @@
                 font-size: 72px;
                 margin-bottom: 40px;
             }
+            .text-dark{
+                color: black;
+            }
         </style>
     </head>
     <body>
         <div class="container">
             <div class="content">
-                <div class="title">Page Not Found.</div>
+                <div class="title text-dark">Maintance work is on going for this page. Please Stay with us and try again later.</div>
             </div>
         </div>
     </body>

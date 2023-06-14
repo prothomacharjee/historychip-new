@@ -109,7 +109,7 @@ class SiteController extends Controller
 
     public function blogs($slug = null)
     {
-        if(is_null($this->pages)){
+        if (is_null($this->pages)) {
             abort('404');
         }
         $previous = [];
@@ -129,7 +129,6 @@ class SiteController extends Controller
 
             $previous = Blog::getBlogPreviousId((int) $blogs->blog_id);
             $next = Blog::getBlogNextId((int) $blogs->blog_id);
-
         } else {
 
             $blogs = DB::table('blogs as b')
@@ -152,13 +151,12 @@ class SiteController extends Controller
             'meta' => $this->pages,
 
         ]);
-
     }
 
     public function partners($slug = null)
     {
         if ($slug) {
-            if(is_null($this->pages)){
+            if (is_null($this->pages)) {
                 abort('404');
             }
 
@@ -183,7 +181,6 @@ class SiteController extends Controller
                 'partnerimages' => $partnerimages,
                 'meta' => $this->pages,
             ]);
-
         } else {
             $partners = DB::table('partners as b')
                 ->join('pages as p', 'b.id', '=', 'p.page_group_id')
@@ -202,7 +199,6 @@ class SiteController extends Controller
 
             ]);
         }
-
     }
 
     public function profile()
@@ -223,14 +219,41 @@ class SiteController extends Controller
     public function my_stories()
     {
 
-        $published_stories = Story::FetchStoryByAuthorIDAndApprovalType(Auth::id(),12, 1);
-        $waiting_stories = Story::FetchStoryByAuthorIDAndApprovalType(Auth::id(),12, 0);
-        $rejected_stories = Story::FetchStoryByAuthorIDAndApprovalType(Auth::id(),12,2);
-        $draft_stories = Story::FetchDraftStoryByAuthorID(Auth::id(),12, 1);
+        $published_stories = Story::FetchStoryByAuthorIDAndApprovalType(Auth::guard('users')->id(), 12, 1);
+        $waiting_stories = Story::FetchStoryByAuthorIDAndApprovalType(Auth::guard('users')->id(), 12, 0);
+        $rejected_stories = Story::FetchStoryByAuthorIDAndApprovalType(Auth::guard('users')->id(), 12, 2);
+        $draft_stories = Story::FetchDraftStoryByAuthorID(Auth::guard('users')->id(), 12, 1);
 
 
         return view('site.my-stories')->with([
             'page_title' => 'My Stories',
+            'notices' => $this->notices,
+            'published_stories' => $published_stories,
+            'waiting_stories' => $waiting_stories,
+            'rejected_stories' => $rejected_stories,
+            'draft_stories' => $draft_stories,
+            'meta' => $this->pages,
+
+        ]);
+    }
+
+    public function author_stories($slug)
+    {
+        if (is_null($this->pages)) {
+            abort('404');
+        }
+        $slugParts = explode('-', $slug);
+        $firstWord = $slugParts[0];
+
+        $author = User::findOrFail($firstWord);
+        $published_stories = Story::FetchStoryByAuthorIDAndApprovalType($firstWord, 12, 1);
+        $waiting_stories = Story::FetchStoryByAuthorIDAndApprovalType($firstWord, 12, 0);
+        $rejected_stories = Story::FetchStoryByAuthorIDAndApprovalType($firstWord, 12, 2);
+        $draft_stories = Story::FetchDraftStoryByAuthorID($firstWord, 12, 1);
+
+
+        return view('site.author-stories')->with([
+            'page_title' => $author->name.' Stories',
             'notices' => $this->notices,
             'published_stories' => $published_stories,
             'waiting_stories' => $waiting_stories,
@@ -246,7 +269,7 @@ class SiteController extends Controller
         if ($slug) {
             # code...
             // $stories = Story::findOrFail(Auth::id())->load('user_profile');
-            if(is_null($this->pages)){
+            if (is_null($this->pages)) {
                 abort('404');
             }
             $slugParts = explode('-', $slug);
@@ -294,7 +317,6 @@ class SiteController extends Controller
             'meta' => $this->pages,
 
         ]);
-
     }
 
     public function saveimage(Request $request)
@@ -344,7 +366,4 @@ class SiteController extends Controller
         );
         echo json_encode($value);
     }
-
-
-
 }
