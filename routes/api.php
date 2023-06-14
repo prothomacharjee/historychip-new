@@ -21,6 +21,7 @@ use App\Http\Controllers\ApiController;
 
 Route::post('/login', [ApiController::class, 'api_login'])->name('api.login');
 Route::post('/register', [ApiController::class, 'api_register'])->name('api.register');
+Route::post('/logout', [ApiController::class, 'api_logout'])->name('api.logout');
 
 Route::get('/stories/{slug?}', [ApiController::class, 'api_read_story'])->name('api.story.read');
 
