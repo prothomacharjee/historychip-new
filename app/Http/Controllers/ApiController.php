@@ -194,7 +194,7 @@ class ApiController extends Controller
 
     public function api_logout(Request $request)
     {
-        $request->user()->token()->revoke();
+        $request->user('web')->token()->revoke();
 
         return response()->json(['response' => 'Successfully logged out']);
     }

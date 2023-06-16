@@ -18,7 +18,7 @@ class Controller extends BaseController
 
     public function __construct()
     {
-        if (strpos(Route::currentRouteName(), 'admin.') === 0 || strpos(Route::currentRouteName(), 'api.') === 0) {
+        if (strpos(Route::currentRouteName(), 'admin.') === 0 || strpos(Route::currentRouteName(), 'api.') === 0 ) {
 
         } else {
 
@@ -40,10 +40,16 @@ class Controller extends BaseController
             $url = url()->current(); //Route::current()->uri();
             $basePath = url('/');
             $pathAfterBase = str_replace($basePath, '', $url);
-            
 
-            $this->pages = Page::where('url', $pathAfterBase)->first();
+            if(Route::currentRouteName() == 'password.reset'){
+                $this->pages = Page::where('name', Route::currentRouteName())->first();
+            }
+            else{
+                $this->pages = Page::where('url', $pathAfterBase)->first();
+            }
+
             $routeExists = false;
+
 
 
 

@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name', 200);
             $table->string('email', 200);
+            $table->string('phone', 200);
             $table->longText('message');
             $table->tinyInteger('is_read')->default(0);
             $table->tinyInteger('is_replied')->default(0);

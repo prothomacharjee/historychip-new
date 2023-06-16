@@ -96,7 +96,7 @@ class UserAuthController extends Controller
                     // elseif ($user->is_available == 0) {
                     //     $this->incrementLoginAttempts($request);
                     //     return redirect()->back()->with('error', "Sorry! Account is temporary blocked.");
-                    // } 
+                    // }
                     else {
                         // Email is registered and verified, but password is incorrect
                         $this->incrementLoginAttempts($request);

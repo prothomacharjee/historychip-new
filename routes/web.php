@@ -55,7 +55,7 @@ Route::get('/login', [UserAuthController::class, 'showLoginForm'])->name('login'
 Route::post('/login', [UserAuthController::class, 'login'])->name('login.submit');
 Route::get('/register', [UserAuthController::class, 'showRegistrationForm'])->name('register')->middleware('guest');
 Route::post('/register', [UserAuthController::class, 'register'])->name('register.submit');
-Route::get('/password/reset', [UserAuthController::class, 'showResetPasswordForm'])->name('password.request')->middleware('guest');
+Route::get('/password/reset-request', [UserAuthController::class, 'showResetPasswordForm'])->name('password.reset-request')->middleware('guest');
 
 //User Profile
 Route::get('/profile', [SiteController::class, 'profile'])->name('profile');
@@ -70,6 +70,7 @@ Route::get('/frequently-asked-questions', [SiteController::class, 'faq'])->name(
 Route::get('/privacy-policy', [SiteController::class, 'privacypolicy'])->name('privacypolicy');
 Route::get('/terms-and-conditions', [SiteController::class, 'termsandconditions'])->name('termsandconditions');
 Route::get('/contact-us', [SiteController::class, 'contactus'])->name('contactus');
+Route::post('/contact-us', [ContactController::class, 'store'])->name('contactus.submit');
 Route::get('/writing-prompts', [SiteController::class, 'writingprompt'])->name('writingprompt');
 Route::get('/blogs/{slug?}', [SiteController::class, 'blogs'])->name('blogs');
 Route::get('/partners/{slug?}', [SiteController::class, 'partners'])->name('partners');

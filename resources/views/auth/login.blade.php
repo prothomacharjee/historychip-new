@@ -115,7 +115,7 @@
                                     <label for="remember" class="softsource-login-remember-label"> Remember me</label>
                                 </div>
                                 <div class="col-md-6 text-end">
-                                    <a href="{{ route('password.request') }}">Forgot Your Password ?</a>
+                                    <a href="{{ route('password.reset-request') }}">Forgot Your Password ?</a>
                                 </div>
                                 <div class="col-md-12 text-center mt-5">
                                     <span class="softsource-login-remember-not-registered"> Don’t have an account? <a
