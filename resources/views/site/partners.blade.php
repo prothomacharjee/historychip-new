@@ -33,7 +33,7 @@
             <div class="row">
                 @if (count($partners) > 0)
                     @foreach ($partners as $partner)
-                        <div class="col-lg-4 col-md-6 mb-5">
+                        <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 mb-5">
                             <!--======= Single Partner Item Start ========-->
                             <div class="softsource-partner-item-div">
                                 <!-- Partner Feature Start -->

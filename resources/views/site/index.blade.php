@@ -172,14 +172,14 @@
     <!-- Section 3: Search Stories -->
     <section class="bg-light py-5 mt-5">
         <div class="container">
-            <div class="row">
-                <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+            <div class="row ">
+                <div class="col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-12 col-12">
                     <div class="softsource-home-search-story-section-title-wrap mb-5">
                         <div class="softsource-home-search-story-title">Search <br><span> Stories</span></div>
                         <div class="softsource-home-search-story-horizontal-line"></div>
                     </div>
                 </div>
-                <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+                <div class="col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-12 col-12">
                     <div class="softsource-home-search-story-section-category-wrap p-3">
                         <form class="softsource-home-search-story-form d-flex p-5" method="Post" action="">
                             <div class="">
@@ -222,7 +222,7 @@
             <div class="row">
                 <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
                     <div class="softsource-home-search-writing-prompt-title-wrap mb-5">
-                        <div class="softsource-home-writing-prompt-title mt-5">Want<br>Creative<br>Writing<br>Prompts?
+                        <div class="softsource-home-writing-prompt-title mt-5">Want<br>Writing<br>Prompts?
                         </div>
                         <div class="">
                             <a href="{{ route('story.write') }}"

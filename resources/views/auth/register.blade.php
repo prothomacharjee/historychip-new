@@ -20,7 +20,12 @@
                 <div class="softsource-register_div">
                     <h3>Register</h3>
                     <h4>Where everyone's stories matter.</h4>
+
                     <br>
+                    <div class="text-center">
+                        <a href="{{ route('quick-register') }}" class="softsource-submit_btn btn-lg">Try Quick Registration</a>
+                    </div>
+                    
                     @if (session('success'))
                         <div class="alert border-0 border-start border-5 border-success alert-dismissible fade show py-2">
                             <div class="d-flex align-items-center">
@@ -59,7 +64,9 @@
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
                     @endif
+
                     <br>
+
                     <form class="mt-3" method="POST" id="register_form" action="{{ route('register.submit') }}"
                         class="captcha-form">
                         @csrf

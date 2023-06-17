@@ -8,8 +8,8 @@ use App\Models\Page;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 use Yajra\DataTables\Facades\DataTables;
 
 class BlogController extends Controller
@@ -52,7 +52,7 @@ class BlogController extends Controller
             "blog_description" => "required",
             "blog_date" => "required",
             "status" => "required",
-         'blog_banner' => 'file|max:2048|mimes:jpeg,png,svg,webp',
+            'blog_banner' => 'file|max:2048|mimes:jpeg,png,svg,webp',
         ]);
 
         if ($validator->fails()) {
@@ -126,7 +126,6 @@ class BlogController extends Controller
         ]);
     }
 
-
     /**
      * Remove the specified resource from storage.
      */
@@ -138,7 +137,7 @@ class BlogController extends Controller
                 $blog->delete();
             });
             return redirect()->route('admin.blogs')->with('success', 'Blogs Deleted Successfully');
-        } catch (\Exception$e) {
+        } catch (\Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
         }
     }

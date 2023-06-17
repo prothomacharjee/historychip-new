@@ -51,11 +51,16 @@ use App\Http\Controllers\WritingPromptController;
 Auth::routes(['verify' => true]);
 
 // User Authentications
-Route::get('/login', [UserAuthController::class, 'showLoginForm'])->name('login');
-Route::post('/login', [UserAuthController::class, 'login'])->name('login.submit');
+Route::get('/login', [UserAuthController::class, 'showLoginForm'])->name('login')->middleware('guest');
+Route::post('/login', [UserAuthController::class, 'login'])->name('login.submit')->middleware('guest');
 Route::get('/register', [UserAuthController::class, 'showRegistrationForm'])->name('register')->middleware('guest');
-Route::post('/register', [UserAuthController::class, 'register'])->name('register.submit');
+Route::post('/register', [UserAuthController::class, 'register'])->name('register.submit')->middleware('guest');
 Route::get('/password/reset-request', [UserAuthController::class, 'showResetPasswordForm'])->name('password.reset-request')->middleware('guest');
+
+Route::get('/quick-register', [UserAuthController::class, 'showQuickRegisterForm'])->name('quick-register')->middleware('guest');
+Route::post('/quick-register', [UserAuthController::class, 'quickRegister'])->name('quick-register.submit')->middleware('guest');
+Route::get('/quick-register-verification', [UserAuthController::class, 'showQuickRegisterOTPForm'])->name('quick-register.verify')->middleware('guest');
+Route::post('/quick-register-verification', [UserAuthController::class, 'quickRegisterSubmit'])->name('quick-register.verify.submit')->middleware('guest');
 
 //User Profile
 Route::get('/profile', [SiteController::class, 'profile'])->name('profile');

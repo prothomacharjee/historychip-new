@@ -47,7 +47,7 @@
         transform: translate(-28%, -50%) !important;
     }
 
-    .softsource-home-daily-prompt-header{
+    .softsource-home-daily-prompt-header {
         font-size: 58px;
     }
 }
@@ -61,7 +61,7 @@
         bottom: 150px;
     }
 
-    .softsource-home-daily-prompt-header{
+    .softsource-home-daily-prompt-header {
         font-size: 51px;
     }
 }
@@ -80,7 +80,7 @@
         left: 65% !important;
     }
 
-    .softsource-home-daily-prompt-header{
+    .softsource-home-daily-prompt-header {
         font-size: 44px;
     }
 }
@@ -128,13 +128,311 @@
         height: 700px !important;
     }
 
-    .softsource-home-daily-prompt-header{
+    .softsource-home-daily-prompt-header {
         font-size: 35px;
     }
 
+    .softsource-home-fetured-story-top-title,
+    .softsource-home-fetured-blog-top-title {
+        font-size: 44px;
+    }
 
+    .softsource-home-search-story-section-title-wrap {
+        text-align: center;
+    }
+    .softsource-home-search-story-horizontal-line {
+        display: none;
+    }
+
+    .softsource-home-search-story-form {
+        width: auto;
+        justify-content: center;
+    }
+    .softsource-home-writing-prompt-title {
+        font-size: 80px;
+    }
+
+    .softsource-home-intro-title {
+        font-size: 80px;
+    }
+
+    .softsource-home-intro-title span {
+        font-size: 75px;
+    }
+
+    .partner .softsource-nav-menus > li.nav-item {
+        padding-left: 5px !important;
+        padding-right: 5px !important;
+    }
 }
 
+@media only screen and (max-width: 768px) {
+    .softsource-home-fetured-story-horizontal-line,
+    .softsource-home-fetured-blog-horizontal-line {
+        display: none;
+    }
+
+    .softsource-home-fetured-story-top-title,
+    .softsource-home-fetured-blog-top-title {
+        font-size: 56px;
+    }
+
+    .softsource-partner-top-section-intro h2 {
+        font-size: 60px;
+    }
+
+    .softsource-partner-details-historychip-div img,
+    .softsource-partner-top-section img,
+    .softsource-partner-bottom-section img {
+        width: 100% !important;
+    }
+}
+
+@media only screen and (max-width: 425px) {
+    .softsource-home-top-scroll {
+        display: none;
+    }
+    .softsource-home-text-over-video-div {
+        transform: none !important;
+        top: 15% !important;
+        left: 0 !important;
+    }
+
+    .softsource-firstline-header {
+        font-size: 57px !important;
+        text-align: center !important;
+    }
+
+    .softsource-home-daily-prompt {
+        flex-direction: column;
+        padding-left: 0px !important;
+    }
+
+    .softsource-home-search-story-form {
+        flex-direction: column;
+    }
+    .softsource-home-search-story-title {
+        font-size: 90px;
+    }
+
+    .softsource-home-writing-prompt-title {
+        font-size: 70px;
+    }
+    .softsource-home-intro-title {
+        font-size: 75px;
+    }
+
+    .softsource-home-intro-title span {
+        font-size: 55px;
+    }
+
+    .softsource-home-newsletter-title {
+        font-size: 40px;
+    }
+
+    .softsource-home-fetured-story-top-title,
+    .softsource-home-fetured-blog-top-title {
+        font-size: 23px;
+    }
+
+    .softsource-home-daily-prompt-header {
+        font-size: 30px;
+    }
+
+    .softsource-home-daily-prompt-word-text-box input {
+        font-size: 15px;
+    }
+
+    .softsource-home-daily-prompt-word-text-box {
+        margin-left: 0px !important;
+        margin-right: 0px !important;
+    }
+    .softsource-home-daily-prompt-add-story {
+        width: 100%;
+    }
+
+    .softsource-footer-inner-div {
+        padding-right: 1rem !important;
+        padding-left: 1rem !important;
+        margin-right: 1rem !important;
+        margin-left: 1rem !important;
+    }
+
+    .softsource-social-networks {
+        display: flex;
+        justify-content: center;
+    }
+
+    .softsource-footer-logo-div {
+        text-align: center !important;
+    }
+    .softsource-footer-social-div {
+        text-align: center !important;
+    }
+
+    .softsource-footer-social-div {
+        max-width: 100%;
+    }
+
+    .softsource-partner-bottom-section img {
+        margin-bottom: 5px;
+    }
+
+    .softsource-hc-partner-intro {
+        text-align: center;
+    }
+
+    .partner .navbar-toggler-icon {
+        width: 1em;
+        height: 1em;
+    }
+    .partner .softsource-home-btn-register {
+        font-size: 8px;
+    }
+
+    .partner .softsource-home-btn-login {
+        font-size: 8px;
+    }
+
+    .partner .softsource-cust-tag{
+        margin-left: -40px;
+    }
+}
+
+@media only screen and (max-width: 375px) {
+    .softsource-home-daily-prompt-header {
+        font-size: 26px;
+    }
+
+    .softsource-home-search-story-title {
+        font-size: 80px;
+    }
+
+    .softsource-home-writing-prompt-title {
+        font-size: 60px;
+    }
+
+    .softsource-home-intro-title {
+        font-size: 68px;
+    }
+
+    .softsource-home-intro-title span {
+        font-size: 50px;
+    }
+
+    .softsource-home-fetured-story-top-title,
+    .softsource-home-fetured-blog-top-title {
+        font-size: 30px;
+    }
+
+    .softsource-footer-copyright-text,
+    .softsource-footer-poweredby-text {
+        text-align: center !important;
+
+        padding-top: 5px;
+    }
+
+    .softsource-partner-feature img {
+        width: 328px;
+    }
+
+    .softsource-header-logo .light-logo {
+        max-width: 60px;
+    }
+
+    .softsource-cust-tag {
+        font-size: 5px;
+        margin-left: -10px;
+    }
+
+    .softsource-scrolling-notice marquee {
+        font-size: 10px;
+    }
+
+    .navbar-toggler-icon {
+        width: 1em;
+        height: 1em;
+    }
+
+    .softsource-home-btn-register {
+        font-size: 8px;
+    }
+
+    .softsource-home-btn-login {
+        font-size: 8px;
+    }
+
+    .softsource-home-btn-register,
+    .softsource-home-btn-login {
+        padding: 7px;
+    }
+
+    .softsource-firstline-header {
+        font-size: 50px !important;
+    }
+
+
+    .partner .softsource-cust-tag{
+        margin-left: -15px;
+    }
+
+    .partner .navbar-toggler-icon {
+        width: 1em;
+        height: 1em;
+    }
+}
+
+@media only screen and (max-width: 320px) {
+    .softsource-home-daily-prompt-header {
+        font-size: 20px;
+    }
+
+    .softsource-home-search-story-title {
+        font-size: 72px;
+    }
+
+    .softsource-home-writing-prompt-title {
+        font-size: 53px;
+    }
+
+    .softsource-home-intro-title {
+        font-size: 58px;
+    }
+
+    .softsource-home-intro-title span {
+        font-size: 41px;
+    }
+
+    .softsource-home-newsletter-title {
+        font-size: 29px;
+    }
+
+    .softsource-firstline-header {
+        font-size: 45px !important;
+    }
+    .softsource-home-fetured-story-top-title,
+    .softsource-home-fetured-blog-top-title {
+        font-size: 26px;
+    }
+
+    .softsource-partner-feature img {
+        width: 273px;
+    }
+
+    .softsource-partner-top-section-intro h2 {
+        font-size: 50px;
+    }
+
+    .navbar-toggler-icon {
+        width: 1em;
+        height: 1em;
+    }
+
+    .partner .navbar-toggler-icon {
+        width: 1em;
+        height: 1em;
+    }
+}
 
 @media (min-width: 1200px) {
     .softsource-index-section6 .form-sec {

@@ -77,12 +77,12 @@
         </div>
     </div>
 
-    <div class="softsource-main_content">
+    <div class="softsource-main_content partner">
         <div class="navbar-expand-lg navbar-light softsource-nav-bg">
             <div class="softsource-top-section softsource-header-sticky">
                 <div class="mx-5">
                     <div class="row align-items-center">
-                        <div class="col-md-1 col-xxl-1 col-xl-1 col-lg-1 col-1 col-sm-1">
+                        <div class="col-md-3 col-xxl-1 col-xl-1 col-lg-1 col-2 col-sm-2">
                             <div class="softsource-header-logo">
                                 <a class="navbar-brand ms-auto " href="{{ url($partner->url) }}">
                                     <img class="img-fluid light-logo" src="{{ asset($partner->logo) }}" alt="{{ $partner->partner_name }} Logo">
@@ -90,7 +90,7 @@
                                 </a>
                             </div>
                         </div>
-                        <div class="col-md-8 col-xxl-8 col-xl-8 col-lg-8 col-8 col-sm-8">
+                        <div class="col-md-4 col-xxl-8 col-xl-8 col-lg-7 col-2 col-sm-2">
                             <nav class="navbar">
 
                                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -177,7 +177,7 @@
                                 </div>
                             </nav>
                         </div>
-                        <div class="col-md-2 col-md-2 col-xxl-2 col-xl-2 col-lg-2 col-2	col-sm-2">
+                        <div class="col-md-3 col-md-2 col-xxl-2 col-xl-2 col-lg-2 col-5	col-sm-5">
                             <div class="ml-2">
                                 @guest
                                 @if (Route::has('login'))
@@ -220,7 +220,7 @@
                                 @endguest
                             </div>
                         </div>
-                        <div class="col-md-1 col-xxl-1 col-xl-1 col-lg-1 col-1 col-sm-1">
+                        <div class="col-md-1 col-xxl-1 col-xl-1 col-lg-2 col-2 col-sm-2">
                             <div class="softsource-header-logo">
                                 <a class="navbar-brand ms-auto " href="{{ route('home') }}">
                                     <img class="img-fluid light-logo" src="{{ asset('frontend/images/logo/logo-light.png') }}" alt="History Chip Logo">

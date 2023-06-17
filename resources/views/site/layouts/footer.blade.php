@@ -1,8 +1,8 @@
  <footer class="pt-5 softsource-footer">
-     <div class="mx-5 px-5">
+     <div class="mx-5 px-5 softsource-footer-inner-div">
          <div class="row softsource-footer-widget-wrapper softsource-nomargin">
 
-             <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6 softsource-footer-div-1">
+             <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 softsource-footer-div-1">
                  {{-- <img src="{{ asset('frontend/images/logo/logo-light-old.png') }}" alt="History Chip Footer Logo" class="img-fluid w-25"> --}}
                  <div class="softsource-footer-logo-div text-start">
                      <a href="{{ route('home') }}">
@@ -40,7 +40,7 @@
 
              </div>
              <div
-                 class="col-xxl-2 col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2 softsource-footer-div-1 softsource-footer-widget">
+                 class="col-xxl-2 col-xl-2 col-lg-2 col-md-6 col-sm-6 col-6 softsource-footer-div-1 softsource-footer-widget">
                  <h6 class="softsource-footer-widget__title">QUICK LINKS</h6>
                  <ul class="softsource-footer-widget__list">
                      <li><a href="{{ route('about') }}"><span>About History Chip</span></a></li>
@@ -51,7 +51,7 @@
              </div>
 
              <div
-                 class="col-xxl-2 col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2 softsource-footer-div-1 softsource-footer-widget">
+                 class="col-xxl-2 col-xl-2 col-lg-2 col-md-6 col-sm-6 col-6 softsource-footer-div-1 softsource-footer-widget">
                  <h6 class="softsource-footer-widget__title">Resource</h6>
                  <ul class="softsource-footer-widget__list">
                      <li><a href="{{ route('faq') }}"><span>FAQ</span></a></li>
@@ -64,7 +64,7 @@
              </div>
 
              <div
-                 class="col-xxl-2 col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2 softsource-footer-div-1 softsource-footer-widget">
+                 class="col-xxl-2 col-xl-2 col-lg-2 col-md-6 col-sm-12 col-12 softsource-footer-div-1 softsource-footer-widget">
                  <h6 class="softsource-footer-widget__title">Contact Us</h6>
                  <ul class="softsource-footer-widget__list">
                      <li>History Chip, LLC P.O. Box 516 Watertown, CT</li>
@@ -75,10 +75,10 @@
          </div>
          <div class="softsource-footer-border mt-4"></div>
          <div class="row py-1 g-0">
-             <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6  softsource-footer-copyright-text">
+             <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12  softsource-footer-copyright-text">
                  &copy; 2019 - {{ date('Y') }}. Version : 2.0. History Chip. All Rights Reserved.
              </div>
-             <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6 text-end softsource-footer-poweredby-text">
+             <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 text-end softsource-footer-poweredby-text">
                  Web designed by <a title="SoftSource, Bangladesh" href="https://wersoftsource.com/" target="_blank"
                      rel="noopener noreferrer">SoftSource, Bangladesh</a>
              </div>
