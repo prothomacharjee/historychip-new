@@ -27,3 +27,11 @@ Route::get('/stories/{slug?}', [ApiController::class, 'api_read_story'])->name('
 
 Route::get('/partners/{slug?}', [ApiController::class, 'api_partners'])->name('api.partners');
 
+Route::get('/comments/{story_id}', [ApiController::class, 'api_story_comments'])->name('api.story.comment');
+Route::post('/write-comments', [ApiController::class, 'api_write_story_comments'])->name('api.story.comment.write');
+
+Route::post('/save-story', [ApiController::class, 'api_save_update_story'])->name('api.story.save');
+
+
+
+

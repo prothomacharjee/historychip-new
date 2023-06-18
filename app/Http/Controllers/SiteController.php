@@ -8,6 +8,7 @@ use App\Models\Page;
 use App\Models\Partner;
 use App\Models\Story;
 use App\Models\StoryCategory;
+use App\Models\StoryComment;
 use App\Models\User;
 use App\Models\WritingPrompt;
 use Illuminate\Http\Request;
@@ -277,6 +278,7 @@ class SiteController extends Controller
             // $remainingPart = implode('-', array_slice($slugParts, 1));
 
             $stories = Story::FetchSingleStory($firstWord);
+            $comments = StoryComment::where('story_id', $firstWord)->with('commentator', 'accepter')->get();
 
             $author = Page::where(['page_group' => 'author', 'page_group_id' => $stories->author_id]);
 
@@ -286,6 +288,7 @@ class SiteController extends Controller
             $stories = Story::FetchAllStory();
             $page_title = 'Read Stories';
             $detail = false;
+            $comments = null;
         }
 
         return view('site.stories')->with([
@@ -294,6 +297,7 @@ class SiteController extends Controller
             'stories' => $stories,
             'detail' => $detail,
             'meta' => $this->pages,
+            'comments' => $comments,
         ]);
     }
 

@@ -2,15 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Story;
+use App\Models\Page;
 use App\Models\User;
+use App\Models\Story;
+use App\Models\Partner;
 use App\Models\UserProfile;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Str;
+use App\Models\StoryComment;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use App\Mail\NewStorySubmitted;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Session;
+use App\Mail\StorySubmissionConfirmation;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class ApiController extends Controller
 {
@@ -197,5 +205,158 @@ class ApiController extends Controller
         $request->user('web')->token()->revoke();
 
         return response()->json(['response' => 'Successfully logged out']);
+    }
+
+    public function api_story_comments($story_id)
+    {
+        $comments = StoryComment::where('story_id', $story_id)->with('commentator', 'accepter')->get();
+        return response()->json($comments);
+    }
+
+    public function api_write_story_comments(Request $request)
+    {
+        $data = [
+            'user_id' => auth()->user()->id,
+            'story_id' => $request->input('storyId'),
+            'comment' => $request->input('message'),
+            'accepting_date_time' => null,
+        ];
+
+        try {
+            DB::beginTransaction();
+
+            $comment = StoryComment::create($data);
+
+            DB::commit();
+
+            return response()->json([
+                'response' => true,
+                'msg' => 'Your Comment is Posted. It will Show in the timeline after an Admin\'s Approval.',
+            ]);
+        } catch (\Exception $e) {
+            DB::rollBack();
+
+            return response()->json([
+                'response' => false,
+                'msg' => $e->getMessage(),
+            ], 500);
+        }
+    }
+
+    public function api_save_update_story(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            "title" => "required",
+            "author_name" => "required",
+            "category_id" => "required",
+            "context" => "required|string|min:500|max:12000",
+            "event_location" => "required",
+            "event_detail_dates" => "required",
+            'header_image_path' => 'nullable',
+            'photo_credit' => 'required_if:header_image_path,!=,',
+            'audio_video_path' => 'nullable',
+            'audio_video_credit' => 'required_if:audio_video_path,!=,',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'response' => false,
+                'errors' => $validator->errors(),
+            ], 422);
+        } else {
+            try {
+                DB::beginTransaction();
+
+                $story = $request->id ? Story::findOrFail($request->id) : new Story;
+                $meta = $request->id ? Page::where(['page_group' => 'story', 'page_group_id' => $request->id])->first() : new Page;
+
+                $story->title = $request->input('title');
+                $story->header_image_path = $request->input('header_image_path');
+                $story->header_image_alt_text = $request->input('header_image_alt_text');
+                $story->photo_credit = $request->input('photo_credit');
+                $story->author_name = $request->input('author_name');
+                $story->author_id = Auth::id();
+                $story->tags = $request->input('tags');
+                $story->category_id = json_encode($request->input('category_id'));
+                $story->sub_category_id_level_1 = $request->input('sub_category_id_level_1') ? json_encode($request->input('sub_category_id_level_1')) : null;
+                $story->sub_category_id_level_2 = $request->input('sub_category_id_level_2') ? json_encode($request->input('sub_category_id_level_2')) : null;
+                $story->sub_category_id_level_3 = $request->input('sub_category_id_level_3') ? json_encode($request->input('sub_category_id_level_3')) : null;
+                $story->is_anonymous = $request->input('is_anonymous');
+                $story->context = $request->input('context');
+                $story->audio_video_path = $request->input('audio_video_path');
+                $story->is_audioconvert = $request->input('is_audioconvert');
+                $story->audio_video_credit = $request->input('audio_video_credit');
+                $story->event_location = $request->input('event_location');
+                $story->event_detail_dates = $request->input('event_detail_dates');
+                $story->event_dates = $request->input('event_dates');
+                $story->is_draft = $request->input('is_draft');
+                $story->edit_count = $request->id ? ($story->edit_count + 1) : 0;
+
+                $meta->page_title = $request->input('title');
+                $meta->page_group = 'story';
+                $meta->meta_title = $request->input('title');
+                $meta->meta_keywords = $request->input('tags');
+                $meta->meta_description = strlen(strip_tags($request->input('context'))) > 100 ? substr(strip_tags($request->input('context')), 0, 100) . ' . . .' : strip_tags($request->input('context'));
+                $meta->og_author = $request->input('author_name');
+
+                $story->save();
+                $meta->page_group_id = $story->id;
+                $meta->name = "stories." . $story->id . lcfirst(str_replace(' ', '', ucwords($request->input('title'))));
+                $meta->url = "/stories/" . $story->id . "-" . Str::slug($request->input('title'));
+                $meta->save();
+
+                $authorPage = Page::where(['page_group' => 'author', 'page_group_id' => Auth::id()])->first();
+                if (empty($authorPage)) {
+                    $authorMeta = new Page;
+                    $authorMeta->page_group = 'author';
+                    $authorMeta->page_group_id = Auth::id();
+                    $authorMeta->name = "authors." . lcfirst(str_replace(' ', '', ucwords(Auth::user()->name)));
+                    $authorMeta->url = "/authors/" . Str::slug(Auth::user()->name);
+                    $authorMeta->page_title = Auth::user()->name;
+                    $authorMeta->meta_title = Auth::user()->name;
+                    $authorMeta->meta_keywords = Auth::user()->name . ", History Chip, History Chip Author";
+                    $authorMeta->meta_description = "History Chip offers a lot of interesting stories to read online. Read short stories, inspirational stories, brand stories, success stories, and more. Read a story now written by the author " . Auth::user()->name;
+                    $authorMeta->og_author = 'History Chip';
+                    $authorMeta->save();
+                }
+
+                DB::commit();
+
+                $this->SendStorySubmissionConfirmationMail($meta->url);
+
+                return response()->json([
+                    'response' => true,
+                    'msg' => "Thank you for submitting your story, we will review it and send an email when published.",
+                ]);
+            } catch (\Exception $e) {
+                DB::rollBack();
+
+                return response()->json([
+                    'response' => false,
+                    'msg' => $e->getMessage(),
+                ], 500);
+            }
+        }
+    }
+
+    public function SendStorySubmissionConfirmationMail2Way($url)
+    {
+        $user = Auth::user();
+        $details = [
+            'title' => 'Story Submission Acknowledgement From History Chip',
+            'theBody' => 'Thank you for submitting your story, we will review it and send an email when published.',
+            'theComment' => "",
+            'signature' => 'Jean McGavin',
+        ];
+        $details_admin = [
+            'title' => 'New Story has been submitted in Historychip',
+            'name' => $user->name,
+            'email' => $user->email,
+            'url' => $url
+        ];
+
+        Mail::to($user->email)->send(new StorySubmissionConfirmation($details));
+        Mail::to('jean@historychip.com')->send(new NewStorySubmitted($details_admin));
+        Session::flash('success', 'Story Submitted Successfully');
     }
 }
