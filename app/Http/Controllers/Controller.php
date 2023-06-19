@@ -18,6 +18,7 @@ class Controller extends BaseController
 
     public function __construct()
     {
+
         if (strpos(Route::currentRouteName(), 'admin.') === 0 || strpos(Route::currentRouteName(), 'api.') === 0 ) {
 
         } else {

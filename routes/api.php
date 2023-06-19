@@ -32,6 +32,10 @@ Route::post('/write-comments', [ApiController::class, 'api_write_story_comments'
 
 Route::post('/save-story', [ApiController::class, 'api_save_update_story'])->name('api.story.save');
 
+Route::get('/user-details/{user_id}', [ApiController::class, 'api_user_details'])->name('api.user-details');
+
+Route::get('/author-stories/{author_id}', [ApiController::class, 'api_author_stories'])->name('api.author.story');
+
 
 
 

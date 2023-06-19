@@ -359,4 +359,25 @@ class ApiController extends Controller
         Mail::to('jean@historychip.com')->send(new NewStorySubmitted($details_admin));
         Session::flash('success', 'Story Submitted Successfully');
     }
+
+    public function api_user_details($user_id)
+    {
+        $user = User::findOrFail($user_id)->load('user_profile');
+        return response()->json($user);
+    }
+
+    public function api_author_stories($user_id)
+    {
+        $published_stories = Story::FetchStoryByAuthorIDAndApprovalType($user_id, 12, 1);
+        $waiting_stories = Story::FetchStoryByAuthorIDAndApprovalType($user_id, 12, 0);
+        $rejected_stories = Story::FetchStoryByAuthorIDAndApprovalType($user_id, 12, 2);
+        $draft_stories = Story::FetchDraftStoryByAuthorID($user_id, 12, 1);
+
+        return response()->json([
+            'published_stories' => $published_stories,
+            'waiting_stories' => $waiting_stories,
+            'rejected_stories' => $rejected_stories,
+            'draft_stories' => $draft_stories,
+        ]);
+    }
 }

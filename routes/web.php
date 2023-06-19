@@ -63,8 +63,9 @@ Route::get('/quick-register-verification', [UserAuthController::class, 'showQuic
 Route::post('/quick-register-verification', [UserAuthController::class, 'quickRegisterSubmit'])->name('quick-register.verify.submit')->middleware('guest');
 
 //User Profile
-Route::get('/profile', [SiteController::class, 'profile'])->name('profile');
-Route::get('/my-stories', [SiteController::class, 'my_stories'])->name('my-stories');
+Route::get('/profile', [SiteController::class, 'profile'])->name('profile')->middleware('auth');
+Route::post('/profile', [SiteController::class, 'profile_save'])->name('profile.save')->middleware('auth');
+Route::get('/my-stories', [SiteController::class, 'my_stories'])->name('my-stories')->middleware('auth');
 
 //Sites
 Route::get('/', [SiteController::class, 'index'])->name('home');
@@ -99,6 +100,10 @@ Route::post('/story/comment', [StoryController::class, 'save_comment'])->name('s
 
 // Redirection Url
 Route::redirect('/blogdetail/{id}/{slug}', '/blogs/{slug}', 301);
+Route::redirect('/blog', '/blogs', 301);
+Route::redirect('/partner', '/partners', 301);
+Route::redirect('/writing-prompt', '/writing-prompts', 301);
+Route::redirect('/writingprompt', '/writing-prompts', 301);
 
 
 // ADMIN PANEL

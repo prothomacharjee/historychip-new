@@ -2,18 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Helpers\SoftSourceHelper;
 use App\Models\Blog;
 use App\Models\Page;
-use App\Models\Partner;
-use App\Models\Story;
-use App\Models\StoryCategory;
-use App\Models\StoryComment;
 use App\Models\User;
-use App\Models\WritingPrompt;
+use App\Models\Story;
+use App\Models\Partner;
+use App\Models\StoryComment;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use App\Models\StoryCategory;
+use App\Models\WritingPrompt;
+use App\Helpers\SoftSourceHelper;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class SiteController extends Controller
 {
@@ -215,6 +216,50 @@ class SiteController extends Controller
             'meta' => $this->pages,
 
         ]);
+    }
+
+    public function profile_save(Request $request){
+        $input = $request->except(['files', '_token']);
+        $validator = Validator::make($input, [
+            "name" => "required",
+            "bill" => "required",
+            "bill_type" => "required",
+            "max_image_count" => "required",
+            "max_content_length" => "required",
+            "status" => "required",
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->with('error', $validator);
+        } else {
+            if ($request->id) {
+                try {
+                    $partnerType = PartnerType::findOrFail($request->id);
+                    DB::transaction(function () use ($input, $partnerType) {
+                        $partnerType->update($input);
+                    });
+                    return redirect()->route('admin.partner-types')->with('success', 'Partner Type Updated Successfully');
+                } catch (\Exception $e) {
+
+                    return redirect()->back()->with('error', $e->getMessage());
+                }
+            } else {
+                try {
+                    DB::transaction(function () use ($input) {
+                        PartnerType::create($input);
+
+                        $path = resource_path('views/site/partner-types'); // path to the directory for new view file
+                        $filename = 'partner-'.strtolower($input['name']).'.blade.php'; // name of the new view file
+
+                        // create the new view file with the given name and directory path
+                        View::make($path . '/' . $filename)->render();
+                    });
+                    return redirect()->route('admin.partner-types')->with('success', 'Partner Type Created Successfully');
+                } catch (\Exception $e) {
+                    return redirect()->back()->with('error', $e->getMessage());
+                }
+            }
+        }
     }
 
     public function my_stories()

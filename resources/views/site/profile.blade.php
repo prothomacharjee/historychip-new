@@ -17,7 +17,7 @@
     </div>
 
     <div class="container my-5" id="softsource-profile-container">
-        <form method="POST" id="softsource-personal_info_form" action="" class="w-100" enctype="multipart/form-data"
+        <form method="POST" id="softsource-personal_info_form" action="route('profile.save')" class="w-100" enctype="multipart/form-data"
             novalidate="novalidate">
             <div class="row">
                 @csrf
@@ -27,7 +27,7 @@
                     <label class="softsource-custom-profile d-block m-auto">
                         <img src="{{ asset('frontend/images/web_img/user4.jpg') }}" alt="profile image"
                             class="img-fluid profile-picture" id="profile-img-tag">
-                        <input type="hidden" name="image" value="">
+                        <input type="hidden" name="user_profile[image]" value="">
                         <input type="file" name="image_name" class="softsource-profile-pic"
                             accept="image/png, image/jpeg,image/jpg">
                         <div class="softsource-bg-overlay">
@@ -76,7 +76,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group profile-icon mb-0">
-                                        <input type="text" value="{{ $user->user_profile->pen_name }}" class="form-control" name="pen_name"
+                                        <input type="text" value="{{ $user->user_profile->pen_name }}" class="form-control" name="user_profile[pen_name]"
                                             placeholder="Pen Name">
                                     </div>
                                 </div>
@@ -89,7 +89,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group profile-icon mb-0">
-                                        <textarea class="form-control" name="bio" placeholder="Brief Bio">{{ $user->user_profile->bio }}</textarea>
+                                        <textarea class="form-control" name="user_profile[bio]" placeholder="Brief Bio">{{ $user->user_profile->bio }}</textarea>
                                     </div>
                                 </div>
                             </div>
@@ -101,19 +101,19 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group profile-icon mb-2">
-                                        <input type="link" value="{{ $user->user_profile->facebook_page_link }}" class="form-control" name="facebook_page_link"
+                                        <input type="link" value="{{ $user->user_profile->facebook_page_link }}" class="form-control" name="user_profile[facebook_page_link]"
                                             placeholder="Facebook">
                                     </div>
                                     <div class="form-group profile-icon mb-1">
-                                        <input type="link" value="{{ $user->user_profile->twitter_page_link }}" class="form-control" name="twitter_page_link"
+                                        <input type="link" value="{{ $user->user_profile->twitter_page_link }}" class="form-control" name="user_profile[twitter_page_link]"
                                             placeholder="Twitter">
                                     </div>
                                     <div class="form-group profile-icon mb-1">
-                                        <input type="link" value="{{ $user->user_profile->linkedin_page_link }}" class="form-control" name="linkedin_page_link"
+                                        <input type="link" value="{{ $user->user_profile->linkedin_page_link }}" class="form-control" name="user_profile[linkedin_page_link]"
                                             placeholder="LinkedIn">
                                     </div>
                                     <div class="form-group profile-icon mb-0">
-                                        <input type="link" value="{{ $user->user_profile->instagram_page_link }}" class="form-control" name="instagram_page_link"
+                                        <input type="link" value="{{ $user->user_profile->instagram_page_link }}" class="form-control" name="user_profile[instagram_page_link]"
                                             placeholder="Instagram">
                                     </div>
                                 </div>
@@ -142,7 +142,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group profile-icon mb-0">
-                                        <input type="tel" value="{{ $user->user_profile->phone }}" class="form-control" name="phone"
+                                        <input type="tel" value="{{ $user->user_profile->phone }}" class="form-control" name="user_profile[phone]"
                                             placeholder="Phone number">
                                     </div>
                                 </div>
@@ -156,7 +156,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group profile-icon mb-0">
-                                        <input type="text" value="{{ $user->user_profile->city }}" class="form-control" name="city"
+                                        <input type="text" value="{{ $user->user_profile->city }}" class="form-control" name="user_profile[city]"
                                             placeholder="City">
                                     </div>
                                 </div>
@@ -170,7 +170,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group profile-icon mb-0">
-                                        <input type="text" value="{{ $user->user_profile->state }}" class="form-control" name="state"
+                                        <input type="text" value="{{ $user->user_profile->state }}" class="form-control" name="user_profile[state]"
                                             placeholder="State">
                                     </div>
                                 </div>
@@ -184,7 +184,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group profile-icon mb-0">
-                                        <input type="text" value="{{ $user->user_profile->country }}" class="form-control" name="country"
+                                        <input type="text" value="{{ $user->user_profile->country }}" class="form-control" name="user_profile[country]"
                                             placeholder="Country">
                                     </div>
                                 </div>
@@ -198,7 +198,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group profile-icon mb-0">
-                                        <input type="date" value="{{ $user->user_profile->dob }}" class="form-control" name="dob"
+                                        <input type="date" value="{{ $user->user_profile->dob }}" class="form-control" name="user_profile[dob]"
                                             placeholder="DOB">
                                     </div>
                                 </div>
