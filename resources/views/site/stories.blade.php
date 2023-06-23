@@ -33,7 +33,7 @@ $authorIdentity = $stories->is_anonymous ? 'A story by Anonymous' : "A story by 
                                 @if ($stories->is_anonymous)
                                 A story by Anonymous
                                 @else
-                                <a href="{{ url('author/' . Str::slug($stories->author_details->name)) }}">A
+                                <a href="{{ url('authors/'.$stories->author_id.'-'. Str::slug($stories->author_details->name)) }}">A
                                     story by {{ $stories->author_name }}</a>
                                 @endif
                             </span>
@@ -308,7 +308,7 @@ $authorIdentity = $stories->is_anonymous ? 'A story by Anonymous' : "A story by 
                             <div class="story-date">
                                 <span class="far fa-user meta-icon"></span>
                                 @if (!$story->is_anonymous)
-                                <a href="{{ url('authors/'.$story->author_id.'-'. Str::slug($story->author_details->name)) }}">{{ $story->author_name }}</a>
+                                <a href="{{ url('authors/'.$story->author_id.'-'.Str::slug($story->author_details->name)) }}">{{ $story->author_name }}</a>
                                 @else
                                 Anonymous
                                 @endif

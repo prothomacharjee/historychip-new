@@ -46,24 +46,22 @@
     <!-- <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;800&display=swap" rel="stylesheet"> -->
     <link rel="stylesheet" href="{{ asset('frontend/css/fonts.css') }}">
     <!-- CSS -->
-    <link rel="stylesheet" href="{{ asset('frontend/css/bootstrap/bootstrap.min.css?q=' . time()) }}">
-    <link href="{{ asset('frontend/input-tags/css/tagsinput.css?q=' . time()) }}" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('frontend/css/animate/animate.min.css?q=' . time()) }}">
-    <link rel="stylesheet" href="{{ asset('frontend/fontawsome/css/all.min.css?q=' . time()) }}">
-    <link rel="stylesheet" href="{{ asset('frontend/css/select2/select2.min.css?q=' . time()) }}">
+    <link rel="stylesheet" href="{{ asset('frontend/css/bootstrap/bootstrap.min.css') }}">
+    <link href="{{ asset('frontend/input-tags/css/tagsinput.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('frontend/css/animate/animate.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontend/fontawsome/css/all.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontend/css/select2/select2.min.css') }}">
 
     <link href="{{ asset('frontend/file-uploader/css/font-fileuploader.css') }}" rel="stylesheet">
     <link href="{{ asset('frontend/file-uploader/css/jquery.fileuploader-theme-thumbnails.css') }}" rel="stylesheet">
     <link href="{{ asset('frontend/file-uploader/css/script.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('frontend/file-uploader/css/custom.css') }}">
 
-    <link href="{{ asset('frontend/css/summernote/summernote-lite.min.css?q=' . time()) }}" rel="stylesheet">
+    <link href="{{ asset('frontend/css/summernote/summernote-lite.min.css') }}" rel="stylesheet">
 
     <link rel="stylesheet" href="{{ asset('frontend/css/frontend.css?q=' . time()) }}">
     <link rel="stylesheet" href="{{ asset('frontend/css/mediaquery.css?q=' . time()) }}">
     <link rel="stylesheet" href="{{ asset('frontend/css/keyframes.css?q=' . time()) }}">
-
-    <script src="{{ asset('frontend/js/jquery/jquery.min.js?q=' . time()) }}"></script>
 </head>
 
 <body class="softsource-no-select">
@@ -256,14 +254,14 @@
     <!-- JS -->
 
 
-    <script src="{{ asset('frontend/js/bootstrap/bootstrap.bundle.min.js?q=' . time()) }}"></script>
-    <script src="{{ asset('frontend/input-tags/js/tagsinput.js?q=' . time()) }}"></script>
-    <script src="{{ asset('frontend/js/select2/select2.min.js?q=' . time()) }}"></script>
+    <script src="{{ asset('frontend/js/bootstrap/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('frontend/input-tags/js/tagsinput.js') }}"></script>
+    <script src="{{ asset('frontend/js/select2/select2.min.js') }}"></script>
 
     <script src="{{ asset('frontend/file-uploader/js/script.js?2.1.2') }}" type="text/javascript"></script>
     <script src="{{ asset('frontend/file-uploader/js/file-custom.js?2.1.2') }}" type="text/javascript"></script>
 
-    <script src="{{ asset('frontend/js/summernote/summernote-lite.min.js?q=' . time()) }}"></script>
+    <script src="{{ asset('frontend/js/summernote/summernote-lite.min.js') }}"></script>
 
     <script src="{{ asset('frontend/fontawsome/js/17472dc9f4.js?q=' . time()) }}"></script>
     <script src="{{ asset('frontend/js/global-variables.js?q=' . time()) }}"></script>

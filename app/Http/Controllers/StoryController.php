@@ -2,21 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use Exception;
-use App\Models\Page;
-use App\Models\User;
-use App\Models\Story;
-use Illuminate\Support\Str;
-use App\Models\StoryComment;
-use Illuminate\Http\Request;
 use App\Mail\NewStorySubmitted;
-use Illuminate\Support\Facades\DB;
+use App\Mail\StorySubmissionConfirmation;
+use App\Models\Page;
+use App\Models\Story;
+use App\Models\StoryComment;
+use App\Models\User;
+use Exception;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
-use Yajra\DataTables\Facades\DataTables;
-use App\Mail\StorySubmissionConfirmation;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
+use Yajra\DataTables\Facades\DataTables;
 
 class StoryController extends Controller
 {
@@ -46,7 +46,7 @@ class StoryController extends Controller
             "title" => "required",
             "author_name" => "required",
             "category_id" => "required",
-            "context" => "required|string|min:500|max:12000",
+            "context" => "string",
             "event_location" => "required",
             "event_detail_dates" => "required",
             'header_image_path' => 'nullable',
@@ -59,11 +59,12 @@ class StoryController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         } else {
             $story = $request->id ? Story::findOrFail($request->id) : new Story;
-            $meta = $request->id ? Page::where(['page_group' => 'story', 'page_group_id' => $request->id]) : new Page;
+
+            $meta = $request->id ? Page::where(['page_group' => 'story', 'page_group_id' => $request->id])->first() : new Page;
 
             $story->title = $request->title;
             $story->header_image_path = $request->header_image_path;
-            $story->header_image_alt_text = $request->header_image_alt_text;
+            $story->header_image_alt_text = $request->title . ' Story Banner';
             $story->photo_credit = $request->photo_credit;
             $story->author_name = $request->author_name;
             $story->author_id = Auth::id();
@@ -82,6 +83,7 @@ class StoryController extends Controller
             $story->event_dates = $request->event_dates;
             $story->is_draft = $request->is_draft;
             $story->edit_count = $request->id ? ($story->edit_count + 1) : 0;
+            $story->is_approved = 0;
 
             $meta->page_title = $request->title;
             $meta->page_group = 'story';
@@ -91,8 +93,10 @@ class StoryController extends Controller
             $meta->og_author = $request->author_name;
 
             try {
-                DB::transaction(function () use ($story, $meta,$request) {
+                DB::transaction(function () use ($story, $meta, $request) {
+
                     $story->save();
+
                     $meta->page_group_id = $story->id;
                     $meta->name = "stories." . $story->id . lcfirst(str_replace(' ', '', ucwords($request->title)));
                     $meta->url = "/stories/" . $story->id . "-" . Str::slug($request->title);
@@ -104,7 +108,7 @@ class StoryController extends Controller
                         $authorMeta->page_group = 'auhtor';
                         $authorMeta->page_group_id = Auth::id();
                         $authorMeta->name = "authors." . lcfirst(str_replace(' ', '', ucwords(Auth::user()->name)));
-                        $authorMeta->url = "/authors/" . Str::slug(Auth::user()->name);
+                        $authorMeta->url = "/authors/" . Auth::guard('web')->id() . '-' . Str::slug(Auth::user()->name);
                         $authorMeta->page_title = Auth::user()->name;
                         $authorMeta->meta_title = Auth::user()->name;
                         $authorMeta->meta_keywords = Auth::user()->name . ", History Chip, History Chip Author";
@@ -112,9 +116,17 @@ class StoryController extends Controller
                         $authorMeta->og_author = 'History Chip';
                         $authorMeta->save();
                     }
-                    $this->SendStorySubmissionConfirmationMail($meta->url);
+
+                    if ($story->is_draft == 1) {
+                        $this->SendStorySubmissionConfirmationMail2Way($meta->url);
+                    }
                 });
-                return redirect()->route('my-stories')->with('success', "Thank you for submitting your story, we will review it and send an email when published.");
+
+                if ($story->is_draft == 1) {
+                    return redirect()->route('my-stories')->with('success', "The Story is saved in your draft list.");
+                } else {
+                    return redirect()->route('my-stories')->with('success', "Thank you for submitting your story, we will review it and send an email when published.");
+                }
             } catch (Exception $e) {
                 return redirect()->back()->with('error', $e->getMessage());
             }
@@ -148,9 +160,25 @@ class StoryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Story $story)
+    public function destroy($id)
     {
-        //
+        $story = Story::find($id);
+        if ($story) {
+            // Delete the row
+            $meta = Page::where(['page_group' => 'story', 'page_group_id' => $id])->first();
+
+            $meta->delete();
+
+            $story->delete();
+
+            // Return a response or redirect as needed
+
+            return redirect()->route('my-stories')->with('success', "Story deleted successfully");
+        } else {
+            // Row not found
+            return redirect()->route('my-stories')->with('error', "Some error occured. Please try again later.");
+
+        }
     }
 
     public function save_comment(Request $request)
@@ -178,7 +206,8 @@ class StoryController extends Controller
         }
     }
 
-    public function SendStorySubmissionConfirmationMail2Way($url){
+    public function SendStorySubmissionConfirmationMail2Way($url)
+    {
         $user = Auth::user();
         $details = [
             'title' => 'Story Submission Acknowledgement From History Chip',
@@ -190,7 +219,7 @@ class StoryController extends Controller
             'title' => 'New Story has been submitted in Historychip',
             'name' => $user->name,
             'email' => $user->email,
-            'url' => $url
+            'url' => $url,
         ];
 
         Mail::to($user->email)->send(new StorySubmissionConfirmation($details));
@@ -214,7 +243,7 @@ class StoryController extends Controller
         );
 
         // Build the DataTables response
-        $data = DataTables::of(Story::select($columns)->where('is_approved', '=', 1))
+        $data = DataTables::of(Story::select($columns)->where('is_approved', '=', 1)->where('is_featured', '=', 0))
             ->addColumn('serial', function ($row) {
                 static $count = 0;
                 $count++;
@@ -230,12 +259,12 @@ class StoryController extends Controller
             })
             ->addColumn('approval', function ($row) {
                 $user = User::where('id', $row->approved_by)->first();
-                return ($user)?$user->name:'';
+                return ($user) ? $user->name : '';
             })
             ->addColumn('action', function ($row) use ($url) {
-                $buttons = '<a href="' . route('admin.stories.edit', $row->id) . '" data-toggle="tooltip" title="Edit" class="edit btn btn-outline-primary btn-sm me-2"><i class="fadeInUp animate__animated bx bx-edit-alt"></i></a>';
-                $buttons .= '<a href="' . route('admin.stories.status', ['id' => $row->id, 'featured_status' => 1]) . '" data-toggle="tooltip" title="Featured" class="edit btn btn-outline-warning btn-sm me-2"><i class="fadeInUp animate__animated bx bx-edit-alt"></i></a>';
-                $buttons .= '<a href="' . route('admin.stories.status', ['id' => $row->id, 'approval_status' => 2]) . '" data-toggle="tooltip" title="Reject" class="edit btn btn-outline-warning btn-sm me-2"><i class="fadeInUp animate__animated bx bx-edit-alt"></i></a>';
+                $buttons = ''; // '<a href="' . route('admin.stories.edit', $row->id) . '" data-toggle="tooltip" title="Edit" class="edit btn btn-outline-primary btn-sm me-2"><i class="fadeInUp animate__animated bx bx-edit-alt"></i></a>';
+                $buttons .= '<a href="' . route('admin.stories.status', ['id' => $row->id, 'type' => 'featured', 'status' => 1]) . '" data-toggle="tooltip" title="Featured" class="edit btn btn-outline-warning btn-sm me-2"><i class="fadeInUp animate__animated bx bx-trending-up"></i></a>';
+                $buttons .= '<a href="' . route('admin.stories.status', ['id' => $row->id, 'type' => 'approval', 'status' => 2]) . '" data-toggle="tooltip" title="Reject" class="edit btn btn-outline-dark btn-sm me-2"><i class="fadeInUp animate__animated bx bx-upside-down"></i></a>';
                 $buttons .= '<button type="button" class="delete btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#delete_modal"  onclick="remove_function(' . $row->id . ', \'' . $url . '\')" title="Delete"><i class="fadeInUp animate__animated bx bx-trash-alt"></i></button>';
 
                 return $buttons;
@@ -276,7 +305,7 @@ class StoryController extends Controller
             })
             ->addColumn('approval', function ($row) {
                 $user = User::where('id', $row->approved_by)->first();
-                return ($user)?$user->name:'';
+                return ($user) ? $user->name : '';
 
             })
             ->addColumn('author', function ($row) {
@@ -284,8 +313,8 @@ class StoryController extends Controller
                 return $user->name;
             })
             ->addColumn('action', function ($row) use ($url) {
-                $buttons = '<a href="' . route('admin.stories.edit', $row->id) . '" data-toggle="tooltip" title="Edit" class="edit btn btn-outline-primary btn-sm me-2"><i class="fadeInUp animate__animated bx bx-edit-alt"></i></a>';
-                $buttons .= '<a href="' . route('admin.stories.status', ['id' => $row->id, 'featured_status' => 0]) . '" data-toggle="tooltip" title="Un-Featured" class="edit btn btn-outline-warning btn-sm me-2"><i class="fadeInUp animate__animated bx bx-edit-alt"></i></a>';
+                $buttons = ''; // '<a href="' . route('admin.stories.edit', $row->id) . '" data-toggle="tooltip" title="Edit" class="edit btn btn-outline-primary btn-sm me-2"><i class="fadeInUp animate__animated bx bx-edit-alt"></i></a>';
+                $buttons .= '<a href="' . route('admin.stories.status', ['id' => $row->id, 'type' => 'featured', 'status' => 0]) . '" data-toggle="tooltip" title="Un-Featured" class="edit btn btn-outline-warning btn-sm me-2"><i class="fadeInUp animate__animated bx bx-trending-down"></i></a>';
                 $buttons .= '<button type="button" class="delete btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#delete_modal"  onclick="remove_function(' . $row->id . ', \'' . $url . '\')" title="Delete"><i class="fadeInUp animate__animated bx bx-trash-alt"></i></button>';
 
                 return $buttons;
@@ -296,9 +325,9 @@ class StoryController extends Controller
             ->editColumn('approval_date_time', function ($row) {
                 return ($row->approval_date_time) ? date('Y-m-d H:i', strtotime($row->approval_date_time)) : '';
             })
-            // ->addColumn('blog_description', function ($row) {
-            //     return mb_strimwidth(strip_tags($row->blog_description), 0, 50, "...");
-            // })
+        // ->addColumn('blog_description', function ($row) {
+        //     return mb_strimwidth(strip_tags($row->blog_description), 0, 50, "...");
+        // })
 
             ->rawColumns(['serial', 'author', 'action', 'approval'])
             ->make(true);
@@ -332,9 +361,9 @@ class StoryController extends Controller
                 return User::where('id', $row->author_id)->first()->name;
             })
             ->addColumn('action', function ($row) use ($url) {
-                $buttons = '<a href="' . route('admin.stories.edit', $row->id) . '" data-toggle="tooltip" title="Edit" class="edit btn btn-outline-primary btn-sm me-2"><i class="fadeInUp animate__animated bx bx-edit-alt"></i></a>';
-                $buttons .= '<a href="' . route('admin.stories.status', ['id' => $row->id, 'approval_status' => 1]) . '" data-toggle="tooltip" title="Approve" class="edit btn btn-outline-warning btn-sm me-2"><i class="fadeInUp animate__animated bx bx-edit-alt"></i></a>';
-                $buttons .= '<a href="' . route('admin.stories.status', ['id' => $row->id, 'approval_status' => 2]) . '" data-toggle="tooltip" title="Reject" class="edit btn btn-outline-warning btn-sm me-2"><i class="fadeInUp animate__animated bx bx-edit-alt"></i></a>';
+                $buttons = ''; // '<a href="' . route('admin.stories.edit', $row->id) . '" data-toggle="tooltip" title="Edit" class="edit btn btn-outline-primary btn-sm me-2"><i class="fadeInUp animate__animated bx bx-edit-alt"></i></a>';
+                $buttons .= '<a href="' . route('admin.stories.status', ['id' => $row->id, 'type' => 'approval', 'status' => 1]) . '" data-toggle="tooltip" title="Approve" class="edit btn btn-outline-success btn-sm me-2"><i class="fadeInUp animate__animated bx bx-happy-heart-eyes"></i></a>';
+                $buttons .= '<a href="' . route('admin.stories.status', ['id' => $row->id, 'type' => 'approval', 'status' => 2]) . '" data-toggle="tooltip" title="Reject" class="edit btn btn-outline-dark btn-sm me-2"><i class="fadeInUp animate__animated bx bx-upside-down"></i></a>';
                 $buttons .= '<button type="button" class="delete btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#delete_modal"  onclick="remove_function(' . $row->id . ', \'' . $url . '\')" title="Delete"><i class="fadeInUp animate__animated bx bx-trash-alt"></i></button>';
                 return $buttons;
             })
@@ -380,11 +409,11 @@ class StoryController extends Controller
             })
             ->addColumn('approval', function ($row) {
                 $user = User::where('id', $row->approved_by)->first();
-                return ($user)?$user->name:'';
+                return ($user) ? $user->name : '';
             })
             ->addColumn('action', function ($row) use ($url) {
-                $buttons = '<a href="' . route('admin.stories.edit', $row->id) . '" data-toggle="tooltip" title="Edit" class="edit btn btn-outline-primary btn-sm me-2"><i class="fadeInUp animate__animated bx bx-edit-alt"></i></a>';
-                $buttons .= '<a href="' . route('admin.stories.status', ['id' => $row->id, 'approval_status' => 1]) . '" data-toggle="tooltip" title="Approve" class="edit btn btn-outline-warning btn-sm me-2"><i class="fadeInUp animate__animated bx bx-edit-alt"></i></a>';
+                $buttons = ''; // '<a href="' . route('admin.stories.edit', $row->id) . '" data-toggle="tooltip" title="Edit" class="edit btn btn-outline-primary btn-sm me-2"><i class="fadeInUp animate__animated bx bx-edit-alt"></i></a>';
+                $buttons .= '<a href="' . route('admin.stories.status', ['id' => $row->id, 'type' => 'approval', 'status' => 1]) . '" data-toggle="tooltip" title="Approve" class="edit btn btn-outline-success btn-sm me-2"><i class="fadeInUp animate__animated bx bx-happy-heart-eyes"></i></a>';
                 $buttons .= '<button type="button" class="delete btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#delete_modal"  onclick="remove_function(' . $row->id . ', \'' . $url . '\')" title="Delete"><i class="fadeInUp animate__animated bx bx-trash-alt"></i></button>';
 
                 return $buttons;
@@ -428,7 +457,7 @@ class StoryController extends Controller
                 return User::where('id', $row->author_id)->first()->name;
             })
             ->addColumn('action', function ($row) use ($url) {
-                $buttons = '<a href="' . route('admin.stories.edit', $row->id) . '" data-toggle="tooltip" title="Edit" class="edit btn btn-outline-primary btn-sm me-2"><i class="fadeInUp animate__animated bx bx-edit-alt"></i></a>';
+                $buttons = ''; // '<a href="' . route('admin.stories.edit', $row->id) . '" data-toggle="tooltip" title="Edit" class="edit btn btn-outline-primary btn-sm me-2"><i class="fadeInUp animate__animated bx bx-edit-alt"></i></a>';
                 $buttons .= '<button type="button" class="delete btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#delete_modal"  onclick="remove_function(' . $row->id . ', \'' . $url . '\')" title="Delete"><i class="fadeInUp animate__animated bx bx-trash-alt"></i></button>';
                 return $buttons;
             })
@@ -442,41 +471,53 @@ class StoryController extends Controller
         return $data;
     }
 
-    public function ChangeStoryStatus($id, $approval_status = null, $featured_status = null)
+    public function ChangeStoryStatus($id, $type, $status)
     {
 
-        if($approval_status){
-            $returnText = ($approval_status == 1) ? 'Approved' : 'Rejected';
+        if ($type == 'approval') {
+            $returnText = ($status == 1) ? 'Approved' : 'Rejected';
             try {
-                DB::transaction(function () use ($id, $approval_status) {
+                DB::transaction(function () use ($id, $status) {
                     $story = Story::findOrFail($id);
-                    $story->is_approved = $approval_status;
+                    $story->is_approved = $status;
                     $story->update();
                 });
                 return redirect()->route('admin.stories')->with('success', "Story $returnText Successfully");
             } catch (\Exception $e) {
                 return redirect()->back()->with('error', $e->getMessage());
             }
-        }
-        elseif($featured_status){
+        } elseif ($type = 'featured') {
             $count = Story::where('is_featured', 1)->count();
-            if ($count <= 3) {
-                $returnText = ($featured_status == 1) ? 'Featured' : 'Un-Featured';
+
+            if ($status == 1) {
+                if ($count < 3) {
+                    try {
+                        DB::transaction(function () use ($id, $status) {
+                            $story = Story::findOrFail($id);
+                            $story->is_featured = $status;
+                            $story->update();
+                        });
+                        return redirect()->route('admin.stories')->with('success', "Story Featured Successfully");
+                    } catch (\Exception $e) {
+                        return redirect()->back()->with('error', $e->getMessage());
+                    }
+                } else {
+                    return redirect()->route('admin.stories')->with('info', "Already Three Featured Stories Existed");
+                }
+            } else {
                 try {
-                    DB::transaction(function () use ($id, $featured_status) {
+                    DB::transaction(function () use ($id, $status) {
                         $story = Story::findOrFail($id);
-                        $story->is_featured = $featured_status;
+                        $story->is_featured = $status;
                         $story->update();
                     });
-                    return redirect()->route('admin.stories')->with('success', "Story $returnText Successfully");
+                    return redirect()->route('admin.stories')->with('success', "Story Un-Featured Successfully");
                 } catch (\Exception $e) {
                     return redirect()->back()->with('error', $e->getMessage());
                 }
-            } else {
-                return redirect()->route('admin.blogs')->with('info', "Already Three Featured Blog Existed");
             }
-        }
-        else{
+
+        } else {
             return redirect()->route('admin.blogs')->with('info', "You are trying a wrong URL.");
         }
 
@@ -499,15 +540,6 @@ class StoryController extends Controller
         // }
     }
 
-
-
-
-
-
-
-
-
-
 // Story Comments
     public function LoadApproveCommentDataTable(Request $request)
     {
@@ -522,10 +554,10 @@ class StoryController extends Controller
             'accepted',
             'accepting_date_time',
             'comment',
-            'updated_at'
+            'updated_at',
         );
         // Build the DataTables response
-        $data = DataTables::of(StoryComment::select($columns)->where('accepted', '=', 1)->with('story.author_details','commenteter','accepter'))
+        $data = DataTables::of(StoryComment::select($columns)->where('accepted', '=', 1)->with('story.author_details', 'commenteter', 'accepter'))
             ->addColumn('serial', function ($row) {
                 static $count = 0;
                 $count++;
@@ -543,7 +575,7 @@ class StoryController extends Controller
                 return $row->commenteter->name;
             })
             ->addColumn('approval', function ($row) {
-                return $row->accepter->name??'';
+                return $row->accepter->name ?? '';
             })
             ->addColumn('action', function ($row) use ($url) {
                 $buttons = '<a href="' . route('admin.stories.edit', $row->id) . '" data-toggle="tooltip" title="Edit" class="edit btn btn-outline-primary btn-sm me-2"><i class="fadeInUp animate__animated bx bx-edit-alt"></i></a>';
@@ -558,7 +590,7 @@ class StoryController extends Controller
                 return ($row->accepting_date_time) ? date('Y-m-d H:i', strtotime($row->accepting_date_time)) : '';
             })
 
-            ->rawColumns(['serial','story_title', 'story_author','commentator', 'action', 'approval'])
+            ->rawColumns(['serial', 'story_title', 'story_author', 'commentator', 'action', 'approval'])
             ->make(true);
 
         // Return the DataTables response
@@ -575,10 +607,10 @@ class StoryController extends Controller
             'story_id',
             'comment',
             'created_at',
-            'updated_at'
+            'updated_at',
         );
         // Build the DataTables response
-        $data = DataTables::of(StoryComment::select($columns)->where('accepted', '=', 0)->with('story.author_details','commentator','accepter'))
+        $data = DataTables::of(StoryComment::select($columns)->where('accepted', '=', 0)->with('story.author_details', 'commentator', 'accepter'))
             ->addColumn('serial', function ($row) {
                 static $count = 0;
                 $count++;
@@ -606,8 +638,7 @@ class StoryController extends Controller
                 return ($row->created_at) ? date('Y-m-d H:i', strtotime($row->created_at)) : '';
             })
 
-
-            ->rawColumns(['serial','story_title', 'story_author','commentator', 'action', 'approval'])
+            ->rawColumns(['serial', 'story_title', 'story_author', 'commentator', 'action', 'approval'])
             ->make(true);
 
         // Return the DataTables response
@@ -627,10 +658,10 @@ class StoryController extends Controller
             'accepted',
             'accepting_date_time',
             'comment',
-            'updated_at'
+            'updated_at',
         );
         // Build the DataTables response
-        $data = DataTables::of(StoryComment::select($columns)->where('accepted', '=', 2)->with('story.author_details','commenteter','accepter'))
+        $data = DataTables::of(StoryComment::select($columns)->where('accepted', '=', 2)->with('story.author_details', 'commenteter', 'accepter'))
             ->addColumn('serial', function ($row) {
                 static $count = 0;
                 $count++;
@@ -648,7 +679,7 @@ class StoryController extends Controller
                 return $row->story->commenteter->name;
             })
             ->addColumn('approval', function ($row) {
-                return $row->story->accepter->name??'';
+                return $row->story->accepter->name ?? '';
             })
             ->addColumn('action', function ($row) use ($url) {
                 $buttons = '<a href="' . route('admin.stories.edit', $row->id) . '" data-toggle="tooltip" title="Edit" class="edit btn btn-outline-primary btn-sm me-2"><i class="fadeInUp animate__animated bx bx-edit-alt"></i></a>';
@@ -663,14 +694,11 @@ class StoryController extends Controller
                 return ($row->accepting_date_time) ? date('Y-m-d H:i', strtotime($row->accepting_date_time)) : '';
             })
 
-            ->rawColumns(['serial','story_title', 'story_author','commentator', 'action', 'approval'])
+            ->rawColumns(['serial', 'story_title', 'story_author', 'commentator', 'action', 'approval'])
             ->make(true);
 
         // Return the DataTables response
         return $data;
     }
-
-
-
 
 }

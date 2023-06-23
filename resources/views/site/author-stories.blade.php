@@ -102,7 +102,7 @@
                                             <div class="story-date">
                                                 <span class="far fa-user meta-icon"></span>
                                                 @if (!$story->is_anonymous)
-                                                <a href="{{ url('author/' . Str::slug($story->author_details->name)) }}">{{ $story->author_name }}</a>
+                                                <a href="{{ url('authors/'.$story->author_id.'-'. Str::slug($story->author_details->name)) }}">{{ $story->author_name }}</a>
                                                 @else
                                                 Anonymous
                                                 @endif
@@ -174,7 +174,7 @@
                                             <div class="story-date">
                                                 <span class="far fa-user meta-icon"></span>
                                                 @if (!$story->is_anonymous)
-                                                <a href="{{ url('author/' . Str::slug($story->author_details->name)) }}">{{ $story->author_name }}</a>
+                                                <a href="{{ url('authors/'.$story->author_id.'-'. Str::slug($story->author_details->name)) }}">{{ $story->author_name }}</a>
                                                 @else
                                                 Anonymous
                                                 @endif
@@ -246,7 +246,7 @@
                                             <div class="story-date">
                                                 <span class="far fa-user meta-icon"></span>
                                                 @if (!$story->is_anonymous)
-                                                <a href="{{ url('author/' . Str::slug($story->author_details->name)) }}">{{ $story->author_name }}</a>
+                                                <a href="{{ url('authors/'.$story->author_id.'-'. Str::slug($story->author_details->name)) }}">{{ $story->author_name }}</a>
                                                 @else
                                                 Anonymous
                                                 @endif
@@ -318,7 +318,7 @@
                                             <div class="story-date">
                                                 <span class="far fa-user meta-icon"></span>
                                                 @if (!$story->is_anonymous)
-                                                <a href="{{ url('author/' . Str::slug($story->author_details->name)) }}">{{ $story->author_name }}</a>
+                                                <a href="{{ url('authors/'.$story->author_id.'-'. Str::slug($story->author_details->name)) }}">{{ $story->author_name }}</a>
                                                 @else
                                                 Anonymous
                                                 @endif

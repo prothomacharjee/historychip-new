@@ -6,13 +6,60 @@
         $type = isset($_GET['type']) ? $_GET['type'] : null;
 
         $preload = '';
-        $category_id = old('category_id') ? old('category_id') : (!empty($story->category_id) ? $story->category_id : []);
-        $sub_category_id_level_1 = old('sub_category_id_level_1') ? old('sub_category_id_level_1') : (!empty($story->sub_category_id_level_1) ? $story->sub_category_id_level_1 : []);
-        $sub_category_id_level_2 = old('sub_category_id_level_2') ? old('sub_category_id_level_2') : (!empty($story->sub_category_id_level_2) ? $story->sub_category_id_level_2 : []);
-        $sub_category_id_level_3 = old('sub_category_id_level_3') ? old('sub_category_id_level_3') : (!empty($story->sub_category_id_level_3) ? $story->sub_category_id_level_3 : []);
+        $audio_preload = '';
+        $category_id = old('category_id') ? old('category_id') : (!empty($story->category_id) ? json_decode($story->category_id) : []);
+        $sub_category_id_level_1 = old('sub_category_id_level_1') ? old('sub_category_id_level_1') : (!empty($story->sub_category_id_level_1) ? json_decode($story->sub_category_id_level_1) : []);
+        $sub_category_id_level_2 = old('sub_category_id_level_2') ? old('sub_category_id_level_2') : (!empty($story->sub_category_id_level_2) ? json_decode($story->sub_category_id_level_2) : []);
+        $sub_category_id_level_3 = old('sub_category_id_level_3') ? old('sub_category_id_level_3') : (!empty($story->sub_category_id_level_3) ? json_decode($story->sub_category_id_level_3) : []);
         $length = old('context') ? strlen(old('context')) : (!empty($partner->context) ? strlen(strip_tags($partner->context)) : 0);
-        $max_story_content_length = '12000';
-        $min_story_content_length = '500';
+        // $max_story_content_length = '12000';
+        // $min_story_content_length = '500';
+        $header_image_path = !empty($story->header_image_path) ? $story->header_image_path : '';
+
+        if ($header_image_path != '') {
+            $preload = [];
+
+            if (file_exists(realpath('.' . $header_image_path))) {
+                $path = preg_replace('/\//', '', $header_image_path, 1);
+                $finfo = finfo_open(FILEINFO_MIME_TYPE);
+                $mime = finfo_file($finfo, $path);
+                $preload[] = [
+                    'name' => basename($path),
+                    'type' => $mime,
+                    'size' => filesize($path),
+                    'file' => $header_image_path,
+                    'local' => $header_image_path,
+                    'data' => [
+                        'url' => $header_image_path,
+                        'thumbnail' => $header_image_path,
+                        'readerForce' => true,
+                    ],
+                ];
+            }
+        }
+
+        $audio_path = !empty($story->audio_video_path) ? $story->audio_video_path : '';
+
+        if ($audio_path != '') {
+            $audio_preload = [];
+            if (file_exists(realpath('.' . $audio_path))) {
+                $path = preg_replace('/\//', '', $audio_path, 1);
+                $finfo = finfo_open(FILEINFO_MIME_TYPE);
+                $mime = finfo_file($finfo, $path);
+                $audio_preload[] = [
+                    'name' => basename($path),
+                    'type' => $mime,
+                    'size' => filesize($path),
+                    'file' => $audio_path,
+                    'local' => $audio_path,
+                    'data' => [
+                        'url' => $audio_path,
+                        'thumbnail' => $audio_path,
+                        'readerForce' => true,
+                    ],
+                ];
+            }
+        }
     @endphp
 
     <div class="position-relative softsource-top-contianer">
@@ -73,6 +120,20 @@
     <div class="softsource-write-story-submit-section pt-3">
         <div class="container">
             <div class="container softsource-write-story-col-container my-5">
+                @if (!empty($story) && $story->is_draft == 0)
+                    <div class="alert border-0 border-start border-5 border-primary alert-dismissible fade show py-2">
+                        <div class="d-flex align-items-center">
+                            <div class="font-35 text-primary"><i class='bx bx-primary-square'></i>
+                            </div>
+                            <div class="ms-3">
+                                <h6 class="mb-0 text-primary">If you edit your story and submit, it will again go through
+                                    the
+                                    approval phase by our Admin.</h6>
+                            </div>
+                        </div>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @endif
                 <div class="text-center softsource-tab-buttons">
                     <button type="button" id="text"
                         class="softsource-write-story-btn my-2 px-4 softsource-show-action softsource-only-text">Only
@@ -86,8 +147,9 @@
                 <form class="row g-3 needs-validation" method="post" novalidate action="{{ route('story.create') }}"
                     id="story_form" enctype="multipart/form-data">
                     @csrf
-                    <input type="hidden" name="is_draft" id="is_draft"
-                        value="{{ old('is_draft') ? old('is_draft') : (!empty($partner->is_draft) ? $partner->is_draft : 0) }}" />
+                    <input type="hidden" name="id" id="id"
+                        value="{{ old('id') ? old('id') : (!empty($story->id) ? $story->id : null) }}" />
+                    <input type="hidden" name="is_draft" id="is_draft" value="0" />
 
                     <div class="row pt-3">
                         <div class="col-12">
@@ -100,10 +162,10 @@
                                 <div id="errorBlock" class="help-block"></div>
                             </div>
                             <input type="hidden" name="header_image_path" id="header_image_path" class="front_file-saver"
-                                value="">
+                                value="{{ !empty($story->header_image_path) ? $story->header_image_path : null }}">
                         </div>
 
-                        <div class="col-6 photo_credit_div mt-3" style="display:none">
+                        {{-- <div class="col-6 photo_credit_div mt-3" style="{{empty($story)?'display:none':''}}">
                             <label for="header_image_alt_text" class="form-label">Banner Alter Text <span
                                     class="text-danger">*</span></label>
                             <input type="text" class="form-control @error('header_image_alt_text') is-invalid @enderror"
@@ -116,9 +178,9 @@
                             @error('header_image_alt_text')
                                 <div id="validationPhotoAltCreditFeedback" class="invalid-feedback">{{ $message }}</div>
                             @enderror
-                        </div>
+                        </div> --}}
 
-                        <div class="col-6 photo_credit_div mt-3" style="display:none">
+                        <div class="col-12 photo_credit_div mt-3" style="{{empty($story)?'display:none':''}}">
                             <label for="photo_credit" class="form-label">Photo Credit <span
                                     class="text-danger">*</span></label>
                             <input type="text" class="form-control @error('photo_credit') is-invalid @enderror"
@@ -169,7 +231,8 @@
                             <label for="tags" class="form-label">Story Tags (Max 15 tags allowed)</label>
                             <input type="text"
                                 class="form-control @error('tags') is-invalid @enderror softsource-tag-input"
-                                id="tags" name="tags" placeholder="Enter Meta Keywords" data-role="tagsinput"
+                                id="tags" name="tags" placeholder="Enter Story Tags (Press Enter to Add)"
+                                data-role="tagsinput"
                                 value="{{ old('tags') ? old('tags') : (!empty($story->tags) ? $story->tags : null) }}">
                             <span class="fa fa-question-circle field-icon" data-bs-toggle="popover"
                                 data-bs-placement="top" data-bs-trigger="hover"
@@ -287,13 +350,12 @@
                         </div>
 
                         <div class="col-md-8 mt-3 softsource-show-text">
-                            <label for="context" class="form-label">Story Content <span class="text-danger">* (Min 500
-                                    and Max 12000)</span></label>
-                            <textarea maxlength="{{ $max_story_content_length }}" minlength="{{ $min_story_content_length }}" rows="16"
-                                class="form-control softsource-summernote @error('context') is-invalid @enderror" id="context" name="context"
-                                placeholder="Tell the world your story..." required aria-describedby="validationContentFeedback">{{ old('context') ? old('context') : (!empty($story->context) ? $story->context : null) }}</textarea>
+                            <label for="context" class="form-label">Story Content</label>
+                            <textarea rows="16" class="form-control softsource-summernote @error('context') is-invalid @enderror"
+                                id="context" name="context" placeholder="Tell the world your story..." required
+                                aria-describedby="validationContentFeedback">{{ old('context') ? old('context') : (!empty($story->context) ? $story->context : null) }}</textarea>
                             <div class="text-end story-context-word-count">
-                                {{ $length }}/{{ $max_story_content_length }}</div>
+                                {{ $length }} Characters</div>
                             <div class="valid-feedback">Looks good!</div>
                             <div class="invalid-feedback">You Must Write Your Story Content Here.</div>
                             @error('context')
@@ -307,12 +369,13 @@
                                 <label for="" class="form-label">Audio/Video</label>
                                 <input type="file" name="story_audio_video" id="story_audio_video"
                                     data-id="{{ route('story.deleteaudio') }}"
-                                    data-fileuploader-files='{{ $preload }}'
+                                    data-fileuploader-files='{{ json_encode($audio_preload) }}'
                                     data-url="{{ route('story.saveaudio') }}" data-name="story">
                                 <div id="errorBlock" class="help-block"></div>
                                 <span class="text-danger audio-upload-error-show"></span>
                                 <input type="hidden" name="audio_video_path" id="audio_video_path"
-                                    class="front_file-saver" value="">
+                                    class="front_file-saver"
+                                    value="{{ !empty($story->audio_video_path) ? $story->audio_video_path : null }}">
                             </div>
 
                             <div class="col-md-12 audioconvert_div" style="display:none">
@@ -363,15 +426,14 @@
                         </div>
 
                         <div class="col-md-4 mt-3">
-                            <label for="event_detail_dates" class="form-label">Event Period/Instance <span
-                                    class="text-danger">*</span></label>
-                            <input type="text" class="form-control @error('event_detail_dates') is-invalid @enderror"
+                            <label for="event_detail_dates" class="form-label">Event Period/Instance</label>
+                            <input required type="text" class="form-control @error('event_detail_dates') is-invalid @enderror"
                                 id="event_detail_dates" name="event_detail_dates" placeholder="Event Period/Instance"
                                 required aria-describedby="validationEventDetailsDateFeedback"
                                 value="{{ old('event_detail_dates') ? old('event_detail_dates') : (!empty($story->event_detail_dates) ? $story->event_detail_dates : null) }}">
                             <span class="fa fa-question-circle field-icon" data-bs-toggle="popover"
                                 data-bs-placement="top" data-bs-trigger="hover"
-                                data-bs-content="If your story spans a period of time, be as specific as possible, for instance, Spring 2004, 1960s, 2001-2003."></span>
+                                data-bs-content="If your story spans a period of time, be as specific as possible, for instance, Spring 2004, 1960s, 2001-2003. You can either write any one between 'Event Period' and 'Event Date' or both."></span>
                             <div class="valid-feedback">Looks good!</div>
                             <div class="invalid-feedback">You must enter an event period or instances.</div>
                             @error('event_detail_dates')
@@ -382,13 +444,13 @@
 
                         <div class="col-md-4 mt-3">
                             <label for="event_dates" class="form-label">Event Date</label>
-                            <input type="date" class="form-control @error('event_dates') is-invalid @enderror"
+                            <input required type="date" class="form-control @error('event_dates') is-invalid @enderror"
                                 id="event_dates" name="event_dates" placeholder="Event Date"
                                 aria-describedby="validationEventDateFeedback"
                                 value="{{ old('event_dates') ? old('event_dates') : (!empty($story->event_dates) ? $story->event_dates : null) }}">
                             <span class="fa fa-question-circle field-icon" data-bs-toggle="popover"
                                 data-bs-placement="top" data-bs-trigger="hover"
-                                data-bs-content="If you know the exact date for your story add it here."></span>
+                                data-bs-content="If you know the exact date for your story add it here. You can either write any one between 'Event Period' and 'Event Date' or both."></span>
                             <div class="valid-feedback">Looks good!</div>
                             {{-- <div class="invalid-feedback">You must enter an event location.</div> --}}
                             @error('event_dates')
@@ -397,11 +459,11 @@
                         </div>
 
                         <div class="col-md-6 mt-5 softsource-tab-buttons">
-                            <button class="softsource-write-story-btn" type="submit">Save</button>
+                            <button class="softsource-write-story-btn" type="submit">Submit</button>
                             <button class="softsource-write-story-btn" onclick="saveAsDraft()" type="button">Save as
                                 Draft</button>
                             {{-- <button class="softsource-write-story-btn" type="reset">Reset</button> --}}
-                            <button class="softsource-write-story-btn" type="button">Preview</button>
+                            {{-- <button class="softsource-write-story-btn" type="button">Preview</button> --}}
                         </div>
 
                         <div class="col-md-6 mt-5 softsource-tab-buttons text-end">
@@ -452,21 +514,21 @@
                 ],
                 callbacks: {
                     onKeydown: function(e) {
-                        var t = e.currentTarget.innerText;
-                        if (t.trim().length >= Number('{{ $max_story_content_length }}')) {
-                            //delete keys, arrow keys, copy, cut, select all
-                            if (e.keyCode != 8 && !(e.keyCode >= 37 && e.keyCode <= 40) && e.keyCode !=
-                                46 && !(e.keyCode == 88 && e.ctrlKey) && !(e.keyCode == 67 && e
-                                    .ctrlKey) && !(e.keyCode == 65 && e.ctrlKey)) {
-                                e.preventDefault();
-                            }
-                            $('.story-context-word-count').addClass('text-danger');
-                        }
+                        //     var t = e.currentTarget.innerText;
+                        //  {{--    if (t.trim().length >= Number('{{ $max_story_content_length }}')) { --}}
+                        //         //delete keys, arrow keys, copy, cut, select all
+                        //         if (e.keyCode != 8 && !(e.keyCode >= 37 && e.keyCode <= 40) && e.keyCode !=
+                        //             46 && !(e.keyCode == 88 && e.ctrlKey) && !(e.keyCode == 67 && e
+                        //                 .ctrlKey) && !(e.keyCode == 65 && e.ctrlKey)) {
+                        //             e.preventDefault();
+                        //         }
+                        //         $('.story-context-word-count').addClass('text-danger');
+                        //     }
                     },
                     onKeyup: function(e) {
                         var t = e.currentTarget.innerText;
                         $('.story-context-word-count').text(
-                            `${t.length} / {{ $max_story_content_length }}`).removeClass(
+                            `${t.length}  Characters`).removeClass(
                             'text-danger');
                     },
                     onPaste: function(e) {
@@ -475,15 +537,15 @@
                             .getData('Text');
                         e.preventDefault();
                         var maxPaste = bufferText.length;
-                        if (t.length + bufferText.length > Number('{{ $max_story_content_length }}')) {
-                            maxPaste = Number('{{ $max_story_content_length }}') - t.length;
-                        }
+                        //{{-- if(t.length+bufferText.length>Number('$max_story_content_length ')) {
+                           // maxPaste = Number('{{ $max_story_content_length }}') - t.length;
+                        //} --}}
                         if (maxPaste > 0) {
                             document.execCommand('insertText', false, bufferText.substring(0,
                                 maxPaste));
                         }
                         $('.story-context-word-count').text(
-                            `${t.length} / {{ $max_story_content_length }}`).removeClass(
+                            `${t.length} Characters`).removeClass(
                             'text-danger');
                     }
                 }
@@ -533,6 +595,22 @@
         function initAutocomplete() {
             const input = document.getElementById('event_location');
             const autocomplete = new google.maps.places.Autocomplete(input);
+        }
+
+        $(document).on('input', '#event_detail_dates', function() {
+            toggleRequired($(this), $('#event_dates'));
+        });
+
+        $(document).on('input', '#event_dates', function() {
+            toggleRequired($(this), $('#event_detail_dates'));
+        });
+
+        function toggleRequired(input, otherInput) {
+            if (input.val().trim() !== '') {
+                otherInput.removeAttr('required');
+            } else {
+                otherInput.attr('required', 'required');
+            }
         }
     </script>
     <script

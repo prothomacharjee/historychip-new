@@ -45,10 +45,12 @@ class ApiController extends Controller
     public function api_partners($slug = null)
     {
         if ($slug) {
+            $url ='/partners/'.$slug;
+
             $partner = DB::table('partners as b')
                 ->join('pages as p', 'b.id', '=', 'p.page_group_id')
                 ->select(DB::raw('b.id as partner_id,b.name as partner_name, b.title, b.description, b.banner, b.banner_alt_text,b.logo,b.short_description,b.top_image, p.id as page_id, p.name, p.url, p.page_title, p.meta_title, p.meta_keywords, p.meta_description'))
-                ->where('p.id', '=', $this->pages->id)
+                ->where('p.url', '=', $url)
                 ->where('b.status', '=', 1)
                 ->first();
 
@@ -113,7 +115,7 @@ class ApiController extends Controller
             if (Auth::guard('web')->attempt($credentials, $request->get('remember'))) {
                 // User is authenticated
                 $this->clearLoginAttempts($request);
-                return response()->json(['response' => 'Success'], 200);
+                return response()->json(['response' => 'Success', 'user_id' => Auth::id()], 200);
             } else {
                 // Check if email is registered
                 $user = User::where('email', $credentials['email'])->first();

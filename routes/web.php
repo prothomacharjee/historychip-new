@@ -85,6 +85,7 @@ Route::get('/authors/{slug?}', [SiteController::class, 'author_stories'])->name(
 
 Route::get('/write-story/{slug?}', [SiteController::class, 'write_story'])->name('story.write')->middleware('auth');
 
+
 Route::post('/save-image', [SiteController::class, 'saveimage'])->name('story.saveimage')->middleware('auth');
 Route::post('/delete-image', [SiteController::class, 'deleteimage'])->name('story.deleteimage')->middleware('auth');
 Route::post('/save-audio', [SiteController::class, 'saveaudio'])->name('story.saveaudio')->middleware('auth');
@@ -96,7 +97,7 @@ Route::post('/getwritingprompts', [WritingPromptController::class, 'getwritingpr
 
 Route::post('/story/create', [StoryController::class, 'store'])->name('story.create')->middleware('auth');
 Route::post('/story/comment', [StoryController::class, 'save_comment'])->name('story.comment')->middleware('auth');
-
+Route::get('/story/delete/{slug?}', [StoryController::class, 'destroy'])->name('story.delete')->middleware('auth');
 
 // Redirection Url
 Route::redirect('/blogdetail/{id}/{slug}', '/blogs/{slug}', 301);
@@ -201,5 +202,5 @@ Route::group(['prefix' => 'powerhouse', 'middleware' => 'admin'], function () {
     Route::get('/stories/edit/{id}', [StoryController::class, 'edit'])->name('admin.stories.edit');
     Route::post('/delete-stories/{id}', [StoryController::class, 'destroy'])->name('admin.stories.destroy');
 
-    Route::get('/stories/staus/{id}/{approval_status?}/{featured_status?}', [StoryController::class, 'ChangeStoryStatus'])->name('admin.stories.status');
+    Route::get('/stories/staus/{id}/{type}/{status}', [StoryController::class, 'ChangeStoryStatus'])->name('admin.stories.status');
 });
