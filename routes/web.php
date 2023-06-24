@@ -90,6 +90,7 @@ Route::post('/save-image', [SiteController::class, 'saveimage'])->name('story.sa
 Route::post('/delete-image', [SiteController::class, 'deleteimage'])->name('story.deleteimage')->middleware('auth');
 Route::post('/save-audio', [SiteController::class, 'saveaudio'])->name('story.saveaudio')->middleware('auth');
 Route::post('/delete-audio', [SiteController::class, 'deleteaudio'])->name('story.deleteaudio')->middleware('auth');
+Route::post('/search/basic', [SiteController::class, 'searchBasic'])->name('story.searchbasic')->middleware('auth');
 
 Route::post('/subcat-by-parentcat', [SiteController::class, 'FetchSubCatByParentCategory'])->name('story.subCatByParentCategory');
 

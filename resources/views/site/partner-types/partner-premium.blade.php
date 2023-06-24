@@ -3,7 +3,7 @@
 @section('content')
     <style scoped>
         .softsource-top-contianer {
-            background-image:  url("{{ asset($partner->banner) }}");
+            background-image: url("{{ asset($partner->banner) }}");
             background-position: center;
             background-size: cover;
             padding-top: 195px;
@@ -22,6 +22,23 @@
                             <h1 class="text-white softsoutce-top-banner-text fw-bold">{{ $page_title }}</h1>
                         </div>
                     </div>
+                </div>
+                <div class="col-12 col-lg-12 col-md-12 text-center">
+                    <div class="footer-box d-inline-block px-3 py-2">
+                        <div class="softsource-add-your-story-box softsource-btn-hover-transition">
+                            <a href="{{ route('story.write') }}"
+                                class="softsource-add-your-story-box-btn softsource-btn-hover-transition">Add Your Story</a>
+                            <div class="softsource-add-story-link">
+                                <a title="Add with Audio" href="{{ route('story.write', ['type' => 'audio']) }}"><i
+                                        class="fa fa-music"></i></a>
+                                <a title="Add with Video" href="{{ route('story.write', ['type' => 'audio']) }}"><i
+                                        class="fa fa-video"></i></a>
+                                <a title="Add Only Text" href="{{ route('story.write', ['type' => 'text']) }}"
+                                    class="music"><i class="fa fa-file"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -66,28 +83,30 @@
             <div class="row justify-content-center">
                 @foreach ($partnerimages->partner_image as $key => $image)
                     @if ($key == 3)
-                        @break;
-                    @endif
+                    @break;
+                @endif
                 <div class="col-md-4">
-                    <img src="{{ asset($image->image_path) }}" alt="{{ $image->image_alt_text }}" style="width: 75%; height:219px">
+                    <img src="{{ asset($image->image_path) }}" alt="{{ $image->image_alt_text }}"
+                        style="width: 75%; height:219px">
                 </div>
-                @endforeach
-            </div>
-            <div class="row justify-content-center mt-5">
-                <div class="col-md-12">
-                    <?=  $partner->description ?>
-                </div>
-            </div>
-            <div class="row justify-content-center">
-                @foreach ($partnerimages->partner_image as $key => $image)
-                    @if ($key >= 0 || $key <=2 )
-                        @continue;
-                    @endif
-                <div class="col-md-4">
-                    <img src="{{ asset($image->image_path) }}" alt="{{ $image->image_alt_text }}" style="width: 75%; height:219px">
-                </div>
-                @endforeach
+            @endforeach
+        </div>
+        <div class="row justify-content-center mt-5">
+            <div class="col-md-12">
+                <?= $partner->description ?>
             </div>
         </div>
+        <div class="row justify-content-center">
+            @foreach ($partnerimages->partner_image as $key => $image)
+                @if ($key >= 0 || $key <= 2)
+                    @continue;
+                @endif
+                <div class="col-md-4">
+                    <img src="{{ asset($image->image_path) }}" alt="{{ $image->image_alt_text }}"
+                        style="width: 75%; height:219px">
+                </div>
+            @endforeach
+        </div>
     </div>
+</div>
 @endsection

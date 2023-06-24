@@ -296,16 +296,16 @@ form .form-group {
     background-color: #3c454c;
 }
 
-.softsource-top-section {
+.softsource-mid-nav-top-section {
     padding: 0 0;
     /* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); */
 }
 
-.softsource-top-section div {
+.softsource-mid-nav-top-section div {
 }
 
-.softsource-bottom-section {
-    margin-top: -10px;
+.softsource-mid-nav-bottom-section {
+
 }
 
 .softsource-header-logo {
@@ -321,7 +321,7 @@ form .form-group {
 
 .softsource-header-logo .light-logo {
     display: inherit;
-    max-width: 100px;
+    max-width: 125px;
 }
 
 .softsource-home-btn-login {
@@ -350,9 +350,11 @@ form .form-group {
 }
 
 .softsource-scrolling-notice marquee {
-    white-space: nowrap;
-    font-size: 14px;
-    color: #fff;
+    color: #000;
+    font-size: 16px;
+    font-family: Poppins;
+    line-height: 160%;
+    letter-spacing: -0.32px;
 }
 
 .softsource-scrolling-notice-lists-container {
@@ -776,13 +778,14 @@ form .form-group {
 }
 
 .softsource-cust-tag {
-    font-family: adorn-roman, sans-serif;
-    font-weight: 400;
-    color: #fff;
-    font-size: 10px;
+    color: #4a5154;
     text-align: center;
-    margin-left: -28px;
-    margin-bottom: 0.5rem;
+    font-size: 10px;
+    font-family: Plus Jakarta Sans;
+    font-weight: 500;
+    line-height: 121.5%;
+    letter-spacing: -0.2px;
+    margin-left: -20px;
 }
 
 .softsource-nav-top {
@@ -825,8 +828,8 @@ form .form-group {
 }
 
 .softsource-nav-menus > li.nav-item {
-    padding-left: 24px;
-    padding-right: 24px;
+    padding-left: 5px;
+    padding-right: 5px;
     margin: 0;
     position: relative;
 }
@@ -849,13 +852,16 @@ form .form-group {
 .softsource-nav-menus .nav-link {
     margin: 0;
     /* text-decoration: none; */
-    color: #fff;
     display: block;
     padding: 10px 2px;
-    font-size: 14px;
-    font-weight: 500;
-    line-height: 1.18;
     position: relative;
+    color: #000;
+    text-align: center;
+    font-size: 18px;
+    font-family: Poppins;
+    font-weight: 500;
+    line-height: 24px;
+    letter-spacing: 0.5px;
 }
 
 .softsource-nav-menus .softsource-nav-main-menu:before {
@@ -981,26 +987,72 @@ form .form-group {
 .softsource-nav-search-btn {
     pointer-events: none;
     font-size: 12px;
-    border-radius: 120px;
+    border-radius: 50px;
+    border: 1px solid black;
     border-left: none;
+    padding: 12px 20px 12px 0px;
+}
+
+.softsource-nav-search-btn span {
+    width: 19px;
+    height: 19px;
+    color: #292d32;
+    background-color: transparent;
+    border: none;
+    pointer-events: none;
 }
 
 .softsource-nav-search-input {
-    border-radius: 120px;
-    border-right: none;
-    padding: 0 0px 0 15px;
     font-size: 14px;
     letter-spacing: normal;
     outline: none;
+    border: 1px solid black;
+    border-right: none;
+    border-radius: 50px;
+    width: 256px;
+    padding: 12px 20px 12px 18px;
+    align-items: center;
+    gap: 10px;
 }
 
 .softsource-nav-search-input::placeholder {
-    color: white;
+    color: black;
 }
 
-.softsource-add-story-btn:hover {
-    color: #fff !important;
-    background-color: #778b91 !important;
+.softsource-nav-search-input:focus {
+    box-shadow: 0 0 5px #3e5662;
+}
+
+
+.softsource-nav-add-story-btn {
+    border-radius: 50px;
+    border: 1px solid #000;
+    padding: 12px 20px 12px 20px;
+
+    color: #000;
+    font-size: 16px;
+    font-family: DM Sans;
+    line-height: 24px;
+    letter-spacing: 0.5px;
+}
+
+.softsource-nav-add-story-btn:hover {
+    color: #000 !important;
+    border: 1px solid #000;
+}
+
+.softsource-nav-search-bar {
+    width: 45% !important;
+}
+
+.softsource-nav-login-register {
+    color: #000;
+    text-align: center;
+    font-size: 16px;
+    font-family: Poppins;
+    font-weight: 600;
+    line-height: 24px;
+    letter-spacing: 0.5px;
 }
 
 .softsource-add-your-story-box {

@@ -20,8 +20,27 @@
                     <div class="position-relative">
                         <div class="text-left softsource-font ">
                             <h1 class="text-white softsoutce-top-banner-text fw-bold">{{ $page_title }}</h1>
+
                         </div>
                     </div>
+                </div>
+
+                <div class="col-12 text-center">
+                    <div class="footer-box d-inline-block px-3 py-2">
+                        <div class="softsource-add-your-story-box softsource-btn-hover-transition">
+                            <a href="{{ route('story.write') }}"
+                                class="softsource-add-your-story-box-btn softsource-btn-hover-transition">Add Your Story</a>
+                            <div class="softsource-add-story-link">
+                                <a title="Add with Audio" href="{{ route('story.write', ['type' => 'audio']) }}"><i
+                                        class="fa fa-music"></i></a>
+                                <a title="Add with Video" href="{{ route('story.write', ['type' => 'audio']) }}"><i
+                                        class="fa fa-video"></i></a>
+                                <a title="Add Only Text" href="{{ route('story.write', ['type' => 'text']) }}"
+                                    class="music"><i class="fa fa-file"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
