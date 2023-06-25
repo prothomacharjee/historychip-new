@@ -297,8 +297,7 @@ form .form-group {
 }
 
 .softsource-mid-nav-top-section {
-    padding: 0 0;
-    /* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); */
+
 }
 
 .softsource-mid-nav-top-section div {
@@ -828,8 +827,8 @@ form .form-group {
 }
 
 .softsource-nav-menus > li.nav-item {
-    padding-left: 5px;
-    padding-right: 5px;
+    padding-left: 25px;
+    padding-right: 25px;
     margin: 0;
     position: relative;
 }
@@ -986,7 +985,6 @@ form .form-group {
 
 .softsource-nav-search-btn {
     pointer-events: none;
-    font-size: 12px;
     border-radius: 50px;
     border: 1px solid black;
     border-left: none;
@@ -1028,7 +1026,6 @@ form .form-group {
     border-radius: 50px;
     border: 1px solid #000;
     padding: 12px 20px 12px 20px;
-
     color: #000;
     font-size: 16px;
     font-family: DM Sans;
@@ -1042,7 +1039,7 @@ form .form-group {
 }
 
 .softsource-nav-search-bar {
-    width: 45% !important;
+
 }
 
 .softsource-nav-login-register {
