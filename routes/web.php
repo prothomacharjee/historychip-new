@@ -64,7 +64,8 @@ Route::post('/quick-register-verification', [UserAuthController::class, 'quickRe
 
 //User Profile
 Route::get('/profile', [SiteController::class, 'profile'])->name('profile')->middleware('auth');
-Route::post('/profile', [SiteController::class, 'profile_save'])->name('profile.save')->middleware('auth');
+Route::post('/profile/about', [SiteController::class, 'profile_about_save'])->name('profile.about.save')->middleware('auth');
+Route::post('/profile/visibility', [SiteController::class, 'profile_visibility_save'])->name('profile.visibility.save')->middleware('auth');
 Route::get('/my-stories', [SiteController::class, 'my_stories'])->name('my-stories')->middleware('auth');
 
 //Sites

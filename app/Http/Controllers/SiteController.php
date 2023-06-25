@@ -218,15 +218,23 @@ class SiteController extends Controller
         ]);
     }
 
-    public function profile_save(Request $request){
-        $input = $request->except(['files', '_token']);
+    public function profile_about_save(Request $request){
+        $input = $request->except(['image_name', '_token']);
         $validator = Validator::make($input, [
-            "name" => "required",
-            "bill" => "required",
-            "bill_type" => "required",
-            "max_image_count" => "required",
-            "max_content_length" => "required",
-            "status" => "required",
+            "name" => "required|string",
+            "pen_name" => "required|string",
+            "email" => "required",
+            "bio" => "nullable",
+            "image_name" => 'nullable|file|max:2048|mimes:jpeg,png,svg,webp',
+            "facebook_page_link" => "nullable",
+            "twitter_page_link" => "nullable",
+            "linkedin_page_link" => "nullable",
+            "instagram_page_link" => "nullable",
+            "phone" => "nullable",
+            "city" => "nullable",
+            "state" => "nullable",
+            "country" => "nullable",
+            "dob" => "nullable",
         ]);
 
         if ($validator->fails()) {
@@ -234,30 +242,88 @@ class SiteController extends Controller
         } else {
             if ($request->id) {
                 try {
-                    $partnerType = PartnerType::findOrFail($request->id);
-                    DB::transaction(function () use ($input, $partnerType) {
-                        $partnerType->update($input);
+                    $user = User::findOrFail(Auth::id())->load('user_profile');
+                    $user->user_profile->pen_name = $request->pen_name;
+                    $user->user_profile->bio = $request->bio;
+                    $user->user_profile->facebook_page_link = $request->facebook_page_link;
+                    $user->user_profile->twitter_page_link = $request->twitter_page_link;
+                    $user->user_profile->linkedin_page_link = $request->linkedin_page_link;
+                    $user->user_profile->instagram_page_link = $request->instagram_page_link;
+                    $user->user_profile->phone = $request->phone;
+                    $user->user_profile->city = $request->city;
+                    $user->user_profile->state = $request->state;
+                    $user->user_profile->country = $request->country;
+                    $user->user_profile->dob = $request->dob;
+
+                    if ($request->hasFile('image_name')) {
+                        $user->user_profile->image = SoftSourceHelper::FileUploaderHelper($request->image_name, 'frontend/profiles');
+                    }
+
+                    DB::transaction(function () use ($user) {
+                        $user->save();
                     });
-                    return redirect()->route('admin.partner-types')->with('success', 'Partner Type Updated Successfully');
+                    return redirect()->route('profile')->with('success', 'Profile Updated Successfully');
                 } catch (\Exception $e) {
 
                     return redirect()->back()->with('error', $e->getMessage());
                 }
             } else {
+                return redirect()->back()->with('error', 'Some Error Occured. Please refresh the page adn try again.');
+            }
+        }
+    }
+
+    public function profile_visibility_save(Request $request){
+        $input = $request->except(['image_name', '_token']);
+        $validator = Validator::make($input, [
+            "name" => "required|string",
+            "pen_name" => "required|string",
+            "email" => "required",
+            "bio" => "nullable",
+            "image_name" => 'nullable|file|max:2048|mimes:jpeg,png,svg,webp',
+            "facebook_page_link" => "nullable",
+            "twitter_page_link" => "nullable",
+            "linkedin_page_link" => "nullable",
+            "instagram_page_link" => "nullable",
+            "phone" => "nullable",
+            "city" => "nullable",
+            "state" => "nullable",
+            "country" => "nullable",
+            "dob" => "nullable",
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->with('error', $validator);
+        } else {
+            if ($request->id) {
                 try {
-                    DB::transaction(function () use ($input) {
-                        PartnerType::create($input);
+                    $user = User::findOrFail(Auth::id())->load('user_profile');
+                    $user->user_profile->pen_name = $request->pen_name;
+                    $user->user_profile->bio = $request->bio;
+                    $user->user_profile->facebook_page_link = $request->facebook_page_link;
+                    $user->user_profile->twitter_page_link = $request->twitter_page_link;
+                    $user->user_profile->linkedin_page_link = $request->linkedin_page_link;
+                    $user->user_profile->instagram_page_link = $request->instagram_page_link;
+                    $user->user_profile->phone = $request->phone;
+                    $user->user_profile->city = $request->city;
+                    $user->user_profile->state = $request->state;
+                    $user->user_profile->country = $request->country;
+                    $user->user_profile->dob = $request->dob;
 
-                        $path = resource_path('views/site/partner-types'); // path to the directory for new view file
-                        $filename = 'partner-'.strtolower($input['name']).'.blade.php'; // name of the new view file
+                    if ($request->hasFile('image_name')) {
+                        $user->user_profile->image = SoftSourceHelper::FileUploaderHelper($request->image_name, 'frontend/profiles');
+                    }
 
-                        // create the new view file with the given name and directory path
-                        View::make($path . '/' . $filename)->render();
+                    DB::transaction(function () use ($user) {
+                        $user->save();
                     });
-                    return redirect()->route('admin.partner-types')->with('success', 'Partner Type Created Successfully');
+                    return redirect()->route('profile')->with('success', 'Profile Updated Successfully');
                 } catch (\Exception $e) {
+
                     return redirect()->back()->with('error', $e->getMessage());
                 }
+            } else {
+                return redirect()->back()->with('error', 'Some Error Occured. Please refresh the page adn try again.');
             }
         }
     }

@@ -753,8 +753,8 @@ form .form-group {
 
 .softsource-is-sticky {
     position: fixed;
-    top: 0;
-    left: 0;
+    /* top: 0;
+    left: 0; */
     width: 100%;
     -webkit-animation: 0.95s ease-in-out 0s normal none 1 running fadeInDown;
     animation: 0.95s ease-in-out 0s normal none 1 running fadeInDown;
@@ -764,7 +764,7 @@ form .form-group {
     transition: all 0.7s cubic-bezier(0.645, 0.045, 0.355, 1);
     -webkit-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.1);
     box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.1);
-    background-color: #3c454c;
+    background-color: #fff;
     opacity: 0.85;
 }
 

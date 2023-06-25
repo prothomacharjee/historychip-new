@@ -21,8 +21,7 @@
     <meta property="og:title" content="{{ $meta->page_title ?? '' }} | {{ config('app.name', 'SoftSource') }}" />
     <meta property="og:url" content="{{ url()->current() }}" />
     <meta property="og:site_name" content="{{ config('app.name', 'SoftSource') }}" />
-    <meta property="og:image"
-        content="{{ !empty($meta) && $meta->og_image ? asset($meta->og_image) : asset('frontend/images/logo/logo-light.png') }}" />
+    <meta property="og:image" content="{{ !empty($meta) && $meta->og_image ? asset($meta->og_image) : asset('frontend/images/logo/logo-light.png') }}" />
     <meta property="og:audio" content="{{ !empty($meta) && $meta->og_audio ? asset($meta->og_audio) : '' }}" />
     <meta property="og:video" content="{{ !empty($meta) && $meta->og_video ? asset($meta->og_video) : '' }}" />
     <meta property="og:description" content="{{ $meta->meta_description ?? '' }}" />
@@ -69,8 +68,7 @@
 
 <body class="softsource-no-select">
     <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-585M6TM" height="0" width="0"
-            style="display:none;visibility:hidden"></iframe></noscript>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-585M6TM" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
 
     <div class="softsource-preloader-container">
@@ -87,8 +85,7 @@
                 <div class="col-md-2 col-xxl-2 col-xl-2 col-lg-2 col-3 col-sm-2">
                     <div class="softsource-header-logo">
                         <a class="navbar-brand ms-auto " href="{{ route('home') }}">
-                            <img class="img-fluid light-logo" src="{{ asset('frontend/images/logo/logo.png') }}"
-                                alt="History Chip Logo">
+                            <img class="img-fluid light-logo" src="{{ asset('frontend/images/logo/logo.png') }}" alt="History Chip Logo">
                             <p class="softsource-cust-tag">every person, every story, all the truth</p>
                         </a>
                     </div>
@@ -97,17 +94,13 @@
                 <div class="col-md-6 col-xxl-8 col-xl-8 col-lg-8 col-4 col-sm-6 d-flex justify-content-start align-items-center flex-column">
                     <div class="softsource-mid-nav-top-section d-flex justify-content-start align-items-center mt-3">
                         <nav class="navbar">
-                            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
-                                aria-label="Toggle navigation">
+                            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                                 <span class="navbar-toggler-icon"></span>
                             </button>
                             <div class="collapse navbar-collapse justify-content-center " id="navbarNav">
                                 <ul class="navbar-nav softsource-nav-menus">
                                     <li class="nav-item softsource-has-children">
-                                        <a class="nav-link softsource-nav-main-menu"
-                                            href="javascript:;"><span>About</span><i
-                                                class="fa-solid fa-angle-down softsource-nav-angle-down"></i></a>
+                                        <a class="nav-link softsource-nav-main-menu" href="javascript:;"><span>About</span><i class="fa-solid fa-angle-down softsource-nav-angle-down"></i></a>
                                         <ul class="softsource-submenu">
                                             <li><a href="{{ route('about') }}"><span>About History Chip</span></a>
                                             </li>
@@ -117,9 +110,7 @@
                                         </ul>
                                     </li>
                                     <li class="nav-item softsource-has-children">
-                                        <a class="nav-link softsource-nav-main-menu"
-                                            href="javascript:;"><span>Stories</span><i
-                                                class="fa-solid fa-angle-down softsource-nav-angle-down"></i></a>
+                                        <a class="nav-link softsource-nav-main-menu" href="javascript:;"><span>Stories</span><i class="fa-solid fa-angle-down softsource-nav-angle-down"></i></a>
                                         <ul class="softsource-submenu">
                                             <li><a href="{{ route('story.read') }}"><span>Read a
                                                         Story</span></a></li>
@@ -129,8 +120,7 @@
                                         </ul>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link softsource-nav-main-menu"
-                                            href="{{ route('writingprompt') }}">
+                                        <a class="nav-link softsource-nav-main-menu" href="{{ route('writingprompt') }}">
                                             <span>Writing Prompts</span>
                                         </a>
                                     </li>
@@ -142,8 +132,8 @@
                                         <ul class="softsource-submenu">
                                             <li><a href="{{ route('faq') }}"><span>FAQ</span></a></li>
                                             @guest
-                                                <li><a href="{{ route('register') }}"><span>Registration</span></a>
-                                                </li>
+                                            <li><a href="{{ route('register') }}"><span>Registration</span></a>
+                                            </li>
                                             @endguest
                                             <li><a href="{{ route('privacypolicy') }}"><span>Privacy
                                                         Policy</span></a></li>
@@ -167,52 +157,44 @@
                             </div>
                         </nav>
                         <div class="softsource-nav-search-section d-flex justify-content-evenly align-items-center">
-                            <div class="input-group softsource-nav-search-bar">
-                                <form method="GET" action="{{ route('story.searchbasic') }}">
+                            <form method="GET" action="{{ route('story.searchbasic') }}">
+                                <div class="input-group softsource-nav-search-bar">
 
-                                    <input type="text" class="form-control softsource-nav-search-input"
-                                        placeholder="Search Any Word" name="search">
+                                    <input type="text" class="form-control softsource-nav-search-input" placeholder="Search Any Word" name="search">
                                     <div class="input-group-prepend softsource-nav-search-btn">
                                         <span class="input-group-text"><i class="fa fa-search"></i></span>
                                     </div>
-                                </form>
-                            </div>
+                                </div>
+                            </form>
                             <a href="{{ route('story.write') }}" class="btn softsource-nav-add-story-btn">Add a
                                 story</a>
                             <div class="">
                                 @guest
-                                    @if (Route::has('login'))
-                                        <span class="softsource-nav-login-register"><a href="{{ route('login') }}"
-                                                class="">Login</a> / <a href="{{ route('register') }}"
-                                                class="">Register</a></span>
-                                    @endif
+                                @if (Route::has('login'))
+                                <span class="softsource-nav-login-register"><a href="{{ route('login') }}" class="">Login</a> / <a href="{{ route('register') }}" class="">Register</a></span>
+                                @endif
                                 @else
-                                    <div class="dropdown">
-                                        <button class="btn dropdown-toggle text-white softsource-profile-dropdown-button"
-                                            type="button" id="dropdownMenuButton" data-bs-toggle="dropdown"
-                                            aria-expanded="false">
-                                            {{ \App\Helpers\SoftSourceHelper::GetIntialsFromNameString(Auth::user()->name) }}
-                                        </button>
-                                        <ul class="dropdown-menu softsource-profile-dropdown-ulist"
-                                            aria-labelledby="dropdownMenuButton">
-                                            <li><a class="dropdown-item" href="{{ route('profile') }}">My
-                                                    Profile&nbsp;&nbsp;</a>
-                                            </li>
-                                            <li><a class="dropdown-item" href="{{ route('my-stories') }}">My
-                                                    Stories&nbsp;&nbsp;</a></li>
-                                            <li class="divider"></li>
-                                            <li><a class="dropdown-item" href="{{ route('logout') }}"
-                                                    onclick="event.preventDefault();
+                                <div class="dropdown">
+                                    <button class="btn dropdown-toggle text-white softsource-profile-dropdown-button" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                        {{ \App\Helpers\SoftSourceHelper::GetIntialsFromNameString(Auth::user()->name) }}
+                                    </button>
+                                    <ul class="dropdown-menu softsource-profile-dropdown-ulist" aria-labelledby="dropdownMenuButton">
+                                        <li><a class="dropdown-item" href="{{ route('profile') }}">My
+                                                Profile&nbsp;&nbsp;</a>
+                                        </li>
+                                        <li><a class="dropdown-item" href="{{ route('my-stories') }}">My
+                                                Stories&nbsp;&nbsp;</a></li>
+                                        <li class="divider"></li>
+                                        <li><a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                  document.getElementById('logout-form').submit();">
-                                                    {{ __('Logout') }}
-                                                </a>
-                                                <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                                    class="d-none">
-                                                    @csrf
-                                                </form>
-                                            </li>
-                                        </ul>
-                                    </div>
+                                                {{ __('Logout') }}
+                                            </a>
+                                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                                @csrf
+                                            </form>
+                                        </li>
+                                    </ul>
+                                </div>
                                 @endguest
                             </div>
                         </div>
@@ -222,7 +204,7 @@
                             <marquee behavior="scroll" direction="left">
                                 <ul class="softsource-scrolling-notice-lists-container">
                                     @foreach ($notices as $notice)
-                                        <li>{{ $notice->content }}</li>
+                                    <li>{{ $notice->content }}</li>
                                     @endforeach
                                 </ul>
                             </marquee>
