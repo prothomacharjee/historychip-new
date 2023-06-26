@@ -176,7 +176,7 @@ class SiteController extends Controller
 
             $viewPage = "site.partner-types.partner-" . strtolower($partnerimages->partner_type->name);
 
-            return view('site.partner-types.partner-basic')->with([
+            return view($viewPage)->with([
                 'page_title' => $page_title,
                 'notices' => $this->notices,
                 'partner' => $partner,
@@ -235,6 +235,7 @@ class SiteController extends Controller
             "state" => "nullable",
             "country" => "nullable",
             "dob" => "nullable",
+            "id" => "required",
         ]);
 
         if ($validator->fails()) {
@@ -260,9 +261,9 @@ class SiteController extends Controller
                     }
 
                     DB::transaction(function () use ($user) {
-                        $user->save();
+                        $user->user_profile->save();
                     });
-                    return redirect()->route('profile')->with('success', 'Profile Updated Successfully');
+                    return redirect()->route('profile')->with('success', 'Profile Information Updated Successfully');
                 } catch (\Exception $e) {
 
                     return redirect()->back()->with('error', $e->getMessage());
@@ -274,22 +275,12 @@ class SiteController extends Controller
     }
 
     public function profile_visibility_save(Request $request){
-        $input = $request->except(['image_name', '_token']);
+        $input = $request->except(['_token']);
         $validator = Validator::make($input, [
-            "name" => "required|string",
-            "pen_name" => "required|string",
-            "email" => "required",
-            "bio" => "nullable",
-            "image_name" => 'nullable|file|max:2048|mimes:jpeg,png,svg,webp',
-            "facebook_page_link" => "nullable",
-            "twitter_page_link" => "nullable",
-            "linkedin_page_link" => "nullable",
-            "instagram_page_link" => "nullable",
-            "phone" => "nullable",
-            "city" => "nullable",
-            "state" => "nullable",
-            "country" => "nullable",
-            "dob" => "nullable",
+            "is_pic_public" => "required",
+            "is_social_media_public" => "required",
+            "is_bio_public" => "required",
+            "id" => "required",
         ]);
 
         if ($validator->fails()) {
@@ -298,26 +289,14 @@ class SiteController extends Controller
             if ($request->id) {
                 try {
                     $user = User::findOrFail(Auth::id())->load('user_profile');
-                    $user->user_profile->pen_name = $request->pen_name;
-                    $user->user_profile->bio = $request->bio;
-                    $user->user_profile->facebook_page_link = $request->facebook_page_link;
-                    $user->user_profile->twitter_page_link = $request->twitter_page_link;
-                    $user->user_profile->linkedin_page_link = $request->linkedin_page_link;
-                    $user->user_profile->instagram_page_link = $request->instagram_page_link;
-                    $user->user_profile->phone = $request->phone;
-                    $user->user_profile->city = $request->city;
-                    $user->user_profile->state = $request->state;
-                    $user->user_profile->country = $request->country;
-                    $user->user_profile->dob = $request->dob;
-
-                    if ($request->hasFile('image_name')) {
-                        $user->user_profile->image = SoftSourceHelper::FileUploaderHelper($request->image_name, 'frontend/profiles');
-                    }
+                    $user->user_profile->is_pic_public = $request->is_pic_public;
+                    $user->user_profile->is_social_media_public = $request->is_social_media_public;
+                    $user->user_profile->is_bio_public = $request->is_bio_public;
 
                     DB::transaction(function () use ($user) {
                         $user->save();
                     });
-                    return redirect()->route('profile')->with('success', 'Profile Updated Successfully');
+                    return redirect()->route('profile')->with('success', 'Profile Visibilty Updated Successfully');
                 } catch (\Exception $e) {
 
                     return redirect()->back()->with('error', $e->getMessage());

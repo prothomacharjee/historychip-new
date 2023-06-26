@@ -11,6 +11,7 @@ use Illuminate\Support\Str;
 use App\Models\StoryComment;
 use Illuminate\Http\Request;
 use App\Mail\NewStorySubmitted;
+use App\Helpers\SoftSourceHelper;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -45,7 +46,7 @@ class ApiController extends Controller
     public function api_partners($slug = null)
     {
         if ($slug) {
-            $url ='/partners/'.$slug;
+            $url = '/partners/' . $slug;
 
             $partner = DB::table('partners as b')
                 ->join('pages as p', 'b.id', '=', 'p.page_group_id')
@@ -367,6 +368,69 @@ class ApiController extends Controller
         $user = User::findOrFail($user_id)->load('user_profile');
         return response()->json($user);
     }
+
+    public function updateProfile(Request $request)
+    {
+        $input = $request->except(['image_name', '_token']);
+        $validator = Validator::make($input, [
+            "id" => "required",
+            "pen_name" => "required|string",
+            "bio" => "nullable",
+            "image_name" => 'nullable|file|max:2048|mimes:jpeg,png,svg,webp',
+            "facebook_page_link" => "nullable",
+            "twitter_page_link" => "nullable",
+            "linkedin_page_link" => "nullable",
+            "instagram_page_link" => "nullable",
+            "phone" => "nullable",
+            "city" => "nullable",
+            "state" => "nullable",
+            "country" => "nullable",
+            "dob" => "nullable",
+            "is_pic_public" => "required",
+            "is_social_media_public" => "required",
+            "is_bio_public" => "required",
+
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['error' => $validator->errors()], 400);
+        } else {
+            if ($request->id) {
+                try {
+                    $user = User::findOrFail(Auth::id())->load('user_profile');
+                    $user->user_profile->pen_name = $request->pen_name;
+                    $user->user_profile->bio = $request->bio;
+                    $user->user_profile->facebook_page_link = $request->facebook_page_link;
+                    $user->user_profile->twitter_page_link = $request->twitter_page_link;
+                    $user->user_profile->linkedin_page_link = $request->linkedin_page_link;
+                    $user->user_profile->instagram_page_link = $request->instagram_page_link;
+                    $user->user_profile->phone = $request->phone;
+                    $user->user_profile->city = $request->city;
+                    $user->user_profile->state = $request->state;
+                    $user->user_profile->country = $request->country;
+                    $user->user_profile->dob = $request->dob;
+                    $user->user_profile->is_pic_public = $request->is_pic_public;
+                    $user->user_profile->is_social_media_public = $request->is_social_media_public;
+                    $user->user_profile->is_bio_public = $request->is_bio_public;
+
+                    if ($request->hasFile('image_name')) {
+                        $user->user_profile->image = SoftSourceHelper::FileUploaderHelper($request->image_name, 'frontend/profiles');
+                    }
+
+                    DB::transaction(function () use ($user) {
+                        $user->user_profile->save();
+                    });
+
+                    return response()->json(['success' => 'Profile Information Updated Successfully'], 200);
+                } catch (\Exception $e) {
+                    return response()->json(['error' => $e->getMessage()], 500);
+                }
+            } else {
+                return response()->json(['error' => 'Some Error Occurred. Please refresh the page and try again.'], 400);
+            }
+        }
+    }
+
 
     public function api_author_stories($user_id)
     {

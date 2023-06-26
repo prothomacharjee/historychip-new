@@ -17,7 +17,47 @@
 </div>
 
 <div class="container my-5" id="softsource-profile-container">
-    <form method="POST" id="softsource-personal_info_form" action="route('profile.about.save')" novalidate class="needs-validation w-100" enctype="multipart/form-data">
+    <div class="row">
+        <div class="col-12">
+            @if (session('success'))
+            <div class="alert border-0 border-start border-5 border-success alert-dismissible fade show py-2">
+                <div class="d-flex align-items-center">
+                    <div class="font-35 text-success"><i class='bx bxs-check-circle'></i>
+                    </div>
+                    <div class="ms-3">
+                        <h6 class="mb-0 text-success">{{ session('success') }}</h6>
+                    </div>
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            @endif
+            @if (session('error'))
+            <div class="alert border-0 border-start border-5 border-danger alert-dismissible fade show py-2">
+                <div class="d-flex align-items-center">
+                    <div class="font-35 text-danger"><i class='bx bxs-message-square-x'></i>
+                    </div>
+                    <div class="ms-3">
+                        <h6 class="mb-0 text-danger">{{ session('error') }}</h6>
+                    </div>
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            @endif
+            @if (session('info'))
+            <div class="alert border-0 border-start border-5 border-info alert-dismissible fade show py-2">
+                <div class="d-flex align-items-center">
+                    <div class="font-35 text-info"><i class='bx bx-info-square'></i>
+                    </div>
+                    <div class="ms-3">
+                        <h6 class="mb-0 text-info">{{ session('info') }}</h6>
+                    </div>
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            @endif
+        </div>
+    </div>
+    <form method="POST" id="softsource-personal_info_form" action="{{ route('profile.about.save') }}" novalidate class="needs-validation w-100" enctype="multipart/form-data">
         <div class="row">
             @csrf
             <input type="hidden" name="id" value="{{ $user->id }}">
@@ -206,7 +246,7 @@
             </div>
         </div>
     </form>
-    <form id="desc-permission_info_form" method="post" novalidate class="needs-validation" action="route('profile.visibility.save')">
+    <form id="desc-permission_info_form" method="post" novalidate class="needs-validation" action="{{ route('profile.visibility.save') }}">
         @csrf
         <input type="hidden" name="id" value="{{ $user->id }}">
 
@@ -228,7 +268,7 @@
                                     <div class="softsource-onoffswitch">
                                         <input type="checkbox" name="is_pic_public" value="{{ $user->user_profile->is_pic_public }}" class="softsource-onoffswitch-checkbox" id="piconoffswitch" tabindex="0" checked="">
                                         <label class="softsource-switch">
-                                            <input type="checkbox" id="checkbox" {{ $user->user_profile->is_pic_public == 1 ? 'checked' : '' }}>
+                                            <input type="checkbox" id="checkbox" value="{{ $user->user_profile->is_pic_public }}" {{ $user->user_profile->is_pic_public == 1 ? 'checked' : '' }}>
                                             <span class="softsource-slider-toggle"></span>
                                         </label>
                                     </div>
@@ -243,9 +283,9 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="softsource-onoffswitch">
-                                        <input type="checkbox" name="is_social_media_public" value="0" class="softsource-onoffswitch-checkbox" id="bioonoffswitch" tabindex="0" checked="">
+                                        <input type="checkbox" name="is_social_media_public" value="{{ $user->user_profile->is_social_media_public }}" class="softsource-onoffswitch-checkbox" id="bioonoffswitch" tabindex="0" checked="">
                                         <label class="softsource-switch">
-                                            <input type="checkbox" id="checkbox">
+                                            <input type="checkbox" id="checkbox" value="{{ $user->user_profile->is_social_media_public }}" {{ $user->user_profile->is_social_media_public == 1 ? 'checked' : '' }}>
                                             <span class="softsource-slider-toggle"></span>
                                         </label>
                                     </div>
@@ -259,9 +299,9 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="softsource-onoffswitch">
-                                        <input type="checkbox" name="is_bio_public" value="0" class="softsource-onoffswitch-checkbox" id="socialonoffswitch" tabindex="0" checked="">
+                                        <input type="checkbox" name="is_bio_public" value="{{ $user->user_profile->is_bio_public }}" class="softsource-onoffswitch-checkbox" id="socialonoffswitch" tabindex="0" checked="">
                                         <label class="softsource-switch">
-                                            <input type="checkbox" id="checkbox">
+                                            <input type="checkbox" id="checkbox" value="{{ $user->user_profile->is_bio_public }}" {{ $user->user_profile->is_bio_public == 1 ? 'checked' : '' }}>
                                             <span class="softsource-slider-toggle"></span>
                                         </label>
                                     </div>
@@ -278,5 +318,18 @@
         </div>
     </form>
 </div>
+
+<script>
+    $(document).on("change", '.softsource-switch #checkbox', function() {
+        //        $(this).closest("div.onoffswitch").find("input").prop("checked");
+        if ($(this).is(":checked")) {
+            $(this).val(1);
+            $(this).closest("div.softsource-onoffswitch").find("input").val(1)
+        } else {
+            $(this).val(0);
+            $(this).closest("div.softsource-onoffswitch").find("input").val("0")
+        }
+    })
+</script>
 
 @endsection
