@@ -48,7 +48,8 @@ class StoryController extends Controller
             "category_id" => "required",
             "context" => "string",
             "event_location" => "required",
-            "event_detail_dates" => "required",
+            'event_dates' => 'required_without_all:event_detail_dates|nullable',
+            'event_detail_dates' => 'required_without_all:event_dates|nullable',
             'header_image_path' => 'nullable',
             'photo_credit' => 'required_if:header_image_path,!=,',
             'audio_video_path' => 'nullable',
@@ -486,7 +487,7 @@ class StoryController extends Controller
             } catch (\Exception $e) {
                 return redirect()->back()->with('error', $e->getMessage());
             }
-        } elseif ($type = 'featured') {
+        } elseif ($type == 'featured') {
             $count = Story::where('is_featured', 1)->count();
 
             if ($status == 1) {
@@ -517,7 +518,30 @@ class StoryController extends Controller
                 }
             }
 
-        } else {
+        }
+        elseif ($type == 'draft') {
+
+            $returnText = ($status == 1) ? 'Drafted' : 'Submitted';
+            $extraText = ($status == 1) ? '' : 'Thank you for submitting your story, we will review it and send an email when published.';
+            try {
+                $story = Story::findOrFail($id);
+
+                DB::transaction(function () use ($story, $status) {
+
+                    $story->is_draft = $status;
+                    $story->update();
+                });
+                $meta  = Page::where('page_group', 'story')->where('page_group_id', $story->id)->first();
+                if ($status == 0) {
+                    $this->SendStorySubmissionConfirmationMail2Way($meta->url);
+                }
+                return redirect()->route('my-stories')->with('success', "Story $returnText Successfully. ". $extraText );
+            } catch (\Exception $e) {
+                return redirect()->back()->with('error', $e->getMessage());
+            }
+        }
+
+        else {
             return redirect()->route('admin.blogs')->with('info', "You are trying a wrong URL.");
         }
 

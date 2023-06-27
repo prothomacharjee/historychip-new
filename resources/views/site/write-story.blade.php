@@ -236,7 +236,7 @@
                                 value="{{ old('tags') ? old('tags') : (!empty($story->tags) ? $story->tags : null) }}">
                             <span class="fa fa-question-circle field-icon" data-bs-toggle="popover"
                                 data-bs-placement="top" data-bs-trigger="hover"
-                                data-bs-content="Please add up to 8 tags that best represent your story. Tags will help others as they search
+                                data-bs-content="Please add up to 15 tags that best represent your story. Tags will help others as they search
                                                               for stories about similar topics. Tags might include names of people included in your story,
                                                               specific places, events, or key items in your story."></span>
                             <div class="valid-feedback">Looks good!</div>

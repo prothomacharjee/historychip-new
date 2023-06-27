@@ -100,6 +100,8 @@ Route::post('/getwritingprompts', [WritingPromptController::class, 'getwritingpr
 Route::post('/story/create', [StoryController::class, 'store'])->name('story.create')->middleware('auth');
 Route::post('/story/comment', [StoryController::class, 'save_comment'])->name('story.comment')->middleware('auth');
 Route::get('/story/delete/{slug?}', [StoryController::class, 'destroy'])->name('story.delete')->middleware('auth');
+Route::get('/story/staus/{id}/{type}/{status}', [StoryController::class, 'ChangeStoryStatus'])->name('story.status');
+
 
 // Redirection Url
 Route::redirect('/blogdetail/{id}/{slug}', '/blogs/{slug}', 301);

@@ -66,7 +66,7 @@
     }
 
     .softsource-nav-menus .nav-link,
-    .softsource-nav-login-register {
+    .softsource-nav-login-register, .softsource-profile-dropdown-button {
         font-size: 23px;
     }
 
@@ -105,12 +105,13 @@
         padding-right: 15px;
     }
 
-    .softsource-nav-menus .nav-link {
+    .softsource-nav-menus .nav-link,.softsource-nav-login-register, .softsource-profile-dropdown-button {
         font-size: 20px;
     }
 
-    .softsource-nav-login-register {
-        font-size: 20px;
+
+    .softsource-profile-dropdown-ulist li a, .softsource-submenu > li > a > span{
+        font-size: 16px;
     }
 }
 
@@ -144,7 +145,7 @@
         padding-right: 10px;
     }
 
-    .softsource-nav-menus .nav-link {
+    .softsource-nav-menus .nav-link, .softsource-profile-dropdown-button {
         font-size: 18px;
     }
 
@@ -295,8 +296,18 @@
         width: 100% !important;
     }
 
-    .softsource-navbar-toggler {
+
+
+    .softsource-top-search-form,.softsource-nav-add-story-btn, .softsource-top-login-register-div{
+        display: none;
+    }
+
+    .softsource-nav-toggle-btn {
         display: block !important;
+    }
+
+    .softsource-scrolling-notice marquee{
+        font-size: 14px;
     }
 
 }

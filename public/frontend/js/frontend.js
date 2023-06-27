@@ -19,15 +19,15 @@ $(document).ready(function () {
         confirmKeys: [13, 188], // optional: specify which keys trigger tag creation (enter key and comma key by default)
     });
 
-    // Blink logo for 5 seconds or until process is complete
+    // Blink logo for 2.5 seconds or until process is complete
     let intervalId = setInterval(function () {
         logo.toggle();
-    }, 500);
+    }, 250);
 
     // Hide preloader container and stop blinking on window load event
     $(window).on("load", function () {
         clearInterval(intervalId);
-        preloader.fadeOut(5000, function () {
+        preloader.fadeOut(2500, function () {
             $("body").css("overflow", "auto");
         });
     });

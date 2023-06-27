@@ -219,9 +219,9 @@ class ApiController extends Controller
     public function api_write_story_comments(Request $request)
     {
         $data = [
-            'user_id' => auth()->user()->id,
-            'story_id' => $request->input('storyId'),
-            'comment' => $request->input('message'),
+            'user_id' => $request->input('user_id'),
+            'story_id' => $request->input('story_id'),
+            'comment' => $request->input('comment'),
             'accepting_date_time' => null,
         ];
 
