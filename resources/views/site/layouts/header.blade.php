@@ -162,7 +162,8 @@
                                 </ul>
                             </div>
                         </nav>
-                        <form method="GET" action="{{ route('story.searchbasic') }}" class="softsource-top-search-form">
+                        <form method="POST" action="{{ route('story.search') }}" class="softsource-top-search-form">
+                            @csrf
                             <div class="input-group softsource-nav-search-bar">
 
                                 <input type="text" class="form-control softsource-nav-search-input"
@@ -208,7 +209,7 @@
                                 </div>
                             @endguest
                         </div>
-                        <div class="softsource-nav-toggle-btn ms-auto">
+                        <div class="softsource-nav-toggle-btn ms-auto" style="display: none">
                             <div id='top'></div>
                             <div id='middle'></div>
                             <div id='bottom'></div>

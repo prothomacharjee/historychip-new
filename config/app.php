@@ -198,6 +198,8 @@ return [
 
         Yajra\DataTables\DataTablesServiceProvider::class,
 
+        Laravel\Scout\ScoutServiceProvider::class,
+
     ],
 
     /*

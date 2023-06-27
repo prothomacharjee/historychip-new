@@ -2,12 +2,16 @@
 
 namespace App\Models;
 
+use App\Models\StoryCategory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use Laravel\Scout\Searchable;
 
 class Story extends Model
 {
     protected $guarded = [];
+
+    use Searchable;
 
     public function base_category()
     {
@@ -114,37 +118,75 @@ class Story extends Model
             ->get();
     }
 
-    public static function storiesById($storyIds, $sort_by)
+
+    public static function ProcessSearchResults($ids, $paginated_number = 9,)
     {
-        $storyIds = implode(",", $storyIds);
-        $sql = "select * from stories s where s.approved = 1 and FIND_IN_SET(s.id,'$storyIds') and s.submit_status=1";
+        return Story::with('base_category', 'level1_category', 'level2_category', 'level3_category', 'author_details')
+            ->join('pages as p', 'stories.id', '=', 'p.page_group_id')
+            ->select(DB::raw('stories.*, p.id as page_id, p.name, p.url, p.page_title, p.meta_title, p.meta_keywords, p.meta_description'))
+            ->where('p.page_group', '=', 'story')
+            ->whereIn('p.page_group_id', $ids)
+            ->whereIn('stories.id', $ids)
+            ->paginate($paginated_number);
+    }
 
-        if ($sort_by != "") {
 
-            if ($sort_by == "high" || $sort_by == "low") {
-                $sort = ($sort_by == 'high') ? 'DESC' : 'ASC';
-                $sql .= " ORDER BY s.author " . $sort;
-            } else if ($sort_by == "new" || $sort_by == "old") {
-                $sort = ($sort_by == 'new') ? 'DESC' : 'ASC';
-                $sql .= " ORDER BY s.created_at " . $sort;
-            } else if ($sort_by == "a" || $sort_by == "z") {
-                $sort = ($sort_by == 'z') ? 'DESC' : 'ASC';
-                $sql .= " ORDER BY s.title " . $sort;
-            } else if ($sort_by == "shuffle") {
-                $sql .= " ORDER BY RAND()";
-            }
-        } else {
-            $sql .= " ORDER By s.created_at DESC;";
+
+
+    public function toSearchableArray()
+    {
+        if($this->category_id != null){
+
+            $categoryNames = StoryCategory::whereIn('id', json_decode($this->category_id))->where('level', 0)->pluck('name')->toArray();
         }
-        $sql;
-        $stories = DB::select($sql);
-
-        $return = [];
-        foreach ($stories as $storyData) {
-            $return[] = new Story((array) $storyData);
+        else{
+            $categoryNames = null;
         }
 
-        return $return;
+        if($this->sub_category_id_level_1 != null){
+
+            $subCategoryNamesLevel1 = StoryCategory::whereIn('id', json_decode($this->sub_category_id_level_1))->where('level', 1)->pluck('name')->toArray();
+        }
+        else{
+            $subCategoryNamesLevel1 = null;
+        }
+
+
+
+        // Calculate the size of the record
+        $recordSize = $this->calculateRecordSize();
+
+        // If the record size exceeds the limit, return an empty array
+        if ($recordSize > 10000) {
+            return [];
+        }
+
+        if ($this->is_draft == 1) {
+            return [];
+        }
+
+        if ($this->is_approved == 0) {
+            return [];
+        }
+
+        return [
+            'id' => $this->id,
+            'title' => $this->title,
+            'context' => $this->context,
+            'category_name' => $categoryNames,
+            'sub_category_name_level_1' => $subCategoryNamesLevel1,
+            'author_name' => $this->author_name,
+            'tags' => $this->tags,
+        ];
+
+    }
+
+    private function calculateRecordSize()
+    {
+        // Calculate the size of the record
+        $recordSize = strlen(json_encode($this->toArray()));
+
+        return $recordSize;
     }
 
 }

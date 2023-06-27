@@ -413,6 +413,28 @@ class SiteController extends Controller
         ]);
     }
 
+    public function storySearch(Request $request)
+    {
+        // Retrieve the search query from the request
+        $query = $request->input('search');
+
+        // Perform the search using Laravel Scout
+        $results = Story::search($query)->get();
+        $ids = $results->pluck('id')->all();
+        $stories = Story::ProcessSearchResults($ids);
+        // Return the search results to the view
+
+        return view('site.search-results')->with([
+            'page_title' => 'Search Results',
+            'notices' => $this->notices,
+            'stories' => $stories,
+            'meta' => $this->pages,
+
+        ]);
+    }
+
+
+
     public function saveimage(Request $request)
     {
         return SoftSourceHelper::SaveImageBYFileUploader($request);
@@ -460,4 +482,6 @@ class SiteController extends Controller
         );
         echo json_encode($value);
     }
+
+
 }
