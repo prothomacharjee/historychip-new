@@ -65,6 +65,10 @@
     <link rel="stylesheet" href="{{ asset('frontend/css/keyframes.css?q=' . time()) }}">
 
     <script src="{{ asset('frontend/js/jquery/jquery.min.js') }}"></script>
+    <script>
+        /*to prevent Firefox FOUC, this must be here*/
+        let FF_FOUC_FIX;
+    </script>
 </head>
 
 <body class="softsource-no-select">
@@ -162,14 +166,17 @@
                                 </ul>
                             </div>
                         </nav>
-                        <form method="POST" action="{{ route('story.search') }}" class="softsource-top-search-form">
+                        <form method="POST" action="{{ route('story.search') }}"
+                            class="softsource-top-search-form">
                             @csrf
                             <div class="input-group softsource-nav-search-bar">
 
                                 <input type="text" class="form-control softsource-nav-search-input"
-                                    placeholder="Search Any Word" name="search">
+                                    placeholder="Search Any Word" name="search"
+                                    value="{{ old('search') ? old('search') : null }}">
                                 <div class="input-group-prepend softsource-nav-search-btn">
-                                    <span class="input-group-text"><i class="fa fa-search"></i></span>
+                                    <button type="submit" class="input-group-text"><i
+                                            class="fa fa-search"></i></button>
                                 </div>
                             </div>
                         </form>
@@ -195,9 +202,10 @@
                                         <li><a class="dropdown-item" href="{{ route('my-stories') }}">My
                                                 Stories&nbsp;&nbsp;</a></li>
 
-                                        <li><a class="dropdown-item" href="{{ route('logout') }}"
+                                        <li>
+                                            <a class="dropdown-item" href="{{ route('logout') }}"
                                                 onclick="event.preventDefault();
-                                             document.getElementById('logout-form').submit();">
+                                            document.getElementById('logout-form').submit();">
                                                 {{ __('Logout') }}
                                             </a>
                                             <form id="logout-form" action="{{ route('logout') }}" method="POST"
@@ -209,11 +217,170 @@
                                 </div>
                             @endguest
                         </div>
-                        <div class="softsource-nav-toggle-btn ms-auto" style="display: none">
-                            <div id='top'></div>
-                            <div id='middle'></div>
-                            <div id='bottom'></div>
+
+                        <div class="softsource-responsive-menu-div ms-auto d-none">
+                            <div class="softsource-nav-toggle-btn" style="display: none">
+                                <div id='top'></div>
+                                <div id='middle'></div>
+                                <div id='bottom'></div>
+                            </div>
+                            <div class="softsource-responsive-nav">
+                                <div id="items">
+
+                                    <nav class="softsource-responsive-navigation-menu">
+                                        <ul class="softsource-responsive-nav-menus">
+                                            <li class="">
+                                                <a href="/"><span>Home</span></a>
+
+                                            </li>
+                                            <li class="softsource-responsive-has-children">
+                                                <a href="javascript:;">
+                                                    <span>About us</span>
+                                                    <i class="fa-solid fa-angle-down softsource-nav-angle-down"></i>
+                                                </a>
+                                                <ul class="softsource-submenu hidden">
+                                                    <li>
+                                                        <a href="{{ route('about') }}">
+                                                            <span>About Us</span>
+
+                                                        </a>
+                                                    </li>
+                                                    <li><a href="{{ route('founder') }}"><span>Founder</span></a>
+                                                    </li>
+                                                    <li><a href="{{ route('historychipfor') }}"><span>Who is
+                                                                History Chip
+                                                                for</span></a></li>
+                                                    <!-- <li><a href="javascript:;"><span>Terms of Use</span></a></li> -->
+                                                </ul>
+                                            </li>
+                                            <li class="softsource-responsive-has-children">
+                                                <a href="javascript:;"><span>Stories</span>
+                                                    <i class="fa-solid fa-angle-down softsource-nav-angle-down"></i>
+                                                </a>
+                                                <ul class="softsource-submenu hidden">
+                                                    <li><a href="{{ route('story.read') }}"><span>Read a
+                                                                Story</span></a></li>
+                                                    <li><a href="{{ route('story.write') }}"><span>Write a
+                                                                Story</span></a>
+                                                    </li>
+
+                                                </ul>
+                                            </li>
+                                            <li>
+                                                <a href="{{ route('writingprompt') }}"><span>Writing
+                                                        Prompts</span></a>
+                                            </li>
+                                            <li class="softsource-responsive-has-children">
+                                                <a href="javascript:;">
+                                                    <span>Resource</span>
+                                                    <i class="fa-solid fa-angle-down softsource-nav-angle-down"></i>
+                                                </a>
+                                                <!-- multilevel submenu -->
+                                                <ul class="softsource-submenu hidden">
+                                                    <li>
+                                                        <a href="{{ route('faq') }}">
+                                                            <span>FAQ</span>
+                                                        </a>
+                                                    </li>
+
+                                                    @guest
+                                                        <li>
+                                                            <a
+                                                                href="{{ route('register') }}"><span>Registration</span></a>
+                                                        </li>
+                                                    @endguest
+                                                    <li>
+                                                        <a href="{{ route('privacypolicy') }}">
+                                                            <span>Privacy Policy</span>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="{{ route('termsandconditions') }}">
+                                                            <span>Term of Use</span>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="{{ route('contactus') }}">
+                                                            <span>Contact Us</span>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                            <li>
+                                                <a href="{{ route('blogs') }}"><span>Blogs</span></a>
+                                            </li>
+
+                                            <li>
+                                                <a href="{{ route('partners') }}"><span>Partners</span></a>
+                                            </li>
+
+                                            @guest
+                                                @if (Route::has('login'))
+                                                    <li>
+                                                        <a href="{{ route('login') }}"
+                                                            class=""><span>Login</span></a>
+                                                    </li>
+                                                @endif
+                                                @if (Route::has('register'))
+                                                    <li>
+                                                        <a href="{{ route('register') }}"
+                                                            class=""><span>Register</span></a>
+                                                    </li>
+                                                @endif
+                                            @else
+                                                <li>
+                                                    <a class="dropdown-item" href="{{ route('profile') }}">My
+                                                        Profile&nbsp;&nbsp;</a>
+                                                </li>
+                                                <li>
+                                                    <a class="dropdown-item" href="{{ route('my-stories') }}">My
+                                                        Stories&nbsp;&nbsp;</a>
+                                                </li>
+
+                                                <li>
+                                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                                        {{ __('Logout') }}
+                                                    </a>
+                                                    <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                                        class="d-none">
+                                                        @csrf
+                                                    </form>
+                                                </li>
+                                            @endguest
+                                        </ul>
+                                    </nav>
+
+                                    <div class="text-center mt-3">
+                                        <a href="{{ route('story.write') }}"
+                                            class="btn softsource-home-fetured-story-read-more-story-btn px-5">Add a
+                                            Story</a>
+
+
+                                    </div>
+
+                                    <form method="POST" action="{{ route('story.search') }}"
+                                        class="softsource-responsive-search-form px-3 mt-2">
+                                        @csrf
+                                        <div class="input-group softsource-nav-search-bar">
+
+                                            <input type="text" class="form-control softsource-nav-search-input"
+                                                placeholder="Search Any Word" name="search"
+                                                value="{{ old('search') ? old('search') : null }}">
+                                            <div class="input-group-prepend softsource-nav-search-btn">
+                                                <button class="input-group-text"><i class="fa fa-search"></i></button>
+                                            </div>
+                                        </div>
+                                    </form>
+
+
+
+
+                                </div>
+                            </div>
                         </div>
+
+
                     </div>
                     <div class="softsource-mid-nav-bottom-section">
                         <div class="softsource-scrolling-notice">

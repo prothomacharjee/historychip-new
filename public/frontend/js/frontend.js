@@ -162,3 +162,28 @@ $(document).on("change", "#sub_category_id_level_2", function () {
         $('#sub_category_id_level_2, #sub_category_id_level_3').attr("disabled", true);
     }
 });
+
+
+$(document).on("click keydown", ".softsource-nav-toggle-btn", function () {
+    $('.softsource-nav-toggle-btn').toggleClass('active');
+    $('.softsource-responsive-nav').toggleClass('active');
+})
+
+
+$(document).on("click", ".softsource-responsive-has-children", function() {
+    $('.softsource-responsive-has-children').not(this).removeClass('active');
+    $(this).toggleClass('active');
+
+
+    var $submenu = $(this).children('.softsource-submenu');
+
+    // Hide other elements with the same class
+    $('.softsource-responsive-has-children').not(this).children('.softsource-submenu').addClass('hidden');
+
+    // Toggle class on the clicked element's children
+    $submenu.toggleClass('hidden');
+  });
+
+
+
+

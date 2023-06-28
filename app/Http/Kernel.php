@@ -67,5 +67,7 @@ class Kernel extends HttpKernel
 
         'admin' => \App\Http\Middleware\AdminAuthenticate::class,
 
+        'samesite' => \App\Http\Middleware\SameSiteMiddleware::class,
+
     ];
 }

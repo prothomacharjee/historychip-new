@@ -297,25 +297,26 @@ form .form-group {
 }
 
 .softsource-mid-nav-top-section {
-
 }
 
 .softsource-mid-nav-top-section div {
 }
 
 .softsource-mid-nav-bottom-section {
-
 }
 
-.softsource-nav-toggle-btn{
-    z-index: 5;
+.softsource-nav-toggle-btn {
+    position: fixed;
+    top: 10px;
+    right: 15px;
+    z-index: 99;
     cursor: pointer;
     -webkit-transition: left 500ms cubic-bezier(0.6, 0.05, 0.28, 0.91);
     transition: left 500ms cubic-bezier(0.6, 0.05, 0.28, 0.91);
 }
 
 .softsource-nav-toggle-btn:hover > div {
-    box-shadow: 0 0 1px #00DFFC;
+    box-shadow: 0 0 1px #00dffc;
 }
 
 .softsource-nav-toggle-btn div {
@@ -323,8 +324,152 @@ form .form-group {
     height: 3px;
     margin-bottom: 8px;
     background-color: #000;
-    -webkit-transition: -webkit-transform 500ms cubic-bezier(0.6, 0.05, 0.28, 0.91), opacity 500ms, box-shadow 250ms, background-color 500ms;
-    transition: transform 500ms cubic-bezier(0.6, 0.05, 0.28, 0.91), opacity 500ms, box-shadow 250ms, background-color 500ms;
+    -webkit-transition: -webkit-transform 500ms
+            cubic-bezier(0.6, 0.05, 0.28, 0.91),
+        opacity 500ms, box-shadow 250ms, background-color 500ms;
+    transition: transform 500ms cubic-bezier(0.6, 0.05, 0.28, 0.91),
+        opacity 500ms, box-shadow 250ms, background-color 500ms;
+}
+
+.softsource-nav-toggle-btn.active {
+    right: 19px;
+    color: #2e3f49 !important;
+    z-index: 999;
+    top: 14px;
+}
+
+.softsource-nav-toggle-btn.active div {
+    background-color: #f00;
+}
+
+.softsource-nav-toggle-btn.active:hover > div {
+    box-shadow: 0 0 1px #343838;
+}
+
+.softsource-nav-toggle-btn.active #top {
+    -webkit-transform: translateY(10px) rotate(-135deg);
+    -ms-transform: translateY(10px) rotate(-135deg);
+    transform: translateY(10px) rotate(-135deg);
+    background-color: #2e3f49;
+}
+
+.softsource-nav-toggle-btn.active #middle {
+    -webkit-transform: scale(0);
+    -ms-transform: scale(0);
+    transform: scale(0);
+}
+
+.softsource-nav-toggle-btn.active #bottom {
+    -webkit-transform: translateY(-10px) rotate(-45deg);
+    -ms-transform: translateY(-10px) rotate(-45deg);
+    transform: translateY(-10px) rotate(-45deg);
+    background-color: #2e3f49;
+}
+
+.softsource-responsive-nav {
+    position: fixed;
+    z-index: 888 !important;
+    /* overflow: auto; */
+    top: 0px;
+    right: -275px;
+    width: 275px;
+    opacity: 0;
+    padding: 20px 0px;
+    height: 100%;
+    background-color: #f6f6f6;
+    color: #343838;
+    -webkit-transition: all 350ms cubic-bezier(0.6, 0.05, 0.28, 0.91);
+    transition: all 350ms cubic-bezier(0.6, 0.05, 0.28, 0.91);
+}
+
+.softsource-responsive-nav.active {
+    right: 0px;
+    opacity: 1;
+}
+
+.softsource-responsive-nav.active #items {
+    position: relative;
+    top: 5% !important;
+    top: 0;
+}
+
+.softsource-responsive-nav.active #items .item {
+    position: relative;
+    cursor: pointer;
+    font-size: 2em;
+    padding: 15px 30px;
+    -webkit-transition: all 250ms;
+    transition: all 250ms;
+}
+
+.softsource-responsive-nav.active #items .item:hover {
+    padding: 15px 45px;
+    background-color: rgba(52, 56, 56, 0.2);
+}
+
+.softsource-responsive-nav-menus {
+    list-style: outside none none;
+    margin: 0;
+    padding: 0;
+}
+
+.softsource-responsive-nav-menus > li {
+    margin: 0 24px;
+    position: relative;
+}
+
+.softsource-responsive-nav-menus > li > a {
+    display: block;
+    padding: 10px 2px;
+    position: relative;
+    color: #000;
+    font-size: 20px;
+    font-family: Poppins;
+    line-height: 160%;
+    letter-spacing: -0.28px;
+}
+
+.softsource-responsive-nav-menus > li.softsource-responsive-has-children {
+    position: relative;
+}
+
+.softsource-responsive-nav-menus > li.active > a:before {
+    width: 100%;
+    left: 0;
+    background-color: #34444b;
+}
+
+.softsource-responsive-nav-menus > li > a:before {
+    content: "";
+    width: 0;
+    height: 3px;
+    bottom: 0;
+    position: absolute;
+    left: 0;
+    background-color: #000;
+    -webkit-transition: all 0.7s cubic-bezier(0.645, 0.045, 0.355, 1);
+    -o-transition: all 0.7s cubic-bezier(0.645, 0.045, 0.355, 1);
+    transition: all 0.7s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+.softsource-responsive-nav-menus
+    > li.softsource-responsive-has-children
+    > .softsource-submenu {
+    -webkit-transform: translateY(0);
+    -ms-transform: translateY(0);
+    transform: translateY(0);
+    visibility: visible;
+    opacity: 1;
+}
+
+.softsource-responsive-nav-menus
+    > li.softsource-responsive-has-children
+    > .softsource-submenu.hidden {
+    visibility: hidden;
+    opacity: 0;
+    -webkit-transform: translateY(-100%);
+    -ms-transform: translateY(-100%);
+    transform: translateY(-100%);
 }
 
 .softsource-header-logo {
@@ -344,15 +489,26 @@ form .form-group {
 }
 
 .softsource-home-btn-login {
-    background: #95a8ae;
-    border: 1px solid #95a8ae;
     border-radius: 50px;
+    padding: 12px 20px;
+    border: 3px solid #95a8ae;
+    background: #95a8ae;
+    color: #000;
+    font-size: 35px;
+    font-family: Open Sans;
+    line-height: 24px;
+    letter-spacing: 0.5px;
 }
 
 .softsource-home-btn-register {
-    border: 1px solid #95a8ae;
+    border: 3px solid #000;
     border-radius: 50px;
-    color: #95a8ae;
+    color: black;
+    font-size: 35px;
+    padding: 12px 20px;
+    font-family: Open Sans;
+    line-height: 24px;
+    letter-spacing: 0.5px;
 }
 
 .softsource-home-btn-login:hover {
@@ -395,7 +551,7 @@ form .form-group {
 }
 
 .softsource-home-daily-prompt {
-    background: rgba(28, 28, 28, 20%);
+    background: #95a8ae;
     backdrop-filter: blur(10.5px);
     border-radius: 50px;
     justify-content: center;
@@ -411,11 +567,11 @@ form .form-group {
 }
 
 .softsource-home-daily-prompt-add-story {
-    background: rgba(0, 0, 0, 0.45);
+    background: rgba(0, 0, 0, 0.25);
     flex-basis: 25%;
     border-radius: 50px;
     height: 285px;
-
+    backdrop-filter: blur(10.5px);
     display: flex;
     flex-direction: column;
     align-items: center; /* Center vertically */
@@ -513,8 +669,7 @@ form .form-group {
 }
 
 .softsource-home-fetured-story-horizontal-line {
-    width: 382px;
-
+    width: 50%;
     border: 3px solid #95a8ae;
 }
 
@@ -577,8 +732,8 @@ form .form-group {
 .softsource-home-search-story-form-category-label {
     font-family: "Poppins";
     font-style: normal;
-    font-weight: 400;
-    font-size: 16px;
+    font-weight: 500;
+    font-size: 20px;
     line-height: 24px;
     color: #000000;
 }
@@ -590,7 +745,7 @@ form .form-group {
     box-sizing: border-box;
     width: 216px;
     height: 57px;
-    font-size: 15px;
+    font-size: 22px;
     text-transform: capitalize;
     cursor: pointer;
     margin-right: 30px;
@@ -667,7 +822,7 @@ form .form-group {
     font-family: "Poppins";
     font-style: normal;
     font-weight: 500;
-    font-size: 16px;
+    font-size: 25px;
     line-height: 150%;
     text-align: justify;
     letter-spacing: -0.03em;
@@ -692,7 +847,7 @@ form .form-group {
 }
 
 .softsource-home-fetured-blog-horizontal-line {
-    width: 382px;
+    width: 50%;
     border: 3px solid #95a8ae;
 }
 
@@ -727,6 +882,7 @@ form .form-group {
     border-top-left-radius: 25px !important;
     border-bottom-left-radius: 25px !important;
     padding-left: 50px;
+    font-size: 25px;
 }
 
 .softsource-home-newsletter-btn {
@@ -776,8 +932,8 @@ form .form-group {
     left: 0;
     width: 100%; */
     width: -webkit-fill-available;
-    -webkit-animation: 0.95s ease-in-out 0s normal none 1 running fadeInDown;
-    animation: 0.95s ease-in-out 0s normal none 1 running fadeInDown;
+    /* -webkit-animation: 0.95s ease-in-out 0s normal none 1 running fadeInDown;
+    animation: 0.95s ease-in-out 0s normal none 1 running fadeInDown; */
     z-index: 9;
     -webkit-transition: all 0.7s cubic-bezier(0.645, 0.045, 0.355, 1);
     -o-transition: all 0.7s cubic-bezier(0.645, 0.045, 0.355, 1);
@@ -1006,20 +1162,18 @@ form .form-group {
 }
 
 .softsource-nav-search-btn {
-    pointer-events: none;
     border-radius: 50px;
     border: 1px solid black;
     border-left: none;
     padding: 12px 20px 12px 0px;
 }
 
-.softsource-nav-search-btn span {
+.softsource-nav-search-btn button {
     width: 19px;
     height: 19px;
     color: #292d32;
     background-color: transparent;
     border: none;
-    pointer-events: none;
 }
 
 .softsource-nav-search-input {
@@ -1043,7 +1197,6 @@ form .form-group {
     box-shadow: 0 0 5px #3e5662;
 }
 
-
 .softsource-nav-add-story-btn {
     border-radius: 50px;
     border: 1px solid #000;
@@ -1061,7 +1214,6 @@ form .form-group {
 }
 
 .softsource-nav-search-bar {
-
 }
 
 .softsource-nav-login-register {
@@ -1287,15 +1439,16 @@ form .form-group {
 }
 
 .softsource-firstline-header {
-    font-family: "Montserrat";
     font-style: normal;
     font-weight: 500;
     font-size: 86px;
-    line-height: 111%;
     align-items: center;
     text-align: right;
     text-transform: uppercase;
     color: #ffffff;
+
+    font-family: "PT Serif";
+    line-height: 121%;
 }
 
 .softsource-firstline-header-inside {
@@ -1308,6 +1461,12 @@ form .form-group {
     z-index: 2;
 }
 
+.softsource-home-responsive-btn {
+    top: 65%;
+    left: 30% !important;
+    z-index: 2;
+}
+
 .softsource-video-overlay {
     position: absolute;
     top: 0;
@@ -1315,7 +1474,7 @@ form .form-group {
     width: 100%;
     height: 99%;
     z-index: 1;
-    background-color: rgba(0, 0, 0, 73%); /* Adjust the opacity as needed */
+    background-color: rgba(0, 0, 0, 30%); /* Adjust the opacity as needed */
     /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); Adjust the shadow properties as needed */
 }
 
@@ -1327,7 +1486,7 @@ form .form-group {
 .softsource-scroll-down {
     height: 50px;
     width: 30px;
-    border: 4px solid #778a91;
+    border: 4px solid #fff;
     position: relative;
     left: 50%;
     bottom: 20px;
@@ -1346,9 +1505,9 @@ form .form-group {
     height: 10px;
     width: 10px;
     /* transform: translate(-50%, -100%) rotate(45deg); */
-    border: 2px solid #778a91;
+    border: 2px solid #fff;
     border-radius: 50%;
-    background-color: #778a91;
+    background-color: #fff;
     animation: softsource_scroll 2s infinite;
 }
 
@@ -1380,7 +1539,9 @@ form .form-group {
     font-weight: 700;
     font-size: 20px;
     line-height: 102.5%;
-    letter-spacing: -0.02em;
+
+    letter-spacing: -0.4px;
+    text-transform: uppercase;
 }
 .softsource-home-hero-horizontal-lines-div {
     display: flex;
@@ -1693,13 +1854,14 @@ form .form-group {
 .single-blog-item .post-info .post-meta .post-view {
     padding: 10px 10px;
     padding-bottom: 16px;
+    font-size: 25px;
 }
 
 .softsource-single-blog-item.blog-grid .post-info .post-title {
     margin-bottom: 10px;
     line-height: 1.5;
     font-weight: 800;
-    font-size: 18px;
+    font-size: 24px;
 }
 
 .softsource-single-blog-item.blog-grid .post-info .btn-text {
@@ -1709,6 +1871,12 @@ form .form-group {
 .softsource-single-blog-item.blog-grid .post-info .btn-text a {
     font-size: 14px;
     font-weight: 500;
+}
+
+.softsource-single-blog-item p {
+    font-size: 20px;
+    font-weight: 500;
+    margin-top: 30px;
 }
 
 .preview-text,
@@ -2700,12 +2868,12 @@ form .form-group {
     padding-bottom: 0px !important;
 }
 
-.softsource-profile-dropdown-ulist li{
+.softsource-profile-dropdown-ulist li {
     border-bottom: 1px solid #3e5662;
     padding-bottom: 5px;
 }
 
-.softsource-profile-dropdown-ulist li a{
+.softsource-profile-dropdown-ulist li a {
     display: block;
     padding: 5px 20px;
     font-size: 20px;
@@ -3129,6 +3297,7 @@ input:checked + .softsource-slider-toggle:before {
 .softsource-story-item-details .story-meta .story-view {
     padding: 10px 10px;
     padding-bottom: 16px;
+    font-size: 25px;
 }
 
 .softsource-story-item-details .story-meta .story-date .meta-icon,
@@ -3140,7 +3309,7 @@ input:checked + .softsource-slider-toggle:before {
     margin-bottom: 10px;
     line-height: 1.5;
     font-weight: 800;
-    font-size: 18px;
+    font-size: 24px;
 }
 
 .softsource-story-item-details .story-excerpt {
@@ -3149,7 +3318,7 @@ input:checked + .softsource-slider-toggle:before {
 
 .softsource-story-item-details p {
     margin-top: 30px;
-    font-size: 15px;
+    font-size: 20px;
     font-weight: 500;
 }
 
@@ -3159,7 +3328,7 @@ input:checked + .softsource-slider-toggle:before {
 }
 
 .softsource-story-item-details .softsource-story-btn-text a {
-    font-size: 14px;
+    font-size: 22px;
     font-weight: 500;
 }
 

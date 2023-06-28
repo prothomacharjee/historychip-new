@@ -12,12 +12,19 @@
             <div class="softsource-video-overlay"></div>
         </div>
 
+
+
         <div class="position-absolute top-50 text-end softsource-home-text-over-video-div">
-            <h1 class="text-white text-end softsource-firstline-header">The <span
-                    class="softsource-firstline-header-inside">story</span> of our world is not complete until you add your
-                <span class="softsource-firstline-header-inside">story</span>
+            <h1 class="text-white text-end softsource-firstline-header">The story of our world is not complete until you add
+                your story
             </h1>
         </div>
+
+        <div class="position-absolute  softsource-home-responsive-btn" style="display: none">
+            <a href="{{ route('register') }}" class="btn softsource-home-btn-register">Register</a>
+            <a href="{{ route('login') }}" class="btn softsource-home-btn-login">Login</a>
+        </div>
+
         <div class="position-absolute text-center mb-3 softsource-home-top-scroll">
             <div class="softsource-home-hero-horizontal-lines-div">
                 <div class="softsource-home-hero-horizontal-line line-1"></div>
@@ -45,15 +52,16 @@
                         <h2 class="text-center softsource-home-daily-prompt-header">Daily Prompt Generator</h2>
                         <div class="softsource-home-daily-prompt-word-text-box d-flex mx-5">
                             <div id="softsource-wordbox" class="softsource-wordbox"></div>
-                            <input class="ms-auto generate-prompt-button" type="BUTTON" value="GENERATE PROMPT" tabindex="0">
+                            <input class="ms-auto generate-prompt-button" type="BUTTON" value="GENERATE PROMPT"
+                                tabindex="0">
                         </div>
                         <!-- <div class="text-start">
 
-                                                                                                                        <button type="button" class="btn-direction backBtn"><i class="fa fa-arrow-left"
-                                                                                                                                aria-hidden="true"></i></button>
-                                                                                                                        <button type="button" class="btn-direction nextBtn"><i class="fa fa-arrow-right"
-                                                                                                                                aria-hidden="true"></i></button>
-                                                                                                                    </div> -->
+                                                                                                                            <button type="button" class="btn-direction backBtn"><i class="fa fa-arrow-left"
+                                                                                                                                    aria-hidden="true"></i></button>
+                                                                                                                            <button type="button" class="btn-direction nextBtn"><i class="fa fa-arrow-right"
+                                                                                                                                    aria-hidden="true"></i></button>
+                                                                                                                        </div> -->
                     </div>
                     <div class="softsource-home-daily-prompt-add-story">
                         <div class="softsource-home-daily-prompt-add-story-link">
@@ -120,7 +128,9 @@
                                             </div>
                                             <div class="softsource-h-line"></div>
                                             <h5 class="story-title pt-3">
-                                                <a href="{{ url($story->url) }}">{{ $story->title }}</a>
+                                                <a href="{{ url($story->url) }}" data-bs-toggle="tooltip"
+                                                    data-bs-placement="top" title=""
+                                                    data-bs-original-title="{{ $story->title }}">{{ strlen($story->title) > 18 ? substr($story->title, 0, 18) . ' . . .' : $story->title }}</a>
                                             </h5>
                                             <div class="story-excerpt mt-3">
                                                 <p>{{ strlen(strip_tags($story->context)) > 100 ? substr(strip_tags($story->context), 0, 100) . ' . . .' : strip_tags($story->context) }}
@@ -235,7 +245,7 @@
                     <div class="_form_17"></div>
                     <script src="https://historychip.activehosted.com/f/embed.php?id=17" type="text/javascript" charset="utf-8"></script>
                     <!-- <div class="_form_15"></div>
-                                                <script src="https://historychip.activehosted.com/f/embed.php?id=15" type="text/javascript" charset="utf-8"></script> -->
+                                                    <script src="https://historychip.activehosted.com/f/embed.php?id=15" type="text/javascript" charset="utf-8"></script> -->
                 </div>
             </div>
         </div>
@@ -252,7 +262,7 @@
                         All of our stories together are the BIG PICTURE. That’s why I built this site, because EVERYBODY
                         should be part of the story of our world. It’s like a huge library written by all of us. Join me and
                         be part of the story!</p>
-                    <a class="btn softsource-home-fetured-story-read-more-story-btn mt-4"
+                    <a class="btn softsource-home-fetured-story-read-more-story-btn mt-4 px-5"
                         href="{{ route('story.read') }}">Read More Story</a>
                 </div>
                 <div
@@ -289,14 +299,15 @@
                                         $blog_banner = $blog->blog_banner;
                                     }
                                 @endphp
-                                <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 mt-0">
+                                <div
+                                    class="col-xxl-4 col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 mt-0 mb-5 animate__animated fadeInUp">
                                     <!--======= Single Blog Item Start ========-->
                                     <div class="softsource-single-blog-item blog-grid">
                                         <!-- Post Feature Start -->
                                         <div class="post-feature softsource-blog-thumbnail">
                                             <a href="{{ url($blog->url) }}">
                                                 <img class="img-fluid" src="{{ asset($blog_banner) }}"
-                                                    alt="{{ $blog->blog_banner_alt_text }}" style="width: 370px;">
+                                                    alt="{{ $blog->blog_banner_alt_text }}" style="width: 370px; height:208px">
                                             </a>
                                         </div>
                                         <!-- Post Feature End -->
@@ -312,14 +323,15 @@
                                                 <div class="softsource-h-line"></div>
                                             </div>
                                             <h5 class="post-title font-weight--bold pt-3">
-                                                <a href="{{ url($blog->url) }}">
-                                                    {{ $blog->blog_title }}
-                                                </a>
+
+                                                <a href="{{ url($blog->url) }}" data-bs-toggle="tooltip"
+                                                    data-bs-placement="top" title=""
+                                                    data-bs-original-title="{{ $blog->blog_title }}">{{ strlen($blog->blog_title) > 18 ? substr($blog->blog_title, 0, 18) . ' . . .' : $blog->blog_title }}</a>
                                             </h5>
                                             <div class="post-excerpt">
 
                                                 <p>
-                                                    {{ strlen(strip_tags($blog->blog_description)) > 60 ? substr(strip_tags($blog->blog_description), 0, 50) . ' . . .' : strip_tags($blog->blog_description) }}
+                                                    {{ strlen(strip_tags($blog->blog_description)) > 100 ? substr(strip_tags($blog->blog_description), 0, 100) . ' . . .' : strip_tags($blog->blog_description) }}
                                                 </p>
 
                                             </div>
@@ -363,7 +375,7 @@
                     <h3 class="softsource-home-newsletter-title"><span>Sign-up</span> for our newsletter</h3>
                 </div>
                 <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6 mx-auto">
-                    <form class="newsletter-form">
+                    <form class="softsource-newsletter-form">
                         <div class="input-group mb-3">
                             <input type="email" class="form-control softsource-home-newsletter-input"
                                 placeholder="Email address" id="email" required

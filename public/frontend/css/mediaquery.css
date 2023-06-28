@@ -1,18 +1,19 @@
 @media only screen and (max-width: 3000px) {
     .softsource-home-text-over-video-div {
         transform: translate(-45%, -50%) !important;
-        left: 72% !important;
+        left: 75% !important;
     }
 
     .softsource-home-top-scroll {
         bottom: 100px;
     }
+
 }
 
 @media only screen and (max-width: 2560px) {
     .softsource-home-text-over-video-div {
         transform: translate(-35%, -50%) !important;
-        left: 67% !important;
+        left: 70% !important;
     }
 
     .softsource-home-top-scroll {
@@ -34,12 +35,14 @@
         font-size: 85px;
     }
 
-    .softsource-nav-menus>li.nav-item {
+    .softsource-nav-menus > li.nav-item {
         padding-left: 20px;
         padding-right: 20px;
     }
 
-
+    .softsource-home-fetured-story-horizontal-line, .softsource-home-fetured-blog-horizontal-line{
+        width: 40%;
+    }
 }
 
 @media only screen and (max-width: 1920px) {
@@ -59,14 +62,14 @@
         font-size: 58px;
     }
 
-
-    .softsource-nav-menus>li.nav-item {
+    .softsource-nav-menus > li.nav-item {
         padding-left: 20px;
         padding-right: 20px;
     }
 
     .softsource-nav-menus .nav-link,
-    .softsource-nav-login-register, .softsource-profile-dropdown-button {
+    .softsource-nav-login-register,
+    .softsource-profile-dropdown-button {
         font-size: 23px;
     }
 
@@ -77,7 +80,6 @@
 
     .softsource-nav-search-btn {
         padding: 8px 12px 8px 0px;
-
     }
 
     .softsource-nav-add-story-btn {
@@ -85,6 +87,9 @@
         font-size: 15px;
     }
 
+    .softsource-home-fetured-story-horizontal-line, .softsource-home-fetured-blog-horizontal-line{
+        width: 35%;
+    }
 }
 
 @media only screen and (max-width: 1680px) {
@@ -100,18 +105,28 @@
         font-size: 51px;
     }
 
-    .softsource-nav-menus>li.nav-item {
+    .softsource-nav-menus > li.nav-item {
         padding-left: 15px;
         padding-right: 15px;
     }
 
-    .softsource-nav-menus .nav-link,.softsource-nav-login-register, .softsource-profile-dropdown-button {
+    .softsource-nav-menus .nav-link,
+    .softsource-nav-login-register,
+    .softsource-profile-dropdown-button {
         font-size: 20px;
     }
 
-
-    .softsource-profile-dropdown-ulist li a, .softsource-submenu > li > a > span{
+    .softsource-profile-dropdown-ulist li a,
+    .softsource-submenu > li > a > span {
         font-size: 16px;
+    }
+
+    .softsource-home-fetured-story-horizontal-line, .softsource-home-fetured-blog-horizontal-line{
+        width: 30%;
+    }
+
+    .softsource-home-fetured-story-top-title{
+        font-size: 100px;
     }
 }
 
@@ -133,19 +148,18 @@
         font-size: 44px;
     }
 
-
-
     .softsource-nav-login-register {
         font-size: 14px;
         line-height: 20px;
     }
 
-    .softsource-nav-menus>li.nav-item {
+    .softsource-nav-menus > li.nav-item {
         padding-left: 10px;
         padding-right: 10px;
     }
 
-    .softsource-nav-menus .nav-link, .softsource-profile-dropdown-button {
+    .softsource-nav-menus .nav-link,
+    .softsource-profile-dropdown-button {
         font-size: 18px;
     }
 
@@ -157,7 +171,12 @@
         font-size: 10px;
     }
 
-
+    .softsource-home-fetured-story-top-title, .softsource-home-fetured-blog-top-title{
+        font-size: 90px;
+    }
+    .softsource-home-fetured-story-horizontal-line, .softsource-home-fetured-blog-horizontal-line {
+        width: 25%;
+    }
 }
 
 @media only screen and (max-width: 1366px) {
@@ -179,24 +198,21 @@
         margin-left: 0px;
         margin-bottom: 0.3rem;
     }
+
+    .softsource-home-fetured-story-top-title, .softsource-home-fetured-blog-top-title{
+        font-size: 85px;
+    }
 }
 
+
 @media only screen and (max-width: 1024px) {
-
-
     .softsource-header-logo .light-logo {
         max-width: 90px;
         margin-left: auto;
         margin-right: auto;
     }
 
-    .softsource-home-btn-login {
-        font-size: 13px;
-    }
 
-    .softsource-home-btn-register {
-        font-size: 12px;
-    }
 
     .softsource-home-text-over-video-div {
         transform: translate(-10%, -50%) !important;
@@ -215,9 +231,25 @@
         font-size: 35px;
     }
 
-    .softsource-home-fetured-story-top-title,
-    .softsource-home-fetured-blog-top-title {
-        font-size: 44px;
+    .softsource-home-fetured-story-top-title, .softsource-home-fetured-blog-top-title{
+        font-size: 80px;
+    }
+
+    .softsource-story-item-details .story-title, .softsource-single-blog-item.blog-grid .post-info .post-title{
+        font-size: 20px;
+    }
+
+    .softsource-story-item-details p, .softsource-single-blog-item p{
+        font-size: 18px;
+    }
+
+    .softsource-home-intro-second-div{
+        padding-top: 100px;
+    }
+
+
+    .softsource-home-fetured-story-horizontal-line, .softsource-home-fetured-blog-horizontal-line {
+        display: none;
     }
 
     .softsource-home-search-story-section-title-wrap {
@@ -245,12 +277,12 @@
         font-size: 75px;
     }
 
-    .partner .softsource-nav-menus>li.nav-item {
+    .partner .softsource-nav-menus > li.nav-item {
         padding-left: 5px !important;
         padding-right: 5px !important;
     }
 
-    .softsource-nav-menus>li.nav-item {
+    .softsource-nav-menus > li.nav-item {
         padding-left: 5px;
         padding-right: 5px;
     }
@@ -270,12 +302,9 @@
     .softsource-nav-add-story-btn {
         font-size: 9px;
     }
-
-
 }
 
 @media only screen and (max-width: 768px) {
-
     .softsource-home-fetured-story-horizontal-line,
     .softsource-home-fetured-blog-horizontal-line {
         display: none;
@@ -296,37 +325,75 @@
         width: 100% !important;
     }
 
-
-
-    .softsource-top-search-form,.softsource-nav-add-story-btn, .softsource-top-login-register-div{
+    .softsource-top-search-form,
+    .softsource-nav-add-story-btn,
+    .softsource-top-login-register-div {
         display: none;
     }
 
-    .softsource-nav-toggle-btn {
+    .softsource-nav-toggle-btn,
+    .softsource-responsive-menu-div {
         display: block !important;
     }
 
-    .softsource-scrolling-notice marquee{
+    .softsource-scrolling-notice marquee {
         font-size: 14px;
     }
 
-}
+    .softsource-mid-nav-bottom-section {
+        margin-top: 20px;
+    }
+    .softsource-home-newsletter-input{
+        padding-left: 15px;
+        font-size: 18px;
+    }
 
-@media only screen and (max-width: 425px) {
+    .softsource-home-newsletter-btn{
+        width: 130px;
+    }
+
     .softsource-home-top-scroll {
         display: none;
     }
 
     .softsource-home-text-over-video-div {
         transform: none !important;
-        top: 15% !important;
+        top: 10% !important;
         left: 0 !important;
+        padding: 0px 130px;
     }
 
     .softsource-firstline-header {
         font-size: 57px !important;
         text-align: center !important;
     }
+
+    .softsource-home-responsive-btn{
+        display: block !important;
+    }
+
+
+}
+
+@media only screen and (max-width: 425px) {
+
+    .softsource-home-text-over-video-div{
+        padding: 0px 0px;
+    }
+
+    .softsource-firstline-header {
+        font-size: 50px !important;
+    }
+
+    .softsource-home-responsive-btn{
+        top: 60%;
+        left: 20% !important;
+    }
+
+    .softsource-home-btn-register, .softsource-home-btn-login{
+        font-size: 25px;
+    }
+
 
     .softsource-home-daily-prompt {
         flex-direction: column;
@@ -357,9 +424,23 @@
         font-size: 40px;
     }
 
+    .softsource-home-fetured-story-section-title-wrap{
+        padding-left: 0px !important;
+    }
+
     .softsource-home-fetured-story-top-title,
     .softsource-home-fetured-blog-top-title {
-        font-size: 23px;
+        font-size: 28px;
+    }
+
+    .softsource-home-newsletter-input {
+
+        font-size: 12px;
+    }
+
+    .softsource-home-newsletter-btn {
+        width: 85px;
+        font-size: 12px;
     }
 
     .softsource-home-daily-prompt-header {
@@ -416,13 +497,6 @@
         height: 1em;
     }
 
-    .partner .softsource-home-btn-register {
-        font-size: 8px;
-    }
-
-    .partner .softsource-home-btn-login {
-        font-size: 8px;
-    }
 
     .partner .softsource-cust-tag {
         margin-left: -40px;
@@ -430,6 +504,19 @@
 }
 
 @media only screen and (max-width: 375px) {
+    .softsource-firstline-header {
+        font-size: 48px !important;
+    }
+    .softsource-home-newsletter-title {
+        font-size: 36px;
+    }
+
+    .softsource-home-newsletter-btn {
+        width: 75px;
+        font-size: 10px;
+    }
+
+
     .softsource-home-daily-prompt-header {
         font-size: 26px;
     }
@@ -452,7 +539,7 @@
 
     .softsource-home-fetured-story-top-title,
     .softsource-home-fetured-blog-top-title {
-        font-size: 30px;
+        font-size: 23px;
     }
 
     .softsource-footer-copyright-text,
@@ -484,22 +571,7 @@
         height: 1em;
     }
 
-    .softsource-home-btn-register {
-        font-size: 8px;
-    }
 
-    .softsource-home-btn-login {
-        font-size: 8px;
-    }
-
-    .softsource-home-btn-register,
-    .softsource-home-btn-login {
-        padding: 7px;
-    }
-
-    .softsource-firstline-header {
-        font-size: 50px !important;
-    }
 
 
     .partner .softsource-cust-tag {
@@ -538,7 +610,15 @@
     }
 
     .softsource-firstline-header {
-        font-size: 45px !important;
+        font-size: 42px !important;
+    }
+
+    .softsource-home-btn-register, .softsource-home-btn-login {
+        font-size: 20px;
+    }
+
+    .softsource-home-responsive-btn {
+        left: 15% !important;
     }
 
     .softsource-home-fetured-story-top-title,
