@@ -13,7 +13,7 @@
     <div class="position-relative softsource-top-contianer">
         <div class="container">
             <div class="row">
-                <div class="col-lg-12 col-md-12 me-auto ms-auto">
+                <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 me-auto ms-auto">
                     <div class="position-relative">
                         <div class="text-center softsource-font ">
                             <h1 class="text-white softsoutce-top-banner-text">Writing Prompts</h1>
@@ -25,17 +25,17 @@
                     </div>
                 </div>
 
-                <div class="col-lg-2 col-md-2 ms-auto me-auto">
+                <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-2 col-sm-12 col-12 ms-auto me-auto">
 
                 </div>
 
-                <div class="col-lg-8 col-md-8 me-auto ms-auto softsource-writing-prompt-div">
+                <div class="col-xxl-8 col-xl-8 col-lg-8 col-md-8 col-sm-12 col-12 me-auto ms-auto softsource-writing-prompt-div">
                     <h5 class="fadeInUp animate__animated mt-4 text-white">DAILY WRITING PROMPTS</h5>
                     <p class="fadeInUp animate__animated text-white mb-0">Press the GENERATE button for new daily writing
                         prompts.</p>
                 </div>
 
-                <div class="col-lg-2 col-md-2 ms-auto me-auto">
+                <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-2 col-sm-12 col-12 ms-auto me-auto">
 
                 </div>
             </div>
@@ -45,7 +45,7 @@
     <div class="softsource-writingprompt-section pt-2">
         <div class="container">
             <div class="row">
-                <div class="col-lg-11 col-md-11 ms-auto me-auto mb-3">
+                <div class="col-xxl-11 col-xl-11 col-lg-11 col-md-11 col-sm-12 col-12 ms-auto me-auto mb-3">
                     <div class="softsource-word-text-box d-flex">
                         {{-- <textarea name="WordBox" id="wordbox" tabindex="0" rows="2"></textarea> --}}
                         <div id="wordbox" class="softsource-wordbox"></div>
@@ -60,7 +60,7 @@
                             aria-hidden="true"></i></button>
                 </div>
 
-                <div class="col-lg-12 col-md-12 ms-auto me-auto mb-5">
+                <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 ms-auto me-auto mb-5">
                     <div class="service-hero-wrap wow move-up">
                         <div class="service-hero-text text-center hc-t-font">
                             <h5 class="fadeInUp animate__animated mt-4 text-center">Need more Writing Prompts to Inspire
@@ -70,11 +70,11 @@
 
                     </div>
                 </div>
-                <div class="col-lg-2 col-md-2 ms-auto me-auto">
+                <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-12 col-sm-12 col-12 ms-auto me-auto">
 
                 </div>
 
-                <div class="col-lg-8 col-md-8 ms-auto me-auto">
+                <div class="col-xxl-8 col-xl-8 col-lg-8 col-md-12 col-sm-12 col-12 ms-auto me-auto">
                     <div class="row">
                         <?php
                         if (count($writingprompt) > 0) {
@@ -87,7 +87,7 @@
                                 ?>
 
 
-                        <div class="col-lg-4 col-md-6 mb-5 fadeInUp animate__animated text-center"
+                        <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 mb-5 fadeInUp animate__animated text-center"
                             style="visibility: visible;">
                             <img class="img-fluid" src="<?php echo $headerImage; ?>" alt="<?php echo $prompt->title; ?>"
                                 style="width: 90px; height: 75px;">
@@ -111,7 +111,7 @@
 
                 </div>
 
-                <div class="col-lg-2 col-md-2 ms-auto me-auto">
+                <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-12 col-sm-12 col-12 ms-auto me-auto">
 
                 </div>
             </div>
@@ -119,17 +119,17 @@
 
         <div class="container mt-4 softsource-writingprompt-download">
             <div class="row pt-5">
-                <div class="col-lg-2 col-md-2 ms-auto me-auto">
+                <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-12 col-sm-12 col-12 ms-auto me-auto">
 
                 </div>
-                <div class="col-lg-4 col-md-4 ms-auto me-auto mb-5">
+                <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ms-auto me-auto mb-5">
                     <div class="_form_15"></div>
                     <script src="https://historychip.activehosted.com/f/embed.php?id=15" type="text/javascript" charset="utf-8"></script>
                 </div>
-                <div class="col-lg-4 col-md-4 ms-auto me-auto mb-5 mt-5">
-                    <img src="{{ asset('frontend/images/web_img/quick-easy.png') }}" alt="writing tips quick easy">
+                <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ms-auto me-auto mb-5 mt-5">
+                    <img class="img-fluid" src="{{ asset('frontend/images/web_img/quick-easy.png') }}" alt="writing tips quick easy">
                 </div>
-                <div class="col-lg-2 col-md-2 ms-auto me-auto">
+                <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-12 col-sm-12 col-12 ms-auto me-auto">
 
                 </div>
             </div>
@@ -137,7 +137,7 @@
 
         <div class="container mb-4" style="">
             <div class="row">
-                <div class="col-lg-12 col-md-12 ms-auto me-auto mb-5">
+                <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 ms-auto me-auto mb-5">
                     <h4 class="fadeInUp animate__animated mt-4 text-center" style="font-color:#2A353B">Quick and Easy Story
                         Writing Guide</h4>
                     <p class="fadeInUp animate__animated text-center"
@@ -145,7 +145,7 @@
                         especially for those of us who think we can’t write a story!</p>
                 </div>
 
-                <div class="col-lg-6 col-md-6 ms-auto me-auto">
+                <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 ms-auto me-auto">
                     <h5 class="fadeInUp animate__animated mt-2"
                         style="font-family:Open Sans; font-size: 30px; font-weight: 700; line-height:40.85px; font-color:#2A353B">
                         So, you want to add a story to History Chip!</h5>
@@ -168,11 +168,11 @@
 
                 </div>
 
-                <div class="col-lg-6 col-md-6 ms-auto me-auto">
-                    <img src="{{ asset('frontend/images/web_img/writing-guide.png') }}" alt="writing tips quick easy">
+                <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 ms-auto me-auto">
+                    <img class="img-fluid" src="{{ asset('frontend/images/web_img/writing-guide.png') }}" alt="writing tips quick easy">
                 </div>
 
-                <div class="col-lg-12 col-md-12 ms-auto me-auto text-white p-5" style="background: #556F7C;">
+                <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 ms-auto me-auto text-white p-5" style="background: #556F7C;">
                     <p class="fadeInUp animate__animated mt-4 text-center"
                         style="font-family:Open Sans; font-size: 30px; font-weight: 400; line-height:39.03px; font-color:#2E3B41">
                         Now, just take a minute or two to remember the details of the story you want to write.</p>
@@ -187,7 +187,7 @@
             </div>
 
             <div class="row text-center mt-5">
-                <div class="col-lg-4 col-md-4 ms-auto me-auto">
+                <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12 ms-auto me-auto">
                     <img src="{{ asset('frontend/images/web_img/who.png') }}" alt="Who" class="img-icon">
                     <h6 class="fadeInUp animate__animated"
                         style="font-family:Open Sans; font-size: 28px; font-weight: 600; line-height:32.25px; color:#000 !important">
@@ -200,7 +200,7 @@
                         Just you, friends, family, strangers?</h6>
                 </div>
 
-                <div class="col-lg-4 col-md-4 ms-auto me-auto">
+                <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12 ms-auto me-auto">
                     <img src="{{ asset('frontend/images/web_img/when.png') }}" alt="when" class="img-icon">
                     <h6 class="fadeInUp animate__animated"
                         style="font-family:Open Sans; font-size: 28px; font-weight: 600; line-height:32.25px; color:#000 !important">
@@ -213,7 +213,7 @@
                         What time of day?</h6>
                 </div>
 
-                <div class="col-lg-4 col-md-4 ms-auto me-auto">
+                <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12 ms-auto me-auto">
                     <img src="{{ asset('frontend/images/web_img/where.png') }}" alt="where" class="img-icon">
                     <h6 class="fadeInUp animate__animated"
                         style="font-family:Open Sans; font-size: 28px; font-weight: 600; line-height:32.25px; color:#000 !important">
@@ -230,7 +230,7 @@
 
             <div class="row text-center my-5">
 
-                <div class="col-lg-4 col-md-4 ms-auto me-auto">
+                <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12 ms-auto me-auto">
                     <img src="{{ asset('frontend/images/web_img/what.png') }}" alt="what" class="img-icon">
                     <h6 class="fadeInUp animate__animated"
                         style="font-family:Open Sans; font-size: 28px; font-weight: 600; line-height:32.25px; font-color:#000 !important">
@@ -243,7 +243,7 @@
                         What happened? A trip somewhere? A hurricane? What are the important details? </h6>
                 </div>
 
-                <div class="col-lg-4 col-md-4 ms-auto me-auto">
+                <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12 ms-auto me-auto">
                     <img src="{{ asset('frontend/images/web_img/why.png') }}" alt="whyy" class="img-icon">
                     <h6 class="fadeInUp animate__animated"
                         style="font-family:Open Sans; font-size: 28px; font-weight: 600; line-height:32.25px; font-color:#000 !important">
@@ -257,7 +257,7 @@
                         Why do you want to share this story? </h6>
                 </div>
 
-                <div class="col-lg-4 col-md-4 ms-auto me-auto">
+                <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12 ms-auto me-auto">
                     <img src="{{ asset('frontend/images/web_img/how.png') }}" alt="how" class="img-icon">
                     <h6 class="fadeInUp animate__animated"
                         style="font-family:Open Sans; font-size: 28px; font-weight: 600; line-height:32.25px; font-color:#000 !important">
@@ -275,7 +275,7 @@
         <div class="softsource-writingprompt-share position-relative d-flex">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-12 col-md-12 ml-auto mr-auto">
+                    <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 ml-auto mr-auto">
                         <div class="service-hero-wrap wow move-up">
                             <div class="service-hero-text text-center hc-t-font">
                                 <h1 class="text-white">WANT TO SHARE YOUR<br>STORY WITH THE WORLD? </h1>
@@ -299,7 +299,7 @@
             </h6>
 
             <div class="row">
-                <div class="col-lg-12 col-md-12 ml-auto mr-auto">
+                <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 ml-auto mr-auto">
                     <div class="card" style="box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);">
 
                         <div class="card-body text-justify">

@@ -5,7 +5,7 @@
     <div class="position-relative softsource-top-contianer">
         <div class="container">
             <div class="row">
-                <div class="col-lg-12 col-md-12 ms-auto me-auto">
+                <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 ms-auto me-auto">
                     <div class="position-relative">
                         <div class="text-center softsource-font ">
                             <h1 class="text-white softsoutce-top-banner-text">Founder</h1>
@@ -24,7 +24,7 @@
 
                     <div class="row justify-content-center align-items-center">
 
-                        <div class="col-md-7">
+                        <div class="col-xxl-7 col-xl-7 col-lg-7 col-md-7 col-sm-12 col-12">
                             <div class="about-desc">
                                 <div class="about-desc-content softsource-founder-section_cust">
                                     <h2 class="font-weight--reguler mb-15">My Name is <span class="softsource-text-color-secondary">Jean McGavin </span>and I am The Founder of <span class="softsource-text-color-secondary">History Chip. </span></h2>
@@ -33,7 +33,7 @@
                             </div>
                         </div>
 
-                        <div class="col-md-5  d-md-block">
+                        <div class="col-xxl-5 col-xl-5 col-lg-5 col-md-5 col-sm-12 col-12  d-md-block">
                             <img class="img-fluid img-thumbnail" src="{{asset('frontend/images/web_img/f.jpg')}}" alt="Founder's Picture">
                         </div>
 

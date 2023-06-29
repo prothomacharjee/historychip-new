@@ -23,7 +23,7 @@
     <div class="position-relative softsource-top-contianer">
         <div class="container">
             <div class="row">
-                <div class="col-lg-12 col-md-12 ms-auto me-auto">
+                <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 ms-auto me-auto">
                     <div class="position-relative">
                         <div class="text-center softsource-font ">
                             <h1 class="text-white softsoutce-top-banner-text">{{ $page_title }}</h1>
@@ -52,7 +52,7 @@
             <div class="row">
 
                 @if ($detail)
-                    <div class="col-lg-8  m-auto">
+                    <div class="col-xxl-8 col-xl-8 col-lg-8 col-md-8 col-sm-12 col-12  m-auto">
                         <div class="story-feature story-single blog-thumbnail  wow move-up animated"
                             style="visibility: visible;">
                             @php
@@ -74,7 +74,7 @@
                     </div>
                     @if ($stories->audio_video_path)
                         @if (substr($stories->audio_video_path, -4) == '.mp4' && $stories->is_audioconvert == 0)
-                            <div class="col-lg-8  m-auto">
+                            <div class="col-xxl-8 col-xl-8 col-lg-8 col-md-8 col-sm-12 col-12  m-auto">
                                 <video style="width: 80%;  margin-left: 10%; margin-top: 25px; margin-right: 10%" controls
                                     controlsList="nodownload">
                                     <source src="{{ $stories->audio_video_path }}">
@@ -82,7 +82,7 @@
                                 </video>
                             </div>
                         @else
-                            <div class="col-lg-8  m-auto">
+                            <div class="col-xxl-8 col-xl-8 col-lg-8 col-md-8 col-sm-12 col-12  m-auto">
                                 <audio
                                     style="width: 80%; height: 40px; margin-left: 10%; margin-top: 25px; margin-right: 10%"
                                     controls controlsList="nodownload">
@@ -93,14 +93,14 @@
                         @endif
                         @if ($stories->audio_video_credit != null)
                             @if (substr($stories->audio_video_path, -4) == '.mp4' && $stories->is_audioconvert == 0)
-                                <div class="row col-lg-8  m-auto">
-                                    <div class="col-lg-10 m-auto text-end">
+                                <div class="row col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12  m-auto">
+                                    <div class="col-xxl-10 col-xl-10 col-lg-10 col-md-10 col-sm-12 col-12 m-auto text-end">
                                         <p>Video Credit: {{ $stories->audio_video_credit }}</p>
                                     </div>
                                 </div>
                             @else
-                                <div class="row col-lg-8 m-auto">
-                                    <div class="col-lg-10 m-auto text-end">
+                                <div class="row col-xxl-8 col-xl-8 col-lg-8 col-md-8 col-sm-12 col-12 m-auto">
+                                    <div class="col-xxl-10 col-xl-10 col-lg-10 col-md-10 col-sm-12 col-12 m-auto text-end">
                                         <p>Audio Credit: {{ $stories->audio_video_credit }}</p>
                                     </div>
                                 </div>
@@ -108,7 +108,7 @@
                         @endif
                     @endif
 
-                    <div class="col-lg-8 m-auto">
+                    <div class="col-xxl-8 col-xl-8 col-lg-8 col-md-8 col-sm-12 col-12 m-auto">
                         <div class="main-story-wrap">
                             <div class="row">
                                 <div class="col softsource-individual-story-text">
@@ -123,7 +123,7 @@
 
                     {{-- Social media share --}}
                     @if ($stories->is_draft == 0)
-                        <div class="col-lg-8 m-auto">
+                        <div class="col-xxl-8 col-xl-8 col-lg-8 col-md-8 col-sm-12 col-12 m-auto">
                             <div class="text-center" style="color:#778B91">
                                 <b>Want to Share This Story with Friends?</b>
                                 <div class=" text-center d-flex justify-content-center">
@@ -163,7 +163,8 @@
                     @endif
 
                     {{-- Tags and location --}}
-                    <div class="col-lg-8 d-flex justify-content-start m-auto softsource-story-border-bottom pb-4 mb-3">
+                    <div
+                        class="col-xxl-8 col-xl-8 col-lg-8 col-md-8 col-sm-12 col-12 d-flex justify-content-start m-auto softsource-story-border-bottom pb-4 mb-3">
                         @if ($stories->tags)
                             <div class="d-flex">
                                 <div class="tagcloud-icon">
@@ -193,7 +194,7 @@
 
                     {{-- Edit and Submit  --}}
                     @if ($stories->is_draft == 1)
-                        <div class="col-lg-8 m-auto">
+                        <div class="col-xxl-8 col-xl-8 col-lg-8 col-md-8 col-sm-12 col-12 m-auto">
                             <div class="text-center">
                                 <a href="{{ route('story.write', $stories->id) }}"
                                     class="softsource-write-story-btn">Edit</a>
@@ -206,7 +207,7 @@
                     {{-- Comments --}}
                     @if ($stories->is_draft == 0)
                         <div
-                            class="col-lg-8 m-auto softsource-story-comment-section softsource-story-border-bottom mb-3 pb-4">
+                            class="col-xxl-8 col-xl-8 col-lg-8 col-md-8 col-sm-12 col-12 m-auto softsource-story-comment-section softsource-story-border-bottom mb-3 pb-4">
                             <div id="commentmsg"
                                 class="alert border-0 border-start border-5 border-success alert-dismissible fade show py-2"
                                 style="display: none">
@@ -358,7 +359,8 @@
                                 }
                             @endphp
 
-                            <div class="col-lg-4 col-md-6 mb-5 animate__animated fadeInUp">
+                            <div
+                                class="col-xxl-4 col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 mb-5 animate__animated fadeInUp">
                                 <div class="softsource-story-item-div">
                                     <div class="softsource-story-item-image text-center">
                                         <a href="{{ url($story->url) }}">
@@ -414,15 +416,15 @@
                             </div>
                         @endforeach
                     @else
-                        <div class="col-lg-12 col-md-12 text-center mb-5 animate__animated fadeInUp">
+                        <div
+                            class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 text-center mb-5 animate__animated fadeInUp">
                             <h2>No stories found.</h2>
                         </div>
                     @endif
                     @if (count($stories) > 0)
                         <div class="row">
-                            <div class="col-lg-12 col-md-12 text-center mb-5">
-                                <div style="width: 280px;margin: 0 auto;"
-                                    class="d-flex justify-content-center pagination">
+                            <div class="col-12 text-center mb-5">
+                                <div class="pagination justify-content-center">
                                     @csrf
                                     {!! $stories->links() !!}
                                 </div>

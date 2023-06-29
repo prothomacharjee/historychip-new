@@ -93,8 +93,10 @@
                             </div>
 
                             <div class="form-group">
-                                {!! NoCaptcha::renderJs() !!}
-                                {!! NoCaptcha::display() !!}
+                                <div class="d-flex justify-content-center">
+                                    {!! NoCaptcha::renderJs() !!}
+                                    {!! NoCaptcha::display() !!}
+                                </div>
                                 <span class="captcha-validation" style="color:#b02a37" role="alert">
 
                                 </span>

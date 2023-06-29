@@ -13,7 +13,7 @@
     <div class="position-relative softsource-top-contianer">
         <div class="container">
             <div class="row">
-                <div class="col-lg-12 col-md-12 me-auto ms-auto">
+                <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 me-auto ms-auto">
                     <div class="position-relative">
                         <div class="text-center softsource-font ">
                             <h1 class="text-white softsoutce-top-banner-text">Who is History Chip For?</h1>
@@ -27,7 +27,7 @@
     <div class="softsource-historychipfor-section pt-5">
         <div class="container">
             <div class="row">
-                <div class="col-lg-12">
+                <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                     <blockquote class="fadeInUp animate__animated animate__delay-1s softsource-blockquote">
                         <p class="softsource-who-for">
                             <b><span>You the</span> story tellers</b> - those who want to share true stories offering fresh

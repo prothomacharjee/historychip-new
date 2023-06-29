@@ -8,6 +8,10 @@
         bottom: 100px;
     }
 
+    .softsource-header-partner-logo .light-logo{
+        max-width: 200px !important;
+    }
+
 }
 
 @media only screen and (max-width: 2560px) {
@@ -128,6 +132,22 @@
     .softsource-home-fetured-story-top-title{
         font-size: 100px;
     }
+
+    .partner .softsource-header-logo .light-logo {
+        max-width: 110px !important;
+    }
+
+    .partner .softsource-header-logo .softsource-cust-tag
+    {
+        font-size: 9px;
+        margin-left: -24px;
+    }
+
+    .softsource-header-partner-logo .light-logo {
+        max-width: 160px !important;
+    }
+
+
 }
 
 @media only screen and (max-width: 1440px) {
@@ -177,6 +197,20 @@
     .softsource-home-fetured-story-horizontal-line, .softsource-home-fetured-blog-horizontal-line {
         width: 25%;
     }
+
+    .softsource-header-partner-logo .light-logo {
+        max-width: 140px !important;
+    }
+
+    .partner .softsource-header-logo .light-logo {
+        max-width: 100px !important;
+    }
+
+    .partner .softsource-header-logo .softsource-cust-tag
+    {
+        font-size: 8px;
+        margin-left: -24px;
+    }
 }
 
 @media only screen and (max-width: 1366px) {
@@ -202,6 +236,20 @@
     .softsource-home-fetured-story-top-title, .softsource-home-fetured-blog-top-title{
         font-size: 85px;
     }
+
+    .partner .softsource-nav-menus > li.nav-item {
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+
+    .partner .softsource-header-logo .light-logo {
+        max-width: 90px !important;
+    }
+
+    .partner .softsource-header-logo .softsource-cust-tag
+    {
+        margin-left: -30px;
+    }
 }
 
 
@@ -211,9 +259,6 @@
         margin-left: auto;
         margin-right: auto;
     }
-
-
-
     .softsource-home-text-over-video-div {
         transform: translate(-10%, -50%) !important;
         left: 54% !important;
@@ -302,6 +347,40 @@
     .softsource-nav-add-story-btn {
         font-size: 9px;
     }
+
+    .softsource-founder-section-about:after{
+        right: -60px;
+        height: 150px;
+        width: 150px;
+    }
+
+    .softsource-header-partner-logo .light-logo {
+        max-width: 110px !important;
+    }
+
+    .partner .softsource-nav-menus > li.nav-item {
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+
+    .partner .softsource-header-logo .light-logo {
+        max-width: 90px !important;
+    }
+
+    .partner .softsource-header-logo .softsource-cust-tag
+    {
+        margin-left: -60px !important;
+    }
+
+    .partner .softsource-nav-login-register {
+        font-size: 10px !important;
+    }
+
+    .partner .softsource-nav-menus .nav-link {
+        font-size: 11px !important;
+    }
+
+
 }
 
 @media only screen and (max-width: 768px) {
@@ -370,6 +449,16 @@
 
     .softsource-home-responsive-btn{
         display: block !important;
+    }
+
+    .softsource-founder-section-about:after {
+        right: -50px;
+        height: 130px;
+        width: 130px;
+    }
+
+    .partner .softsource-header-logo .softsource-cust-tag {
+        margin-left: 0px !important;
     }
 
 
@@ -497,9 +586,27 @@
         height: 1em;
     }
 
-
     .partner .softsource-cust-tag {
         margin-left: -40px;
+    }
+
+    .softsource-founder-section-about:after {
+        right: -15px;
+        height: 100px;
+        width: 100px;
+    }
+
+    .pagination {
+        --bs-pagination-padding-x: 0.5rem !important;
+        --bs-pagination-font-size: 0.8rem !important;
+    }
+
+    .softsource-writing-prompt-div{
+        margin-right: 0px !important;
+    }
+
+    .partner .softsource-header-logo .softsource-cust-tag {
+        margin-left: 0px !important;
     }
 }
 
@@ -570,17 +677,18 @@
         width: 1em;
         height: 1em;
     }
-
-
-
-
-    .partner .softsource-cust-tag {
-        margin-left: -15px;
+    .partner .softsource-header-logo .softsource-cust-tag {
+        margin-left: -25px !important;
     }
 
     .partner .navbar-toggler-icon {
         width: 1em;
         height: 1em;
+    }
+
+    .pagination {
+        --bs-pagination-padding-x: 0.4rem !important;
+        --bs-pagination-font-size: 0.7rem !important;
     }
 }
 
@@ -590,7 +698,7 @@
     }
 
     .softsource-home-search-story-title {
-        font-size: 72px;
+        font-size: 70px;
     }
 
     .softsource-home-writing-prompt-title {
@@ -642,6 +750,19 @@
     .partner .navbar-toggler-icon {
         width: 1em;
         height: 1em;
+    }
+
+    .pagination {
+        --bs-pagination-padding-x: 0.3rem !important;
+        --bs-pagination-font-size: 0.6rem !important;
+    }
+
+    .partner .softsource-header-logo .light-logo {
+        max-width: 85px !important;
+    }
+
+    .partner .softsource-header-logo .softsource-cust-tag {
+        margin-left: -35px !important;
     }
 }
 

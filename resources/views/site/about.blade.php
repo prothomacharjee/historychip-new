@@ -5,7 +5,7 @@
     <div class="position-relative softsource-top-contianer">
         <div class="container">
             <div class="row">
-                <div class="col-lg-12 col-md-12 ms-auto me-auto">
+                <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 ms-auto me-auto">
                     <div class="position-relative">
                         <div class="text-center softsource-font ">
                             <h1 class="text-white softsoutce-top-banner-text">About Us</h1>
@@ -20,7 +20,7 @@
         <div class="container">
             <div class="row align-items-center">
                 <!--baseline-->
-                <div class="col-lg-6 col-md-7 mt-5 mb-5">
+                <div class="mt-5 mb-5 col-xxl-6 col-xl-6 col-lg-6 col-md-7 col-sm-12 col-12">
                     <div class="softsource-about-us-middle-container-left-div">
                         <h3>About History Chip </h3>
                         <p class="text-justify">History is created one micro story at a time until it forms a
@@ -41,7 +41,7 @@
 
                     </div>
                 </div>
-                <div class="col-lg-6 col-md-5">
+                <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-5 col-sm-12 col-12">
                     <div class="position-relative softsource-about-us-middle-container-right-div">
                         <div class="position-relative ht-banner-01">
                             <img class="img-fluid" src="{{ asset('frontend/images/web_img/a-1.jpg') }}" alt="read a story">
@@ -52,7 +52,7 @@
                         </div>
 
                         <div class="row">
-                            <div class="col-lg-12 col-md-12 ms-auto me-auto">
+                            <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 ms-auto me-auto">
                                 <div class="position-relative">
                                     <div class="w-100 text-center">
                                         <a onclick="PlayVideo_About()" return false;" id="startPlayback" class="softsource-video-link softsource-about-video-link">
@@ -102,13 +102,13 @@
             </div>
             <div class="row align-items-center mt-3">
                 <!--baseline-->
-                <div class="col-lg-6 col-md-6 mt-5 mb-5">
+                <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 mt-5 mb-5">
                     <div class="softsource-about-us-bottom-container-left-div">
                         <img src="{{ asset('frontend/images/web_img/about-left-img.jpg') }} "
                             alt="Jackson Square in the French Quarter of New Orleans, Louisiana">
                     </div>
                 </div>
-                <div class="col-lg-6 col-md-6">
+                <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
                     <div class="softsource-about-us-bottom-container-right-div">
                         <h4 class="animatable fadeInUp">More stories create more opportunities to flesh out the truth.
                         </h4>
@@ -129,7 +129,7 @@
     <div class="softsource-mission-vision-area mb-5">
         <div class="container">
             <div class="row">
-                <div class="col-lg-6">
+                <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
                     <div class="softsource-mission-vision__block d-flex align-items-center">
                         <div class="softsource-mission-vision__icon">
                             <img src="{{ asset('frontend/images/web_img/mission.png') }}" alt="mission icon">
@@ -142,7 +142,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-6">
+                <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
                     <div class="softsource-mission-vision__block d-flex align-items-center">
                         <div class="softsource-mission-vision__icon">
                             <img src="{{ asset('frontend/images/web_img/vision.png') }}" alt="vision icon">
@@ -162,18 +162,18 @@
     <div class="softsource-mission-vision-sponsor-section mb-5" style="">
         <div class="container">
             <div class="row">
-                <div class="col-lg-3">
+                <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12">
 
                 </div>
-                <div class="col-lg-6">
+                <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
                     <div class="text-center">
                         <div class="">
-                            <a href="https://www.bizcatalyst360.com/about"><img src="{{ asset('frontend/images/web_img/bizcatalyst.png') }}" alt="Bizcatalyst 360 Logo"></a>
+                            <a href="https://www.bizcatalyst360.com/about"><img class="img-fluid" src="{{ asset('frontend/images/web_img/bizcatalyst.png') }}" alt="Bizcatalyst 360 Logo"></a>
                         </div>
 
                     </div>
                 </div>
-                <div class="col-lg-3">
+                <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12">
 
                 </div>
             </div>

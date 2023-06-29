@@ -4,7 +4,7 @@
     <div class="position-relative softsource-top-contianer">
         <div class="container">
             <div class="row">
-                <div class="col-lg-12 col-md-12 ml-auto mr-auto">
+                <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 ml-auto mr-auto">
                     <div class="position-relative">
                         <div class="text-center softsource-font ">
                             <h1 class="text-white softsoutce-top-banner-text">Register</h1>
@@ -16,16 +16,16 @@
     </div>
     <div class="softsource-register-section pt-5">
         <div class="container">
-            <div class="offset-lg-3 col-sm-10 col-md-8 col-lg-6 col-12 m-auto">
+            <div class="offset-xxl-3 offset-xl-3  col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-12 col-12 m-auto">
                 <div class="softsource-register_div">
                     <h3>Register</h3>
                     <h4>Where everyone's stories matter.</h4>
 
-                    <br>
+                    {{-- <br>
                     <div class="text-center">
                         <a href="{{ route('quick-register') }}" class="softsource-submit_btn btn-lg">Try Quick Registration</a>
-                    </div>
-                    
+                    </div> --}}
+
                     @if (session('success'))
                         <div class="alert border-0 border-start border-5 border-success alert-dismissible fade show py-2">
                             <div class="d-flex align-items-center">
@@ -171,7 +171,8 @@
                                     <input type="checkbox" id="toggle-partner"><label for="toggle-partner">Are You
                                         Willing to Join with Our Partner?</label>
                                 </div>
-                                <select class="form-control select2" id="partner_id" name="partner_id" style="display:none">
+                                <select class="form-control select2" id="partner_id" name="partner_id"
+                                    style="display:none">
                                     <option value="">Select an Partner</option>
                                     @foreach ($partners as $partner)
                                         <option value="{{ $partner->id }}">{{ $partner->name }}</option>
@@ -198,8 +199,11 @@
                             </p>
                         </div>
                         <div class="form-group {{ $errors->has('g-recaptcha-response') ? ' has-error' : '' }}">
-                            {!! NoCaptcha::renderJs() !!}
-                            {!! NoCaptcha::display() !!}
+                            <div class="d-flex justify-content-center">
+                                {!! NoCaptcha::renderJs() !!}
+                                {!! NoCaptcha::display() !!}
+                            </div>
+
                             <span class="captcha-validation" style="color:#b02a37" role="alert">
 
                             </span>
