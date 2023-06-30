@@ -420,6 +420,7 @@ class SiteController extends Controller
 
         // Perform the search using Laravel Scout
         $results = Story::search($query)->get();
+        // dd($results);
         $ids = $results->pluck('id')->all();
         $stories = Story::ProcessSearchResults($ids);
         // Return the search results to the view
@@ -429,7 +430,6 @@ class SiteController extends Controller
             'notices' => $this->notices,
             'stories' => $stories,
             'meta' => $this->pages,
-
         ]);
     }
 

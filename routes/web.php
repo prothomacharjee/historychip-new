@@ -92,6 +92,7 @@ Route::post('/delete-image', [SiteController::class, 'deleteimage'])->name('stor
 Route::post('/save-audio', [SiteController::class, 'saveaudio'])->name('story.saveaudio')->middleware('auth');
 Route::post('/delete-audio', [SiteController::class, 'deleteaudio'])->name('story.deleteaudio')->middleware('auth');
 Route::post('/story-search', [SiteController::class, 'storySearch'])->name('story.search');
+// Route::get('/story-search-show/{results}', [SiteController::class, 'showStorySearch'])->name('story.search.show');
 
 Route::post('/subcat-by-parentcat', [SiteController::class, 'FetchSubCatByParentCategory'])->name('story.subCatByParentCategory');
 
