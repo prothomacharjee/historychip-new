@@ -92,16 +92,7 @@
                         <h2>No stories found.</h2>
                     </div>
                 @endif
-                @if (count($stories) > 0)
-                    <div class="row">
-                        <div class="col-lg-12 col-md-12 text-center mb-5">
-                            <div style="width: 280px;margin: 0 auto;" class="d-flex justify-content-center pagination">
-                                @csrf
-                                {!! $stories->links() !!}
-                            </div>
-                        </div>
-                    </div>
-                @endif
+
 
 
 

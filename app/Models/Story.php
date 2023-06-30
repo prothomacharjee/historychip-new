@@ -119,7 +119,7 @@ class Story extends Model
     }
 
 
-    public static function ProcessSearchResults($ids, $paginated_number = 9,)
+    public static function ProcessSearchResults($ids, $paginated_number = 9)
     {
         return Story::with('base_category', 'level1_category', 'level2_category', 'level3_category', 'author_details')
             ->join('pages as p', 'stories.id', '=', 'p.page_group_id')
@@ -127,7 +127,7 @@ class Story extends Model
             ->where('p.page_group', '=', 'story')
             ->whereIn('p.page_group_id', $ids)
             ->whereIn('stories.id', $ids)
-            ->paginate($paginated_number);
+            ->get();
     }
 
 
