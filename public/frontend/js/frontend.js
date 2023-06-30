@@ -1,6 +1,5 @@
 $(document).ready(function () {
-    let preloader = $(".softsource-preloader-container");
-    let logo = $(".softsource-preloader-container img");
+
 
     $(".softsource-summernote").summernote({
         placeholder: "Enter content here...",
@@ -20,17 +19,40 @@ $(document).ready(function () {
     });
 
     // Blink logo for 2.5 seconds or until process is complete
-    let intervalId = setInterval(function () {
-        logo.toggle();
-    }, 250);
+    // let intervalId = setInterval(function () {
+    //     logo.toggle();
+    // }, 250);
 
     // Hide preloader container and stop blinking on window load event
-    $(window).on("load", function () {
-        clearInterval(intervalId);
-        preloader.fadeOut(2500, function () {
-            $("body").css("overflow", "auto");
-        });
-    });
+    // $(window).on("load", function () {
+    //     clearInterval(intervalId);
+    //     preloader.fadeOut(2500, function () {
+    //         $("body").css("overflow", "auto");
+    //     });
+    // });
+
+    // $(window).on("load", function () {
+    //     // Replace "#preloader" with the actual ID or selector of your preloader element
+    //     var intervalId = setInterval(function () {
+    //         if (document.readyState === "complete") {
+    //             clearInterval(intervalId);
+    //             preloader.fadeOut(2500, function () {
+    //                 $("body").css("overflow", "auto");
+    //             });
+    //         }
+    //     }, 100);
+    // });
+
+    // window.addEventListener("load", (event) => {
+    //     var intervalId = setInterval(function () {
+    //         if (document.readyState === "complete") {
+    //             clearInterval(intervalId);
+    //             preloader.fadeOut(2500, function () {
+    //                 $("body").css("overflow", "auto");
+    //             });
+    //         }
+    //     }, 100);
+    // });
 
     $(".captcha-form").submit(function (event) {
         let form = $(this);
@@ -51,6 +73,18 @@ $(document).ready(function () {
     var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
         return new bootstrap.Popover(popoverTriggerEl);
     });
+});
+
+windows.on("load", function () {
+    // Replace "#preloader" with the actual ID or selector of your preloader element
+    var intervalId = setInterval(function () {
+        if (document.readyState === "complete") {
+            clearInterval(intervalId);
+            preloader.fadeOut(1500, function () {
+                $("body").css("overflow", "auto");
+            });
+        }
+    }, 100);
 });
 
 windows.on("scroll", function () {
@@ -114,76 +148,107 @@ $(document).on("click", ".softsource-audio-text", function () {
 
 //Story Categories
 $(document).on("change", "#category_id", function () {
-    $('#sub_category_id_level_1, #sub_category_id_level_2, #sub_category_id_level_3').html("").attr("disabled", true);
+    $(
+        "#sub_category_id_level_1, #sub_category_id_level_2, #sub_category_id_level_3"
+    )
+        .html("")
+        .attr("disabled", true);
     var js = {
-        "id": $(this).val(),
-        'level': 1,
-        "_token": $('meta[name="csrf-token"]').attr('content'),
+        id: $(this).val(),
+        level: 1,
+        _token: $('meta[name="csrf-token"]').attr("content"),
     };
-    $.post("/subcat-by-parentcat", js, function (data) {
-        if(data.count>0){
-            $('#sub_category_id_level_1').html(data.result).attr("disabled", false);
-        }
-    }, "json");
+    $.post(
+        "/subcat-by-parentcat",
+        js,
+        function (data) {
+            if (data.count > 0) {
+                $("#sub_category_id_level_1")
+                    .html(data.result)
+                    .attr("disabled", false);
+            }
+        },
+        "json"
+    );
 });
 
 $(document).on("change", "#sub_category_id_level_1", function () {
-    if ($(this).val() !== '') {
-        $('#sub_category_id_level_2, #sub_category_id_level_3').html("").attr("disabled", true);
+    if ($(this).val() !== "") {
+        $("#sub_category_id_level_2, #sub_category_id_level_3")
+            .html("")
+            .attr("disabled", true);
         var js = {
-            "_token": $('meta[name="csrf-token"]').attr('content'),
-            "id": $(this).val(),
-            'level': 2,
+            _token: $('meta[name="csrf-token"]').attr("content"),
+            id: $(this).val(),
+            level: 2,
         };
-        $.post("/subcat-by-parentcat", js, function (data) {
-            if(data.count>0){
-                $('#sub_category_id_level_2').html(data.result).attr("disabled", false);
-            }
-        }, "json");
+        $.post(
+            "/subcat-by-parentcat",
+            js,
+            function (data) {
+                if (data.count > 0) {
+                    $("#sub_category_id_level_2")
+                        .html(data.result)
+                        .attr("disabled", false);
+                }
+            },
+            "json"
+        );
     } else {
-        $('#sub_category_id_level_2, #sub_category_id_level_3').attr("disabled", true);
+        $("#sub_category_id_level_2, #sub_category_id_level_3").attr(
+            "disabled",
+            true
+        );
     }
 });
 
 $(document).on("change", "#sub_category_id_level_2", function () {
-    if ($(this).val() !== '') {
-        $('#sub_category_id_level_2, #sub_category_id_level_3').html("").attr("disabled", true);
+    if ($(this).val() !== "") {
+        $("#sub_category_id_level_2, #sub_category_id_level_3")
+            .html("")
+            .attr("disabled", true);
         var js = {
-            "_token": $('meta[name="csrf-token"]').attr('content'),
-            "id": $(this).val(),
-            'level': 3,
+            _token: $('meta[name="csrf-token"]').attr("content"),
+            id: $(this).val(),
+            level: 3,
         };
-        $.post("/subcat-by-parentcat", js, function (data) {
-            if(data.count>0){
-                $('#sub_category_id_level_3').html(data.result).attr("disabled", false);
-            }
-        }, "json");
+        $.post(
+            "/subcat-by-parentcat",
+            js,
+            function (data) {
+                if (data.count > 0) {
+                    $("#sub_category_id_level_3")
+                        .html(data.result)
+                        .attr("disabled", false);
+                }
+            },
+            "json"
+        );
     } else {
-        $('#sub_category_id_level_2, #sub_category_id_level_3').attr("disabled", true);
+        $("#sub_category_id_level_2, #sub_category_id_level_3").attr(
+            "disabled",
+            true
+        );
     }
 });
 
-
 $(document).on("click keydown", ".softsource-nav-toggle-btn", function () {
-    $('.softsource-nav-toggle-btn').toggleClass('active');
-    $('.softsource-responsive-nav').toggleClass('active');
-})
+    $(".softsource-nav-toggle-btn").toggleClass("active");
+    $(".softsource-responsive-nav").toggleClass("active");
+});
 
+$(document).on("click", ".softsource-responsive-has-children", function () {
+    $(".softsource-responsive-has-children").not(this).removeClass("active");
+    $(this).toggleClass("active");
 
-$(document).on("click", ".softsource-responsive-has-children", function() {
-    $('.softsource-responsive-has-children').not(this).removeClass('active');
-    $(this).toggleClass('active');
-
-
-    var $submenu = $(this).children('.softsource-submenu');
+    var $submenu = $(this).children(".softsource-submenu");
 
     // Hide other elements with the same class
-    $('.softsource-responsive-has-children').not(this).children('.softsource-submenu').addClass('hidden');
+    $(".softsource-responsive-has-children")
+        .not(this)
+        .children(".softsource-submenu")
+        .addClass("hidden");
 
     // Toggle class on the clicked element's children
-    $submenu.toggleClass('hidden');
-  });
-
-
-
-
+    $submenu.toggleClass("hidden");
+});

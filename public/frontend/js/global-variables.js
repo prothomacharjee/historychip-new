@@ -4,7 +4,9 @@ let playCounter = 0;
 
 let windows = $(window);
 let screenSize = windows.width();
-let html = $('html');
-let body = $('body');
+let html = $("html");
+let body = $("body");
 let mainContent = $(".softsource-main_content");
 
+let preloader = $(".softsource-preloader-container");
+let logo = $(".softsource-preloader-container img");

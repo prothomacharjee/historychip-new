@@ -69,6 +69,13 @@
         /*to prevent Firefox FOUC, this must be here*/
         let FF_FOUC_FIX;
     </script>
+
+    @php
+
+        header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
+        header('Cache-Control: post-check=0, pre-check=0', false);
+        header('Pragma: no-cache');
+    @endphp
 </head>
 
 <body class="softsource-no-select">
@@ -77,12 +84,12 @@
             style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
 
-    {{-- <div class="softsource-preloader-container">
+    <div class="softsource-preloader-container">
         <div class="softsource-blinker">
             <img src="{{ asset('frontend/images/logo/logo.png') }}" class="mx-auto d-block" style="width: 150px;">
             <p class="softsource-cust-tag softsource-text-color-secondary">every person, every story, all the truth</p>
         </div>
-    </div> --}}
+    </div>
 
     <div class="softsource-main_content">
         <div class="navbar-expand-lg navbar-light">
@@ -421,8 +428,8 @@
     <script src="{{ asset('frontend/js/summernote/summernote-lite.min.js') }}"></script>
 
     <script src="{{ asset('frontend/fontawsome/js/17472dc9f4.js?q=' . time()) }}"></script>
-    <script src="{{ asset('frontend/js/global-variables.js?q=' . time()) }}"></script>
-    <script src="{{ asset('frontend/js/frontend.js?q=' . time()) }}"></script>
+    <script src="{{ asset('frontend/js/global-variables.js') }}"></script>
+    <script src="{{ asset('frontend/js/frontend.js') }}"></script>
     <!-- Google Tag Manager -->
     <script>
         (function(w, d, s, l, i) {
