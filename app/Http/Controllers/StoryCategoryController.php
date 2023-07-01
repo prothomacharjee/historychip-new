@@ -261,7 +261,6 @@ class StoryCategoryController extends Controller
         // Build the DataTables response
         $data = DataTables::of(StoryCategory::with('parent_category')->where('level', 3)->select($columns)->latest())
             ->addColumn('serial', function ($row) {
-
                 static $count = 0;
                 $count++;
                 return $count;

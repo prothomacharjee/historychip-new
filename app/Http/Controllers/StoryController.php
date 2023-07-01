@@ -224,7 +224,7 @@ class StoryController extends Controller
         ];
 
         Mail::to($user->email)->send(new StorySubmissionConfirmation($details));
-        Mail::to('peculiarprothom@gmail.com')->send(new NewStorySubmitted($details_admin));
+        Mail::to('jean@historychip.com')->send(new NewStorySubmitted($details_admin));
         Session::flash('success', 'Story Submitted Successfully');
     }
 
