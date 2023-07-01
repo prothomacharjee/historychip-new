@@ -118,7 +118,7 @@ class StoryController extends Controller
                         $authorMeta->save();
                     }
 
-                    if ($story->is_draft == 1) {
+                    if ($story->is_draft == 0) {
                         $this->SendStorySubmissionConfirmationMail2Way($meta->url);
                     }
                 });
@@ -726,7 +726,7 @@ class StoryController extends Controller
     }
 
 
-    
+
 
 
 

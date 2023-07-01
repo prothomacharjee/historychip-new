@@ -77,12 +77,12 @@
             style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
 
-    <div class="softsource-preloader-container">
+    {{-- <div class="softsource-preloader-container">
         <div class="softsource-blinker">
             <img src="{{ asset('frontend/images/logo/logo.png') }}" class="mx-auto d-block" style="width: 150px;">
             <p class="softsource-cust-tag softsource-text-color-secondary">every person, every story, all the truth</p>
         </div>
-    </div>
+    </div> --}}
 
     <div class="partner softsource-main_content">
         <div class="navbar-expand-lg navbar-light">
