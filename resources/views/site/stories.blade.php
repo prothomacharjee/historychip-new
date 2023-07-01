@@ -390,7 +390,7 @@
                                         </div>
                                         <div style="width: 100%; height: 33px;">
                                             @if ($story->audio_video_path)
-                                                @if (substr($story->audio_video_path, -4) == '.mp4' && $story->audioconvert == 0)
+                                                {{-- @if (substr($story->audio_video_path, -4) == '.mp4' && $story->audioconvert == 0)
                                                     <video
                                                         style="width: 96%; height: 100px; margin-left: 2%; margin-right: 2%"
                                                         controls controlsList="nodownload">
@@ -404,7 +404,12 @@
                                                         <source src="{{ $story->audio_video_path }}">
                                                         Your browser does not support the audio element.
                                                     </audio>
-                                                @endif
+                                                @endif --}}
+                                                <audio style="width: 96%; height: 40px; margin-left: 2%; margin-right: 2%"
+                                                    controls controlsList="nodownload">
+                                                    <source src="{{ $story->audio_video_path }}">
+                                                    Your browser does not support the audio element.
+                                                </audio>
                                             @endif
                                         </div>
                                         <div class="softsource-story-btn-text">

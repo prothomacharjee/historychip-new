@@ -58,7 +58,7 @@
                 @endif
             </div>
 
-            <div class="col">
+            <div class="col-6">
                 {{-- <h6 class="mb-0 text-uppercase">Notice Prompts</h6>
                 <hr /> --}}
                 <div class="card">
@@ -130,7 +130,7 @@
 
 
             </div>
-            <div class="col">
+            <div class="col-6">
                 {{-- <h6 class="mb-0 text-uppercase">Notice Prompts List</h6>
                 <hr /> --}}
                 <div class="card">
@@ -221,7 +221,7 @@
                     $("#duration_to").val((response.duration_from) ? moment(response.duration_to).format(
                         'YYYY-MM-DD HH:mm') : '');
                     $("#status").val(response.status);
-                    $('#content').summernote();
+                    // $('#content').summernote();
                     $('.note-icon-caret').hide();
                 }
             });

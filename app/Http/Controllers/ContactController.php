@@ -178,7 +178,7 @@ class ContactController extends Controller
         );
 
         // Build the DataTables response
-        $data = DataTables::of(Contact::select($columns))
+        $data = DataTables::of(Contact::select($columns)->latest())
             ->addColumn('action', function ($row) use ($url) {
                 $buttons = '';
                 if ($row->is_replied == 0) {

@@ -1,12 +1,18 @@
-function page_loader() {
-    $(".preloader-activate").addClass("preloader-active");
-    $(".preloader-activate").removeClass("loaded");
+function page_loader(type) {
+    // $(".preloader-activate").addClass("preloader-active");
+    // $(".preloader-activate").removeClass("loaded");
+
+    $(`.${type}-upload-waiting`).html("Uploading..... Please Wait").fadeIn(500);
+    $('.softsource-write-story-btn').prop('disabled', true);
 }
 
 
-function close_loader() {
-    $(".open_tm_preloader").addClass("loaded");
-    $(".open_tm_preloader").removeClass("preloader-active");
+function close_loader(type) {
+    // $(".open_tm_preloader").addClass("loaded");
+    // $(".open_tm_preloader").removeClass("preloader-active");
+
+    $(`.${type}-upload-waiting`).html("Uploaded Successfully.").fadeOut("slow");
+    $('.softsource-write-story-btn').prop('disabled', false);
 }
 $(document).ready(function () {
     $('input[name="story_header_image"]').fileuploader({
@@ -21,7 +27,7 @@ $(document).ready(function () {
                 '<h3 class="fileuploader-input-caption"><p>choose photo to upload</p></h3>' +
                 '<p>${captions.or}</p>' +
                 '<button type="button" class="fileuploader-input-button"><span>${captions.button}</span></button>' +
-                '<br><br><h6 class="banner-photo-place">Add Banner photo here</h6><span><span class="required">*</span> Note: Photograph should be under 10 MB and Allowed Formats : "JPG", "PNG", "GIF", "JPEG","JFIF"</span>' +
+                '<br><br><h6 class="banner-photo-place">Add Banner photo here</h6><span><span class="required">*</span> Note: Photograph should be under <b> 10 MB </b>and Allowed Formats : "JPG", "PNG", "GIF", "JPEG","JFIF"</span>' +
                 '</div>' +
                 '</div>',
         theme: 'dragdrop',
@@ -154,7 +160,7 @@ $(document).ready(function () {
                 form.append('name', item.name);
                 form.append('editing', true);
                 form.append('_token', $('meta[name="csrf-token"]').attr('content'));
-                page_loader()
+                page_loader('image')
                 $.ajax({
                     url: $('input[name="story_header_image"]').attr("data-url"),
                     data: form,
@@ -165,7 +171,7 @@ $(document).ready(function () {
 
                     item.reader.read(function () {
                         var filename = JSON.parse(data);
-                        close_loader();
+                        close_loader('image');
                         if (filename.name)
                         {
                             item.html.find('.fileuploader-action-remove').addClass('fileuploader-action-success');
@@ -201,7 +207,7 @@ $(document).ready(function () {
 
     $('input[name="story_audio_video"]').fileuploader({
         limit: 1,
-        maxSize: 100000,
+        maxSize: 1000,
         extensions: ['audio/*', 'video/*'],
         enableApi: true,
         addMore: false,
@@ -212,7 +218,7 @@ $(document).ready(function () {
                 '<h3 class="fileuploader-input-caption"><span>Choose photo to upload</span></h3>' +
                 '<p>${captions.or}</p>' +
                 '<button type="button" class="fileuploader-input-button"><span>${captions.button}</span></button>' +
-                '<br><br><span><span class="text-danger">*</span> Note: Audio or video ( MP3 or MP4 can be added) files can be uploaded here. </span>' +
+                '<br><br><span><span class="text-danger">*</span> Note: Audio or video ( MP3 or MP4 can be added) files can be uploaded here.  It should be under <b> 1 GB </b> </span>' +
                 '</div>' +
                 '</div>',
         theme: 'dragdrop',
@@ -224,11 +230,11 @@ $(document).ready(function () {
             start: true,
             synchron: true,
             beforeSend: function () {
-                page_loader();
+                page_loader('audio');
             },
             onSuccess: function (data, item) {
                 var filename = JSON.parse(data);
-                close_loader();
+                close_loader('audio');
                 // console.log(attr_name);
                 if (filename.filename)
                 {
@@ -252,6 +258,7 @@ $(document).ready(function () {
                 }
                 else
                 {
+                    console.log('new',filename.warnings[0]);
                     $('.audio-upload-error-show').html(filename.warnings[0]);
                     $('#audio_video_path').val('');
                     $('.audioconvert_div,.audio_video_credit_div').fadeOut(500);

@@ -97,7 +97,7 @@ class NoticePromptController extends Controller
         );
 
         // Build the DataTables response
-        $data = DataTables::of(NoticePrompt::select($columns))
+        $data = DataTables::of(NoticePrompt::select($columns)->latest())
             ->addColumn('status', function ($row) {
                 return ($row->status == 1) ? '<span class="badge bg-success">Active</span>' : '<span class="badge bg-danger">Inactive</span>';
             })

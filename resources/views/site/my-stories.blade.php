@@ -99,11 +99,19 @@
                             <div class="row">
                                 @if (count($published_stories) > 0)
                                     @foreach ($published_stories as $story)
+                                        @php
+
+                                            if ($story->header_image_path == '') {
+                                                $headerImage = '/storage/frontend/stories/images/Banner72pi2.jpg';
+                                            } else {
+                                                $headerImage = $story->header_image_path;
+                                            }
+                                        @endphp
                                         <div class="col-lg-4 col-md-6 mb-5 animate__animated fadeInUp">
                                             <div class="softsource-story-item-div">
                                                 <div class="softsource-story-item-image text-center">
                                                     <a href="{{ url($story->url) }}">
-                                                        <img class="img-fluid" src="{{ asset($story->header_image_path) }}"
+                                                        <img class="img-fluid" src="{{ asset($$headerImage) }}"
                                                             alt="{{ $story->header_image_alt_text }}" style="width: 370px;">
                                                     </a>
                                                 </div>
@@ -129,7 +137,7 @@
                                                     </div>
                                                     <div style="width: 100%; height: 33px;">
                                                         @if ($story->audio_video_path)
-                                                            @if (substr($story->audio_video_path, -4) == '.mp4' && $story->audioconvert == 0)
+                                                            {{-- @if (substr($story->audio_video_path, -4) == '.mp4' && $story->audioconvert == 0)
                                                                 <video
                                                                     style="width: 96%; height: 100px; margin-left: 2%; margin-right: 2%"
                                                                     controls controlsList="nodownload">
@@ -143,7 +151,13 @@
                                                                     <source src="{{ $story->audio_video_path }}">
                                                                     Your browser does not support the audio element.
                                                                 </audio>
-                                                            @endif
+                                                            @endif --}}
+                                                            <audio
+                                                                style="width: 96%; height: 40px; margin-left: 2%; margin-right: 2%"
+                                                                controls controlsList="nodownload">
+                                                                <source src="{{ $story->audio_video_path }}">
+                                                                Your browser does not support the audio element.
+                                                            </audio>
                                                         @endif
                                                     </div>
                                                     <div class="softsource-story-btn-text d-flex justify-content-between">
@@ -194,12 +208,19 @@
                             <div class="row">
                                 @if (count($waiting_stories) > 0)
                                     @foreach ($waiting_stories as $story)
+                                        @php
+
+                                            if ($story->header_image_path == '') {
+                                                $headerImage = '/storage/frontend/stories/images/Banner72pi2.jpg';
+                                            } else {
+                                                $headerImage = $story->header_image_path;
+                                            }
+                                        @endphp
                                         <div class="col-lg-4 col-md-6 mb-5 animate__animated fadeInUp">
                                             <div class="softsource-story-item-div">
                                                 <div class="softsource-story-item-image text-center">
                                                     <a href="{{ url($story->url) }}">
-                                                        <img class="img-fluid"
-                                                            src="{{ asset($story->header_image_path) }}"
+                                                        <img class="img-fluid" src="{{ asset($headerImage) }}"
                                                             alt="{{ $story->header_image_alt_text }}"
                                                             style="width: 370px;">
                                                     </a>
@@ -226,7 +247,7 @@
                                                     </div>
                                                     <div style="width: 100%; height: 33px;">
                                                         @if ($story->audio_video_path)
-                                                            @if (substr($story->audio_video_path, -4) == '.mp4' && $story->audioconvert == 0)
+                                                            {{-- @if (substr($story->audio_video_path, -4) == '.mp4' && $story->audioconvert == 0)
                                                                 <video
                                                                     style="width: 96%; height: 100px; margin-left: 2%; margin-right: 2%"
                                                                     controls controlsList="nodownload">
@@ -240,7 +261,13 @@
                                                                     <source src="{{ $story->audio_video_path }}">
                                                                     Your browser does not support the audio element.
                                                                 </audio>
-                                                            @endif
+                                                            @endif --}}
+                                                            <audio
+                                                                style="width: 96%; height: 40px; margin-left: 2%; margin-right: 2%"
+                                                                controls controlsList="nodownload">
+                                                                <source src="{{ $story->audio_video_path }}">
+                                                                Your browser does not support the audio element.
+                                                            </audio>
                                                         @endif
                                                     </div>
                                                     <div class="softsource-story-btn-text d-flex justify-content-between">
@@ -291,12 +318,18 @@
                             <div class="row">
                                 @if (count($draft_stories) > 0)
                                     @foreach ($draft_stories as $story)
+                                        @php
+                                            if ($story->header_image_path == '') {
+                                                $headerImage = '/storage/frontend/stories/images/Banner72pi2.jpg';
+                                            } else {
+                                                $headerImage = $story->header_image_path;
+                                            }
+                                        @endphp
                                         <div class="col-lg-4 col-md-6 mb-5 animate__animated fadeInUp">
                                             <div class="softsource-story-item-div">
                                                 <div class="softsource-story-item-image text-center">
                                                     <a href="{{ url($story->url) }}">
-                                                        <img class="img-fluid"
-                                                            src="{{ asset($story->header_image_path) }}"
+                                                        <img class="img-fluid" src="{{ asset($headerImage) }}"
                                                             alt="{{ $story->header_image_alt_text }}"
                                                             style="width: 370px;">
                                                     </a>
@@ -323,7 +356,7 @@
                                                     </div>
                                                     <div style="width: 100%; height: 33px;">
                                                         @if ($story->audio_video_path)
-                                                            @if (substr($story->audio_video_path, -4) == '.mp4' && $story->audioconvert == 0)
+                                                            {{-- @if (substr($story->audio_video_path, -4) == '.mp4' && $story->audioconvert == 0)
                                                                 <video
                                                                     style="width: 96%; height: 100px; margin-left: 2%; margin-right: 2%"
                                                                     controls controlsList="nodownload">
@@ -337,7 +370,13 @@
                                                                     <source src="{{ $story->audio_video_path }}">
                                                                     Your browser does not support the audio element.
                                                                 </audio>
-                                                            @endif
+                                                            @endif --}}
+                                                            <audio
+                                                                style="width: 96%; height: 40px; margin-left: 2%; margin-right: 2%"
+                                                                controls controlsList="nodownload">
+                                                                <source src="{{ $story->audio_video_path }}">
+                                                                Your browser does not support the audio element.
+                                                            </audio>
                                                         @endif
                                                     </div>
                                                     <div class="softsource-story-btn-text d-flex justify-content-between">
@@ -388,12 +427,18 @@
                             <div class="row">
                                 @if (count($rejected_stories) > 0)
                                     @foreach ($rejected_stories as $story)
+                                        @php
+                                            if ($story->header_image_path == '') {
+                                                $headerImage = '/storage/frontend/stories/images/Banner72pi2.jpg';
+                                            } else {
+                                                $headerImage = $story->header_image_path;
+                                            }
+                                        @endphp
                                         <div class="col-lg-4 col-md-6 mb-5 animate__animated fadeInUp">
                                             <div class="softsource-story-item-div">
                                                 <div class="softsource-story-item-image text-center">
                                                     <a href="{{ url($story->url) }}">
-                                                        <img class="img-fluid"
-                                                            src="{{ asset($story->header_image_path) }}"
+                                                        <img class="img-fluid" src="{{ asset($headerImage) }}"
                                                             alt="{{ $story->header_image_alt_text }}"
                                                             style="width: 370px;">
                                                     </a>
@@ -420,7 +465,7 @@
                                                     </div>
                                                     <div style="width: 100%; height: 33px;">
                                                         @if ($story->audio_video_path)
-                                                            @if (substr($story->audio_video_path, -4) == '.mp4' && $story->audioconvert == 0)
+                                                            {{-- @if (substr($story->audio_video_path, -4) == '.mp4' && $story->audioconvert == 0)
                                                                 <video
                                                                     style="width: 96%; height: 100px; margin-left: 2%; margin-right: 2%"
                                                                     controls controlsList="nodownload">
@@ -434,7 +479,14 @@
                                                                     <source src="{{ $story->audio_video_path }}">
                                                                     Your browser does not support the audio element.
                                                                 </audio>
-                                                            @endif
+                                                            @endif --}}
+
+                                                            <audio
+                                                                style="width: 96%; height: 40px; margin-left: 2%; margin-right: 2%"
+                                                                controls controlsList="nodownload">
+                                                                <source src="{{ $story->audio_video_path }}">
+                                                                Your browser does not support the audio element.
+                                                            </audio>
                                                         @endif
                                                     </div>
                                                     <div class="softsource-story-btn-text d-flex justify-content-between">

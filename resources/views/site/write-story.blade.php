@@ -14,7 +14,7 @@
         $length = old('context') ? strlen(old('context')) : (!empty($partner->context) ? strlen(strip_tags($partner->context)) : 0);
         // $max_story_content_length = '12000';
         // $min_story_content_length = '500';
-        $header_image_path = !empty($story->header_image_path) ? $story->header_image_path : '';
+        $header_image_path = old('header_image_path') ? old('header_image_path') : (!empty($story->header_image_path) ? $story->header_image_path : '');
 
         if ($header_image_path != '') {
             $preload = [];
@@ -38,7 +38,7 @@
             }
         }
 
-        $audio_path = !empty($story->audio_video_path) ? $story->audio_video_path : '';
+        $audio_path = old('audio_video_path') ? old('audio_video_path') : (!empty($story->audio_video_path) ? $story->audio_video_path : '');
 
         if ($audio_path != '') {
             $audio_preload = [];
@@ -144,8 +144,8 @@
                     <button type="button"
                         class="softsource-write-story-btn my-2 px-4 softsource-show-action softsource-audio-text active">Both</button>
                 </div>
-                <form class="row g-3 needs-validation" method="post" novalidate action="{{ route('story.create') }}"
-                    id="story_form" enctype="multipart/form-data">
+                <form class="row" method="post" action="{{ route('story.create') }}" id="story_form"
+                    enctype="multipart/form-data">
                     @csrf
                     <input type="hidden" name="id" id="id"
                         value="{{ old('id') ? old('id') : (!empty($story->id) ? $story->id : null) }}" />
@@ -160,6 +160,7 @@
                                     data-url="{{ route('story.saveimage') }}" data-name="story">
                                 <!--<span class="help-block">Entering a photograph here is optional but will help to introduce and draw attention to your story. <br> <span class="required">*</span> Note: Photograph should be under 10 MB and Allowed Formats : "JPG", "PNG", "GIF", "JPEG","JFIF"</span>-->
                                 <div id="errorBlock" class="help-block"></div>
+                                <span class="text-warning image-upload-waiting"></span>
                             </div>
                             <input type="hidden" name="header_image_path" id="header_image_path" class="front_file-saver"
                                 value="{{ !empty($story->header_image_path) ? $story->header_image_path : null }}">
@@ -180,7 +181,7 @@
                             @enderror
                         </div> --}}
 
-                        <div class="col-12 photo_credit_div mt-3" style="{{empty($story)?'display:none':''}}">
+                        <div class="col-12 photo_credit_div mt-3" style="{{ empty($story) ? 'display:none' : '' }}">
                             <label for="photo_credit" class="form-label">Photo Credit <span
                                     class="text-danger">*</span></label>
                             <input type="text" class="form-control @error('photo_credit') is-invalid @enderror"
@@ -197,11 +198,15 @@
                         <div class="col-4 mt-3">
 
                             <label for="title" class="form-label">Title <span class="text-danger">*</span></label>
+
+
                             <input type="text" class="form-control @error('title') is-invalid @enderror"
                                 id="title" name="title" placeholder="Title"
-                                aria-describedby="validationTitleFeedback"
+                                aria-describedby="validationPhotovalidationTitleFeedbackCreditFeedback"
                                 value="{{ old('title') ? old('title') : (!empty($story->title) ? $story->title : null) }}"
                                 required>
+
+
                             <div class="valid-feedback">Looks good!</div>
                             <div class="invalid-feedback">You must enter an title.</div>
                             @error('title')
@@ -352,7 +357,7 @@
                         <div class="col-md-8 mt-3 softsource-show-text">
                             <label for="context" class="form-label">Story Content</label>
                             <textarea rows="16" class="form-control softsource-summernote @error('context') is-invalid @enderror"
-                                id="context" name="context" placeholder="Tell the world your story..." required
+                                id="context" name="context" placeholder="Tell the world your story..."
                                 aria-describedby="validationContentFeedback">{{ old('context') ? old('context') : (!empty($story->context) ? $story->context : null) }}</textarea>
                             <div class="text-end story-context-word-count">
                                 {{ $length }} Characters</div>
@@ -373,6 +378,7 @@
                                     data-url="{{ route('story.saveaudio') }}" data-name="story">
                                 <div id="errorBlock" class="help-block"></div>
                                 <span class="text-danger audio-upload-error-show"></span>
+                                <span class="text-warning audio-upload-waiting"></span>
                                 <input type="hidden" name="audio_video_path" id="audio_video_path"
                                     class="front_file-saver"
                                     value="{{ !empty($story->audio_video_path) ? $story->audio_video_path : null }}">
@@ -427,7 +433,8 @@
 
                         <div class="col-md-4 mt-3">
                             <label for="event_detail_dates" class="form-label">Event Period/Instance</label>
-                            <input required type="text" class="form-control @error('event_detail_dates') is-invalid @enderror"
+                            <input required type="text"
+                                class="form-control @error('event_detail_dates') is-invalid @enderror"
                                 id="event_detail_dates" name="event_detail_dates" placeholder="Event Period/Instance"
                                 required aria-describedby="validationEventDetailsDateFeedback"
                                 value="{{ old('event_detail_dates') ? old('event_detail_dates') : (!empty($story->event_detail_dates) ? $story->event_detail_dates : null) }}">
@@ -444,8 +451,9 @@
 
                         <div class="col-md-4 mt-3">
                             <label for="event_dates" class="form-label">Event Date</label>
-                            <input required type="date" class="form-control @error('event_dates') is-invalid @enderror"
-                                id="event_dates" name="event_dates" placeholder="Event Date"
+                            <input required type="date"
+                                class="form-control @error('event_dates') is-invalid @enderror" id="event_dates"
+                                name="event_dates" placeholder="Event Date"
                                 aria-describedby="validationEventDateFeedback"
                                 value="{{ old('event_dates') ? old('event_dates') : (!empty($story->event_dates) ? $story->event_dates : null) }}">
                             <span class="fa fa-question-circle field-icon" data-bs-toggle="popover"
@@ -591,6 +599,8 @@
             $('#is_draft').val('1');
             $('#story_form').submit();
         }
+        // $('#story_form').submit();
+        
 
         function initAutocomplete() {
             const input = document.getElementById('event_location');

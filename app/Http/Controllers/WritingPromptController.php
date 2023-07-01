@@ -98,7 +98,7 @@ class WritingPromptController extends Controller
         );
 
         // Build the DataTables response
-        $data = DataTables::of(WritingPrompt::select($columns))
+        $data = DataTables::of(WritingPrompt::select($columns)->latest())
             ->addColumn('serial', function ($row) {
                 static $count = 0;
                 $count++;

@@ -278,7 +278,7 @@ class StoryController extends Controller
             ->addColumn('title', function ($row) {
                 $meta = Page::where('page_group', 'story')->where('page_group_id', $row->id)->first();
 
-                return ($row->title) ? '<a href="'.url($meta->url) .'">'.$row->title.'</a>' : '';
+                return ($row->title) ? '<a target="_blank" href="'.url($meta->url) .'">'.$row->title.'</a>' : '';
             })
 
             ->rawColumns(['title','serial', 'author', 'action', 'status', 'approval'])
@@ -333,7 +333,7 @@ class StoryController extends Controller
             ->addColumn('title', function ($row) {
                 $meta = Page::where('page_group', 'story')->where('page_group_id', $row->id)->first();
 
-                return ($row->title) ? '<a href="'.url($meta->url) .'">'.$row->title.'</a>' : '';
+                return ($row->title) ? '<a target="_blank" href="'.url($meta->url) .'">'.$row->title.'</a>' : '';
             })
 
             ->rawColumns(['title','serial', 'author', 'action', 'approval'])
@@ -380,7 +380,7 @@ class StoryController extends Controller
             ->addColumn('title', function ($row) {
                 $meta = Page::where('page_group', 'story')->where('page_group_id', $row->id)->first();
 
-                return ($row->title) ? '<a href="'.url($meta->url) .'">'.$row->title.'</a>' : '';
+                return ($row->title) ? '<a target="_blank" href="'.url($meta->url) .'">'.$row->title.'</a>' : '';
             })
             ->rawColumns(['title','serial', 'author', 'action'])
             ->make(true);
@@ -439,7 +439,7 @@ class StoryController extends Controller
             ->addColumn('title', function ($row) {
                 $meta = Page::where('page_group', 'story')->where('page_group_id', $row->id)->first();
 
-                return ($row->title) ? '<a href="'.url($meta->url) .'">'.$row->title.'</a>' : '';
+                return ($row->title) ? '<a target="_blank" href="'.url($meta->url) .'">'.$row->title.'</a>' : '';
             })
 
             ->rawColumns(['title','serial', 'author', 'action', 'status', 'approval'])
@@ -484,7 +484,7 @@ class StoryController extends Controller
             ->addColumn('title', function ($row) {
                 $meta = Page::where('page_group', 'story')->where('page_group_id', $row->id)->first();
 
-                return ($row->title) ? '<a href="'.url($meta->url) .'">'.$row->title.'</a>' : '';
+                return ($row->title) ? '<a target="_blank" href="'.url($meta->url) .'">'.$row->title.'</a>' : '';
             })
             ->rawColumns(['title','serial', 'author', 'action'])
             ->make(true);
@@ -505,7 +505,7 @@ class StoryController extends Controller
                     $story->update();
                 });
                 return redirect()->route('admin.stories')->with('success', "Story $returnText Successfully");
-            } catch (\Exception $e) {
+            } catch (Exception $e) {
                 return redirect()->back()->with('error', $e->getMessage());
             }
         } elseif ($type == 'featured') {
@@ -534,7 +534,7 @@ class StoryController extends Controller
                         $story->update();
                     });
                     return redirect()->route('admin.stories')->with('success', "Story Un-Featured Successfully");
-                } catch (\Exception $e) {
+                } catch (Exception $e) {
                     return redirect()->back()->with('error', $e->getMessage());
                 }
             }
@@ -557,7 +557,7 @@ class StoryController extends Controller
                     $this->SendStorySubmissionConfirmationMail2Way($meta->url);
                 }
                 return redirect()->route('my-stories')->with('success', "Story $returnText Successfully. ". $extraText );
-            } catch (\Exception $e) {
+            } catch (Exception $e) {
                 return redirect()->back()->with('error', $e->getMessage());
             }
         }

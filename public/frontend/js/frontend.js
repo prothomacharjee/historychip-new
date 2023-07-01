@@ -118,7 +118,7 @@ $(document).on("click", ".softsource-only-text", function () {
         .addClass("col-md-12")
         .css("display", "block");
     $(".softsource-show-audio").css("display", "none");
-    $("input[name=context_type]").val("1");
+    // $("input[name=context_type]").val("1");
 });
 
 $(document).on("click", ".softsource-only-audio", function () {
@@ -129,7 +129,7 @@ $(document).on("click", ".softsource-only-audio", function () {
         .removeClass("col-md-4")
         .addClass("col-md-12")
         .css("display", "block");
-    $("input[name=context_type]").val("2");
+    // $("input[name=context_type]").val("2");
 });
 
 $(document).on("click", ".softsource-audio-text", function () {
@@ -143,7 +143,7 @@ $(document).on("click", ".softsource-audio-text", function () {
         .removeClass("col-md-12")
         .addClass("col-md-4")
         .css("display", "block");
-    $("input[name=context_type]").val("3");
+    // $("input[name=context_type]").val("3");
 });
 
 //Story Categories

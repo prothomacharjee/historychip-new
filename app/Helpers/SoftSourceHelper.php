@@ -113,7 +113,7 @@ class SoftSourceHelper
                             }
                         } else {
                             header("HTTP/1.1 500");
-                            echo json_encode(array("hasWarnings" => true, "isSuccess" => false, "warnings" => ["The maximum file size allowed 2 MB"]));
+                            echo json_encode(array("hasWarnings" => true, "isSuccess" => false, "warnings" => ["The maximum file size allowed 10 MB"]));
                         }
                     } else {
                         header("HTTP/1.1 500");
@@ -154,7 +154,7 @@ class SoftSourceHelper
                 $extion_array = explode(".", $name);
                 $ext = $extion_array[count($extion_array) - 1];
                 if (in_array(strtolower($ext), $valid_formats)) {
-                    if ($size < (10 * (1024 * 1024))) {
+                    if ($size < (1000 * (1024 * 1024))) {
                         $actual_image_name = uniqid() . "_" . rand(10, 100000) . "." . $ext;
                         $tmp = $_FILES['story_audio_video']['tmp_name'];
                         if (Storage::disk('public')->putFileAs($path, $tmp, $actual_image_name) != false) {
@@ -186,7 +186,7 @@ class SoftSourceHelper
                         }
                     } else {
                         header("HTTP/1.1 500");
-                        echo json_encode(array("hasWarnings" => true, "isSuccess" => false, "warnings" => ["The maximum file size allowed 10 MB"]));
+                        echo json_encode(array("hasWarnings" => true, "isSuccess" => false, "warnings" => ["The maximum file size allowed 1 GB"]));
                     }
                 } else {
                     header("HTTP/1.1 500");
