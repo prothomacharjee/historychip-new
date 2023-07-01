@@ -244,7 +244,7 @@ class StoryController extends Controller
         );
 
         // Build the DataTables response
-        $data = DataTables::of(Story::select($columns)->where('is_approved', '=', 1)->where('is_featured', '=', 0)->latest())
+        $data = DataTables::of(Story::select($columns)->where('is_approved', '=', 1)->where('is_featured', '=', 0))
             ->addColumn('serial', function ($row) {
                 static $count = 0;
                 $count++;
@@ -277,7 +277,6 @@ class StoryController extends Controller
                 return ($row->approval_date_time) ? date('Y-m-d H:i', strtotime($row->approval_date_time)) : '';
             })
 
-
             ->rawColumns(['serial', 'author', 'action', 'status', 'approval'])
             ->make(true);
 
@@ -299,7 +298,7 @@ class StoryController extends Controller
         );
 
         // Build the DataTables response
-        $data = DataTables::of(Story::select($columns)->where('is_approved', '=', 1)->where('is_featured', '=', 1)->latest())
+        $data = DataTables::of(Story::select($columns)->where('is_approved', '=', 1)->where('is_featured', '=', 1))
             ->addColumn('serial', function ($row) {
                 static $count = 0;
                 $count++;
@@ -353,7 +352,7 @@ class StoryController extends Controller
         // Define the search columns
 
         // Build the DataTables response
-        $data = DataTables::of(Story::select($columns)->where('is_approved', '=', 0)->latest())
+        $data = DataTables::of(Story::select($columns)->where('is_approved', '=', 0))
             ->addColumn('serial', function ($row) {
                 static $count = 0;
                 $count++;
@@ -395,7 +394,7 @@ class StoryController extends Controller
         );
 
         // Build the DataTables response
-        $data = DataTables::of(Story::select($columns)->where('is_approved', '=', 2)->latest())
+        $data = DataTables::of(Story::select($columns)->where('is_approved', '=', 2))
             ->addColumn('serial', function ($row) {
                 static $count = 0;
                 $count++;
@@ -449,7 +448,7 @@ class StoryController extends Controller
         // Define the search columns
 
         // Build the DataTables response
-        $data = DataTables::of(Story::select($columns)->where('is_draft', '=', 1)->latest())
+        $data = DataTables::of(Story::select($columns)->where('is_draft', '=', 1))
             ->addColumn('serial', function ($row) {
                 static $count = 0;
                 $count++;
