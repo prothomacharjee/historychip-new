@@ -277,9 +277,6 @@ class StoryController extends Controller
                 return ($row->approval_date_time) ? date('Y-m-d H:i', strtotime($row->approval_date_time)) : '';
             })
 
-            // ->editColumn('title', function ($row) {
-            //     return ($row->title) ? date('Y-m-d H:i', strtotime($row->approval_date_time)) : '';
-            // })
 
             ->rawColumns(['serial', 'author', 'action', 'status', 'approval'])
             ->make(true);
