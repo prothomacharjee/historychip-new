@@ -58,7 +58,7 @@
             </div>
             <div
                 class="col-xxl-2 col-xl-2 col-lg-2 col-md-6 col-sm-6 col-6 softsource-footer-div-1 softsource-footer-widget">
-                <h6 class="softsource-footer-widget__title">QUICK LINKS</h6>
+                <h6 class="softsource-footer-widget__title">Quick Links</h6>
                 <ul class="softsource-footer-widget__list">
                     <li><a href="{{ route('about') }}"><span>About History Chip</span></a></li>
                     <li><a href="{{ route('story.read') }}"><span>Read a Story</span></a></li>
