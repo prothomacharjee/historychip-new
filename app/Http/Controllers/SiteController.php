@@ -444,11 +444,12 @@ class SiteController extends Controller
         // Retrieve the search query from the request
         $query = $request->input('search');
 
-        // Perform the search using Laravel Scout
-        $results = Story::search($query)->get();
-        // dd($results);
-        $ids = $results->pluck('id')->all();
-        $stories = Story::ProcessSearchResults($ids);
+        // // Perform the search using Laravel Scout
+        // $results = Story::search($query)->get();
+        // // dd($results);
+        // $ids = $results->pluck('id')->all();
+        $stories = Story::ProcessSearchResults($query);
+
         // Return the search results to the view
 
         return view('site.search-results')->with([

@@ -51,10 +51,14 @@ class StoryController extends Controller
             'event_dates' => 'required_without_all:event_detail_dates|nullable',
             'event_detail_dates' => 'required_without_all:event_dates|nullable',
             'header_image_path' => 'nullable',
-            'photo_credit' => 'required_if:header_image_path,!=,',
+            'photo_credit' => 'required_unless:header_image_path,!=,"null"',
             'audio_video_path' => 'nullable',
-            'audio_video_credit' => 'required_if:audio_video_path,!=,',
-        ]);
+            'audio_video_credit' => 'required_unless:audio_video_path,!=,"null"',
+        ],[
+            'photo_credit.required_unless' => 'The photo credit is required when a header image is provided.',
+            'audio_video_credit.required_unless' => 'The audio/video credit is required when an audio/video is provided.',
+        ]
+    );
 
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
@@ -278,10 +282,10 @@ class StoryController extends Controller
             ->addColumn('title', function ($row) {
                 $meta = Page::where('page_group', 'story')->where('page_group_id', $row->id)->first();
 
-                return ($row->title) ? '<a target="_blank" href="'.url($meta->url) .'">'.$row->title.'</a>' : '';
+                return ($row->title) ? '<a target="_blank" href="' . url($meta->url) . '">' . $row->title . '</a>' : '';
             })
 
-            ->rawColumns(['title','serial', 'author', 'action', 'status', 'approval'])
+            ->rawColumns(['title', 'serial', 'author', 'action', 'status', 'approval'])
             ->make(true);
 
         // Return the DataTables response
@@ -333,10 +337,10 @@ class StoryController extends Controller
             ->addColumn('title', function ($row) {
                 $meta = Page::where('page_group', 'story')->where('page_group_id', $row->id)->first();
 
-                return ($row->title) ? '<a target="_blank" href="'.url($meta->url) .'">'.$row->title.'</a>' : '';
+                return ($row->title) ? '<a target="_blank" href="' . url($meta->url) . '">' . $row->title . '</a>' : '';
             })
 
-            ->rawColumns(['title','serial', 'author', 'action', 'approval'])
+            ->rawColumns(['title', 'serial', 'author', 'action', 'approval'])
             ->make(true);
 
         // Return the DataTables response
@@ -380,9 +384,9 @@ class StoryController extends Controller
             ->addColumn('title', function ($row) {
                 $meta = Page::where('page_group', 'story')->where('page_group_id', $row->id)->first();
 
-                return ($row->title) ? '<a target="_blank" href="'.url($meta->url) .'">'.$row->title.'</a>' : '';
+                return ($row->title) ? '<a target="_blank" href="' . url($meta->url) . '">' . $row->title . '</a>' : '';
             })
-            ->rawColumns(['title','serial', 'author', 'action'])
+            ->rawColumns(['title', 'serial', 'author', 'action'])
             ->make(true);
 
         // Return the DataTables response
@@ -439,10 +443,10 @@ class StoryController extends Controller
             ->addColumn('title', function ($row) {
                 $meta = Page::where('page_group', 'story')->where('page_group_id', $row->id)->first();
 
-                return ($row->title) ? '<a target="_blank" href="'.url($meta->url) .'">'.$row->title.'</a>' : '';
+                return ($row->title) ? '<a target="_blank" href="' . url($meta->url) . '">' . $row->title . '</a>' : '';
             })
 
-            ->rawColumns(['title','serial', 'author', 'action', 'status', 'approval'])
+            ->rawColumns(['title', 'serial', 'author', 'action', 'status', 'approval'])
             ->make(true);
 
         // Return the DataTables response
@@ -484,9 +488,9 @@ class StoryController extends Controller
             ->addColumn('title', function ($row) {
                 $meta = Page::where('page_group', 'story')->where('page_group_id', $row->id)->first();
 
-                return ($row->title) ? '<a target="_blank" href="'.url($meta->url) .'">'.$row->title.'</a>' : '';
+                return ($row->title) ? '<a target="_blank" href="' . url($meta->url) . '">' . $row->title . '</a>' : '';
             })
-            ->rawColumns(['title','serial', 'author', 'action'])
+            ->rawColumns(['title', 'serial', 'author', 'action'])
             ->make(true);
 
         // Return the DataTables response
@@ -539,8 +543,7 @@ class StoryController extends Controller
                 }
             }
 
-        }
-        elseif ($type == 'draft') {
+        } elseif ($type == 'draft') {
 
             $returnText = ($status == 1) ? 'Drafted' : 'Submitted';
             $extraText = ($status == 1) ? '' : 'Thank you for submitting your story, we will review it and send an email when published.';
@@ -552,17 +555,15 @@ class StoryController extends Controller
                     $story->is_draft = $status;
                     $story->update();
                 });
-                $meta  = Page::where('page_group', 'story')->where('page_group_id', $story->id)->first();
+                $meta = Page::where('page_group', 'story')->where('page_group_id', $story->id)->first();
                 if ($status == 0) {
                     $this->SendStorySubmissionConfirmationMail2Way($meta->url);
                 }
-                return redirect()->route('my-stories')->with('success', "Story $returnText Successfully. ". $extraText );
+                return redirect()->route('my-stories')->with('success', "Story $returnText Successfully. " . $extraText);
             } catch (Exception $e) {
                 return redirect()->back()->with('error', $e->getMessage());
             }
-        }
-
-        else {
+        } else {
             return redirect()->route('admin.blogs')->with('info', "You are trying a wrong URL.");
         }
 
@@ -745,11 +746,5 @@ class StoryController extends Controller
         // Return the DataTables response
         return $data;
     }
-
-
-
-
-
-
 
 }
