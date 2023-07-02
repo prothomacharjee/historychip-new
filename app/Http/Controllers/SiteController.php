@@ -374,6 +374,32 @@ class SiteController extends Controller
 
             $page_title = $stories->title;
             $detail = true;
+
+            // dd();
+
+            // if (mb_strlen(serialize(strip_tags($stories->contextForDisplay())), '8bit') > 10000) {
+            //     $resultArray = str_split($stories->contextForDisplay(), 2000);
+            //     $searchableArray = [];
+
+            //     foreach ($resultArray as $index => $paragraph) {
+            //         $identifier = $stories->id . '_' . ($index + 1);
+            //         $record = [
+            //             'id' => $identifier,
+            //             'story_id' => $stories->id,
+            //             'title' => $stories->title,
+            //             'context' => $paragraph,
+            //             // 'category_name' => $categoryNames,
+            //             // 'sub_category_name_level_1' => $subCategoryNamesLevel1,
+            //             // 'author_name' => $this->author_name,
+            //             'tags' => $stories->tags,
+            //         ];
+
+            //         $searchableArray[] = $record;
+            //     }
+
+            //     dd($searchableArray);
+            // }
+
         } else {
             $stories = Story::FetchAllStory();
             $page_title = 'Read Stories';

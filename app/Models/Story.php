@@ -129,70 +129,129 @@ class Story extends Model
             ->paginate($paginated_number);
     }
 
-    public function toSearchableArray()
-    {
-        if ($this->category_id != null) {
+    // public function toSearchableArray()
+    // {
+    //     if ($this->category_id != null) {
 
-            $categoryNames = StoryCategory::whereIn('id', json_decode($this->category_id))->where('level', 0)->pluck('name')->toArray();
-        } else {
-            $categoryNames = null;
-        }
+    //         $categoryNames = StoryCategory::whereIn('id', json_decode($this->category_id))->where('level', 0)->pluck('name')->toArray();
+    //     } else {
+    //         $categoryNames = null;
+    //     }
 
-        if ($this->sub_category_id_level_1 != null) {
+    //     if ($this->sub_category_id_level_1 != null) {
 
-            $subCategoryNamesLevel1 = StoryCategory::whereIn('id', json_decode($this->sub_category_id_level_1))->where('level', 1)->pluck('name')->toArray();
-        } else {
-            $subCategoryNamesLevel1 = null;
-        }
+    //         $subCategoryNamesLevel1 = StoryCategory::whereIn('id', json_decode($this->sub_category_id_level_1))->where('level', 1)->pluck('name')->toArray();
+    //     } else {
+    //         $subCategoryNamesLevel1 = null;
+    //     }
 
-        //$context = preg_replace('/[\x00-\x1F\x7F]/u', '', strip_tags($this->context));
-        // $compressedContext = gzcompress($context, 9);
-        // $encodedContext = base64_encode($compressedContext);
+    //     $cleanString = trim($this->context);
 
-        // Calculate the size of the record
-        $recordSize = $this->calculateRecordSize();
+    //     // Remove inverted commas
+    //     $cleanString = str_replace('“', '', $cleanString);
+    //     $cleanString = str_replace('”', '', $cleanString);
 
-        //If the record size exceeds the limit, return an empty array
-        if ($recordSize > 10000) {
-            return [];
-        }
+    //     // Remove consecutive spaces
+    //     $cleanString = preg_replace('/\s+/', ' ', $cleanString);
 
-       // $encodedSize = strlen($context);
+    //     //$context = preg_replace('/[\x00-\x1F\x7F]/u', '', strip_tags($this->context));
+    //     // $compressedContext = gzcompress($context, 9);
+    //     // $encodedContext = base64_encode($compressedContext);
 
-        // If the encoded size exceeds the limit, return an empty array
-        // if ($encodedSize > 10000) {
-        //     // $truncatedContext = strlen($this->context) > 200 ? substr($this->context, 0, 200) . '...' : $this->context;
-        //     $trimmedString = substr($this->context, 0, strlen($this->context) - 50);
-        //     return [
-        //         'id' => $this->id,
-        //         'title' => $this->title,
-        //         'context' => $trimmedString,
-        //         'category_name' => $categoryNames,
-        //         // 'sub_category_name_level_1' => $subCategoryNamesLevel1,
-        //         'author_name' => $this->author_name,
-        //         'tags' => $this->tags,
-        //     ];
-        // }
+    //     // Calculate the size of the record
+    //     $recordSize = $this->calculateRecordSize();
 
-        if ($this->is_draft == 1) {
-            return [];
-        }
+    //     if ($this->is_draft == 1) {
+    //         return [];
+    //     }
 
-        if ($this->is_approved == 0) {
-            return [];
-        }
+    //     if ($this->is_approved == 0) {
+    //         return [];
+    //     }
 
-        return [
-            'id' => $this->id,
-            'title' => $this->title,
-            'context' => $this->context,
-            'category_name' => $categoryNames,
-            // 'sub_category_name_level_1' => $subCategoryNamesLevel1,
-            'author_name' => $this->author_name,
-            'tags' => $this->tags,
-        ];
+    //     //If the record size exceeds the limit, return an empty array
+    //     if ($recordSize > 10000) {
+    //         // return [];
 
-    }
+    //         //$truncatedContext = strlen($this->context) > 200 ? substr($this->context, 0, 200) . '...' : $this->context;
+    //         // $trimmedString = substr($this->context, 0, strlen($this->context) - 100);
+    //         // return [
+    //         //     'id' => $this->id,
+    //         //     'story_id' => $this->id,
+    //         //     'title' => $this->title,
+    //         //     'context' => $trimmedString,
+    //         //     'category_name' => $categoryNames,
+    //         //     'sub_category_name_level_1' => $subCategoryNamesLevel1,
+    //         //     'author_name' => $this->author_name,
+    //         //     'tags' => $this->tags,
+    //         // ];
+
+    //         $resultArray = str_split(strip_tags($cleanString), 100);
+    //         if(count($resultArray) > 0){
+    //             foreach ($resultArray as $index => $paragraph) {
+    //                 // Create a unique identifier for each paragraph
+    //                 $identifier = $this->id . '_' . ($index + 1);
+
+    //                 // Compress the paragraph
+    //                 // $compressedParagraph = gzcompress($paragraph, 9);
+    //                 // $encodedParagraph = base64_encode($compressedParagraph);
+
+    //                 // Create a new record for each paragraph
+    //                 // if (!mb_detect_encoding($paragraph, 'UTF-8', true)) {
+    //                 //     $inputString = mb_convert_encoding($paragraph, 'UTF-8');
+    //                 // }
+    //                 // else{
+    //                 //     $inputString = $paragraph;
+    //                 // }
+    //                 $record = [
+    //                     'id' => $identifier,
+    //                     'story_id' => $this->id,
+    //                     'title' => $this->title,
+    //                     'context' => preg_replace('/[^\x00-\x7F]+/u', '', $paragraph),
+    //                     'category_name' => $categoryNames,
+    //                     'sub_category_name_level_1' => $subCategoryNamesLevel1,
+    //                     'author_name' => $this->author_name,
+    //                     'tags' => $this->tags,
+    //                 ];
+
+    //                 $searchableArray[] = $record;
+    //             }
+    //             return  $searchableArray;
+    //         }
+    //         else{
+    //             return [];
+    //         }
+
+    //     }
+
+    //     // $encodedSize = strlen($context);
+
+    //     // If the encoded size exceeds the limit, return an empty array
+    //     // if ($encodedSize > 10000) {
+    //     //     // $truncatedContext = strlen($this->context) > 200 ? substr($this->context, 0, 200) . '...' : $this->context;
+    //     //     $trimmedString = substr($this->context, 0, strlen($this->context) - 50);
+    //     //     return [
+    //     //         'id' => $this->id,
+    //     //         'title' => $this->title,
+    //     //         'context' => $trimmedString,
+    //     //         'category_name' => $categoryNames,
+    //     //         // 'sub_category_name_level_1' => $subCategoryNamesLevel1,
+    //     //         'author_name' => $this->author_name,
+    //     //         'tags' => $this->tags,
+    //     //     ];
+    //     // }
+
+    //     return [
+    //         'id' => $this->id,
+    //         'story_id' => $this->id,
+    //         'title' => $this->title,
+    //         'context' => strip_tags($cleanString),
+    //         'category_name' => $categoryNames,
+    //         'sub_category_name_level_1' => $subCategoryNamesLevel1,
+    //         'author_name' => $this->author_name,
+    //         'tags' => $this->tags,
+    //     ];
+    // }
 
     // public function toSearchableArray()
     // {
@@ -239,12 +298,90 @@ class Story extends Model
     //     return $searchableArray;
     // }
 
-    private function calculateRecordSize()
-    {
-        // Calculate the size of the record
-        $recordSize = strlen(json_encode($this->toArray()));
 
-        return $recordSize;
+
+
+    public function toSearchableArray()
+    {
+        if ($this->category_id != null) {
+            $categoryNames = StoryCategory::whereIn('id', json_decode($this->category_id))
+                ->where('level', 0)
+                ->pluck('name')
+                ->toArray();
+        } else {
+            $categoryNames = null;
+        }
+
+        if ($this->sub_category_id_level_1 != null) {
+            $subCategoryNamesLevel1 = StoryCategory::whereIn('id', json_decode($this->sub_category_id_level_1))
+                ->where('level', 1)
+                ->pluck('name')
+                ->toArray();
+        } else {
+            $subCategoryNamesLevel1 = null;
+        }
+
+        $cleanString = trim($this->context);
+        $cleanString = str_replace(['“', '”'], '', $cleanString);
+        $cleanString = preg_replace('/\s+/', ' ', $cleanString);
+        $cleanString = strip_tags($cleanString);
+        $cleanString = preg_replace('/[^\x00-\x7F]+/u', '', $cleanString);
+
+        $recordSize = $this->calculateRecordSize($cleanString);
+
+        if ($this->is_draft == 1 || $this->is_approved == 0 || $this->id == 359) {
+            return [];
+        }
+
+        if ($recordSize > 10000) {
+
+            // Calculate the length of the string
+            $length = strlen($cleanString);
+
+            // Calculate the size of each part
+            $partSize = ceil($length / 5);
+
+            // Split the string into three equal parts
+            $parts = str_split($cleanString, $partSize);
+
+            // $resultArray = str_split($cleanString, 10000);
+            $searchableArray = [];
+
+            foreach ($parts as $index => $paragraph) {
+                $identifier = $this->id . '_' . ($index + 1);
+                $record = [
+                    'id' => $identifier,
+                    'story_id' => $this->id,
+                    'title' => $this->title,
+                    'context' => $paragraph,
+                    'category_name' => $categoryNames,
+                    'sub_category_name_level_1' => $subCategoryNamesLevel1,
+                    'author_name' => $this->author_name,
+                    'tags' => $this->tags,
+                ];
+
+                Story::makeSearchable($record);
+            }
+
+            return [];
+        }
+
+        return [
+            'id' => $this->id,
+            'story_id' => $this->id,
+            'title' => $this->title,
+            'context' => $cleanString,
+            'category_name' => $categoryNames,
+            'sub_category_name_level_1' => $subCategoryNamesLevel1,
+            'author_name' => $this->author_name,
+            'tags' => $this->tags,
+        ];
     }
 
+    private function calculateRecordSize($cleanString)
+    {
+        $recordSize = mb_strlen(serialize($cleanString), '8bit');
+
+        return  $recordSize;
+    }
 }

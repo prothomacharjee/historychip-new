@@ -107,12 +107,14 @@
                             @endif
                         @endif
                     @endif
+                    
 
                     <div class="col-xxl-8 col-xl-8 col-lg-8 col-md-8 col-sm-12 col-12 m-auto">
                         <div class="main-story-wrap">
                             <div class="row">
                                 <div class="col softsource-individual-story-text">
                                     <p>
+
                                         {!! $stories->contextForDisplay() !!}
                                     </p>
                                 </div>
@@ -122,7 +124,7 @@
 
 
                     {{-- Social media share --}}
-                    @if ($stories->is_draft == 0)
+                    @if ($stories->is_draft == 0 && $stories->is_approved ==1)
                         <div class="col-xxl-8 col-xl-8 col-lg-8 col-md-8 col-sm-12 col-12 m-auto">
                             <div class="text-center" style="color:#778B91">
                                 <b>Want to Share This Story with Friends?</b>
@@ -205,7 +207,7 @@
                     @endif
 
                     {{-- Comments --}}
-                    @if ($stories->is_draft == 0)
+                    @if ($stories->is_draft == 0 && $stories->is_approved ==1)
                         <div
                             class="col-xxl-8 col-xl-8 col-lg-8 col-md-8 col-sm-12 col-12 m-auto softsource-story-comment-section softsource-story-border-bottom mb-3 pb-4">
                             <div id="commentmsg"
