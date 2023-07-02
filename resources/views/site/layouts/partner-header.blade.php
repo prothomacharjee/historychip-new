@@ -172,7 +172,7 @@
 
                                 <input type="text" class="form-control softsource-nav-search-input"
                                     placeholder="Search Any Word" name="search"
-                                    value="{{ old('search') ? old('search') : null }}">
+                                    value="{{ old('search') ? old('search') : null }}" required>
                                 <div class="input-group-prepend softsource-nav-search-btn">
                                     <button type="submit" class="input-group-text"><i
                                             class="fa fa-search"></i></button>
@@ -365,7 +365,7 @@
 
                                             <input type="text" class="form-control softsource-nav-search-input"
                                                 placeholder="Search Any Word" name="search"
-                                                value="{{ old('search') ? old('search') : null }}">
+                                                value="{{ old('search') ? old('search') : null }}" required>
                                             <div class="input-group-prepend softsource-nav-search-btn">
                                                 <button class="input-group-text"><i class="fa fa-search"></i></button>
                                             </div>

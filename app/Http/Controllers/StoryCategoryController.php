@@ -97,7 +97,7 @@ class StoryCategoryController extends Controller
         );
 
         // Build the DataTables response
-        $data = DataTables::of(StoryCategory::with('parent_category')->where('level', 0)->select($columns))
+        $data = DataTables::of(StoryCategory::with('parent_category')->where('level', 0)->select($columns)->latest())
             ->addColumn('serial', function ($row) {
 
                 static $count = 0;
@@ -151,7 +151,7 @@ class StoryCategoryController extends Controller
         );
 
         // Build the DataTables response
-        $data = DataTables::of(StoryCategory::with('parent_category')->where('level', 1)->select($columns))
+        $data = DataTables::of(StoryCategory::with('parent_category')->where('level', 1)->select($columns)->latest())
             ->addColumn('serial', function ($row) {
 
                 static $count = 0;
@@ -205,7 +205,7 @@ class StoryCategoryController extends Controller
         );
 
         // Build the DataTables response
-        $data = DataTables::of(StoryCategory::with('parent_category')->where('level', 2)->select($columns))
+        $data = DataTables::of(StoryCategory::with('parent_category')->where('level', 2)->select($columns)->latest())
             ->addColumn('serial', function ($row) {
 
                 static $count = 0;
@@ -259,9 +259,8 @@ class StoryCategoryController extends Controller
         );
 
         // Build the DataTables response
-        $data = DataTables::of(StoryCategory::with('parent_category')->where('level', 3)->select($columns))
+        $data = DataTables::of(StoryCategory::with('parent_category')->where('level', 3)->select($columns)->latest())
             ->addColumn('serial', function ($row) {
-
                 static $count = 0;
                 $count++;
                 return $count;
@@ -304,5 +303,5 @@ class StoryCategoryController extends Controller
         echo json_encode($data);
     }
 
-    
+
 }

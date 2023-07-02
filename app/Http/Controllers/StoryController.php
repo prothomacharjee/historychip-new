@@ -239,12 +239,11 @@ class StoryController extends Controller
             'created_at',
             'approval_date_time',
             'approved_by',
-            'approval_date_time',
             'status',
         );
 
         // Build the DataTables response
-        $data = DataTables::of(Story::select($columns)->where('is_approved', '=', 1)->where('is_featured', '=', 0))
+        $data = DataTables::of(Story::select($columns)->where('is_approved', '=', 1)->where('is_featured', '=', 0)->latest())
             ->addColumn('serial', function ($row) {
                 static $count = 0;
                 $count++;
@@ -276,8 +275,13 @@ class StoryController extends Controller
             ->editColumn('approval_date_time', function ($row) {
                 return ($row->approval_date_time) ? date('Y-m-d H:i', strtotime($row->approval_date_time)) : '';
             })
+            ->addColumn('title', function ($row) {
+                $meta = Page::where('page_group', 'story')->where('page_group_id', $row->id)->first();
 
-            ->rawColumns(['serial', 'author', 'action', 'status', 'approval'])
+                return ($row->title) ? '<a target="_blank" href="'.url($meta->url) .'">'.$row->title.'</a>' : '';
+            })
+
+            ->rawColumns(['title','serial', 'author', 'action', 'status', 'approval'])
             ->make(true);
 
         // Return the DataTables response
@@ -298,7 +302,7 @@ class StoryController extends Controller
         );
 
         // Build the DataTables response
-        $data = DataTables::of(Story::select($columns)->where('is_approved', '=', 1)->where('is_featured', '=', 1))
+        $data = DataTables::of(Story::select($columns)->where('is_approved', '=', 1)->where('is_featured', '=', 1)->latest())
             ->addColumn('serial', function ($row) {
                 static $count = 0;
                 $count++;
@@ -326,11 +330,13 @@ class StoryController extends Controller
             ->editColumn('approval_date_time', function ($row) {
                 return ($row->approval_date_time) ? date('Y-m-d H:i', strtotime($row->approval_date_time)) : '';
             })
-        // ->addColumn('blog_description', function ($row) {
-        //     return mb_strimwidth(strip_tags($row->blog_description), 0, 50, "...");
-        // })
+            ->addColumn('title', function ($row) {
+                $meta = Page::where('page_group', 'story')->where('page_group_id', $row->id)->first();
 
-            ->rawColumns(['serial', 'author', 'action', 'approval'])
+                return ($row->title) ? '<a target="_blank" href="'.url($meta->url) .'">'.$row->title.'</a>' : '';
+            })
+
+            ->rawColumns(['title','serial', 'author', 'action', 'approval'])
             ->make(true);
 
         // Return the DataTables response
@@ -352,7 +358,7 @@ class StoryController extends Controller
         // Define the search columns
 
         // Build the DataTables response
-        $data = DataTables::of(Story::select($columns)->where('is_approved', '=', 0))
+        $data = DataTables::of(Story::select($columns)->where('is_approved', '=', 0)->latest())
             ->addColumn('serial', function ($row) {
                 static $count = 0;
                 $count++;
@@ -371,7 +377,12 @@ class StoryController extends Controller
             ->editColumn('created_at', function ($row) {
                 return ($row->created_at) ? date('Y-m-d H:i', strtotime($row->created_at)) : '';
             })
-            ->rawColumns(['serial', 'author', 'action'])
+            ->addColumn('title', function ($row) {
+                $meta = Page::where('page_group', 'story')->where('page_group_id', $row->id)->first();
+
+                return ($row->title) ? '<a target="_blank" href="'.url($meta->url) .'">'.$row->title.'</a>' : '';
+            })
+            ->rawColumns(['title','serial', 'author', 'action'])
             ->make(true);
 
         // Return the DataTables response
@@ -389,12 +400,12 @@ class StoryController extends Controller
             'created_at',
             'approval_date_time',
             'approved_by',
-            'approval_date_time',
+
             'status',
         );
 
         // Build the DataTables response
-        $data = DataTables::of(Story::select($columns)->where('is_approved', '=', 2))
+        $data = DataTables::of(Story::select($columns)->where('is_approved', '=', 2)->latest())
             ->addColumn('serial', function ($row) {
                 static $count = 0;
                 $count++;
@@ -425,8 +436,13 @@ class StoryController extends Controller
             ->editColumn('approval_date_time', function ($row) {
                 return ($row->approval_date_time) ? date('Y-m-d H:i', strtotime($row->approval_date_time)) : '';
             })
+            ->addColumn('title', function ($row) {
+                $meta = Page::where('page_group', 'story')->where('page_group_id', $row->id)->first();
 
-            ->rawColumns(['serial', 'author', 'action', 'status', 'approval'])
+                return ($row->title) ? '<a target="_blank" href="'.url($meta->url) .'">'.$row->title.'</a>' : '';
+            })
+
+            ->rawColumns(['title','serial', 'author', 'action', 'status', 'approval'])
             ->make(true);
 
         // Return the DataTables response
@@ -448,7 +464,7 @@ class StoryController extends Controller
         // Define the search columns
 
         // Build the DataTables response
-        $data = DataTables::of(Story::select($columns)->where('is_draft', '=', 1))
+        $data = DataTables::of(Story::select($columns)->where('is_draft', '=', 1)->latest())
             ->addColumn('serial', function ($row) {
                 static $count = 0;
                 $count++;
@@ -465,7 +481,12 @@ class StoryController extends Controller
             ->editColumn('created_at', function ($row) {
                 return ($row->created_at) ? date('Y-m-d H:i', strtotime($row->created_at)) : '';
             })
-            ->rawColumns(['serial', 'author', 'action'])
+            ->addColumn('title', function ($row) {
+                $meta = Page::where('page_group', 'story')->where('page_group_id', $row->id)->first();
+
+                return ($row->title) ? '<a target="_blank" href="'.url($meta->url) .'">'.$row->title.'</a>' : '';
+            })
+            ->rawColumns(['title','serial', 'author', 'action'])
             ->make(true);
 
         // Return the DataTables response
@@ -484,7 +505,7 @@ class StoryController extends Controller
                     $story->update();
                 });
                 return redirect()->route('admin.stories')->with('success', "Story $returnText Successfully");
-            } catch (\Exception $e) {
+            } catch (Exception $e) {
                 return redirect()->back()->with('error', $e->getMessage());
             }
         } elseif ($type == 'featured') {
@@ -513,7 +534,7 @@ class StoryController extends Controller
                         $story->update();
                     });
                     return redirect()->route('admin.stories')->with('success', "Story Un-Featured Successfully");
-                } catch (\Exception $e) {
+                } catch (Exception $e) {
                     return redirect()->back()->with('error', $e->getMessage());
                 }
             }
@@ -536,7 +557,7 @@ class StoryController extends Controller
                     $this->SendStorySubmissionConfirmationMail2Way($meta->url);
                 }
                 return redirect()->route('my-stories')->with('success', "Story $returnText Successfully. ". $extraText );
-            } catch (\Exception $e) {
+            } catch (Exception $e) {
                 return redirect()->back()->with('error', $e->getMessage());
             }
         }

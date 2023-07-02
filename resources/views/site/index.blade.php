@@ -52,7 +52,7 @@
                         <h2 class="text-center softsource-home-daily-prompt-header">Daily Prompt Generator</h2>
                         <div class="softsource-home-daily-prompt-word-text-box d-flex mx-5">
                             <div id="softsource-wordbox" class="softsource-wordbox"></div>
-                            <input class="ms-auto generate-prompt-button" type="BUTTON" value="GENERATE PROMPT"
+                            <input class="ms-auto generate-prompt-button" type="BUTTON" value="Generate"
                                 tabindex="0">
                         </div>
                         <!-- <div class="text-start">
@@ -107,7 +107,7 @@
                                 @endphp
                                 <div
                                     class="col-xxl-4 col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 mb-5 animate__animated fadeInUp">
-                                    <div class="softsource-story-item-div">
+                                    <div class="softsource-story-item-div card">
                                         <div class="softsource-story-item-image text-center">
                                             <a href="{{ url($story->url) }}">
                                                 <img class="img-fluid" src="{{ asset($headerImage) }}"
@@ -185,13 +185,13 @@
             <div class="row ">
                 <div class="col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-12 col-12">
                     <div class="softsource-home-search-story-section-title-wrap mb-5">
-                        <div class="softsource-home-search-story-title">Search <br><span> Stories</span></div>
+                        <div class="softsource-home-search-story-title">Search<span> Stories</span></div>
                         <div class="softsource-home-search-story-horizontal-line"></div>
                     </div>
                 </div>
                 <div class="col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-12 col-12">
                     <div class="softsource-home-search-story-section-category-wrap p-3">
-                        <form class="softsource-home-search-story-form d-flex p-5" method="Post" action="">
+                        <form class="softsource-home-search-story-form d-flex px-5" method="Post" action="">
                             <div class="">
                                 <label for="category_id"
                                     class="form-label softsource-home-search-story-form-category-label">Select
@@ -216,7 +216,7 @@
                             <div class="mt-4">
 
                                 <button
-                                    class="btn softsource-home-search-story-form-category-button"><span>Go</span></button>
+                                    class="btn softsource-home-search-story-form-category-button gobtn"><span>Go</span></button>
                             </div>
 
                         </form>
@@ -232,7 +232,7 @@
             <div class="row">
                 <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
                     <div class="softsource-home-search-writing-prompt-title-wrap mb-5">
-                        <div class="softsource-home-writing-prompt-title mt-5">Want<br>Writing<br>Prompts?
+                        <div class="softsource-home-writing-prompt-title mt-5">Want Writing Prompts?
                         </div>
                         <div class="">
                             <a href="{{ route('story.write') }}"
@@ -302,7 +302,7 @@
                                 <div
                                     class="col-xxl-4 col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 mt-0 mb-5 animate__animated fadeInUp">
                                     <!--======= Single Blog Item Start ========-->
-                                    <div class="softsource-single-blog-item blog-grid">
+                                    <div class="softsource-single-blog-item card blog-grid">
                                         <!-- Post Feature Start -->
                                         <div class="post-feature softsource-blog-thumbnail">
                                             <a href="{{ url($blog->url) }}">
@@ -374,7 +374,7 @@
                 <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mx-auto mt-5 pt-5">
                     <h3 class="softsource-home-newsletter-title"><span>Sign-up</span> for our newsletter</h3>
                 </div>
-                <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6 mx-auto">
+                <div class="dflex-innews-letter col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6 mx-auto">
                     <form class="softsource-newsletter-form">
                         <div class="input-group mb-3">
                             <input type="email" class="form-control softsource-home-newsletter-input"

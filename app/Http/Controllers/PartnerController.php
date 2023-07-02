@@ -207,7 +207,7 @@ class PartnerController extends Controller
         // );
 
         // Build the DataTables response
-        $data = DataTables::of(Partner::select($columns)->where('status', '=', 1))
+        $data = DataTables::of(Partner::select($columns)->where('status', '=', 1)->latest())
 
             ->addColumn('serial', function ($row) {
                 static $count = 0;

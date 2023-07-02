@@ -180,7 +180,7 @@
 
                                 <input type="text" class="form-control softsource-nav-search-input"
                                     placeholder="Search Any Word" name="search"
-                                    value="{{ old('search') ? old('search') : null }}">
+                                    value="{{ old('search') ? old('search') : null }}" required>
                                 <div class="input-group-prepend softsource-nav-search-btn">
                                     <button type="submit" class="input-group-text"><i
                                             class="fa fa-search"></i></button>
@@ -373,7 +373,7 @@
 
                                             <input type="text" class="form-control softsource-nav-search-input"
                                                 placeholder="Search Any Word" name="search"
-                                                value="{{ old('search') ? old('search') : null }}">
+                                                value="" required>
                                             <div class="input-group-prepend softsource-nav-search-btn">
                                                 <button class="input-group-text"><i class="fa fa-search"></i></button>
                                             </div>
@@ -422,8 +422,8 @@
     <script src="{{ asset('frontend/input-tags/js/tagsinput.js') }}"></script>
     <script src="{{ asset('frontend/js/select2/select2.min.js') }}"></script>
 
-    <script src="{{ asset('frontend/file-uploader/js/script.js?2.1.2') }}" type="text/javascript"></script>
-    <script src="{{ asset('frontend/file-uploader/js/file-custom.js?2.1.2') }}" type="text/javascript"></script>
+    <script src="{{ asset('frontend/file-uploader/js/script.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('frontend/file-uploader/js/file-custom.js') }}" type="text/javascript"></script>
 
     <script src="{{ asset('frontend/js/summernote/summernote-lite.min.js') }}"></script>
 
