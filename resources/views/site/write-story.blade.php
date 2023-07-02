@@ -436,7 +436,7 @@
                             <input required type="text"
                                 class="form-control @error('event_detail_dates') is-invalid @enderror"
                                 id="event_detail_dates" name="event_detail_dates" placeholder="Event Period/Instance"
-                                required aria-describedby="validationEventDetailsDateFeedback"
+                                 aria-describedby="validationEventDetailsDateFeedback"
                                 value="{{ old('event_detail_dates') ? old('event_detail_dates') : (!empty($story->event_detail_dates) ? $story->event_detail_dates : null) }}">
                             <span class="fa fa-question-circle field-icon" data-bs-toggle="popover"
                                 data-bs-placement="top" data-bs-trigger="hover"
@@ -600,7 +600,7 @@
             $('#story_form').submit();
         }
         // $('#story_form').submit();
-        
+
 
         function initAutocomplete() {
             const input = document.getElementById('event_location');

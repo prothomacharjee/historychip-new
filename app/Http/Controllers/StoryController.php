@@ -46,7 +46,7 @@ class StoryController extends Controller
             "title" => "required",
             "author_name" => "required",
             "category_id" => "required",
-            "context" => "string",
+            "context" => "nullable",
             "event_location" => "required",
             'event_dates' => 'required_without_all:event_detail_dates|nullable',
             'event_detail_dates' => 'required_without_all:event_dates|nullable',
