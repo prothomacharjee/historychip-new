@@ -138,9 +138,9 @@ class Story extends Model
             ->where('is_approved', 1)
             ->where('is_draft', 0)
             ->where(function ($query) use ($keyword) {
-                $query->where('title', 'RLIKE', '^' . $keyword . '$')
-                    ->orWhere('context', 'RLIKE', '^' . $keyword . '$')
-                    ->orWhere('tags', 'RLIKE', '^' . $keyword . '$');
+                $query->where('title', 'LIKE', '%" ' . $keyword . ' "%')
+                    ->orWhere('context', 'LIKE', '%" ' . $keyword . ' "%')
+                    ->orWhere('tags', 'LIKE', '%" ' . $keyword . ' "%');
             })
             ->get();
     }
