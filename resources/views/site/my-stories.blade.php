@@ -111,7 +111,7 @@
                                             <div class="softsource-story-item-div">
                                                 <div class="softsource-story-item-image text-center">
                                                     <a href="{{ url($story->url) }}">
-                                                        <img class="img-fluid" src="{{ asset($$headerImage) }}"
+                                                        <img class="img-fluid" src="{{ asset($headerImage) }}"
                                                             alt="{{ $story->header_image_alt_text }}" style="width: 370px;">
                                                     </a>
                                                 </div>

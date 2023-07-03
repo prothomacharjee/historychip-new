@@ -498,7 +498,7 @@ class Story extends Model
     //     return $records;
     // }
 
-    private function calculateRecordSize($cleanString)
+    //private function calculateRecordSize($cleanString)
     // {
     //     $recordSize = mb_strlen(serialize($cleanString), '8bit');
 
