@@ -526,7 +526,7 @@ class SiteController extends Controller
             })
             ->orderBy('name')->get();
 
-        $html = "<option>Select Sub Category</option>";
+        $html = "<option value=''>Select Sub Category</option>";
         foreach ($childCategories as $childCategory) {
             $html .= "<option value='" . $childCategory->id . "'>" . $childCategory->name . "</option>";
         }

@@ -107,7 +107,7 @@
                                 @endphp
                                 <div
                                     class="col-xxl-4 col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 mb-5 animate__animated fadeInUp">
-                                    <div class="softsource-story-item-div card">
+                                    <div class="softsource-story-item-div">
                                         <div class="softsource-story-item-image text-center">
                                             <a href="{{ url($story->url) }}">
                                                 <img class="img-fluid" src="{{ asset($headerImage) }}"
@@ -191,7 +191,7 @@
                 </div>
                 <div class="col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-12 col-12">
                     <div class="softsource-home-search-story-section-category-wrap p-3">
-                        <form class="softsource-home-search-story-form d-flex px-5" method="Post" action="{{ route('story.search.category') }}">
+                        <form class="softsource-home-search-story-form d-flex p-5" method="Post" action="{{ route('story.search.category') }}">
                             @csrf
                             <div class="">
                                 <label for="category_id"
@@ -215,7 +215,7 @@
                                 </select>
                             </div>
                             <div class="mt-4">
-                                <button type="submit" class="btn softsource-home-search-story-form-category-button gobtn"><span>Go</span></button>
+                                <button type="submit" class="btn softsource-home-search-story-form-category-button"><span>Go</span></button>
                             </div>
 
                         </form>
@@ -301,7 +301,7 @@
                                 <div
                                     class="col-xxl-4 col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 mt-0 mb-5 animate__animated fadeInUp">
                                     <!--======= Single Blog Item Start ========-->
-                                    <div class="softsource-single-blog-item card blog-grid">
+                                    <div class="softsource-single-blog-item blog-grid">
                                         <!-- Post Feature Start -->
                                         <div class="post-feature softsource-blog-thumbnail">
                                             <a href="{{ url($blog->url) }}">
@@ -373,7 +373,7 @@
                 <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mx-auto mt-5 pt-5">
                     <h3 class="softsource-home-newsletter-title"><span>Sign-up</span> for our newsletter</h3>
                 </div>
-                <div class="dflex-innews-letter col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6 mx-auto">
+                <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6 mx-auto">
                     <form class="softsource-newsletter-form">
                         <div class="input-group mb-3">
                             <input type="email" class="form-control softsource-home-newsletter-input"

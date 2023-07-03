@@ -1,1203 +1,789 @@
 @media only screen and (max-width: 3000px) {
     .softsource-home-text-over-video-div {
-      transform: translate(-45%, -50%) !important;
-      left: 75% !important;
+        transform: translate(-45%, -50%) !important;
+        left: 75% !important;
     }
 
     .softsource-home-top-scroll {
-      bottom: 100px;
+        bottom: 100px;
     }
 
-    .softsource-header-partner-logo .light-logo {
-      max-width: 200px !important;
+    .softsource-header-partner-logo .light-logo{
+        max-width: 200px !important;
     }
-  }
 
-  @media only screen and (max-width: 2560px) {
+}
+
+@media only screen and (max-width: 2560px) {
     .softsource-home-text-over-video-div {
-      transform: translate(-35%, -50%) !important;
-      left: 70% !important;
+        transform: translate(-35%, -50%) !important;
+        left: 70% !important;
     }
 
     .softsource-home-top-scroll {
-      bottom: 100px;
+        bottom: 100px;
     }
-  }
+}
 
-  @media only screen and (max-width: 2155px) {
+@media only screen and (max-width: 2155px) {
     .softsource-home-text-over-video-div {
-      transform: translate(-35%, -50%) !important;
-      left: 67% !important;
+        transform: translate(-35%, -50%) !important;
+        left: 67% !important;
     }
 
     .softsource-home-top-scroll {
-      bottom: 100px;
+        bottom: 100px;
     }
 
     .softsource-firstline-header {
-      font-size: 85px;
+        font-size: 85px;
     }
 
     .softsource-nav-menus > li.nav-item {
-      padding-left: 20px;
-      padding-right: 20px;
+        padding-left: 20px;
+        padding-right: 20px;
     }
 
-    .softsource-home-fetured-story-horizontal-line,
-    .softsource-home-fetured-blog-horizontal-line {
-      width: 40%;
+    .softsource-home-fetured-story-horizontal-line, .softsource-home-fetured-blog-horizontal-line{
+        width: 40%;
     }
-  }
+}
 
-  @media only screen and (max-width: 1920px) {
+@media only screen and (max-width: 1920px) {
     .softsource-firstline-header {
-      font-size: 75px;
+        font-size: 75px;
     }
 
     .softsource-home-top-scroll {
-      bottom: 150px;
+        bottom: 150px;
     }
 
     .softsource-home-text-over-video-div {
-      transform: translate(-28%, -50%) !important;
+        transform: translate(-28%, -50%) !important;
     }
 
     .softsource-home-daily-prompt-header {
-      font-size: 58px;
+        font-size: 58px;
     }
 
     .softsource-nav-menus > li.nav-item {
-      padding-left: 20px;
-      padding-right: 20px;
+        padding-left: 20px;
+        padding-right: 20px;
     }
 
     .softsource-nav-menus .nav-link,
     .softsource-nav-login-register,
     .softsource-profile-dropdown-button {
-      font-size: 23px;
+        font-size: 23px;
     }
 
     .softsource-nav-search-input {
-      padding: 8px 10px 8px 10px;
-      font-size: 12px;
+        padding: 8px 10px 8px 10px;
+        font-size: 12px;
     }
 
     .softsource-nav-search-btn {
-      padding: 8px 12px 8px 0px;
+        padding: 8px 12px 8px 0px;
     }
 
     .softsource-nav-add-story-btn {
-      padding: 6px 10px 6px 10px;
-      font-size: 15px;
+        padding: 6px 10px 6px 10px;
+        font-size: 15px;
     }
 
-    .softsource-home-fetured-story-horizontal-line,
-    .softsource-home-fetured-blog-horizontal-line {
-      width: 35%;
+    .softsource-home-fetured-story-horizontal-line, .softsource-home-fetured-blog-horizontal-line{
+        width: 35%;
     }
-  }
+}
 
-  @media only screen and (max-width: 1680px) {
+@media only screen and (max-width: 1680px) {
     .softsource-firstline-header {
-      font-size: 66px;
+        font-size: 66px;
     }
 
     .softsource-home-top-scroll {
-      bottom: 150px;
+        bottom: 150px;
     }
 
     .softsource-home-daily-prompt-header {
-      font-size: 51px;
+        font-size: 51px;
     }
 
     .softsource-nav-menus > li.nav-item {
-      padding-left: 15px;
-      padding-right: 15px;
+        padding-left: 15px;
+        padding-right: 15px;
     }
 
     .softsource-nav-menus .nav-link,
     .softsource-nav-login-register,
     .softsource-profile-dropdown-button {
-      font-size: 20px;
+        font-size: 20px;
     }
 
     .softsource-profile-dropdown-ulist li a,
     .softsource-submenu > li > a > span {
-      font-size: 16px;
+        font-size: 16px;
     }
 
-    .softsource-home-fetured-story-horizontal-line,
-    .softsource-home-fetured-blog-horizontal-line {
-      width: 30%;
+    .softsource-home-fetured-story-horizontal-line, .softsource-home-fetured-blog-horizontal-line{
+        width: 30%;
     }
 
-    .softsource-home-fetured-story-top-title {
-      font-size: 100px;
+    .softsource-home-fetured-story-top-title{
+        font-size: 100px;
     }
 
     .partner .softsource-header-logo .light-logo {
-      max-width: 110px !important;
+        max-width: 110px !important;
     }
 
-    .partner .softsource-header-logo .softsource-cust-tag {
-      font-size: 9px;
-      margin-left: -24px;
+    .partner .softsource-header-logo .softsource-cust-tag
+    {
+        font-size: 9px;
+        margin-left: -24px;
     }
 
     .softsource-header-partner-logo .light-logo {
-      max-width: 160px !important;
+        max-width: 160px !important;
     }
-  }
 
-  @media only screen and (max-width: 1440px) {
+
+}
+
+@media only screen and (max-width: 1440px) {
     .softsource-firstline-header {
-      font-size: 57px;
+        font-size: 57px;
     }
 
     .softsource-home-top-scroll {
-      bottom: 150px;
+        bottom: 150px;
     }
 
     .softsource-home-text-over-video-div {
-      transform: translate(-20%, -50%) !important;
-      left: 65% !important;
+        transform: translate(-20%, -50%) !important;
+        left: 65% !important;
     }
 
     .softsource-home-daily-prompt-header {
-      font-size: 44px;
+        font-size: 44px;
     }
 
     .softsource-nav-login-register {
-      font-size: 14px;
-      line-height: 20px;
+        font-size: 14px;
+        line-height: 20px;
     }
 
     .softsource-nav-menus > li.nav-item {
-      padding-left: 10px;
-      padding-right: 10px;
+        padding-left: 10px;
+        padding-right: 10px;
     }
 
     .softsource-nav-menus .nav-link,
     .softsource-profile-dropdown-button {
-      font-size: 18px;
+        font-size: 18px;
     }
 
     .softsource-nav-add-story-btn {
-      font-size: 12px;
+        font-size: 12px;
     }
 
     .softsource-nav-search-input {
-      font-size: 10px;
+        font-size: 10px;
     }
 
-    .softsource-home-fetured-story-top-title,
-    .softsource-home-fetured-blog-top-title {
-      font-size: 90px;
+    .softsource-home-fetured-story-top-title, .softsource-home-fetured-blog-top-title{
+        font-size: 90px;
     }
-    .softsource-home-fetured-story-horizontal-line,
-    .softsource-home-fetured-blog-horizontal-line {
-      width: 25%;
+    .softsource-home-fetured-story-horizontal-line, .softsource-home-fetured-blog-horizontal-line {
+        width: 25%;
     }
 
     .softsource-header-partner-logo .light-logo {
-      max-width: 140px !important;
+        max-width: 140px !important;
     }
 
     .partner .softsource-header-logo .light-logo {
-      max-width: 100px !important;
+        max-width: 100px !important;
     }
 
-    .partner .softsource-header-logo .softsource-cust-tag {
-      font-size: 8px;
-      margin-left: -24px;
+    .partner .softsource-header-logo .softsource-cust-tag
+    {
+        font-size: 8px;
+        margin-left: -24px;
     }
-  }
+}
 
-  @media only screen and (max-width: 1366px) {
+@media only screen and (max-width: 1366px) {
     .softsource-nav-login-register {
-      font-size: 18px;
+        font-size: 18px;
     }
 
     .softsource-mid-nav-bottom-section {
-      margin-left: 20px;
+        margin-left: 20px;
     }
 
     .softsource-header-logo .light-logo {
-      margin-left: auto;
-      margin-right: auto;
+        margin-left: auto;
+        margin-right: auto;
     }
 
     .softsource-cust-tag {
-      font-size: 8px;
-      margin-left: 0px;
-      margin-bottom: 0.3rem;
+        font-size: 8px;
+        margin-left: 0px;
+        margin-bottom: 0.3rem;
     }
 
-    .softsource-home-fetured-story-top-title,
-    .softsource-home-fetured-blog-top-title {
-      font-size: 85px;
+    .softsource-home-fetured-story-top-title, .softsource-home-fetured-blog-top-title{
+        font-size: 85px;
     }
 
     .partner .softsource-nav-menus > li.nav-item {
-      padding-left: 5px;
-      padding-right: 5px;
+        padding-left: 5px;
+        padding-right: 5px;
     }
 
     .partner .softsource-header-logo .light-logo {
-      max-width: 90px !important;
+        max-width: 90px !important;
     }
 
-    .partner .softsource-header-logo .softsource-cust-tag {
-      margin-left: -30px;
+    .partner .softsource-header-logo .softsource-cust-tag
+    {
+        margin-left: -30px;
     }
-  }
+}
 
-  @media only screen and (max-width: 1024px) {
+
+@media only screen and (max-width: 1024px) {
     .softsource-header-logo .light-logo {
-      max-width: 90px;
-      margin-left: auto;
-      margin-right: auto;
+        max-width: 90px;
+        margin-left: auto;
+        margin-right: auto;
     }
     .softsource-home-text-over-video-div {
-      transform: translate(-10%, -50%) !important;
-      left: 54% !important;
+        transform: translate(-10%, -50%) !important;
+        left: 54% !important;
     }
 
     .softsource-home-top-scroll {
-      left: -100px;
+        left: -100px;
     }
 
     .softsource-home-heroo-video-div video {
-      height: 700px !important;
+        height: 700px !important;
     }
 
     .softsource-home-daily-prompt-header {
-      font-size: 35px;
+        font-size: 35px;
     }
 
-    .softsource-home-fetured-story-top-title,
-    .softsource-home-fetured-blog-top-title {
-      font-size: 80px;
+    .softsource-home-fetured-story-top-title, .softsource-home-fetured-blog-top-title{
+        font-size: 80px;
     }
 
-    .softsource-story-item-details .story-title,
-    .softsource-single-blog-item.blog-grid .post-info .post-title {
-      font-size: 20px;
+    .softsource-story-item-details .story-title, .softsource-single-blog-item.blog-grid .post-info .post-title{
+        font-size: 20px;
     }
 
-    .softsource-story-item-details p,
-    .softsource-single-blog-item p {
-      font-size: 18px;
+    .softsource-story-item-details p, .softsource-single-blog-item p{
+        font-size: 18px;
     }
 
-    .softsource-home-intro-second-div {
-      padding-top: 100px;
+    .softsource-home-intro-second-div{
+        padding-top: 100px;
     }
 
-    .softsource-home-fetured-story-horizontal-line,
-    .softsource-home-fetured-blog-horizontal-line {
-      display: none;
+
+    .softsource-home-fetured-story-horizontal-line, .softsource-home-fetured-blog-horizontal-line {
+        display: none;
     }
 
     .softsource-home-search-story-section-title-wrap {
-      text-align: center;
+        text-align: center;
     }
 
     .softsource-home-search-story-horizontal-line {
-      display: none;
+        display: none;
     }
 
     .softsource-home-search-story-form {
-      width: auto;
-      justify-content: center;
+        width: auto;
+        justify-content: center;
     }
 
     .softsource-home-writing-prompt-title {
-      font-size: 80px;
+        font-size: 80px;
     }
 
     .softsource-home-intro-title {
-      font-size: 80px;
+        font-size: 80px;
     }
 
     .softsource-home-intro-title span {
-      font-size: 75px;
+        font-size: 75px;
     }
 
     .partner .softsource-nav-menus > li.nav-item {
-      padding-left: 5px !important;
-      padding-right: 5px !important;
+        padding-left: 5px !important;
+        padding-right: 5px !important;
     }
 
     .softsource-nav-menus > li.nav-item {
-      padding-left: 5px;
-      padding-right: 5px;
+        padding-left: 5px;
+        padding-right: 5px;
     }
 
     .softsource-nav-login-register {
-      font-size: 12px;
+        font-size: 12px;
     }
 
     .softsource-nav-search-input {
-      font-size: 9px;
+        font-size: 9px;
     }
 
     .softsource-nav-menus .nav-link {
-      font-size: 12px;
+        font-size: 12px;
     }
 
     .softsource-nav-add-story-btn {
-      font-size: 9px;
+        font-size: 9px;
     }
 
-    .softsource-founder-section-about:after {
-      right: -60px;
-      height: 150px;
-      width: 150px;
+    .softsource-founder-section-about:after{
+        right: -60px;
+        height: 150px;
+        width: 150px;
     }
 
     .softsource-header-partner-logo .light-logo {
-      max-width: 110px !important;
+        max-width: 110px !important;
     }
 
     .partner .softsource-nav-menus > li.nav-item {
-      padding-left: 5px;
-      padding-right: 5px;
+        padding-left: 5px;
+        padding-right: 5px;
     }
 
     .partner .softsource-header-logo .light-logo {
-      max-width: 90px !important;
+        max-width: 90px !important;
     }
 
-    .partner .softsource-header-logo .softsource-cust-tag {
-      margin-left: -60px !important;
+    .partner .softsource-header-logo .softsource-cust-tag
+    {
+        margin-left: -60px !important;
     }
 
     .partner .softsource-nav-login-register {
-      font-size: 10px !important;
+        font-size: 10px !important;
     }
 
     .partner .softsource-nav-menus .nav-link {
-      font-size: 11px !important;
+        font-size: 11px !important;
     }
-  }
 
-  @media only screen and (max-width: 768px) {
+
+}
+
+@media only screen and (max-width: 768px) {
     .softsource-home-fetured-story-horizontal-line,
     .softsource-home-fetured-blog-horizontal-line {
-      display: none;
+        display: none;
     }
 
     .softsource-home-fetured-story-top-title,
     .softsource-home-fetured-blog-top-title {
-      font-size: 56px;
+        font-size: 56px;
     }
 
     .softsource-partner-top-section-intro h2 {
-      font-size: 60px;
+        font-size: 60px;
     }
 
     .softsource-partner-details-historychip-div img,
     .softsource-partner-top-section img,
     .softsource-partner-bottom-section img {
-      width: 100% !important;
+        width: 100% !important;
     }
 
     .softsource-top-search-form,
     .softsource-nav-add-story-btn,
     .softsource-top-login-register-div {
-      display: none;
+        display: none;
     }
 
     .softsource-nav-toggle-btn,
     .softsource-responsive-menu-div {
-      display: block !important;
+        display: block !important;
     }
 
     .softsource-scrolling-notice marquee {
-      font-size: 14px;
+        font-size: 14px;
     }
 
     .softsource-mid-nav-bottom-section {
-      margin-top: 20px;
+        margin-top: 20px;
     }
-    .softsource-home-newsletter-input {
-      padding-left: 15px;
-      font-size: 18px;
+    .softsource-home-newsletter-input{
+        padding-left: 15px;
+        font-size: 18px;
     }
 
-    .softsource-home-newsletter-btn {
-      width: 130px;
+    .softsource-home-newsletter-btn{
+        width: 130px;
     }
 
     .softsource-home-top-scroll {
-      display: none;
+        display: none;
     }
 
     .softsource-home-text-over-video-div {
-      transform: none !important;
-      top: 10% !important;
-      left: 0 !important;
-      padding: 0px 130px;
+        transform: none !important;
+        top: 10% !important;
+        left: 0 !important;
+        padding: 0px 130px;
     }
 
     .softsource-firstline-header {
-      font-size: 57px !important;
-      text-align: center !important;
+        font-size: 57px !important;
+        text-align: center !important;
     }
 
-    .softsource-home-responsive-btn {
-      display: block !important;
+    .softsource-home-responsive-btn{
+        display: block !important;
     }
 
     .softsource-founder-section-about:after {
-      right: -50px;
-      height: 130px;
-      width: 130px;
+        right: -50px;
+        height: 130px;
+        width: 130px;
     }
 
     .partner .softsource-header-logo .softsource-cust-tag {
-      margin-left: 0px !important;
-    }
-  }
-
-  @media only screen and (max-width: 425px) {
-    .dflex-innews-letter {
-      display: flex;
-      justify-content: center;
-    }
-    .softsource-newsletter-form {
-      margin-top: -3rem !important;
-    }
-    .input-group {
-      width: 16rem !important;
-    }
-    .softsource-home-newsletter-input {
-      height: 40px !important;
-    }
-    .softsource-home-newsletter-btn {
-      height: 40px !important;
-    }
-    .softsource-single-blog-item p {
-      font-size: 13px;
-      margin-top: 0px !important;
-    }
-    .softsource-single-blog-item.blog-grid .post-info .post-title {
-      margin-bottom: 10px;
-      line-height: 1.5;
-      font-weight: 700;
-      font-size: 20px;
-    }
-    .post-date {
-      padding: 10px 10px;
-      padding-bottom: 16px;
-      font-size: 20px;
-    }
-    .story-date a:first-child {
-      font-size: 1.1rem;
-    }
-    .softsource-story-item-details .story-title a {
-      font-size: 1rem;
-    }
-    .softsource-story-item-details p {
-      font-size: 17px;
-    }
-    .story-excerpt {
-      margin-top: 0px !important;
-    }
-    .softsource-story-item-details {
-      background: none !important;
-      padding: 0px;
-      padding-top: 10px;
-      position: relative;
-      margin-top: 0px !important;
-      max-width: 350px;
-      margin-left: auto;
-      margin-right: auto;
-      box-shadow: none !important;
-      width: 100%;
-    }
-    .softsource-story-item-div {
-      background-color: #f7f7f7;
-    }
-    .softsource-story-item-details a {
-      color: black;
-      font-weight: 600;
-    }
-    .softsource-footer-widget__list li {
-      margin-bottom: 25px;
-      font-weight: 400;
-      font-size: 14px;
-      line-height: 70%;
-      letter-spacing: 0.5px;
-    }
-    .softsource-social-networks {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    .softsource-footer-cust-tag {
-      font-weight: 400;
-      font-size: 14px;
-      letter-spacing: 0.5px;
-    }
-    .softsource-nav-search-input {
-      font-size: 10px;
-    }
-    .softsource-nav-search-bar input {
-      background-color: #f6f6f6;
-    }
-    .softsource-home-fetured-story-read-more-story-btn {
-      box-sizing: border-box;
-      background: #3d5561;
-      border: none;
-      border-radius: 14px;
-      font-weight: 500;
-      font-size: 14px;
-      letter-spacing: 1px;
-      margin-left: -4rem;
-      padding-right: 2rem !important;
-      padding-left: 2rem !important;
+        margin-left: 0px !important;
     }
 
-    .softsource-responsive-nav-menus li a {
-      font-size: 14px;
-      line-height: 80%;
-      letter-spacing: 1px;
+    .softsource-home-search-writing-prompt-title-wrap{
+        text-align: center;
     }
 
-    .softsource-home-intro-sub-title {
-      font-weight: 500;
-      font-size: 12px;
-    }
-    .downloadebooktitle {
-      font-size: 20px !important;
-    }
-    .gobtn {
-      font-size: 1rem;
-    }
-    .softsource-home-text-over-video-div {
-      padding: 0px 0px;
+
+}
+
+@media only screen and (max-width: 425px) {
+
+    .softsource-home-text-over-video-div{
+        padding: 0px 0px;
     }
 
     .softsource-firstline-header {
-      font-size: 28px !important;
-      margin-top: 6rem;
-      padding-left: 0.875rem !important;
-      padding-right: 0.875rem !important;
+        font-size: 50px !important;
     }
 
-    .softsource-home-responsive-btn {
-      top: 60%;
-      left: 20% !important;
-    }
-    .softsource-home-btn-register {
-      background-color: #abacac;
-      margin-right: 1rem;
+    .softsource-home-responsive-btn{
+        top: 60%;
+        left: 20% !important;
     }
 
-    .softsource-home-btn-register,
-    .softsource-home-btn-login {
-      font-size: 16px;
+    .softsource-home-btn-register, .softsource-home-btn-login{
+        font-size: 25px;
     }
+
 
     .softsource-home-daily-prompt {
-      flex-direction: column;
-      padding-left: 0px !important;
-      height: 274px !important;
+        flex-direction: column;
+        padding-left: 0px !important;
     }
 
     .softsource-home-search-story-form {
-      flex-direction: row;
+        flex-direction: column;
     }
 
     .softsource-home-search-story-title {
-      font-size: 22px;
-      font-weight: 500;
-      font-family: "Montserrat";
+        font-size: 90px;
     }
 
     .softsource-home-writing-prompt-title {
-      font-size: 22px;
-      text-align: center;
-      font-weight: 600;
+        font-size: 70px;
     }
 
     .softsource-home-intro-title {
-      font-size: 22px;
-      font-weight: 600;
+        font-size: 75px;
     }
 
     .softsource-home-intro-title span {
-      font-size: 22px;
-      font-weight: 600;
+        font-size: 55px;
     }
 
     .softsource-home-newsletter-title {
-      font-size: 15px;
-      font-family: "Poppins";
-      letter-spacing: 1px;
+        font-size: 40px;
     }
 
-    .softsource-home-fetured-story-section-title-wrap {
-      padding-left: 0px !important;
+    .softsource-home-fetured-story-section-title-wrap{
+        padding-left: 0px !important;
     }
 
     .softsource-home-fetured-story-top-title,
     .softsource-home-fetured-blog-top-title {
-      font-size: 28px;
+        font-size: 28px;
     }
 
     .softsource-home-newsletter-input {
-      font-size: 12px;
+
+        font-size: 12px;
     }
 
     .softsource-home-newsletter-btn {
-      width: 85px;
-      font-size: 12px;
+        width: 85px;
+        font-size: 12px;
     }
 
     .softsource-home-daily-prompt-header {
-      font-size: 18px;
-      margin-top: 1.5rem;
-      margin-bottom: 0.875rem;
-      font-weight: 500;
-      letter-spacing: 0.5px;
+        font-size: 30px;
     }
 
     .softsource-home-daily-prompt-word-text-box input {
-      font-size: 14px;
-      padding-left: 10px;
-      padding-right: 10px;
-      letter-spacing: 1px;
-      font-weight: 400;
+        font-size: 15px;
     }
 
     .softsource-home-daily-prompt-word-text-box {
-      margin-left: 0px !important;
-      margin-right: 0px !important;
-      width: 17rem;
-      height: 45px !important;
+        margin-left: 0px !important;
+        margin-right: 0px !important;
     }
 
     .softsource-home-daily-prompt-add-story {
-      width: 100%;
+        width: 100%;
     }
 
     .softsource-footer-inner-div {
-      padding-right: 1rem !important;
-      padding-left: 1rem !important;
-      margin-right: 1rem !important;
-      margin-left: 1rem !important;
+        padding-right: 1rem !important;
+        padding-left: 1rem !important;
+        margin-right: 1rem !important;
+        margin-left: 1rem !important;
     }
 
     .softsource-social-networks {
-      display: flex;
-      justify-content: center;
-      align-items: center;
+        display: flex;
+        justify-content: center;
     }
 
     .softsource-footer-logo-div {
-      text-align: center !important;
+        text-align: center !important;
     }
 
     .softsource-footer-social-div {
-      text-align: center !important;
+        text-align: center !important;
     }
 
     .softsource-footer-social-div {
-      max-width: 100%;
+        max-width: 100%;
     }
 
     .softsource-partner-bottom-section img {
-      margin-bottom: 5px;
+        margin-bottom: 5px;
     }
 
     .softsource-hc-partner-intro {
-      text-align: center;
+        text-align: center;
     }
 
     .partner .navbar-toggler-icon {
-      width: 1em;
-      height: 1em;
+        width: 1em;
+        height: 1em;
     }
 
     .partner .softsource-cust-tag {
-      margin-left: -40px;
+        margin-left: -40px;
     }
 
     .softsource-founder-section-about:after {
-      right: -15px;
-      height: 100px;
-      width: 100px;
+        right: -15px;
+        height: 100px;
+        width: 100px;
     }
 
     .pagination {
-      --bs-pagination-padding-x: 0.5rem !important;
-      --bs-pagination-font-size: 0.8rem !important;
+        --bs-pagination-padding-x: 0.5rem !important;
+        --bs-pagination-font-size: 0.8rem !important;
     }
 
-    .softsource-writing-prompt-div {
-      margin-right: 0px !important;
+    .softsource-writing-prompt-div{
+        margin-right: 0px !important;
     }
 
     .partner .softsource-header-logo .softsource-cust-tag {
-      margin-left: 0px !important;
+        margin-left: 0px !important;
     }
-    .softsource-home-daily-prompt-submit-story-btn {
-      background: #3d5561;
-      backdrop-filter: blur(12.5px);
-      border-radius: 17px;
-      letter-spacing: 0.5px;
-      color: #ffffff;
-      font-family: "Poppins";
-      font-style: normal;
-      font-size: 16px;
-      line-height: 160%;
-      font-weight: 400;
-      padding-left: 30px;
-      padding-right: 30px;
-      margin-bottom: 1rem;
-    }
-    .softsource-home-search-story-form-category-label {
-      font-family: "Poppins";
-      font-style: normal;
-      font-weight: 400;
-      font-size: 14px;
-      line-height: 24px;
-      color: #000000;
-    }
-  }
+}
 
-  @media only screen and (max-width: 375px) {
-    .dflex-innews-letter {
-      display: flex;
-      justify-content: center;
-    }
-    .softsource-newsletter-form {
-      margin-top: -3rem !important;
-    }
-    .input-group {
-      width: 16rem !important;
-    }
-    .softsource-home-newsletter-input {
-      height: 40px !important;
-    }
-    .softsource-home-newsletter-btn {
-      height: 40px !important;
-    }
-    .softsource-single-blog-item p {
-      font-size: 13px;
-      margin-top: 0px !important;
-    }
-    .softsource-single-blog-item.blog-grid .post-info .post-title {
-      margin-bottom: 10px;
-      line-height: 1.5;
-      font-weight: 700;
-      font-size: 20px;
-    }
-    .post-date {
-      padding: 10px 10px;
-      padding-bottom: 16px;
-      font-size: 20px;
-    }
-    .story-date a:first-child {
-      font-size: 1.1rem;
-    }
-    .softsource-story-item-details .story-title a {
-      font-size: 1rem;
-    }
-    .story-excerpt {
-      margin-top: 0px !important;
-    }
-    .softsource-story-item-details {
-      background: none !important;
-      padding: 0px;
-      padding-top: 10px;
-      position: relative;
-      margin-top: 0px !important;
-      max-width: 350px;
-      margin-left: auto;
-      margin-right: auto;
-      box-shadow: none !important;
-      width: 100%;
-    }
-    .softsource-story-item-div {
-      background-color: #f7f7f7;
-    }
-    .softsource-footer-widget__list li {
-      margin-bottom: 25px;
-      font-weight: 400;
-      font-size: 14px;
-      line-height: 70%;
-      letter-spacing: 0.5px;
-    }
-    .softsource-footer-cust-tag {
-      font-weight: 400;
-      font-size: 14px;
-      letter-spacing: 0.5px;
-    }
-    .softsource-nav-search-input {
-      font-size: 10px;
-    }
-    .softsource-nav-search-bar input {
-      background-color: #f6f6f6;
-    }
-    .softsource-responsive-nav-menus li a {
-      font-size: 14px;
-      line-height: 80%;
-      letter-spacing: 1px;
-    }
-    .softsource-home-btn-register {
-      background-color: #abacac;
-      margin-right: 1rem;
-    }
-    .softsource-home-fetured-story-read-more-story-btn {
-      box-sizing: border-box;
-      background: #3d5561;
-      border: none;
-      border-radius: 14px;
-      font-weight: 500;
-      font-size: 14px;
-      letter-spacing: 1px;
-      margin-left: -4rem;
-      padding-right: 2rem !important;
-      padding-left: 2rem !important;
-    }
-    .softsource-home-intro-sub-title {
-      font-weight: 500;
-      font-size: 12px;
-    }
-    .downloadebooktitle {
-      font-size: 20px !important;
-    }
-    .gobtn {
-      font-size: 1rem;
-    }
-    .softsource-home-search-story-form-category-label {
-      font-family: "Poppins";
-      font-style: normal;
-      font-weight: 400;
-      font-size: 14px;
-      line-height: 24px;
-      color: #000000;
-    }
+@media only screen and (max-width: 375px) {
     .softsource-firstline-header {
-      font-size: 28px !important;
-      margin-top: 6rem;
-      padding-left: 0.875rem !important;
-      padding-right: 0.875rem !important;
+        font-size: 48px !important;
     }
     .softsource-home-newsletter-title {
-      font-size: 15px;
-      font-family: "Poppins";
-      letter-spacing: 1px;
+        font-size: 36px;
     }
 
     .softsource-home-newsletter-btn {
-      width: 75px;
-      font-size: 10px;
+        width: 75px;
+        font-size: 10px;
     }
 
+
     .softsource-home-daily-prompt-header {
-      font-size: 18px;
-      margin-top: 1.5rem;
-      margin-bottom: 0.875rem;
-      font-weight: 500;
-      letter-spacing: 0.5px;
+        font-size: 26px;
     }
 
     .softsource-home-search-story-title {
-      font-size: 22px;
-      font-weight: 500;
-      font-family: "Montserrat";
+        font-size: 80px;
     }
 
     .softsource-home-writing-prompt-title {
-      font-size: 22px;
-      text-align: center;
-      font-weight: 600;
+        font-size: 60px;
     }
 
     .softsource-home-intro-title {
-      font-size: 22px;
-      font-weight: 600;
+        font-size: 68px;
     }
 
     .softsource-home-intro-title span {
-      font-size: 22px;
-      font-weight: 600;
+        font-size: 50px;
     }
 
     .softsource-home-fetured-story-top-title,
     .softsource-home-fetured-blog-top-title {
-      font-size: 23px;
+        font-size: 23px;
     }
 
     .softsource-footer-copyright-text,
     .softsource-footer-poweredby-text {
-      text-align: center !important;
+        text-align: center !important;
 
-      padding-top: 5px;
+        padding-top: 5px;
     }
 
     .softsource-partner-feature img {
-      width: 328px;
+        width: 328px;
     }
 
     .softsource-header-logo .light-logo {
-      max-width: 60px;
+        max-width: 60px;
     }
 
     .softsource-cust-tag {
-      font-size: 5px;
-      margin-left: -10px;
+        font-size: 5px;
+        margin-left: -10px;
     }
 
     .softsource-scrolling-notice marquee {
-      font-size: 10px;
+        font-size: 10px;
     }
 
     .navbar-toggler-icon {
-      width: 1em;
-      height: 1em;
+        width: 1em;
+        height: 1em;
     }
     .partner .softsource-header-logo .softsource-cust-tag {
-      margin-left: -25px !important;
+        margin-left: -25px !important;
     }
 
     .partner .navbar-toggler-icon {
-      width: 1em;
-      height: 1em;
+        width: 1em;
+        height: 1em;
     }
 
     .pagination {
-      --bs-pagination-padding-x: 0.4rem !important;
-      --bs-pagination-font-size: 0.7rem !important;
+        --bs-pagination-padding-x: 0.4rem !important;
+        --bs-pagination-font-size: 0.7rem !important;
     }
-  }
+}
 
-  @media only screen and (max-width: 320px) {
-    .dflex-innews-letter {
-      display: flex;
-      justify-content: center;
-    }
-    .softsource-newsletter-form {
-      margin-top: -3rem !important;
-    }
-    .input-group {
-      width: 16rem !important;
-    }
-    .softsource-home-newsletter-input {
-      height: 40px !important;
-    }
-    .softsource-home-newsletter-btn {
-      height: 40px !important;
-    }
-    .softsource-single-blog-item p {
-      font-size: 13px;
-      margin-top: 0px !important;
-    }
-    .softsource-single-blog-item.blog-grid .post-info .post-title {
-      margin-bottom: 10px;
-      line-height: 1.5;
-      font-weight: 700;
-      font-size: 20px;
-    }
-    .post-date {
-      padding: 10px 10px;
-      padding-bottom: 16px;
-      font-size: 20px;
-    }
-    .story-date a:first-child {
-      font-size: 1.1rem;
-    }
-    .softsource-story-item-details .story-title a {
-      font-size: 1rem;
-    }
-    .story-excerpt {
-      margin-top: 0px !important;
-    }
-    .softsource-story-item-details {
-      background: none !important;
-      padding: 0px;
-      padding-top: 10px;
-      position: relative;
-      margin-top: 0px !important;
-      max-width: 350px;
-      margin-left: auto;
-      margin-right: auto;
-      box-shadow: none !important;
-      width: 100%;
-    }
-    .softsource-story-item-div {
-      background-color: #f7f7f7;
-    }
-    .softsource-footer-widget__list li {
-      margin-bottom: 25px;
-      font-weight: 400;
-      font-size: 14px;
-      line-height: 70%;
-      letter-spacing: 0.5px;
-    }
-    .softsource-social-networks {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    .softsource-footer-cust-tag {
-      font-weight: 400;
-      font-size: 14px;
-      letter-spacing: 0.5px;
-    }
-    .softsource-nav-search-input {
-      font-size: 10px;
-    }
-    .softsource-nav-search-bar input {
-      background-color: #f6f6f6;
-    }
-    .softsource-responsive-nav-menus li a {
-      font-size: 14px;
-      line-height: 80%;
-      letter-spacing: 1px;
-    }
-    .softsource-home-btn-register {
-      background-color: #abacac;
-      margin-right: 1rem;
-    }
-    .softsource-home-fetured-story-read-more-story-btn {
-      box-sizing: border-box;
-      background: #3d5561;
-      border: none;
-      border-radius: 14px;
-      font-weight: 500;
-      font-size: 14px;
-      letter-spacing: 1px;
-      margin-left: -4rem;
-      padding-right: 2rem !important;
-      padding-left: 2rem !important;
-    }
-    .softsource-home-intro-sub-title {
-      font-weight: 500;
-      font-size: 12px;
-    }
-    .downloadebooktitle {
-      font-size: 20px !important;
-    }
-    .gobtn {
-      font-size: 1rem;
-    }
-    .softsource-home-search-story-form-category-label {
-      font-family: "Poppins";
-      font-style: normal;
-      font-weight: 400;
-      font-size: 14px;
-      line-height: 24px;
-      color: #000000;
-    }
+@media only screen and (max-width: 320px) {
     .softsource-home-daily-prompt-header {
-      font-size: 18px;
-      margin-top: 1.5rem;
-      margin-bottom: 0.875rem;
-      font-weight: 500;
-      letter-spacing: 0.5px;
+        font-size: 20px;
     }
 
     .softsource-home-search-story-title {
-      font-size: 22px;
-      font-weight: 500;
-      font-family: "Montserrat";
+        font-size: 70px;
     }
 
     .softsource-home-writing-prompt-title {
-      font-size: 22px;
-      text-align: center;
-      font-weight: 600;
+        font-size: 53px;
     }
 
     .softsource-home-intro-title {
-      font-size: 22px;
-      font-weight: 600;
+        font-size: 58px;
     }
 
     .softsource-home-intro-title span {
-      font-size: 22px;
-      font-weight: 600;
+        font-size: 41px;
     }
 
     .softsource-home-newsletter-title {
-      font-size: 15px;
-      font-family: "Poppins";
-      letter-spacing: 1px;
+        font-size: 29px;
     }
 
     .softsource-firstline-header {
-      font-size: 28px !important;
-      margin-top: 6rem;
-      padding-left: 0.875rem !important;
-      padding-right: 0.875rem !important;
+        font-size: 42px !important;
     }
 
-    .softsource-home-btn-register,
-    .softsource-home-btn-login {
-      font-size: 20px;
+    .softsource-home-btn-register, .softsource-home-btn-login {
+        font-size: 20px;
     }
 
     .softsource-home-responsive-btn {
-      left: 15% !important;
+        left: 15% !important;
     }
 
     .softsource-home-fetured-story-top-title,
     .softsource-home-fetured-blog-top-title {
-      font-size: 26px;
+        font-size: 26px;
     }
 
     .softsource-partner-feature img {
-      width: 273px;
+        width: 273px;
     }
 
     .softsource-partner-top-section-intro h2 {
-      font-size: 50px;
+        font-size: 50px;
     }
 
     .navbar-toggler-icon {
-      width: 1em;
-      height: 1em;
+        width: 1em;
+        height: 1em;
     }
 
     .partner .navbar-toggler-icon {
-      width: 1em;
-      height: 1em;
+        width: 1em;
+        height: 1em;
     }
 
     .pagination {
-      --bs-pagination-padding-x: 0.3rem !important;
-      --bs-pagination-font-size: 0.6rem !important;
+        --bs-pagination-padding-x: 0.3rem !important;
+        --bs-pagination-font-size: 0.6rem !important;
     }
 
     .partner .softsource-header-logo .light-logo {
-      max-width: 85px !important;
+        max-width: 85px !important;
     }
 
     .partner .softsource-header-logo .softsource-cust-tag {
-      margin-left: -35px !important;
+        margin-left: -35px !important;
     }
-  }
+}
 
-  @media (min-width: 1200px) {
+@media (min-width: 1200px) {
     .softsource-index-section6 .form-sec {
-      max-width: 60%;
-      margin: auto;
+        max-width: 60%;
+        margin: auto;
     }
-  }
+}
 
-  @media only screen and (max-width: 479px) {
+@media only screen and (max-width: 479px) {
     .softsource-faq-accordion-wrapper .card-header h5 button span {
-      right: 15px;
+        right: 15px;
     }
 
     .softsource-faq-accordion-wrapper .card-header h5 button {
-      padding-left: 15px;
-      padding-right: 20px;
+        padding-left: 15px;
+        padding-right: 20px;
     }
-  }
+}
