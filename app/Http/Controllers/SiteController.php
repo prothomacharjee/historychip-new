@@ -426,17 +426,24 @@ class SiteController extends Controller
         $story = ($id) ? Story::findOrFail($id) : null;
         $page_title = ($id) ? 'Update Story' : 'Write A Story';
 
-        return view('site.write-story')->with([
-            'page_title' => $page_title,
-            'notices' => $this->notices,
-            'categories' => $categories,
-            'categories_level1' => $categories_level1,
-            'categories_level2' => $categories_level2,
-            'categories_level3' => $categories_level3,
-            'story' => $story,
-            'meta' => $this->pages,
+        if(Auth::id() == $story->author_id){
+            return view('site.write-story')->with([
+                'page_title' => $page_title,
+                'notices' => $this->notices,
+                'categories' => $categories,
+                'categories_level1' => $categories_level1,
+                'categories_level2' => $categories_level2,
+                'categories_level3' => $categories_level3,
+                'story' => $story,
+                'meta' => $this->pages,
 
-        ]);
+            ]);
+        }
+        else{
+            return redirect()->route('my-stories')->with('error', "You can't access others' stories. It is not legal. If you try again we will take a legal action agianst you.");
+        }
+
+
     }
 
     public function storySearch(Request $request)
