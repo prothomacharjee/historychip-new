@@ -618,21 +618,23 @@
         $(document).on('click', '#submit_btn', function() {
             $(this).prop('disabled', true).text('Submitting...');
             $('#draft_btn').prop('disabled', true);
+            $('#story_form').submit();
         });
 
         $(document).on('click', '#draft_btn', function() {
+            $('#is_draft').val('1');
             $(this).prop('disabled', true).text('Draft Submitting...');
             $('#submit_btn').prop('disabled', true);
-
+            $('#story_form').submit();
         });
 
 
 
 
-        function saveAsDraft() {
-            $('#is_draft').val('1');
-            $('#story_form').submit();
-        }
+        // function saveAsDraft() {
+        //     $('#is_draft').val('1');
+        //     $('#story_form').submit();
+        // }
         // $('#story_form').submit();
 
 
