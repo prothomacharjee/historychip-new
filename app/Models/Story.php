@@ -11,7 +11,7 @@ class Story extends Model
 {
     protected $guarded = [];
 
-    use Searchable;
+    // use Searchable;
 
     public function base_category()
     {
@@ -138,9 +138,9 @@ class Story extends Model
             ->where('is_approved', 1)
             ->where('is_draft', 0)
             ->where(function ($query) use ($keyword) {
-                $query->where('title', 'like', '%' . $keyword . '%')
-                    ->orWhere('context', 'like', '%' . $keyword . '%')
-                    ->orWhere('tags', 'like', '%' . $keyword . '%');
+                $query->where('title', 'RLIKE', '^' . $keyword . '$')
+                    ->orWhere('context', 'RLIKE', '^' . $keyword . '$')
+                    ->orWhere('tags', 'RLIKE', '^' . $keyword . '$');
             })
             ->get();
     }
@@ -499,9 +499,9 @@ class Story extends Model
     // }
 
     private function calculateRecordSize($cleanString)
-    {
-        $recordSize = mb_strlen(serialize($cleanString), '8bit');
+    // {
+    //     $recordSize = mb_strlen(serialize($cleanString), '8bit');
 
-        return $recordSize;
-    }
+    //     return $recordSize;
+    // }
 }

@@ -15,7 +15,7 @@
         // $max_story_content_length = '12000';
         // $min_story_content_length = '500';
         $header_image_path = old('header_image_path') ? old('header_image_path') : (!empty($story->header_image_path) ? $story->header_image_path : '');
-// dd($header_image_path);
+        // dd($header_image_path);
         if ($header_image_path != '') {
             $preload = [];
 
@@ -163,7 +163,7 @@
                                 <span class="text-warning image-upload-waiting"></span>
                             </div>
                             <input type="hidden" name="header_image_path" id="header_image_path" class="front_file-saver"
-                                value="{{$header_image_path}}">
+                                value="{{ $header_image_path }}">
                         </div>
 
                         {{-- <div class="col-6 photo_credit_div mt-3" style="{{empty($story)?'display:none':''}}">
@@ -181,11 +181,13 @@
                             @enderror
                         </div> --}}
 
-                        <div class="col-12 photo_credit_div mt-3" style="{{ ($header_image_path == '') ? 'display:none' : '' }}">
+                        <div class="col-12 photo_credit_div mt-3"
+                            style="{{ $header_image_path == '' ? 'display:none' : '' }}">
                             <label for="photo_credit" class="form-label">Photo Credit <span
                                     class="text-danger">*</span></label>
                             <input type="text" class="form-control @error('photo_credit') is-invalid @enderror"
-                                id="photo_credit" name="photo_credit" placeholder="Photo Credit" {{ ($header_image_path == '') ? '' : 'required' }}
+                                id="photo_credit" name="photo_credit" placeholder="Photo Credit"
+                                {{ $header_image_path == '' ? '' : 'required' }}
                                 aria-describedby="validationPhotoCreditFeedback"
                                 value="{{ old('photo_credit') ? old('photo_credit') : (!empty($story->photo_credit) ? $story->photo_credit : null) }}">
                             <div class="valid-feedback">Looks good!</div>
@@ -383,7 +385,8 @@
                                     class="front_file-saver" value="{{ $audio_path }}">
                             </div>
 
-                            <div class="col-md-12 audioconvert_div" style="{{ ($audio_path == '') ? 'display:none' : '' }}">
+                            <div class="col-md-12 audioconvert_div"
+                                style="{{ $audio_path == '' ? 'display:none' : '' }}">
                                 <div class="form-check d-flex">
                                     <input type="checkbox" id="is_audioconvert_check" name="is_audioconvert_check"
                                         value="0">
@@ -394,13 +397,15 @@
                             </div>
 
 
-                            <div class="col-12 audio_video_credit_div" style="{{($audio_path == '') ? 'display:none' : '' }}">
+                            <div class="col-12 audio_video_credit_div"
+                                style="{{ $audio_path == '' ? 'display:none' : '' }}">
                                 <label for="audio_video_credit" class="form-label">Audio/Video Credit <span
                                         class="text-danger">*</span></label>
                                 <input type="text"
                                     class="form-control @error('audio_video_credit') is-invalid @enderror"
                                     id="audio_video_credit" name="audio_video_credit" placeholder="Audio/Video Credit"
-                                    aria-describedby="validationPhotoCreditFeedback" {{($audio_path == '') ? '' : 'required' }}
+                                    aria-describedby="validationPhotoCreditFeedback"
+                                    {{ $audio_path == '' ? '' : 'required' }}
                                     value="{{ old('audio_video_credit') ? old('audio_video_credit') : (!empty($story->audio_video_credit) ? $story->audio_video_credit : null) }}">
                                 <div class="valid-feedback">Looks good!</div>
                                 <div class="invalid-feedback">You must enter an audio/video credit.</div>
@@ -434,19 +439,16 @@
                             $event_instance = old('event_detail_dates') ? old('event_detail_dates') : (!empty($story->event_detail_dates) ? $story->event_detail_dates : '');
                             $event_date = old('event_dates') ? old('event_dates') : (!empty($story->event_dates) ? $story->event_dates : '');
 
-                            if($event_instance != '' && $event_date != ''){
+                            if ($event_instance != '' && $event_date != '') {
                                 $instance_required = '';
                                 $date_required = '';
-                            }
-                            elseif ($event_instance == '' && $event_date != '') {
+                            } elseif ($event_instance == '' && $event_date != '') {
                                 $instance_required = '';
                                 $date_required = 'required';
-                            }
-                            elseif ($event_instance != '' && $event_date == '') {
+                            } elseif ($event_instance != '' && $event_date == '') {
                                 $instance_required = 'required';
                                 $date_required = '';
-                            }
-                            else{
+                            } else {
                                 $instance_required = 'required';
                                 $date_required = 'required';
                             }
@@ -457,8 +459,7 @@
                             <input {{ $instance_required }} type="text"
                                 class="form-control @error('event_detail_dates') is-invalid @enderror"
                                 id="event_detail_dates" name="event_detail_dates" placeholder="Event Period/Instance"
-                                 aria-describedby="validationEventDetailsDateFeedback"
-                                value="{{ $event_instance }}">
+                                aria-describedby="validationEventDetailsDateFeedback" value="{{ $event_instance }}">
                             <span class="fa fa-question-circle field-icon" data-bs-toggle="popover"
                                 data-bs-placement="top" data-bs-trigger="hover"
                                 data-bs-content="If your story spans a period of time, be as specific as possible, for instance, Spring 2004, 1960s, 2001-2003. You can either write any one between 'Event Period' and 'Event Date' or both."></span>
@@ -472,11 +473,10 @@
 
                         <div class="col-md-4 mt-3">
                             <label for="event_dates" class="form-label">Event Date</label>
-                            <input {{ $date_required }}  type="date"
+                            <input {{ $date_required }} type="date"
                                 class="form-control @error('event_dates') is-invalid @enderror" id="event_dates"
                                 name="event_dates" placeholder="Event Date"
-                                aria-describedby="validationEventDateFeedback"
-                                value="{{$event_date}}">
+                                aria-describedby="validationEventDateFeedback" value="{{ $event_date }}">
                             <span class="fa fa-question-circle field-icon" data-bs-toggle="popover"
                                 data-bs-placement="top" data-bs-trigger="hover"
                                 data-bs-content="If you know the exact date for your story add it here. You can either write any one between 'Event Period' and 'Event Date' or both."></span>
@@ -488,8 +488,9 @@
                         </div>
 
                         <div class="col-md-6 mt-5 softsource-tab-buttons">
-                            <button class="softsource-write-story-btn" type="submit">Submit</button>
-                            <button class="softsource-write-story-btn" onclick="saveAsDraft()" type="button">Save as
+                            <button class="softsource-write-story-btn" id="submit_btn" type="submit">Submit</button>
+                            <button class="softsource-write-story-btn" id="draft_btn" onclick="saveAsDraft()"
+                                type="button">Save as
                                 Draft</button>
                             {{-- <button class="softsource-write-story-btn" type="reset">Reset</button> --}}
                             {{-- <button class="softsource-write-story-btn" type="button">Preview</button> --}}
@@ -613,6 +614,17 @@
                 hiddenInput.val("0");
             }
         });
+
+        $(document).on('click', '#submit_btn', function() {
+
+            $(this).prop('disabled', true).text('Submitting...');
+        });
+
+        $(document).on('click', '#draft_btn', function() {
+
+            $(this).prop('disabled', true).text('Draft Submitting...');
+        });
+
 
 
 

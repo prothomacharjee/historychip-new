@@ -97,7 +97,7 @@
             </div>
             <div
                 class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 text-end softsource-footer-poweredby-text">
-                Web designed by <a title="SoftSource, Bangladesh" href="https://wersoftsource.com/" target="_blank"
+                Powered by <a title="SoftSource, Bangladesh" href="https://wersoftsource.com/" target="_blank"
                     rel="noopener noreferrer">SoftSource, Bangladesh</a>
             </div>
         </div>
