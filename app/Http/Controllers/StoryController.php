@@ -362,7 +362,7 @@ class StoryController extends Controller
         // Define the search columns
 
         // Build the DataTables response
-        $data = DataTables::of(Story::select($columns)->where('is_approved', '=', 0)->latest())
+        $data = DataTables::of(Story::select($columns)->where('is_approved', '=', 0)->where('is_draft', '=', 0)->latest())
             ->addColumn('serial', function ($row) {
                 static $count = 0;
                 $count++;
