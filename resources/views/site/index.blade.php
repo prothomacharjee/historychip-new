@@ -191,7 +191,8 @@
                 </div>
                 <div class="col-xxl-6 col-xl-6 col-lg-12 col-md-12 col-sm-12 col-12">
                     <div class="softsource-home-search-story-section-category-wrap p-3">
-                        <form class="softsource-home-search-story-form d-flex px-5" method="Post" action="">
+                        <form class="softsource-home-search-story-form d-flex px-5" method="Post" action="{{ route('story.search.category') }}">
+                            @csrf
                             <div class="">
                                 <label for="category_id"
                                     class="form-label softsource-home-search-story-form-category-label">Select
@@ -214,9 +215,7 @@
                                 </select>
                             </div>
                             <div class="mt-4">
-
-                                <button
-                                    class="btn softsource-home-search-story-form-category-button gobtn"><span>Go</span></button>
+                                <button type="submit" class="btn softsource-home-search-story-form-category-button gobtn"><span>Go</span></button>
                             </div>
 
                         </form>

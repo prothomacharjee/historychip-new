@@ -145,6 +145,32 @@ class Story extends Model
             ->get();
     }
 
+    public static function ProcessSearchResultsByCategory($category_id, $sub_category_id_level_1 = null)
+    {
+        if($sub_category_id_level_1){
+            return Story::with('base_category', 'level1_category', 'level2_category', 'level3_category', 'author_details')
+            ->join('pages as p', 'stories.id', '=', 'p.page_group_id')
+            ->select(DB::raw('stories.*, p.id as page_id, p.name, p.url, p.page_title, p.meta_title, p.meta_keywords, p.meta_description'))
+            ->where('p.page_group', '=', 'story')
+            ->where('is_approved', 1)
+            ->where('is_draft', 0)
+            ->where('category_id', 'like', '%"' . $category_id . '"%')
+            ->where('sub_category_id_level_1', 'like', '%"' . $sub_category_id_level_1 . '"%')
+            ->get();
+        }
+        else{
+            return Story::with('base_category', 'level1_category', 'level2_category', 'level3_category', 'author_details')
+            ->join('pages as p', 'stories.id', '=', 'p.page_group_id')
+            ->select(DB::raw('stories.*, p.id as page_id, p.name, p.url, p.page_title, p.meta_title, p.meta_keywords, p.meta_description'))
+            ->where('p.page_group', '=', 'story')
+            ->where('is_approved', 1)
+            ->where('is_draft', 0)
+            ->where('category_id', 'like', '%"' . $category_id . '"%')
+            ->get();
+        }
+
+    }
+
     // public function toSearchableArray()
     // {
     //     if ($this->category_id != null) {

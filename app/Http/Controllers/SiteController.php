@@ -461,6 +461,34 @@ class SiteController extends Controller
     }
 
 
+    public function storySearchByCategory(Request $request)
+    {
+        // Retrieve the search query from the request
+        $category_id = $request->input('category_id');
+        $sub_category_id_level_1 = $request->input('sub_category_id_level_1');
+
+        // // Perform the search using Laravel Scout
+        // $results = Story::search($query)->get();
+        // // dd($results);
+        // $ids = $results->pluck('id')->all();
+        if($sub_category_id_level_1 == ''){
+            $stories = Story::ProcessSearchResultsByCategory($category_id);
+        }
+        else{
+            $stories = Story::ProcessSearchResultsByCategory($category_id, $sub_category_id_level_1);
+        }
+        // dd($stories);
+        // Return the search results to the view
+
+        return view('site.search-results')->with([
+            'page_title' => 'Search Results',
+            'notices' => $this->notices,
+            'stories' => $stories,
+            'meta' => $this->pages,
+        ]);
+    }
+
+
 
     public function saveimage(Request $request)
     {
