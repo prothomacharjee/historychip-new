@@ -616,13 +616,14 @@
         });
 
         $(document).on('click', '#submit_btn', function() {
-
             $(this).prop('disabled', true).text('Submitting...');
+            $('#draft_btn').prop('disabled', true);
         });
 
         $(document).on('click', '#draft_btn', function() {
-
             $(this).prop('disabled', true).text('Draft Submitting...');
+            $('#submit_btn').prop('disabled', true);
+
         });
 
 
