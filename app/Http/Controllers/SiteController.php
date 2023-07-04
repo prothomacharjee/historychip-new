@@ -426,7 +426,7 @@ class SiteController extends Controller
         $story = ($id) ? Story::findOrFail($id) : null;
         $page_title = ($id) ? 'Update Story' : 'Write A Story';
 
-        if(Auth::id() == $story->author_id){
+        if($id && Auth::id() == $story->author_id){
             return view('site.write-story')->with([
                 'page_title' => $page_title,
                 'notices' => $this->notices,
