@@ -99,7 +99,6 @@ class PartnerTypeController extends Controller
             'bill_type',
             'max_image_count',
             'max_content_length',
-            'max_content_length',
             'status',
         );
 

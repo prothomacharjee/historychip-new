@@ -14,6 +14,8 @@ $(document).ready(function () {
     $(".softsource-select2").select2({
         placeholder: "== Please Select ==",
     });
+
+    
 });
 
 $(".date-time-material").bootstrapMaterialDatePicker({
@@ -106,7 +108,6 @@ function MultipleFileUploaderValidation(
 
     const maxFiles = that.max;
 
-
     const fileError = $(`#file-error-${selector_class}`);
     const selected_file = $(`.selected-file-${selector_class}`);
 
@@ -152,7 +153,9 @@ function MultipleFileUploaderValidation(
                     selected_file.html(
                         `<div class="col-md-2">
                             <div class="softsource-image-wrapper text-center">
-                                <img src="${imageUrl}" alt="Selected File ${i + 1}" class="img-thumbnail w-${image_view_width}">
+                                <img src="${imageUrl}" alt="Selected File ${
+                            i + 1
+                        }" class="img-thumbnail w-${image_view_width}">
                                 <button type="button" class="softsource-close-button"><i class="bx bx-x-circle"></i></button>
                                 <input class="form-control mt-3" name="${image_alt_text_selector}[image_alt_text][]" />
                             </div>
@@ -183,3 +186,5 @@ function CamelCase(text) {
             return chr.toUpperCase();
         });
 }
+
+

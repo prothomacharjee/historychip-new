@@ -99,11 +99,7 @@ class WritingPromptController extends Controller
 
         // Build the DataTables response
         $data = DataTables::of(WritingPrompt::select($columns)->latest())
-            ->addColumn('serial', function ($row) {
-                static $count = 0;
-                $count++;
-                return $count;
-            })
+            ->addColumn('serial', '')
             ->addColumn('status', function ($row) {
                 return ($row->status == 1) ? '<span class="badge bg-success">Active</span>' : '<span class="badge bg-danger">Inactive</span>';
             })

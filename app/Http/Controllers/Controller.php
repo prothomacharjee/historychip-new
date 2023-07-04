@@ -33,7 +33,7 @@ class Controller extends BaseController
                             ->where('duration_to', '>=', "$currentDateTime")
                             ->where('status', '=', 1);
                     });
-            })->get();
+            })->inRandomOrder()->get();
 
             // // Get the current route name
             // $routeName = Route::currentRouteName();

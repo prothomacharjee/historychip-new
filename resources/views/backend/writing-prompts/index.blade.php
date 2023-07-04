@@ -58,14 +58,15 @@
                 @endif
             </div>
 
-            <div class="col">
+            <div class="col-6">
                 {{-- <h6 class="mb-0 text-uppercase">writing Prompts</h6>
                 <hr /> --}}
                 <div class="card">
                     <div class="card-body">
                         <div class="p-4 border rounded">
-                            <form class="row g-3 needs-validation" novalidate action="{{ route('admin.writing-prompts.store') }}"
-                                method="post" enctype="multipart/form-data">
+                            <form class="row g-3 needs-validation" novalidate
+                                action="{{ route('admin.writing-prompts.store') }}" method="post"
+                                enctype="multipart/form-data">
                                 @csrf
                                 <input type="hidden" name="id" id="id" value="" />
                                 <div class="col-md-12">
@@ -83,8 +84,8 @@
                                 <div class="col-md-12">
                                     <label for="details" class="form-label">Details <span
                                             class="text-danger">*</span></label>
-                                    <textarea rows="10" class="form-control softsource-summernote @error('details') is-invalid @enderror" id="details"
-                                        name="details" placeholder="Write your details here" required aria-describedby="validationContentFeedback">{{ old('details') }}</textarea>
+                                    <textarea rows="10" class="form-control @error('details') is-invalid @enderror" id="details" name="details"
+                                        placeholder="Write your details here" required aria-describedby="validationContentFeedback">{{ old('details') }}</textarea>
                                     <div class="valid-feedback">Looks good!</div>
                                     <div class="invalid-feedback">You must enter details.</div>
                                     @error('details')
@@ -134,7 +135,7 @@
 
 
             </div>
-            <div class="col">
+            <div class="col-6">
                 {{-- <h6 class="mb-0 text-uppercase">writing Prompts List</h6>
                 <hr /> --}}
                 <div class="card">
@@ -176,7 +177,7 @@
     <script>
         $(document).ready(function() {
             //writing Prompts
-            $("#dt_writing_prompt").DataTable({
+            let table = $("#dt_writing_prompt").DataTable({
                 "processing": true,
                 "serverSide": true,
                 "ajax": "{{ route('admin.writing-prompts.loadDataTable') }}",
@@ -206,6 +207,20 @@
             });
 
 
+            table.on("draw.dt", function() {
+                var info = table.page.info();
+                table
+                    .column(0, {
+                        search: "applied",
+                        order: "applied",
+                    })
+                    .nodes()
+                    .each(function(cell, i) {
+                        cell.innerHTML = i + 1 + info.start;
+                    });
+            });
+
+
 
 
         });
@@ -225,9 +240,11 @@
                     $("#id").val(response.id);
                     $("#title").val(response.title);
                     $("#details").val(response.details);
-                    $('.softsource-summernote').summernote('code', response.details);
+                    // $('.softsource-summernote').summernote('code', response.details);
                     $("#status").val(response.status);
-                    let img = (response.icon) ? `<img src="${response.icon}" alt="${response.title}" class="w-50">` : `<img src="{{ asset('backend/images/custom/no-image-icon.png') }}" alt="${response.title}" class="w-75">`;
+                    let img = (response.icon) ?
+                        `<img src="${response.icon}" alt="${response.title}" class="w-50">` :
+                        `<img src="{{ asset('backend/images/custom/no-image-icon.png') }}" alt="${response.title}" class="w-75">`;
                     $(".selected-file").html(img);
                 }
             });

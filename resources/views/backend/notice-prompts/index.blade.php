@@ -64,8 +64,8 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="p-4 border rounded">
-                            <form class="row g-3 needs-validation" novalidate action="{{ route('admin.notice-prompts.store') }}"
-                                method="post">
+                            <form class="row g-3 needs-validation" novalidate
+                                action="{{ route('admin.notice-prompts.store') }}" method="post">
                                 @csrf
                                 <input type="hidden" name="id" id="id" value="" />
                                 <div class="col-md-12">
@@ -172,7 +172,7 @@
     <script>
         $(document).ready(function() {
             //Notice Prompts
-            $("#dt_notice_prompt").DataTable({
+            let table = $("#dt_notice_prompt").DataTable({
                 "processing": true,
                 "serverSide": true,
                 "ajax": "{{ route('admin.notice-prompts.loadDataTable') }}",
@@ -197,6 +197,19 @@
                         searchable: false
                     }
                 ]
+            });
+
+            table.on("draw.dt", function() {
+                var info = table.page.info();
+                table
+                    .column(0, {
+                        search: "applied",
+                        order: "applied",
+                    })
+                    .nodes()
+                    .each(function(cell, i) {
+                        cell.innerHTML = i + 1 + info.start;
+                    });
             });
         });
 
