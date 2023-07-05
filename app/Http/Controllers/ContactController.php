@@ -103,7 +103,7 @@ class ContactController extends Controller
                 'contact' => $contact,
             ]);
         } else {
-            return redirect()->route('contacts')->with('info', 'Already Replied');
+            return redirect()->route('admin.contacts')->with('info', 'Already Replied');
         }
     }
 
@@ -133,7 +133,7 @@ class ContactController extends Controller
                     DB::transaction(function () use ($contact) {
                         $contact->save();
                     });
-                    return redirect()->route('contacts')->with('success', 'Replied Successfully');
+                    return redirect()->route('admin.contacts')->with('success', 'Replied Successfully');
                 } catch (\Exception $e) {
 
                     return redirect()->back()->with('error', $e->getMessage());
@@ -154,7 +154,7 @@ class ContactController extends Controller
             DB::transaction(function () use ($contact) {
                 $contact->delete();
             });
-            return redirect()->route('contacts')->with('success', 'Contact Deleted Successfully');
+            return redirect()->route('admin.contacts')->with('success', 'Contact Deleted Successfully');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
         }

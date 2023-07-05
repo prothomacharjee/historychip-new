@@ -190,7 +190,7 @@
 
     <script>
         $(document).ready(function() {
-            $("#dt_regular_blog_table").DataTable({
+            let regular_table = $("#dt_regular_blog_table").DataTable({
                 "processing": true,
                 "serverSide": true,
                 "ajax": "{{ route('admin.blogs.LoadRegularBlogDataTable') }}",
@@ -219,7 +219,20 @@
                 ]
             });
 
-            $("#dt_featured_blog_table").DataTable({
+            regular_table.on("draw.dt", function() {
+                var info = regular_table.page.info();
+                regular_table
+                    .column(0, {
+                        search: "applied",
+                        order: "applied",
+                    })
+                    .nodes()
+                    .each(function(cell, i) {
+                        cell.innerHTML = i + 1 + info.start;
+                    });
+            });
+
+            let featured_blog = $("#dt_featured_blog_table").DataTable({
                 "processing": true,
                 "serverSide": true,
                 "ajax": "{{ route('admin.blogs.LoadFeaturedBlogDataTable') }}",
@@ -248,7 +261,20 @@
                 ]
             });
 
-            $("#dt_drafted_blog_table").DataTable({
+            featured_blog.on("draw.dt", function() {
+                var info = featured_blog.page.info();
+                featured_blog
+                    .column(0, {
+                        search: "applied",
+                        order: "applied",
+                    })
+                    .nodes()
+                    .each(function(cell, i) {
+                        cell.innerHTML = i + 1 + info.start;
+                    });
+            });
+
+            let drafted_blog = $("#dt_drafted_blog_table").DataTable({
                 "processing": true,
                 "serverSide": true,
                 "ajax": "{{ route('admin.blogs.LoadDraftedBlogDataTable') }}",
@@ -276,6 +302,19 @@
                         searchable: false
                     }
                 ]
+            });
+
+            drafted_blog.on("draw.dt", function() {
+                var info = drafted_blog.page.info();
+                drafted_blog
+                    .column(0, {
+                        search: "applied",
+                        order: "applied",
+                    })
+                    .nodes()
+                    .each(function(cell, i) {
+                        cell.innerHTML = i + 1 + info.start;
+                    });
             });
         });
     </script>

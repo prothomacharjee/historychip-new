@@ -81,8 +81,8 @@ class PartnerController extends Controller
 
 
 
-            $meta->name = "partners.".lcfirst(str_replace(' ', '', ucwords($req_partner['name'])));
-            $meta->url = "/partners/".Str::slug($req_partner['name']);
+            $meta->name = "partners." . lcfirst(str_replace(' ', '', ucwords($req_partner['name'])));
+            $meta->url = "/partners/" . Str::slug($req_partner['name']);
             $meta->page_title = $req_partner['title'];
             $meta->page_group = 'partner';
             $meta->meta_title = $req_meta['meta_title'];
@@ -117,22 +117,21 @@ class PartnerController extends Controller
             try {
                 DB::transaction(function () use ($partner, $meta, $images, $req_partner) {
                     $partner->save();
-                    if(!empty($images)){
+                    if (!empty($images)) {
                         $partner_images = [];
 
-                        foreach ($images as $key=>$image) {
+                        foreach ($images as $key => $image) {
                             $partner_images[] = [
-                                'image_path'=> $image,
-                                'image_alt_text'=> $req_partner['image_alt_text'][$key],
-                                'partner_id'=> $partner->id,
+                                'image_path' => $image,
+                                'image_alt_text' => $req_partner['image_alt_text'][$key],
+                                'partner_id' => $partner->id,
                             ];
                         }
 
-                        if($req_partner['id']){
+                        if ($req_partner['id']) {
                             $partner->partner_image()->delete();
                             $partner->partner_image()->createMany($partner_images);
-                        }
-                        else{
+                        } else {
 
                             $partner->partner_image()->createMany($partner_images);
                         }
@@ -141,10 +140,9 @@ class PartnerController extends Controller
                     $meta->save();
                 });
                 return redirect()->route('admin.partners')->with('success', "Partner $returnText Successfully");
-            } catch (\Exception$e) {
+            } catch (\Exception $e) {
                 return redirect()->back()->with('error', $e->getMessage());
             }
-
         }
     }
 
@@ -177,7 +175,7 @@ class PartnerController extends Controller
                 $partner->delete();
             });
             return redirect()->route('admin.partners')->with('success', 'Partner Deleted Successfully');
-        } catch (\Exception$e) {
+        } catch (\Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
         }
     }
@@ -209,13 +207,9 @@ class PartnerController extends Controller
         // Build the DataTables response
         $data = DataTables::of(Partner::select($columns)->where('status', '=', 1)->latest())
 
-            ->addColumn('serial', function ($row) {
-                static $count = 0;
-                $count++;
-                return $count;
-            })
+            ->addColumn('serial', '')
             ->addColumn('partner_type', function ($row) {
-               return $row->partner_type->name;
+                return $row->partner_type->name;
             })
             ->addColumn('status', function ($row) {
                 return ($row->status == 1) ? '<span class="badge bg-success">Active</span>' : '<span class="badge bg-danger">Inactive</span>';
@@ -237,7 +231,7 @@ class PartnerController extends Controller
                 return $new_description;
             })
 
-            ->rawColumns(['serial', 'action', 'description', 'banner', 'logo','status', 'partner_type'])
+            ->rawColumns(['serial', 'action', 'description', 'banner', 'logo', 'status', 'partner_type'])
             ->make(true);
 
         // Return the DataTables response

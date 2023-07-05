@@ -267,7 +267,7 @@
 
 <script>
     $(document).ready(function() {
-        $("#dt_approved_story_table").DataTable({
+        let approved_table = $("#dt_approved_story_table").DataTable({
             "processing": true,
             "serverSide": true,
             "ajax": "{{ route('admin.stories.LoadApproveStoryDataTable') }}",
@@ -301,7 +301,20 @@
             ]
         });
 
-        $("#dt_featured_story_table").DataTable({
+        approved_table.on("draw.dt", function() {
+            var info = approved_table.page.info();
+            approved_table
+                .column(0, {
+                    search: "applied",
+                    order: "applied",
+                })
+                .nodes()
+                .each(function(cell, i) {
+                    cell.innerHTML = i + 1 + info.start;
+                });
+        });
+
+        let featured_table = $("#dt_featured_story_table").DataTable({
             "processing": true,
             "serverSide": true,
             "ajax": "{{ route('admin.stories.LoadFeaturedStoryDataTable') }}",
@@ -333,7 +346,20 @@
             ]
         });
 
-        $("#dt_waiting_story_table").DataTable({
+        featured_table.on("draw.dt", function() {
+            var info = featured_table.page.info();
+            featured_table
+                .column(0, {
+                    search: "applied",
+                    order: "applied",
+                })
+                .nodes()
+                .each(function(cell, i) {
+                    cell.innerHTML = i + 1 + info.start;
+                });
+        });
+
+        let waiting_table = $("#dt_waiting_story_table").DataTable({
             "processing": true,
             "serverSide": true,
             "ajax": "{{ route('admin.stories.LoadWaitingStoryDataTable') }}",
@@ -358,7 +384,20 @@
             ]
         });
 
-        $("#dt_rejected_story_table").DataTable({
+        waiting_table.on("draw.dt", function() {
+            var info = waiting_table.page.info();
+            waiting_table
+                .column(0, {
+                    search: "applied",
+                    order: "applied",
+                })
+                .nodes()
+                .each(function(cell, i) {
+                    cell.innerHTML = i + 1 + info.start;
+                });
+        });
+
+        let rejected_table = $("#dt_rejected_story_table").DataTable({
             "processing": true,
             "serverSide": true,
             "ajax": "{{ route('admin.stories.LoadRejectedStoryDataTable') }}",
@@ -392,7 +431,20 @@
             ]
         });
 
-        $("#dt_drafted_story_table").DataTable({
+        rejected_table.on("draw.dt", function() {
+            var info = rejected_table.page.info();
+            rejected_table
+                .column(0, {
+                    search: "applied",
+                    order: "applied",
+                })
+                .nodes()
+                .each(function(cell, i) {
+                    cell.innerHTML = i + 1 + info.start;
+                });
+        });
+
+        let drafted_table = $("#dt_drafted_story_table").DataTable({
             "processing": true,
             "serverSide": true,
             "ajax": "{{ route('admin.stories.LoadDraftedStoryDataTable') }}",
@@ -415,6 +467,19 @@
                     searchable: false
                 }
             ]
+        });
+
+        drafted_table.on("draw.dt", function() {
+            var info = drafted_table.page.info();
+            drafted_table
+                .column(0, {
+                    search: "applied",
+                    order: "applied",
+                })
+                .nodes()
+                .each(function(cell, i) {
+                    cell.innerHTML = i + 1 + info.start;
+                });
         });
     });
 </script>

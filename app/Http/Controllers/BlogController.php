@@ -163,11 +163,7 @@ class BlogController extends Controller
 
         // Build the DataTables response
         $data = DataTables::of(Blog::select($columns)->where('is_featured', '!=', 1)->Where('is_draft', '!=', 1)->latest())
-            ->addColumn('serial', function ($row) {
-                static $count = 0;
-                $count++;
-                return $count;
-            })
+            ->addColumn('serial', '')
             ->addColumn('status', function ($row) {
                 return ($row->status == 1) ? '<span class="badge bg-success">Active</span>' : '<span class="badge bg-danger">Inactive</span>';
             })
@@ -215,11 +211,7 @@ class BlogController extends Controller
 
         // Build the DataTables response
         $data = DataTables::of(Blog::select($columns)->where('is_featured', 1)->latest())
-            ->addColumn('serial', function ($row) {
-                static $count = 0;
-                $count++;
-                return $count;
-            })
+            ->addColumn('serial', '')
             ->addColumn('status', function ($row) {
                 return ($row->status == 1) ? '<span class="badge bg-success">Active</span>' : '<span class="badge bg-danger">Inactive</span>';
             })
@@ -265,11 +257,7 @@ class BlogController extends Controller
 
         // Build the DataTables response
         $data = DataTables::of(Blog::select($columns)->where('is_draft', 1)->latest())
-            ->addColumn('serial', function ($row) {
-                static $count = 0;
-                $count++;
-                return $count;
-            })
+            ->addColumn('serial', '')
             ->addColumn('status', function ($row) {
                 return ($row->status == 1) ? '<span class="badge bg-success">Active</span>' : '<span class="badge bg-danger">Inactive</span>';
             })

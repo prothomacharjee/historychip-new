@@ -54,7 +54,6 @@ class StoryCategoryController extends Controller
             } catch (\Exception $e) {
                 return redirect()->back()->with('error', $e->getMessage());
             }
-
         }
     }
 
@@ -98,12 +97,7 @@ class StoryCategoryController extends Controller
 
         // Build the DataTables response
         $data = DataTables::of(StoryCategory::with('parent_category')->where('level', 0)->select($columns)->latest())
-            ->addColumn('serial', function ($row) {
-
-                static $count = 0;
-                $count++;
-                return $count;
-            })
+            ->addColumn('serial', '')
             ->addColumn('status', function ($row) {
                 return ($row->status == 1) ? '<span class="badge bg-success">Active</span>' : '<span class="badge bg-danger">Inactive</span>';
             })
@@ -152,12 +146,7 @@ class StoryCategoryController extends Controller
 
         // Build the DataTables response
         $data = DataTables::of(StoryCategory::with('parent_category')->where('level', 1)->select($columns)->latest())
-            ->addColumn('serial', function ($row) {
-
-                static $count = 0;
-                $count++;
-                return $count;
-            })
+            ->addColumn('serial', '')
             ->addColumn('status', function ($row) {
                 return ($row->status == 1) ? '<span class="badge bg-success">Active</span>' : '<span class="badge bg-danger">Inactive</span>';
             })
@@ -206,12 +195,7 @@ class StoryCategoryController extends Controller
 
         // Build the DataTables response
         $data = DataTables::of(StoryCategory::with('parent_category')->where('level', 2)->select($columns)->latest())
-            ->addColumn('serial', function ($row) {
-
-                static $count = 0;
-                $count++;
-                return $count;
-            })
+            ->addColumn('serial', '')
             ->addColumn('status', function ($row) {
                 return ($row->status == 1) ? '<span class="badge bg-success">Active</span>' : '<span class="badge bg-danger">Inactive</span>';
             })
@@ -260,11 +244,7 @@ class StoryCategoryController extends Controller
 
         // Build the DataTables response
         $data = DataTables::of(StoryCategory::with('parent_category')->where('level', 3)->select($columns)->latest())
-            ->addColumn('serial', function ($row) {
-                static $count = 0;
-                $count++;
-                return $count;
-            })
+            ->addColumn('serial', '')
             ->addColumn('status', function ($row) {
                 return ($row->status == 1) ? '<span class="badge bg-success">Active</span>' : '<span class="badge bg-danger">Inactive</span>';
             })
@@ -302,6 +282,4 @@ class StoryCategoryController extends Controller
         $data = StoryCategory::where('level', $request->level)->get();
         echo json_encode($data);
     }
-
-
 }

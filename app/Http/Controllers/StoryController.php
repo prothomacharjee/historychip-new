@@ -42,23 +42,26 @@ class StoryController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->except(['_token']), [
-            "title" => "required",
-            "author_name" => "required",
-            "category_id" => "required",
-            "context" => "nullable",
-            "event_location" => "required",
-            'event_dates' => 'required_without_all:event_detail_dates|nullable',
-            'event_detail_dates' => 'required_without_all:event_dates|nullable',
-            'header_image_path' => 'nullable',
-            'photo_credit' => 'required_unless:header_image_path,!=,"null"',
-            'audio_video_path' => 'nullable',
-            'audio_video_credit' => 'required_unless:audio_video_path,!=,"null"',
-        ],[
-            'photo_credit.required_unless' => 'The photo credit is required when a header image is provided.',
-            'audio_video_credit.required_unless' => 'The audio/video credit is required when an audio/video is provided.',
-        ]
-    );
+        $validator = Validator::make(
+            $request->except(['_token']),
+            [
+                "title" => "required",
+                "author_name" => "required",
+                "category_id" => "required",
+                "context" => "nullable",
+                "event_location" => "required",
+                'event_dates' => 'required_without_all:event_detail_dates|nullable',
+                'event_detail_dates' => 'required_without_all:event_dates|nullable',
+                'header_image_path' => 'nullable',
+                'photo_credit' => 'required_unless:header_image_path,!=,"null"',
+                'audio_video_path' => 'nullable',
+                'audio_video_credit' => 'required_unless:audio_video_path,!=,"null"',
+            ],
+            [
+                'photo_credit.required_unless' => 'The photo credit is required when a header image is provided.',
+                'audio_video_credit.required_unless' => 'The audio/video credit is required when an audio/video is provided.',
+            ]
+        );
 
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
@@ -182,7 +185,6 @@ class StoryController extends Controller
         } else {
             // Row not found
             return redirect()->route('my-stories')->with('error', "Some error occured. Please try again later.");
-
         }
     }
 
@@ -248,11 +250,7 @@ class StoryController extends Controller
 
         // Build the DataTables response
         $data = DataTables::of(Story::select($columns)->where('is_approved', '=', 1)->where('is_featured', '=', 0)->latest())
-            ->addColumn('serial', function ($row) {
-                static $count = 0;
-                $count++;
-                return $count;
-            })
+            ->addColumn('serial', '')
             ->addColumn('status', function ($row) {
                 return ($row->status == 1) ? '<span class="badge bg-success">Active</span>' : '<span class="badge bg-danger">Inactive</span>';
             })
@@ -307,15 +305,10 @@ class StoryController extends Controller
 
         // Build the DataTables response
         $data = DataTables::of(Story::select($columns)->where('is_approved', '=', 1)->where('is_featured', '=', 1)->latest())
-            ->addColumn('serial', function ($row) {
-                static $count = 0;
-                $count++;
-                return $count;
-            })
+            ->addColumn('serial', '')
             ->addColumn('approval', function ($row) {
                 $user = User::where('id', $row->approved_by)->first();
                 return ($user) ? $user->name : '';
-
             })
             ->addColumn('author', function ($row) {
                 $user = User::where('id', $row->author_id)->first();
@@ -363,11 +356,7 @@ class StoryController extends Controller
 
         // Build the DataTables response
         $data = DataTables::of(Story::select($columns)->where('is_approved', '=', 0)->where('is_draft', '=', 0)->latest())
-            ->addColumn('serial', function ($row) {
-                static $count = 0;
-                $count++;
-                return $count;
-            })
+            ->addColumn('serial', '')
             ->addColumn('author', function ($row) {
                 return User::where('id', $row->author_id)->first()->name;
             })
@@ -410,11 +399,7 @@ class StoryController extends Controller
 
         // Build the DataTables response
         $data = DataTables::of(Story::select($columns)->where('is_approved', '=', 2)->latest())
-            ->addColumn('serial', function ($row) {
-                static $count = 0;
-                $count++;
-                return $count;
-            })
+            ->addColumn('serial', '')
             ->addColumn('status', function ($row) {
                 return ($row->status == 1) ? '<span class="badge bg-success">Active</span>' : '<span class="badge bg-danger">Inactive</span>';
             })
@@ -469,11 +454,7 @@ class StoryController extends Controller
 
         // Build the DataTables response
         $data = DataTables::of(Story::select($columns)->where('is_draft', '=', 1)->latest())
-            ->addColumn('serial', function ($row) {
-                static $count = 0;
-                $count++;
-                return $count;
-            })
+            ->addColumn('serial', '')
             ->addColumn('author', function ($row) {
                 return User::where('id', $row->author_id)->first()->name;
             })
@@ -542,7 +523,6 @@ class StoryController extends Controller
                     return redirect()->back()->with('error', $e->getMessage());
                 }
             }
-
         } elseif ($type == 'draft') {
 
             $returnText = ($status == 1) ? 'Drafted' : 'Submitted';
@@ -586,7 +566,7 @@ class StoryController extends Controller
         // }
     }
 
-// Story Comments
+    // Story Comments
     public function LoadApproveCommentDataTable(Request $request)
     {
         $url = 'comments';
@@ -746,5 +726,4 @@ class StoryController extends Controller
         // Return the DataTables response
         return $data;
     }
-
 }
