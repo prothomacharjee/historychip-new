@@ -583,7 +583,7 @@ class StoryController extends Controller
             'updated_at',
         );
         // Build the DataTables response
-        $data = DataTables::of(StoryComment::select($columns)->where('accepted', '=', 1)->with('story.author_details', 'commenteter', 'accepter'))
+        $data = DataTables::of(StoryComment::select($columns)->where('accepted', '=', 1)->latest()->with('story.author_details', 'commenteter', 'accepter'))
             ->addColumn('serial', function ($row) {
                 static $count = 0;
                 $count++;
@@ -636,7 +636,7 @@ class StoryController extends Controller
             'updated_at',
         );
         // Build the DataTables response
-        $data = DataTables::of(StoryComment::select($columns)->where('accepted', '=', 0)->with('story.author_details', 'commentator', 'accepter'))
+        $data = DataTables::of(StoryComment::select($columns)->where('accepted', '=', 0)->latest()->with('story.author_details', 'commentator', 'accepter'))
             ->addColumn('serial', function ($row) {
                 static $count = 0;
                 $count++;
@@ -687,7 +687,7 @@ class StoryController extends Controller
             'updated_at',
         );
         // Build the DataTables response
-        $data = DataTables::of(StoryComment::select($columns)->where('accepted', '=', 2)->with('story.author_details', 'commenteter', 'accepter'))
+        $data = DataTables::of(StoryComment::select($columns)->where('accepted', '=', 2)->latest()->with('story.author_details', 'commenteter', 'accepter'))
             ->addColumn('serial', function ($row) {
                 static $count = 0;
                 $count++;

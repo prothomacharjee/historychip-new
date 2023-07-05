@@ -368,7 +368,7 @@ class SiteController extends Controller
             // $remainingPart = implode('-', array_slice($slugParts, 1));
 
             $stories = Story::FetchSingleStory($firstWord);
-            $comments = StoryComment::where('story_id', $firstWord)->with('commentator', 'accepter')->get();
+            $comments = StoryComment::where('story_id', $firstWord)->where('accepted', 1)->with('commentator', 'accepter')->get();
 
             $author = Page::where(['page_group' => 'author', 'page_group_id' => $stories->author_id]);
 

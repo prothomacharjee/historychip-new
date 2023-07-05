@@ -301,18 +301,18 @@
             ]
         });
 
-        approved_table.on("draw.dt", function() {
-            var info = approved_table.page.info();
-            approved_table
-                .column(0, {
-                    search: "applied",
-                    order: "applied",
-                })
-                .nodes()
-                .each(function(cell, i) {
-                    cell.innerHTML = i + 1 + info.start;
-                });
-        });
+        // approved_table.on("draw.dt", function() {
+        //     var info = approved_table.page.info();
+        //     approved_table
+        //         .column(0, {
+        //             search: "applied",
+        //             order: "applied",
+        //         })
+        //         .nodes()
+        //         .each(function(cell, i) {
+        //             cell.innerHTML = i + 1 + info.start;
+        //         });
+        // });
 
         let featured_table = $("#dt_featured_story_table").DataTable({
             "processing": true,
