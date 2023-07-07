@@ -171,6 +171,33 @@ class Story extends Model
 
     }
 
+
+    public static function FetchAllPartnerStory($partner_id)
+    {
+        return Story::with('base_category', 'level1_category', 'level2_category', 'level3_category', 'author_details')
+            ->join('pages as p', 'stories.id', '=', 'p.page_group_id')
+            ->select(DB::raw('stories.*, p.id as page_id, p.name, p.url, p.page_title, p.meta_title, p.meta_keywords, p.meta_description'))
+            ->where('p.page_group', '=', 'story')
+            ->where(['stories.status' => 1, 'stories.is_featured' => 1])->latest()
+            ->get();
+    }
+
+
+    public static function FetchRecentPartnerStory($partner_id)
+    {
+        $author_ids = UserProfile::where('partner_id', $partner_id)->pluck('user_id')->toArray();
+        dd($author_ids);
+        dd( Story::with('base_category', 'level1_category', 'level2_category', 'level3_category', 'author_details')
+            ->join('pages as p', 'stories.id', '=', 'p.page_group_id')
+            ->select(DB::raw('stories.*, p.id as page_id, p.name, p.url, p.page_title, p.meta_title, p.meta_keywords, p.meta_description'))
+            ->where('p.page_group', '=', 'story')
+            ->where(['stories.is_approved' => 1])
+            ->whereIn('author_id', $author_ids)
+            ->latest()
+            ->limit(3)
+            ->get());
+    }
+
     // public function toSearchableArray()
     // {
     //     if ($this->category_id != null) {

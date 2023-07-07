@@ -176,12 +176,15 @@ class SiteController extends Controller
 
             $viewPage = "site.partner-types.partner-" . strtolower($partnerimages->partner_type->name);
 
+            $recent_partner_stories = Story::FetchRecentPartnerStory($partner->partner_id);
+
             return view($viewPage)->with([
                 'page_title' => $page_title,
                 'notices' => $this->notices,
                 'partner' => $partner,
                 'partnerimages' => $partnerimages,
                 'meta' => $this->pages,
+                'recent_partner_stories' => $recent_partner_stories,
             ]);
         } else {
             $partners = DB::table('partners as b')

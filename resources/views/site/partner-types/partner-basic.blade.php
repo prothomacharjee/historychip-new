@@ -111,4 +111,103 @@
         </div>
     </div>
 </div>
+
+@if (!empty($recent_partner_stories))
+    <section class="py-5 my-5">
+        <div class="row mx-1 px-5">
+            <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                <div class="softsource-home-fetured-story-section-title-wrap text-center mb-5 ps-5 d-flex">
+                    <div class="softsource-home-fetured-story-top-title">Recent &nbsp;{{ $partner->partner_name }}&nbsp; Stories</div>
+
+                </div>
+            </div>
+        </div>
+        <div class="container mt-5">
+
+            <div class="row">
+                <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <div class="row">
+                        @foreach ($recent_partner_stories as $key => $story)
+                            @php
+
+                                if ($story->header_image_path == '') {
+                                    $headerImage = '/storage/frontend/stories/images/Banner72pi2.jpg';
+                                } else {
+                                    $headerImage = $story->header_image_path;
+                                }
+                            @endphp
+                            <div
+                                class="col-xxl-4 col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 mb-5 animate__animated fadeInUp">
+                                <div class="softsource-story-item-div">
+                                    <div class="softsource-story-item-image text-center">
+                                        <a href="{{ url($story->url) }}">
+                                            <img class="img-fluid" src="{{ asset($headerImage) }}"
+                                                alt="{{ $story->header_image_alt_text }}" style="width: 370px;">
+                                        </a>
+                                    </div>
+                                    <div class="softsource-story-item-details">
+                                        <div class="story-meta">
+                                            <div class="story-date">
+                                                <span class="far fa-user meta-icon"></span>
+                                                @if (!$story->is_anonymous)
+                                                    <a
+                                                        href="{{ url('author/' . Str::slug($story->author_details->name)) }}">{{ $story->author_name }}</a>
+                                                @else
+                                                    Anonymous
+                                                @endif
+                                            </div>
+                                        </div>
+                                        <div class="softsource-h-line"></div>
+                                        <h5 class="story-title pt-3">
+                                            <a href="{{ url($story->url) }}" data-bs-toggle="tooltip"
+                                                data-bs-placement="top" title=""
+                                                data-bs-original-title="{{ $story->title }}">{{ strlen($story->title) > 18 ? substr($story->title, 0, 18) . ' . . .' : $story->title }}</a>
+                                        </h5>
+                                        <div class="story-excerpt mt-3">
+                                            <p>{{ strlen(strip_tags($story->context)) > 100 ? substr(strip_tags($story->context), 0, 100) . ' . . .' : strip_tags($story->context) }}
+                                            </p>
+                                        </div>
+                                        <div style="width: 100%; height: 33px;">
+                                            @if ($story->audio_video_path)
+                                                @if (substr($story->audio_video_path, -4) == '.mp4' && $story->audioconvert == 0)
+                                                    <video
+                                                        style="width: 96%; height: 100px; margin-left: 2%; margin-right: 2%"
+                                                        controls controlsList="nodownload">
+                                                        <source src="{{ $story->audio_video_path }}">
+                                                        Your browser does not support the audio element.
+                                                    </video>
+                                                @else
+                                                    <audio
+                                                        style="width: 96%; height: 40px; margin-left: 2%; margin-right: 2%"
+                                                        controls controlsList="nodownload">
+                                                        <source src="{{ $story->audio_video_path }}">
+                                                        Your browser does not support the audio element.
+                                                    </audio>
+                                                @endif
+                                            @endif
+                                        </div>
+                                        <div class="softsource-story-btn-text">
+                                            <a href="{{ url($story->url) }}">Read more <i
+                                                    class="ml-1 button-icon fas fa-long-arrow-right"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 text-center">
+                    <a href="{{ route('story.read') }}"
+                        class="btn softsource-home-fetured-story-read-more-story-btn px-5">Read More Stories</a>
+                </div>
+            </div>
+        </div>
+
+    </section>
+@endif
+
+
 @endsection

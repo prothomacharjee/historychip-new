@@ -78,7 +78,7 @@
     @endphp
 </head>
 
-<body class="softsource-no-select">
+<body class="softsource-selectable">
     <!-- Google Tag Manager (noscript) -->
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-585M6TM" height="0" width="0"
             style="display:none;visibility:hidden"></iframe></noscript>
