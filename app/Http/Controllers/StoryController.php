@@ -2,23 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use Exception;
-use App\Models\Page;
-use App\Models\User;
-use App\Models\Story;
-use App\Models\Partner;
-use App\Models\UserProfile;
-use Illuminate\Support\Str;
-use App\Models\StoryComment;
-use Illuminate\Http\Request;
 use App\Mail\NewStorySubmitted;
-use Illuminate\Support\Facades\DB;
+use App\Mail\StorySubmissionConfirmation;
+use App\Models\Page;
+use App\Models\Partner;
+use App\Models\Story;
+use App\Models\StoryComment;
+use App\Models\User;
+use App\Models\UserProfile;
+use Exception;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
-use Yajra\DataTables\Facades\DataTables;
-use App\Mail\StorySubmissionConfirmation;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
+use Yajra\DataTables\Facades\DataTables;
 
 class StoryController extends Controller
 {
@@ -68,13 +68,12 @@ class StoryController extends Controller
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         } else {
-            $user_profile = UserProfile::where('user_id', Auth::id())->get();
+            $user_profile = UserProfile::where('user_id', Auth::id())->first();
 
-            if($user_profile->partner_id != NULL){
+            if (!isset($request->id) && $user_profile->partner_id != null) {
                 $partner = Partner::findOrFail($user_profile->partner_id);
-                $tags = $request->tags.','.$partner->name;
-            }
-            else{
+                $tags = $request->tags . ',' . $partner->name;
+            } else {
                 $tags = $request->tags;
             }
 

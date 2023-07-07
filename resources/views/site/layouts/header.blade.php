@@ -8,9 +8,9 @@
     <meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
 
     <!-- SEO -->
-    <meta name="title" content="{{ $meta->meta_title ?? '' }}">
-    <meta name="description" content="{{ $meta->meta_description ?? '' }}">
-    <meta name="keywords" content="{{ $meta->meta_keywords ?? '' }}">
+    <meta name="title" content="{{ $meta->meta_title ?? 'History Chip - The stories of our world' }}">
+    <meta name="description" content="{{ $meta->meta_description ?? 'Welcomes all your stories. Your stories expand our understanding of each other and life on earth. Big stories or little stories - all are welcome. Building a true peoples’ history. History Chip - the future of history.' }}">
+    <meta name="keywords" content="{{ $meta->meta_keywords ?? 'success stories, inspirational stories, motivational stories, brand story, real life story' }}">
 
 
     <!-- Social Media -->
@@ -18,16 +18,16 @@
     <meta property="og:locale" content="en_US" />
     <meta property="og:type" content="website" />
 
-    <meta property="og:title" content="{{ $meta->page_title ?? '' }} | {{ config('app.name', 'SoftSource') }}" />
+    <meta property="og:title" content="{{ $meta->page_title ?? 'History Chip - The stories of our world' }} | {{ config('app.name', 'SoftSource') }}" />
     <meta property="og:url" content="{{ url()->current() }}" />
     <meta property="og:site_name" content="{{ config('app.name', 'SoftSource') }}" />
     <meta property="og:image"
         content="{{ !empty($meta) && $meta->og_image ? asset($meta->og_image) : asset('frontend/images/logo/logo-light.png') }}" />
     <meta property="og:audio" content="{{ !empty($meta) && $meta->og_audio ? asset($meta->og_audio) : '' }}" />
     <meta property="og:video" content="{{ !empty($meta) && $meta->og_video ? asset($meta->og_video) : '' }}" />
-    <meta property="og:description" content="{{ $meta->meta_description ?? '' }}" />
-    <meta property="og:author" content="{{ $meta->og_author ?? '' }}" />
-    <meta property="article:modified_time" content="{{ $meta->updated_at ?? '' }}" />
+    <meta property="og:description" content="{{ $meta->meta_description ?? 'Welcomes all your stories. Your stories expand our understanding of each other and life on earth. Big stories or little stories - all are welcome. Building a true peoples’ history. History Chip - the future of history.' }}" />
+    <meta property="og:author" content="{{ $meta->og_author ?? 'History Chip' }}" />
+    <meta property="article:modified_time" content="{{ $meta->updated_at ?? now() }}" />
 
     <!-- Author Info -->
     <meta name="author" content="SoftSource, Bangladesh">
@@ -40,7 +40,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ $meta->page_title ?? '' }} | {{ config('app.name', 'Laravel') }}</title>
+    <title>{{ $meta->page_title ?? 'History Chip - The stories of our world' }} | {{ config('app.name', 'Laravel') }}</title>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">

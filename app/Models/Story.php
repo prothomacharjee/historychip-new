@@ -140,7 +140,7 @@ class Story extends Model
             ->where(function ($query) use ($keyword) {
                 $query->where('title', 'LIKE', '% ' . $keyword . ' %')
                     ->orWhere('context', 'LIKE', '% ' . $keyword . ' %')
-                    ->orWhere('tags', 'LIKE', '% ' . $keyword . ' %');
+                    ->orWhere('tags', 'LIKE', '%' . $keyword . '%');
             })
             ->get();
     }

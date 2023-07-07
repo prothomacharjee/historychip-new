@@ -10,7 +10,10 @@
             padding-bottom: 300px;
         }
     </style>
-
+    @php
+        $currentUrl = request()->url();
+        $lastPart = basename($currentUrl);
+    @endphp
 
 
     <div class="position-relative softsource-top-contianer">
@@ -112,12 +115,13 @@
     </div>
 </div>
 
-@if (!empty($recent_partner_stories))
+@if (count($recent_partner_stories)>0)
     <section class="py-5 my-5">
         <div class="row mx-1 px-5">
             <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                 <div class="softsource-home-fetured-story-section-title-wrap text-center mb-5 ps-5 d-flex">
-                    <div class="softsource-home-fetured-story-top-title">Recent &nbsp;{{ $partner->partner_name }}&nbsp; Stories</div>
+                    <div class="softsource-home-fetured-story-top-title">Recent
+                        &nbsp;{{ $partner->partner_name }}&nbsp; Stories</div>
 
                 </div>
             </div>
@@ -200,7 +204,7 @@
             </div>
             <div class="row mt-3">
                 <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 text-center">
-                    <a href="{{ route('story.read') }}"
+                    <a href="{{ route('partners.stories', $lastPart) }}"
                         class="btn softsource-home-fetured-story-read-more-story-btn px-5">Read More Stories</a>
                 </div>
             </div>
