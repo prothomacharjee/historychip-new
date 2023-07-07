@@ -2,21 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use App\Mail\NewStorySubmitted;
-use App\Mail\StorySubmissionConfirmation;
-use App\Models\Page;
-use App\Models\Story;
-use App\Models\StoryComment;
-use App\Models\User;
 use Exception;
+use App\Models\Page;
+use App\Models\User;
+use App\Models\Story;
+use App\Models\Partner;
+use App\Models\UserProfile;
+use Illuminate\Support\Str;
+use App\Models\StoryComment;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use App\Mail\NewStorySubmitted;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Str;
 use Yajra\DataTables\Facades\DataTables;
+use App\Mail\StorySubmissionConfirmation;
+use Illuminate\Support\Facades\Validator;
 
 class StoryController extends Controller
 {
@@ -66,6 +68,16 @@ class StoryController extends Controller
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         } else {
+            $user_profile = UserProfile::where('user_id', Auth::id())->get();
+
+            if($user_profile->partner_id != NULL){
+                $partner = Partner::findOrFail($user_profile->partner_id);
+                $tags = $request->tags.','.$partner->name;
+            }
+            else{
+                $tags = $request->tags;
+            }
+
             $story = $request->id ? Story::findOrFail($request->id) : new Story;
 
             $meta = $request->id ? Page::where(['page_group' => 'story', 'page_group_id' => $request->id])->first() : new Page;
@@ -76,7 +88,7 @@ class StoryController extends Controller
             $story->photo_credit = $request->photo_credit;
             $story->author_name = $request->author_name;
             $story->author_id = Auth::id();
-            $story->tags = $request->tags;
+            $story->tags = $tags;
             $story->category_id = json_encode($request->category_id);
             $story->sub_category_id_level_1 = (($request->sub_category_id_level_1) ? json_encode($request->sub_category_id_level_1) : null);
             $story->sub_category_id_level_2 = (($request->sub_category_id_level_2) ? json_encode($request->sub_category_id_level_2) : null);
@@ -92,6 +104,7 @@ class StoryController extends Controller
             $story->is_draft = $request->is_draft;
             $story->edit_count = $request->id ? ($story->edit_count + 1) : 0;
             $story->is_approved = 0;
+            $story->partner_id = $user_profile->partner_id;
 
             $meta->page_title = $request->title;
             $meta->page_group = 'story';

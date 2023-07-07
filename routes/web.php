@@ -83,6 +83,7 @@ Route::get('/blogs/{slug?}', [SiteController::class, 'blogs'])->name('blogs');
 Route::get('/partners/{slug?}', [SiteController::class, 'partners'])->name('partners');
 Route::get('/stories/{slug?}', [SiteController::class, 'read_story'])->name('story.read');
 Route::get('/authors/{slug?}', [SiteController::class, 'author_stories'])->name('author-stories');
+Route::get('/partners/{slug}/stories', [SiteController::class, 'partners_stories'])->name('partners.stories');
 
 Route::get('/write-story/{slug?}', [SiteController::class, 'write_story'])->name('story.write')->middleware('auth');
 

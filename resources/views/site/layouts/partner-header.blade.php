@@ -83,6 +83,11 @@
             <p class="softsource-cust-tag softsource-text-color-secondary">every person, every story, all the truth</p>
         </div>
     </div> --}}
+    @php
+        $currentUrl = request()->url();
+        $lastPart = basename($currentUrl);
+    @endphp
+
 
     <div class="partner softsource-main_content">
         <div class="navbar-expand-lg navbar-light">
@@ -91,7 +96,8 @@
                 <div class="col-xxl-1 col-xl-1 col-lg-1 col-md-2 col-2 col-sm-2">
                     <div class="softsource-header-partner-logo">
                         <a class="navbar-brand ms-auto " href="{{ url($partner->url) }}">
-                            <img class="img-fluid light-logo" src="{{ asset($partner->logo) }}" alt="{{ $partner->partner_name }} Logo">
+                            <img class="img-fluid light-logo" src="{{ asset($partner->logo) }}"
+                                alt="{{ $partner->partner_name }} Logo">
                             <!-- <p class="softsource-cust-tag">every person, every story, all the truth</p> -->
                         </a>
                     </div>
@@ -120,7 +126,7 @@
                                             href="javascript:;"><span>Stories</span><i
                                                 class="fa-solid fa-angle-down softsource-nav-angle-down"></i></a>
                                         <ul class="softsource-submenu">
-                                            <li><a href="{{ route('story.read') }}"><span>Read a
+                                            <li><a href="{{ route('partners.stories', $lastPart) }}"><span>Read a
                                                         Story</span></a></li>
                                             <li><a href="{{ route('story.write') }}"><span>Write a
                                                         Story</span></a></li>

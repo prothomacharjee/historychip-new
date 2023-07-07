@@ -20,6 +20,7 @@ return new class extends Migration
 
             $table->string('title');
             $table->unsignedBigInteger('author_id');
+            $table->unsignedBigInteger('partner_id');
 
             $table->longText('context')->nullable();
 
