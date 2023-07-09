@@ -209,4 +209,5 @@ Route::group(['prefix' => 'powerhouse', 'middleware' => 'admin'], function () {
     Route::post('/delete-stories/{id}', [StoryController::class, 'destroy'])->name('admin.stories.destroy');
 
     Route::get('/stories/staus/{id}/{type}/{status}', [StoryController::class, 'ChangeStoryStatus'])->name('admin.stories.status');
+    Route::get('/stories/comment-staus/{id}/{type}/{status}', [StoryController::class, 'ChangeCommentStatus'])->name('admin.stories.comment.status');
 });

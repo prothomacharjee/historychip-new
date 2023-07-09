@@ -168,8 +168,7 @@
 
                             @if (count($partners) > 0)
                                 <div class="checkbox">
-                                    <input type="checkbox" id="toggle-partner"><label for="toggle-partner">Are You
-                                        Willing to Join with Our Partner?</label>
+                                    <input type="checkbox" id="toggle-partner"><label for="toggle-partner">Join with Our Community</label>
                                 </div>
                                 <select class="form-control select2" id="partner_id" name="partner_id"
                                     style="display:none">

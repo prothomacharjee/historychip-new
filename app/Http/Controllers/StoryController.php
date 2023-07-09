@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\CommentSubmission;
 use App\Mail\NewStorySubmitted;
 use App\Mail\StorySubmissionConfirmation;
 use App\Models\Page;
@@ -10,6 +11,7 @@ use App\Models\Story;
 use App\Models\StoryComment;
 use App\Models\User;
 use App\Models\UserProfile;
+use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -212,6 +214,19 @@ class StoryController extends Controller
             DB::transaction(function () use ($data) {
                 $comment = StoryComment::create($data);
             });
+
+            $story = Story::FetchSingleStory($request->storyId);
+
+            $details = [
+                'title' => 'Comment Posted in a Story',
+                'commenter' => auth()->user()->name,
+                'commenterEmail' => auth()->user()->email,
+                'url' => $story->url,
+                'commentText' => $request->message,
+
+            ];
+            Mail::to("me.prothomacharjee@gmail.com")->send(new CommentSubmission($details));
+
             echo json_encode([
                 'response' => true,
                 'msg' => 'Your Comment is Posted. It will Show in the timeline after an Admin\'s Approval.',
@@ -556,7 +571,7 @@ class StoryController extends Controller
                 return redirect()->back()->with('error', $e->getMessage());
             }
         } else {
-            return redirect()->route('admin.blogs')->with('info', "You are trying a wrong URL.");
+            return redirect()->route('admin.stories')->with('info', "You are trying a wrong URL.");
         }
 
         // $count = Story::where('is_featured', 1)->count();
@@ -595,7 +610,7 @@ class StoryController extends Controller
             'updated_at',
         );
         // Build the DataTables response
-        $data = DataTables::of(StoryComment::select($columns)->where('accepted', '=', 1)->latest()->with('story.author_details', 'commenteter', 'accepter'))
+        $data = DataTables::of(StoryComment::select($columns)->where('accepted', '=', 1)->latest()->with('story.author_details', 'commentator', 'accepter'))
             ->addColumn('serial', function ($row) {
                 static $count = 0;
                 $count++;
@@ -610,13 +625,14 @@ class StoryController extends Controller
                 return $row->story->author_details->name;
             })
             ->addColumn('commentator', function ($row) {
-                return $row->commenteter->name;
+                return $row->commentator->name;
             })
             ->addColumn('approval', function ($row) {
                 return $row->accepter->name ?? '';
             })
             ->addColumn('action', function ($row) use ($url) {
-                $buttons = '<a href="' . route('admin.stories.edit', $row->id) . '" data-toggle="tooltip" title="Edit" class="edit btn btn-outline-primary btn-sm me-2"><i class="fadeInUp animate__animated bx bx-edit-alt"></i></a>';
+                // $buttons = '<a href="' . route('admin.stories.status', ['id' => $row->id, 'type' => 'featured', 'status' => 1]) . '" data-toggle="tooltip" title="Featured" class="edit btn btn-outline-warning btn-sm me-2"><i class="fadeInUp animate__animated bx bx-trending-up"></i></a>';
+                $buttons = '<a href="' . route('admin.stories.comment.status', ['id' => $row->id, 'type' => 'approval', 'status' => 2]) . '" data-toggle="tooltip" title="Reject" class="edit btn btn-outline-dark btn-sm me-2"><i class="fadeInUp animate__animated bx bx-upside-down"></i></a>';
                 $buttons .= '<button type="button" class="delete btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#delete_modal"  onclick="remove_function(' . $row->id . ', \'' . $url . '\')" title="Delete"><i class="fadeInUp animate__animated bx bx-trash-alt"></i></button>';
 
                 return $buttons;
@@ -667,7 +683,8 @@ class StoryController extends Controller
             })
 
             ->addColumn('action', function ($row) use ($url) {
-                $buttons = '<a href="' . route('admin.stories.edit', $row->id) . '" data-toggle="tooltip" title="Edit" class="edit btn btn-outline-primary btn-sm me-2"><i class="fadeInUp animate__animated bx bx-edit-alt"></i></a>';
+                $buttons = '<a href="' . route('admin.stories.comment.status', ['id' => $row->id, 'type' => 'approval', 'status' => 1]) . '" data-toggle="tooltip" title="Approve" class="edit btn btn-outline-success btn-sm me-2"><i class="fadeInUp animate__animated bx bx-happy-heart-eyes"></i></a>';
+                $buttons .= '<a href="' . route('admin.stories.comment.status', ['id' => $row->id, 'type' => 'approval', 'status' => 2]) . '" data-toggle="tooltip" title="Reject" class="edit btn btn-outline-dark btn-sm me-2"><i class="fadeInUp animate__animated bx bx-upside-down"></i></a>';
                 $buttons .= '<button type="button" class="delete btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#delete_modal"  onclick="remove_function(' . $row->id . ', \'' . $url . '\')" title="Delete"><i class="fadeInUp animate__animated bx bx-trash-alt"></i></button>';
 
                 return $buttons;
@@ -699,7 +716,7 @@ class StoryController extends Controller
             'updated_at',
         );
         // Build the DataTables response
-        $data = DataTables::of(StoryComment::select($columns)->where('accepted', '=', 2)->latest()->with('story.author_details', 'commenteter', 'accepter'))
+        $data = DataTables::of(StoryComment::select($columns)->where('accepted', '=', 2)->latest()->with('story.author_details', 'commentator', 'accepter'))
             ->addColumn('serial', function ($row) {
                 static $count = 0;
                 $count++;
@@ -714,13 +731,13 @@ class StoryController extends Controller
                 return $row->story->author_details->name;
             })
             ->addColumn('commentator', function ($row) {
-                return $row->story->commenteter->name;
+                return $row->commentator->name;
             })
             ->addColumn('approval', function ($row) {
                 return $row->story->accepter->name ?? '';
             })
             ->addColumn('action', function ($row) use ($url) {
-                $buttons = '<a href="' . route('admin.stories.edit', $row->id) . '" data-toggle="tooltip" title="Edit" class="edit btn btn-outline-primary btn-sm me-2"><i class="fadeInUp animate__animated bx bx-edit-alt"></i></a>';
+                $buttons = '<a href="' . route('admin.stories.comment.status', ['id' => $row->id, 'type' => 'approval', 'status' => 1]) . '" data-toggle="tooltip" title="Approve" class="edit btn btn-outline-success btn-sm me-2"><i class="fadeInUp animate__animated bx bx-happy-heart-eyes"></i></a>';
                 $buttons .= '<button type="button" class="delete btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#delete_modal"  onclick="remove_function(' . $row->id . ', \'' . $url . '\')" title="Delete"><i class="fadeInUp animate__animated bx bx-trash-alt"></i></button>';
 
                 return $buttons;
@@ -738,4 +755,27 @@ class StoryController extends Controller
         // Return the DataTables response
         return $data;
     }
+
+    public function ChangeCommentStatus($id, $type, $status)
+    {
+
+        if ($type == 'approval') {
+            $returnText = ($status == 1) ? 'Approved' : 'Rejected';
+            try {
+                DB::transaction(function () use ($id, $status) {
+                    $story = StoryComment::findOrFail($id);
+                    $story->accepted = $status;
+                    $story->accepted_by = Auth::guard('admin')->id();
+                    $story->accepting_date_time = Carbon::now();
+                    $story->update();
+                });
+                return redirect()->route('admin.stories.comments')->with('success', "Comment $returnText Successfully");
+            } catch (Exception $e) {
+                return redirect()->back()->with('error', $e->getMessage());
+            }
+        } else {
+            return redirect()->route('admin.stories.comments')->with('info', "You are trying a wrong URL.");
+        }
+    }
+
 }

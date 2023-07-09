@@ -16,7 +16,7 @@ class StoryComment extends Model
 
     public function accepter()
     {
-        return $this->belongsTo(User::class, 'accepted_by');
+        return $this->belongsTo(Admin::class, 'accepted_by');
     }
 
     public function story()

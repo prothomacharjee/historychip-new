@@ -527,6 +527,8 @@
             });
             // commentpost commentcancel
             $(document).on("click", "#commentpost", function() {
+                $(this).prop('disabled', true).text('Submitting...');
+                $('#commentcancel').prop('disabled', true);
                 SaveComment();
             })
 
