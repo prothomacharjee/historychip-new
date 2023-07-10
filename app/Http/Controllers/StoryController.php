@@ -593,6 +593,83 @@ class StoryController extends Controller
         // }
     }
 
+
+    // public function approve(Request $request)
+    // {
+    //     $returnValues = $request->all();
+    //     $author = Story::getEmailFromAuthorId($returnValues['author_id']);
+
+    //     $email = $author[0]->email;
+    //     $data = array("approved" => $returnValues['status']);
+    //     Story::where("id", $returnValues['story_id'])->update($data);
+    //     if ($returnValues["status"] == 1) {
+
+    //         $details = [
+    //             'title' => 'Mail From History Chip',
+    //             'theBody' => 'Congratulations! Your story has been accepted and is live on History Chip. Thank you for your submission',
+    //             'theComment' => url('stories/' . $returnValues['story_id']),
+    //             'signature' => 'Jean McGavin'
+    //         ];
+
+    //         Mail::to($email)->send(new ApproveEmailReply($details));
+
+    //         $msg = "Approved Succesfully";
+    //         //        } else if ($status==3) {
+    //         //            $details = [
+    //         //                'title' => 'Mail From History Chip',
+    //         //                'theBody' => 'We have made edits to your story.',
+    //         //                'theComment' => $returnValues['comments'],
+    //         //                'signature' => 'Jean McGavin'
+    //         //            ];
+    //         //
+    //         //            Mail::to($email)->send(new EditEmailReply($details));
+    //         //
+    //     }
+    //     else if ($returnValues["status"] == 2) {
+    //         if (isset($returnValues['comments']) and trim($returnValues['comments']) != "") {
+    //             $txt = "Comments:";
+    //         } else {
+    //             $txt = "";
+    //         }
+    //         $details = [
+    //             'title' => 'Mail From History Chip',
+    //             'theBody' => url('termsandconditions'),
+    //             'text' => $txt,
+    //             'theComments' => $returnValues['comments'],
+    //             'signature' => 'Jean McGavin'
+    //         ];
+
+    //         Mail::to($email)->send(new NotApproveEmail($details));
+    //         $msg = "Rejected Succesfully";
+    //     }
+    //     else if ($returnValues["status"] == 3) {
+    //         if (isset($returnValues['comments']) and trim($returnValues['comments']) != "") {
+    //             $txt = "Comments:";
+    //         } else {
+    //             $txt = "";
+    //         }
+    //         // $details = [
+    //         //     'title' => 'Mail From History Chip',
+    //         //     'theBody' => url('termsandconditions'),
+    //         //     'text' => $txt,
+    //         //     'theComments' => $returnValues['comments'],
+    //         //     'signature' => 'Jean McGavin'
+    //         // ];
+
+    //         //Mail::to($email)->send(new NotApproveEmail($details));
+    //         $msg = "Dormanted Succesfully";
+    //     }
+    //     else{
+    //         if (isset($returnValues['comments']) and trim($returnValues['comments']) != "") {
+    //             $txt = "Comments:";
+    //         } else {
+    //             $txt = "";
+    //         }
+    //         $msg = "Move to Waiting List Succesfully";
+    //     }
+    //     echo json_encode(array("result" => 1, "msg" => $msg));
+    // }
+
     // Story Comments
     public function LoadApproveCommentDataTable(Request $request)
     {
