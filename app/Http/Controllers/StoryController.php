@@ -2,25 +2,27 @@
 
 namespace App\Http\Controllers;
 
+use Exception;
+use Carbon\Carbon;
+use App\Models\Page;
+use App\Models\User;
+use App\Models\Story;
+use App\Models\Partner;
+use App\Models\UserProfile;
+use Illuminate\Support\Str;
+use App\Models\StoryComment;
+use Illuminate\Http\Request;
+use App\Mail\NotApproveEmail;
+use App\Mail\ApproveEmailReply;
 use App\Mail\CommentSubmission;
 use App\Mail\NewStorySubmitted;
-use App\Mail\StorySubmissionConfirmation;
-use App\Models\Page;
-use App\Models\Partner;
-use App\Models\Story;
-use App\Models\StoryComment;
-use App\Models\User;
-use App\Models\UserProfile;
-use Carbon\Carbon;
-use Exception;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Str;
 use Yajra\DataTables\Facades\DataTables;
+use App\Mail\StorySubmissionConfirmation;
+use Illuminate\Support\Facades\Validator;
 
 class StoryController extends Controller
 {
@@ -507,7 +509,8 @@ class StoryController extends Controller
 
     public function ChangeStoryStatus($id, $type, $status)
     {
-
+        $story_details = Story::FetchSingleStory($id);
+        $author_email = $story_details->author_details->email;
         if ($type == 'approval') {
             $returnText = ($status == 1) ? 'Approved' : 'Rejected';
             try {
@@ -516,6 +519,32 @@ class StoryController extends Controller
                     $story->is_approved = $status;
                     $story->update();
                 });
+
+                if ($status == 1) {
+                    $details = [
+                        'title' => 'Mail From History Chip',
+                        'theBody' => 'Congratulations! Your story has been accepted and is live on History Chip. Thank you for your submission',
+                        'theComment' => url($story_details->url),
+                        'signature' => 'Jean McGavin'
+                    ];
+
+                    Mail::to($author_email)->send(new ApproveEmailReply($details));
+                } elseif ($status == 2) {
+                    // if (isset($returnValues['comments']) and trim($returnValues['comments']) != "") {
+                    //     $txt = "Comments:";
+                    // } else {
+                    //     $txt = "";
+                    // }
+                    $details = [
+                        'title' => 'Mail From History Chip',
+                        'theBody' => route('termsandconditions'),
+                        // 'text' => 'Sorry! Your story has been accepted and is live on History Chip. Thank you for your submission',
+                        // 'theComments' => $returnValues['comments'],
+                        'signature' => 'Jean McGavin'
+                    ];
+
+                    Mail::to($author_email)->send(new NotApproveEmail($details));
+                }
                 return redirect()->route('admin.stories')->with('success', "Story $returnText Successfully");
             } catch (Exception $e) {
                 return redirect()->back()->with('error', $e->getMessage());
@@ -854,5 +883,4 @@ class StoryController extends Controller
             return redirect()->route('admin.stories.comments')->with('info', "You are trying a wrong URL.");
         }
     }
-
 }
